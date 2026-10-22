@@ -278,7 +278,7 @@ export default function BentoGrid() {
           </div>
 
           {/* BLOCK 2 (Medium / 5 columns): Macro & Meal Fuel */}
-          <div id="nutrition" className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div id="fuel-tracker" className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm flex flex-col justify-between hover:border-slate-300 transition-all">
             <div>
               {/* Header */}
               <div className="flex items-center justify-between mb-5">

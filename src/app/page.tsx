@@ -13,6 +13,7 @@ import BookingModal from "@/components/BookingModal";
 import StreakModal from "@/components/StreakModal";
 import SignInModal from "@/components/SignInModal";
 import DashboardView from "@/components/DashboardView";
+import PulseAINutritionEngine from "@/components/PulseAINutritionEngine";
 
 export default function Home() {
   const [viewMode, setViewMode] = useState<"landing" | "dashboard">("landing");
@@ -58,6 +59,9 @@ export default function Home() {
           onOpenRoutineBuilder={() => setIsRoutineBuilderOpen(true)}
           onOpenGuidedSession={() => setIsGuidedSessionOpen(true)}
         />
+
+        {/* PulseAI Hyper-Local Nutrition Engine */}
+        <PulseAINutritionEngine />
 
         {/* 3. The 4-Pillar Wellness Bento Grid */}
         <BentoGrid />
