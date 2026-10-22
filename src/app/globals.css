@@ -1,13 +1,75 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *, [data-theme=dark], [data-theme=dark] *));
+
 :root {
-  --background: #FAF9F6;
-  --foreground: #0F172A;
+  --background: #F4F6F5;
+  --foreground: #121815;
+  --card: #FFFFFF;
+  --card-foreground: #121815;
+  --popover: #FFFFFF;
+  --popover-foreground: #121815;
+  --primary: #793594;
+  --primary-foreground: #FFFFFF;
+  --secondary: #EAEFEA;
+  --secondary-foreground: #121815;
+  --muted: #E2E8F0;
+  --muted-foreground: #575C4B;
+  --accent: #7A5A00;
+  --accent-foreground: #FFFFFF;
+  --border: rgba(117, 119, 97, 0.22);
+  --input: rgba(117, 119, 97, 0.25);
+  --ring: #793594;
+  --color-amethyst: #793594;
+  --color-sage: #505445;
+  --color-gold: #7A5A00;
+  --color-lime: #6B5000;
+  color-scheme: light;
+}
+
+.dark, [data-theme="dark"] {
+  --background: #0B0E0C;
+  --foreground: #E2E7DE;
+  --card: #121815;
+  --card-foreground: #E2E7DE;
+  --popover: #121815;
+  --popover-foreground: #E2E7DE;
+  --primary: #9c67b5;
+  --primary-foreground: #FFFFFF;
+  --secondary: #2D163D;
+  --secondary-foreground: #E2E7DE;
+  --muted: #1A221E;
+  --muted-foreground: #A0A594;
+  --accent: #f7fe72;
+  --accent-foreground: #0B0E0C;
+  --border: rgba(117, 119, 97, 0.4);
+  --input: rgba(117, 119, 97, 0.45);
+  --ring: #f7fe72;
+  --color-amethyst: #9c67b5;
+  --color-sage: #757761;
+  --color-gold: #f4e76e;
+  --color-lime: #f7fe72;
+  color-scheme: dark;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -17,24 +79,288 @@ html {
 }
 
 body {
-  background: #FAF9F6;
-  color: #0F172A;
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Custom subtle scrollbar */
+/* Custom subtle smoked amethyst & sage scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: var(--background);
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #2D163D;
   border-radius: 9999px;
+  border: 1px solid rgba(117, 119, 97, 0.3);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #9c67b5;
+}
+
+/* =========================================================================
+   DARK THEME CONTRAST SYSTEM (60-30-10 PALETTE TOKENS)
+   ========================================================================= */
+
+/* Boost secondary text contrast in dark mode to WCAG AA/AAA (>5.5:1) */
+html.dark .text-\[\#757761\],
+[data-theme="dark"] .text-\[\#757761\],
+html.dark .text-\[\#A0A493\],
+[data-theme="dark"] .text-\[\#A0A493\],
+html.dark .text-\[\#A0A594\],
+[data-theme="dark"] .text-\[\#A0A594\] {
+  color: #A0A594;
+}
+
+/* Form inputs in dark mode */
+html.dark input,
+html.dark textarea,
+html.dark select,
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  color: #E2E7DE !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder,
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: #757761 !important;
+}
+
+/* =========================================================================
+   LIGHT THEME CONTRAST SYSTEM (WCAG AA/AAA RATIOS)
+   ========================================================================= */
+
+html:not(.dark),
+html.light,
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+html:not(.dark) body,
+html.light body,
+[data-theme="light"] body {
+  background-color: #F4F6F5 !important;
+  color: #121815 !important;
+}
+
+/* Page base wrappers */
+html:not(.dark) .bg-\[\#0B0E0C\],
+html.light .bg-\[\#0B0E0C\],
+[data-theme="light"] .bg-\[\#0B0E0C\] {
+  background-color: #F4F6F5 !important;
+}
+
+html:not(.dark) .bg-\[\#0B0E0C\]\/90,
+html.light .bg-\[\#0B0E0C\]\/90,
+html:not(.dark) .bg-\[\#0B0E0C\]\/95,
+html.light .bg-\[\#0B0E0C\]\/95,
+html:not(.dark) .bg-\[\#0B0E0C\]\/80,
+html.light .bg-\[\#0B0E0C\]\/80,
+html:not(.dark) .bg-\[\#0B0E0C\]\/85,
+html.light .bg-\[\#0B0E0C\]\/85,
+[data-theme="light"] .bg-\[\#0B0E0C\]\/90,
+[data-theme="light"] .bg-\[\#0B0E0C\]\/95 {
+  background-color: rgba(244, 246, 245, 0.96) !important;
+}
+
+/* Card surfaces: clean crisp white with subtle elevation */
+html:not(.dark) .bg-\[\#121815\],
+html.light .bg-\[\#121815\],
+[data-theme="light"] .bg-\[\#121815\] {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 4px 20px -2px rgba(18, 24, 21, 0.06), 0 1px 3px 0 rgba(18, 24, 21, 0.04);
+}
+
+html:not(.dark) .bg-\[\#121815\]\/80,
+html.light .bg-\[\#121815\]\/80,
+html:not(.dark) .bg-\[\#121815\]\/90,
+html.light .bg-\[\#121815\]\/90,
+[data-theme="light"] .bg-\[\#121815\]\/80,
+[data-theme="light"] .bg-\[\#121815\]\/90 {
+  background-color: rgba(255, 255, 255, 0.94) !important;
+}
+
+/* Secondary Amethyst panels in light mode */
+html:not(.dark) .bg-\[\#2D163D\],
+html.light .bg-\[\#2D163D\],
+[data-theme="light"] .bg-\[\#2D163D\] {
+  background-color: #F6EEFA !important;
+}
+
+html:not(.dark) .bg-\[\#2D163D\]\/60,
+html.light .bg-\[\#2D163D\]\/60,
+html:not(.dark) .bg-\[\#2D163D\]\/70,
+html.light .bg-\[\#2D163D\]\/70,
+html:not(.dark) .bg-\[\#2D163D\]\/80,
+html.light .bg-\[\#2D163D\]\/80,
+[data-theme="light"] .bg-\[\#2D163D\]\/60,
+[data-theme="light"] .bg-\[\#2D163D\]\/70 {
+  background-color: rgba(246, 238, 250, 0.85) !important;
+}
+
+/* Typography in light mode - deep obsidian charcoal for 16:1 contrast */
+html:not(.dark) h1,
+html.light h1,
+html:not(.dark) h2,
+html.light h2,
+html:not(.dark) h3,
+html.light h3,
+html:not(.dark) h4,
+html.light h4,
+html:not(.dark) h5,
+html.light h5,
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5 {
+  color: #121815;
+}
+
+html:not(.dark) .text-white,
+html.light .text-white,
+[data-theme="light"] .text-white {
+  color: #121815;
+}
+
+html:not(.dark) .text-\[\#E2E7DE\],
+html.light .text-\[\#E2E7DE\],
+[data-theme="light"] .text-\[\#E2E7DE\] {
+  color: #121815 !important;
+}
+
+html:not(.dark) .text-\[\#CBD2C7\],
+html.light .text-\[\#CBD2C7\],
+[data-theme="light"] .text-\[\#CBD2C7\] {
+  color: #262A21 !important;
+}
+
+html:not(.dark) .text-\[\#A0A594\],
+html.light .text-\[\#A0A594\],
+[data-theme="light"] .text-\[\#A0A594\],
+html:not(.dark) .text-\[\#A0A493\],
+html.light .text-\[\#A0A493\],
+[data-theme="light"] .text-\[\#A0A493\] {
+  color: #575C4B !important;
+}
+
+html:not(.dark) .text-\[\#757761\],
+html.light .text-\[\#757761\],
+[data-theme="light"] .text-\[\#757761\] {
+  color: #575C4B !important;
+}
+
+/* Accent colors in light mode: deep legible ochre and royal amethyst */
+html:not(.dark) .text-\[\#f7fe72\],
+html.light .text-\[\#f7fe72\],
+[data-theme="light"] .text-\[\#f7fe72\] {
+  color: #7A5A00 !important; /* High contrast solar ochre (5.8:1 against light canvas) */
+}
+
+html:not(.dark) .text-\[\#f4e76e\],
+html.light .text-\[\#f4e76e\],
+[data-theme="light"] .text-\[\#f4e76e\] {
+  color: #856100 !important;
+}
+
+html:not(.dark) .text-\[\#9c67b5\],
+html.light .text-\[\#9c67b5\],
+[data-theme="light"] .text-\[\#9c67b5\] {
+  color: #6C2E85 !important; /* Deep velvet amethyst (5.6:1 against white) */
+}
+
+/* Subtle borders in light mode */
+html:not(.dark) [class*="border-[#757761]"],
+html.light [class*="border-[#757761]"],
+[data-theme="light"] [class*="border-[#757761]"] {
+  border-color: rgba(117, 119, 97, 0.22) !important;
+}
+
+html:not(.dark) [class*="border-[#9c67b5]"],
+html.light [class*="border-[#9c67b5]"],
+[data-theme="light"] [class*="border-[#9c67b5]"] {
+  border-color: rgba(108, 46, 133, 0.3) !important;
+}
+
+html:not(.dark) [class*="border-white/5"],
+html.light [class*="border-white/5"],
+html:not(.dark) [class*="border-white/10"],
+html.light [class*="border-white/10"],
+[data-theme="light"] [class*="border-white/5"],
+[data-theme="light"] [class*="border-white/10"] {
+  border-color: rgba(18, 24, 21, 0.08) !important;
+}
+
+html:not(.dark) [class*="bg-white/5"],
+html.light [class*="bg-white/5"],
+[data-theme="light"] [class*="bg-white/5"] {
+  background-color: rgba(18, 24, 21, 0.04) !important;
+}
+
+html:not(.dark) [class*="bg-white/10"],
+html.light [class*="bg-white/10"],
+[data-theme="light"] [class*="bg-white/10"] {
+  background-color: rgba(18, 24, 21, 0.07) !important;
+}
+
+html:not(.dark) [class*="bg-black/40"],
+html.light [class*="bg-black/40"],
+[data-theme="light"] [class*="bg-black/40"] {
+  background-color: rgba(234, 239, 234, 0.75) !important;
+}
+
+html:not(.dark) [class*="bg-black/30"],
+html.light [class*="bg-black/30"],
+[data-theme="light"] [class*="bg-black/30"] {
+  background-color: rgba(234, 239, 234, 0.55) !important;
+}
+
+/* Primary buttons keep dark obsidian text on electric lime in both light and dark */
+html:not(.dark) [class*="from-[#f7fe72]"],
+html.light [class*="from-[#f7fe72]"],
+[data-theme="light"] [class*="from-[#f7fe72]"],
+html:not(.dark) [class*="from-[#f7fe72]"] *,
+html.light [class*="from-[#f7fe72]"] *,
+[data-theme="light"] [class*="from-[#f7fe72]"] * {
+  color: #0B0E0C !important;
+  stroke: #0B0E0C;
+}
+
+/* Explicit dark buttons preserve white text in light mode */
+html:not(.dark) .bg-\[\#9c67b5\],
+html.light .bg-\[\#9c67b5\],
+html:not(.dark) [class*="from-[#9c67b5]"],
+html.light [class*="from-[#9c67b5]"],
+[data-theme="light"] [class*="from-[#9c67b5]"],
+html:not(.dark) .bg-\[\#9c67b5\] button,
+html.light .bg-\[\#9c67b5\] button {
+  color: #FFFFFF !important;
+}
+
+/* Form inputs in light mode */
+html.light input,
+html.light textarea,
+html.light select,
+html:not(.dark) input,
+html:not(.dark) textarea,
+html:not(.dark) select {
+  background-color: #FFFFFF !important;
+  color: #121815 !important;
+  border-color: rgba(117, 119, 97, 0.3) !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder,
+html:not(.dark) input::placeholder,
+html:not(.dark) textarea::placeholder {
+  color: #757761 !important;
 }

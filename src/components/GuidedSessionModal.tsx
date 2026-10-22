@@ -86,78 +86,82 @@ export default function GuidedSessionModal({ isOpen, onClose }: GuidedSessionMod
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-xl bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200 overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-xl bg-[#121815] rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#757761]/40 overflow-hidden text-white">
         
+        {/* Glow ambient background accents */}
+        <div className="absolute -top-24 -right-24 w-56 h-56 bg-[#9c67b5]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-56 h-56 bg-[#f7fe72]/10 rounded-full blur-3xl pointer-events-none" />
+
         {/* Close button */}
         <button
           onClick={() => {
             setIsPlaying(false);
             onClose();
           }}
-          className="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+          className="absolute top-5 right-5 p-2 rounded-full text-[#A0A594] hover:text-white hover:bg-white/10 transition-colors cursor-pointer z-10"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Modal Header */}
-        <div className="flex items-center gap-2 text-xs font-bold text-[#1B4332] uppercase tracking-wider mb-2 font-mono">
-          <Activity className="w-4 h-4 text-emerald-700" />
-          <span>Daily 5-Min Guided Flow // Protocol 01</span>
+        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider mb-2 font-mono relative z-10">
+          <Activity className="w-4 h-4 text-[#f7fe72]" />
+          <span className="text-[#9c67b5]">Daily 5-Min Guided Flow // Protocol 01</span>
         </div>
 
-        <h3 className="text-2xl font-black text-slate-900 tracking-tight">
+        <h3 className="text-2xl font-black text-white tracking-tight relative z-10">
           Express Mobility &amp; Parasympathetic Reset
         </h3>
-        <p className="text-xs text-slate-500 mt-1 mb-6">
+        <p className="text-xs text-[#A0A594] mt-1 mb-6 relative z-10">
           Step {currentStepIdx + 1} of {steps.length} • Calibrated for desk decompression &amp; joint longevity
         </p>
 
         {/* Step Progress Dots */}
-        <div className="flex gap-2 mb-6">
+        <div className="flex gap-2 mb-6 relative z-10">
           {steps.map((_, idx) => (
             <div
               key={idx}
               className={`h-2 flex-1 rounded-full transition-all duration-300 ${
                 idx < currentStepIdx
-                  ? "bg-[#1B4332]"
+                  ? "bg-[#9c67b5]"
                   : idx === currentStepIdx
-                  ? "bg-emerald-500"
-                  : "bg-slate-200"
+                  ? "bg-[#f7fe72] shadow-sm shadow-[#f7fe72]/50"
+                  : "bg-[#757761]/30"
               }`}
             />
           ))}
         </div>
 
         {/* Active Exercise Display Box */}
-        <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 mb-6">
+        <div className="p-5 rounded-2xl bg-[#0B0E0C] border border-[#757761]/35 mb-6 relative z-10">
           <div className="flex items-start justify-between gap-4 mb-2">
             <div>
-              <span className="text-[11px] font-bold text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded uppercase font-mono">
+              <span className="text-[11px] font-bold text-[#f7fe72] bg-[#9c67b5]/20 border border-[#9c67b5]/30 px-2 py-0.5 rounded uppercase font-mono">
                 {currentStep.target}
               </span>
-              <h4 className="text-lg font-bold text-slate-900 mt-1.5">{currentStep.title}</h4>
+              <h4 className="text-lg font-bold text-white mt-2">{currentStep.title}</h4>
             </div>
             
             <div className="text-right shrink-0">
-              <span className="text-3xl font-black text-slate-900 font-mono tabular-nums">
+              <span className="text-3xl font-black text-[#f7fe72] font-mono tabular-nums">
                 {formatTime(secondsRemaining)}
               </span>
-              <p className="text-[10px] text-slate-500">remaining</p>
+              <p className="text-[10px] text-[#A0A594] font-mono">remaining</p>
             </div>
           </div>
 
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed bg-white p-3.5 rounded-xl border border-slate-200/80 mt-3">
-            <strong className="text-slate-800">Biomechanical Cue: </strong>
+          <p className="text-xs sm:text-sm text-[#CBD2C7] leading-relaxed bg-[#121815] p-3.5 rounded-xl border border-[#757761]/25 mt-3">
+            <strong className="text-[#f7fe72]">Biomechanical Cue: </strong>
             {currentStep.cue}
           </p>
         </div>
 
         {/* Player Controls */}
-        <div className="flex items-center justify-between pt-2">
+        <div className="flex items-center justify-between pt-2 relative z-10">
           <button
             onClick={resetSession}
-            className="p-3 text-slate-500 hover:text-slate-800 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer"
+            className="p-3 text-[#A0A594] hover:text-white rounded-xl hover:bg-white/10 transition-colors cursor-pointer"
             title="Reset Session"
           >
             <RotateCcw className="w-5 h-5" />
@@ -165,16 +169,16 @@ export default function GuidedSessionModal({ isOpen, onClose }: GuidedSessionMod
 
           <button
             onClick={() => setIsPlaying(!isPlaying)}
-            className="px-8 py-3.5 rounded-full bg-[#1B4332] hover:bg-[#235841] text-white font-bold text-sm flex items-center gap-2 shadow-md active:scale-95 transition-all cursor-pointer"
+            className="px-8 py-3.5 rounded-full bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] hover:brightness-110 text-[#0B0E0C] font-black text-sm flex items-center gap-2 shadow-lg shadow-[#f7fe72]/20 active:scale-95 transition-all cursor-pointer"
           >
             {isPlaying ? (
               <>
-                <Pause className="w-4 h-4 fill-white" />
+                <Pause className="w-4 h-4 fill-[#0B0E0C] text-[#0B0E0C]" />
                 <span>Pause Interval</span>
               </>
             ) : (
               <>
-                <Play className="w-4 h-4 fill-white ml-0.5" />
+                <Play className="w-4 h-4 fill-[#0B0E0C] text-[#0B0E0C] ml-0.5" />
                 <span>{secondsRemaining === 0 ? "Restart" : "Start Guided Flow"}</span>
               </>
             )}
@@ -183,7 +187,7 @@ export default function GuidedSessionModal({ isOpen, onClose }: GuidedSessionMod
           <button
             onClick={handleNextStep}
             disabled={currentStepIdx >= steps.length - 1}
-            className="p-3 text-slate-500 hover:text-slate-800 disabled:opacity-40 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer"
+            className="p-3 text-[#A0A594] hover:text-white disabled:opacity-30 rounded-xl hover:bg-white/10 transition-colors cursor-pointer"
             title="Next Step"
           >
             <SkipForward className="w-5 h-5" />

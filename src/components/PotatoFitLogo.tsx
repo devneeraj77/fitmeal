@@ -36,46 +36,46 @@ export default function PotatoFitLogo({
         className={`relative ${sizeMap[size]} shrink-0 group flex items-center justify-center`}
       >
         {/* Ambient subtle glow ring */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-amber-500/20 via-emerald-500/25 to-amber-400/20 blur-md group-hover:blur-lg transition-all duration-300 opacity-80" />
+        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#9c67b5]/30 via-[#f7fe72]/20 to-[#9c67b5]/30 blur-md group-hover:blur-lg transition-all duration-300 opacity-80" />
 
         <svg
           viewBox="0 0 120 120"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="relative w-full h-full drop-shadow-[0_4px_12px_rgba(245,158,11,0.25)] transition-transform duration-300 group-hover:scale-105"
+          className="relative w-full h-full drop-shadow-[0_4px_12px_rgba(247,254,114,0.25)] transition-transform duration-300 group-hover:scale-105"
         >
           <defs>
             {/* Gradients for faceted faces */}
             <linearGradient id="facetAmberLight" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FBBF24" />
-              <stop offset="100%" stopColor="#F59E0B" />
+              <stop offset="0%" stopColor="#f7fe72" />
+              <stop offset="100%" stopColor="#f4e76e" />
             </linearGradient>
             <linearGradient id="facetAmberMid" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#F59E0B" />
-              <stop offset="100%" stopColor="#D97706" />
+              <stop offset="0%" stopColor="#f4e76e" />
+              <stop offset="100%" stopColor="#d4c448" />
             </linearGradient>
             <linearGradient id="facetAmberDark" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#D97706" />
-              <stop offset="100%" stopColor="#92400E" />
+              <stop offset="0%" stopColor="#9c67b5" />
+              <stop offset="100%" stopColor="#582b75" />
             </linearGradient>
             <linearGradient id="facetSlateDark" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#1E293B" />
-              <stop offset="100%" stopColor="#0F172A" />
+              <stop offset="0%" stopColor="#281436" />
+              <stop offset="100%" stopColor="#120919" />
             </linearGradient>
             <linearGradient id="facetSlateMid" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#334155" />
-              <stop offset="100%" stopColor="#1E293B" />
+              <stop offset="0%" stopColor="#757761" />
+              <stop offset="100%" stopColor="#44493f" />
             </linearGradient>
 
             {/* Neon Pulse Line Gradient */}
-            <linearGradient id="emeraldBoltGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#34D399" />
-              <stop offset="50%" stopColor="#10B981" />
-              <stop offset="100%" stopColor="#059669" />
+            <linearGradient id="solarBoltGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#f7fe72" />
+              <stop offset="50%" stopColor="#f4e76e" />
+              <stop offset="100%" stopColor="#9c67b5" />
             </linearGradient>
 
             {/* Electric Glow Filter */}
-            <filter id="emeraldGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <filter id="solarGlow" x="-20%" y="-20%" width="140%" height="140%">
               <feGaussianBlur stdDeviation="3" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
@@ -89,70 +89,64 @@ export default function PotatoFitLogo({
             {/* Outer Silhouette / Base Foundation */}
             <polygon
               points="40,16 78,18 104,38 112,66 96,96 66,108 34,102 12,80 8,50 20,28"
-              fill="#0F172A"
-              stroke="#F59E0B"
+              fill="#0E1210"
+              stroke="#f7fe72"
               strokeWidth="1.5"
               strokeOpacity="0.4"
             />
 
             {/* Individual Facet Polygons (Low-Poly / Chiseled 3D Potato) */}
-            {/* Top facets */}
             <polygon points="40,16 78,18 64,36 38,34" fill="url(#facetAmberLight)" opacity="0.9" />
             <polygon points="78,18 104,38 88,44 64,36" fill="url(#facetAmberMid)" opacity="0.85" />
             <polygon points="20,28 40,16 38,34 18,46" fill="url(#facetAmberMid)" opacity="0.8" />
 
-            {/* Upper-mid facets */}
             <polygon points="18,46 38,34 52,50 28,62 8,50" fill="url(#facetSlateMid)" opacity="0.95" />
             <polygon points="88,44 104,38 112,66 94,68 76,52" fill="url(#facetAmberDark)" opacity="0.9" />
             <polygon points="64,36 88,44 76,52 52,50" fill="url(#facetAmberLight)" opacity="0.95" />
 
-            {/* Lower-mid facets */}
             <polygon points="28,62 52,50 62,72 38,82 12,80" fill="url(#facetSlateDark)" opacity="0.95" />
             <polygon points="76,52 94,68 84,90 62,72" fill="url(#facetAmberMid)" opacity="0.85" />
             <polygon points="94,68 112,66 96,96 84,90" fill="url(#facetAmberDark)" opacity="0.9" />
 
-            {/* Bottom facets */}
             <polygon points="12,80 38,82 34,102" fill="url(#facetSlateDark)" opacity="0.9" />
             <polygon points="38,82 62,72 66,108 34,102" fill="url(#facetAmberDark)" opacity="0.85" />
             <polygon points="62,72 84,90 96,96 66,108" fill="url(#facetAmberMid)" opacity="0.9" />
 
-            {/* Facet Edge Creases for Precision Wireframe Aesthetic */}
+            {/* Facet Edge Creases */}
             <polyline
               points="40,16 38,34 52,50 62,72 66,108"
-              stroke="#FBBF24"
+              stroke="#f7fe72"
+              strokeWidth="0.8"
+              strokeOpacity="0.5"
+            />
+            <polyline
+              points="78,18 64,36 76,52 84,90"
+              stroke="#f4e76e"
               strokeWidth="0.8"
               strokeOpacity="0.4"
             />
             <polyline
-              points="78,18 64,36 76,52 84,90"
-              stroke="#F59E0B"
-              strokeWidth="0.8"
-              strokeOpacity="0.3"
-            />
-            <polyline
               points="18,46 52,50 88,44"
-              stroke="#FEF3C7"
+              stroke="#9c67b5"
               strokeWidth="0.8"
-              strokeOpacity="0.3"
+              strokeOpacity="0.4"
             />
           </g>
 
           {/* EMBEDDED DYNAMIC LIGHTNING BOLT & PULSE LINE */}
-          {/* Neon Underglow Pulse */}
           <path
             d="M 12,58 L 30,58 L 42,42 L 50,78 L 62,26 L 72,88 L 82,50 L 92,58 L 108,58"
-            stroke="#10B981"
+            stroke="#f7fe72"
             strokeWidth="5"
             strokeLinecap="round"
             strokeLinejoin="round"
-            filter="url(#emeraldGlow)"
+            filter="url(#solarGlow)"
             opacity="0.65"
           />
 
-          {/* Precision Emerald Pulse Line */}
           <path
             d="M 12,58 L 30,58 L 42,42 L 50,78 L 62,26 L 72,88 L 82,50 L 92,58 L 108,58"
-            stroke="url(#emeraldBoltGradient)"
+            stroke="url(#solarBoltGradient)"
             strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -161,15 +155,15 @@ export default function PotatoFitLogo({
           {/* Central Embedded Lightning Bolt Accent */}
           <path
             d="M 64,28 L 50,56 L 62,56 L 46,90 L 74,50 L 60,50 Z"
-            fill="#FBBF24"
-            stroke="#FEF3C7"
+            fill="#f7fe72"
+            stroke="#ffffff"
             strokeWidth="1.2"
-            className="filter drop-shadow-[0_0_6px_rgba(245,158,11,0.8)]"
+            className="filter drop-shadow-[0_0_8px_rgba(247,254,114,0.9)]"
           />
 
           {/* Heartbeat Peak Node */}
-          <circle cx="62" cy="26" r="3" fill="#A7F3D0" />
-          <circle cx="72" cy="88" r="3" fill="#A7F3D0" />
+          <circle cx="62" cy="26" r="3" fill="#ffffff" />
+          <circle cx="72" cy="88" r="3" fill="#ffffff" />
         </svg>
       </div>
 
@@ -178,26 +172,18 @@ export default function PotatoFitLogo({
         <div className="flex flex-col">
           <div className="flex items-center gap-1.5">
             <span
-              className={`font-black tracking-tight uppercase font-sans ${
-                variant === "light" ? "text-slate-900" : "text-white"
-              } ${textMap[size]}`}
+              className={`font-black tracking-tight uppercase font-sans text-[#121815] dark:text-[#F0F4EE] ${textMap[size]}`}
             >
-              POTATO<span className="text-[#F59E0B]">FIT</span>
+              POTATO<span className="text-[#8436A4] dark:text-[#f7fe72]">FIT</span>
             </span>
             <span
-              className={`hidden sm:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold tracking-widest uppercase ${
-                variant === "light"
-                  ? "bg-emerald-50 text-emerald-800 border border-emerald-300"
-                  : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30"
-              }`}
+              className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono font-bold tracking-widest uppercase bg-[#2D163D] text-[#D8B4E2] border border-[#9c67b5]/50 shadow-2xs"
             >
               APEX v2.4
             </span>
           </div>
           <span
-            className={`hidden sm:block text-[10px] sm:text-xs font-semibold tracking-wider uppercase -mt-0.5 ${
-              variant === "light" ? "text-slate-500" : "text-slate-400"
-            }`}
+            className="hidden sm:block text-[10px] sm:text-xs font-semibold tracking-wider uppercase -mt-0.5 text-[#757761] dark:text-[#A0A594]"
           >
             Hyper-Local Athletic Fuel
           </span>

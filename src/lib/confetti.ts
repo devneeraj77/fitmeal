@@ -21,17 +21,17 @@ export function fireTierUnlockConfetti() {
     });
   }
 
-  // 1. Core emerald & mint burst
+  // 1. Core amethyst & lavender burst
   fire(0.25, {
     spread: 30,
     startVelocity: 55,
-    colors: ["#10B981", "#34D399", "#059669"],
+    colors: ["#9c67b5", "#b88cd0", "#6b378c"],
   });
 
-  // 2. High-density gold shimmer ribbons
+  // 2. High-density electric cyber-lime & solar gold ribbons
   fire(0.2, {
     spread: 60,
-    colors: ["#F59E0B", "#FBBF24", "#FDE68A", "#D97706"],
+    colors: ["#f7fe72", "#f4e76e", "#fff7a1", "#d4c448"],
   });
 
   // 3. Wide field dispersion
@@ -39,7 +39,7 @@ export function fireTierUnlockConfetti() {
     spread: 100,
     decay: 0.91,
     scalar: 0.9,
-    colors: ["#10B981", "#F59E0B", "#34D399", "#FFFFFF"],
+    colors: ["#9c67b5", "#f7fe72", "#f4e76e", "#757761", "#FFFFFF"],
   });
 
   // 4. Heavy gravity particles
@@ -49,14 +49,14 @@ export function fireTierUnlockConfetti() {
     decay: 0.92,
     scalar: 1.2,
     shapes: ["star"],
-    colors: ["#F59E0B", "#FBBF24", "#10B981"],
+    colors: ["#f7fe72", "#9c67b5", "#f4e76e"],
   });
 
   // 5. High altitude pop
   fire(0.1, {
     spread: 130,
     startVelocity: 45,
-    colors: ["#34D399", "#FDE68A", "#6EE7B7"],
+    colors: ["#f7fe72", "#b88cd0", "#ffffff"],
   });
 }
 
@@ -71,7 +71,7 @@ export function fireBadgeEquipGlint() {
     angle: 60,
     spread: 55,
     origin: { x: 0.1, y: 0.7 },
-    colors: ["#10B981", "#F59E0B", "#34D399"],
+    colors: ["#f7fe72", "#9c67b5", "#f4e76e"],
     zIndex: 9999,
   });
 
@@ -80,7 +80,7 @@ export function fireBadgeEquipGlint() {
     angle: 120,
     spread: 55,
     origin: { x: 0.9, y: 0.7 },
-    colors: ["#10B981", "#F59E0B", "#34D399"],
+    colors: ["#f7fe72", "#9c67b5", "#f4e76e"],
     zIndex: 9999,
   });
 }

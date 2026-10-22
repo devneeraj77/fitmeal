@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import {
   Trophy,
-  Crown,
   Lock,
   Sparkles,
   CheckCircle2,
@@ -12,20 +11,11 @@ import {
   Check,
   ShieldCheck,
   Store,
-  ArrowLeft,
   ArrowRight,
-  Flame,
   Dumbbell,
-  Zap,
   Award,
   LayoutDashboard,
-  ChevronRight,
-  Star,
-  RefreshCw,
   Gift,
-  HelpCircle,
-  Clock,
-  MapPin,
   Utensils,
 } from "lucide-react";
 import CanvasBadge, { BadgeTier, BadgeRarity, EmblemType } from "@/components/CanvasBadge";
@@ -146,8 +136,8 @@ export default function RewardsPage() {
       title: "Progressive Overload",
       xpThreshold: 2500,
       rankThreshold: "Top 200 Contenders",
-      accentGlow: "rgba(203, 213, 225, 0.25)",
-      gradientText: "from-slate-100 via-slate-300 to-slate-400",
+      accentGlow: "rgba(226, 231, 222, 0.25)",
+      gradientText: "from-[#E2E7DE] via-[#CBD2C7] to-[#A0A594]",
       tagline: "Demonstrated discipline, compound mechanical tension, and strict hydration adherence.",
       badges: [
         {
@@ -197,8 +187,8 @@ export default function RewardsPage() {
       title: "Apex Contender",
       xpThreshold: 5000,
       rankThreshold: "Top 50 Global (Active Tier)",
-      accentGlow: "rgba(245, 158, 11, 0.3)",
-      gradientText: "from-amber-200 via-yellow-400 to-amber-500",
+      accentGlow: "rgba(247, 254, 114, 0.35)",
+      gradientText: "from-[#f4e76e] via-[#f7fe72] to-[#f4e76e]",
       tagline: "Elite contenders dominating South Delhi regional and global competitive boards.",
       badges: [
         {
@@ -267,8 +257,8 @@ export default function RewardsPage() {
       title: "Biomechanical Vanguard",
       xpThreshold: 10000,
       rankThreshold: "Top 25 Contenders",
-      accentGlow: "rgba(16, 185, 129, 0.3)",
-      gradientText: "from-emerald-300 via-teal-200 to-emerald-500",
+      accentGlow: "rgba(156, 103, 181, 0.35)",
+      gradientText: "from-[#9c67b5] via-[#b88cd0] to-[#f7fe72]",
       tagline: "Masters of physical resilience, sustainable clean fueling, and local community leadership.",
       badges: [
         {
@@ -295,9 +285,9 @@ export default function RewardsPage() {
       perks: [
         {
           id: "rew_emerald_particles",
-          title: "Emerald Particle Profile Halo",
+          title: "Amethyst Particle Profile Halo",
           type: "aura",
-          valueDescription: "Continuous floating jade embers orbiting your profile badge across the entire platform.",
+          valueDescription: "Continuous floating amethyst & solar embers orbiting your profile badge across the entire platform.",
           isUnlocked: userXp >= 10000,
           isClaimed: !!claimedCodes["rew_emerald_particles"],
         },
@@ -319,8 +309,8 @@ export default function RewardsPage() {
       title: "Immortal Pantheon",
       xpThreshold: 20000,
       rankThreshold: "Top 10 Grandmasters",
-      accentGlow: "rgba(168, 85, 247, 0.3)",
-      gradientText: "from-purple-300 via-fuchsia-200 to-indigo-400",
+      accentGlow: "rgba(156, 103, 181, 0.45)",
+      gradientText: "from-[#9c67b5] via-[#d5b3e7] to-[#f7fe72]",
       tagline: "The immortal pantheon of FitMeal athletes. Absolute perfection of nutrition & power output.",
       badges: [
         {
@@ -366,7 +356,6 @@ export default function RewardsPage() {
     },
   ];
 
-  // Current active tier
   const activeTier =
     tiers.find(
       (t) => userXp >= t.xpThreshold && (t.id === "apex" || userXp < (tiers[tiers.indexOf(t) + 1]?.xpThreshold || Infinity))
@@ -374,12 +363,10 @@ export default function RewardsPage() {
 
   const inspectedTier = tiers.find((t) => t.id === selectedTierId) || activeTier;
 
-  // Find inspected badge object
   const allBadges = tiers.flatMap((t) => t.badges);
   const activeInspectedBadge =
     allBadges.find((b) => b.id === selectedBadgeId) || inspectedTier.badges[0];
 
-  // Milestone progression mathematics
   const nextTierIndex = tiers.findIndex((t) => t.id === activeTier.id) + 1;
   const nextTier = nextTierIndex < tiers.length ? tiers[nextTierIndex] : null;
   const xpNeeded = nextTier ? Math.max(0, nextTier.xpThreshold - userXp) : 0;
@@ -388,7 +375,6 @@ export default function RewardsPage() {
     ? Math.min(100, Math.max(0, ((userXp - activeTier.xpThreshold) / tierSpan) * 100))
     : 100;
 
-  // Interactive Quick XP Boosters
   const handleBoostWorkout = () => {
     const newXp = userXp + 250;
     setUserXp(newXp);
@@ -407,7 +393,6 @@ export default function RewardsPage() {
     setTimeout(() => setToastMessage(null), 3500);
   };
 
-  // Claim handler
   const handleClaim = (perk: DigitalPerkItem) => {
     if (!perk.isUnlocked) return;
     const code = perk.voucherCode || `KIRANA-${perk.id.replace("rew_", "").toUpperCase()}`;
@@ -417,7 +402,6 @@ export default function RewardsPage() {
     setTimeout(() => setToastMessage(null), 3500);
   };
 
-  // Equip badge handler
   const handleEquip = (badge: RewardBadgeItem) => {
     if (!badge.isUnlocked) return;
     setEquippedBadge({ id: badge.id, name: badge.name });
@@ -426,7 +410,6 @@ export default function RewardsPage() {
     setTimeout(() => setToastMessage(null), 3000);
   };
 
-  // Copy code handler
   const handleCopy = (id: string, code: string) => {
     if (typeof navigator !== "undefined" && navigator.clipboard) {
       navigator.clipboard.writeText(code);
@@ -436,21 +419,21 @@ export default function RewardsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#07100B] text-slate-100 font-sans selection:bg-emerald-500/30 selection:text-emerald-200 pb-24">
+    <div className="min-h-screen bg-[#0B0E0C] text-[#E2E7DE] font-sans selection:bg-[#9c67b5]/30 selection:text-[#f7fe72] pb-24">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-5 left-1/2 -translate-x-1/2 z-60 bg-gradient-to-r from-emerald-600 via-[#1B4332] to-emerald-700 text-white px-5 py-2.5 rounded-full shadow-2xl border border-emerald-400/50 text-xs sm:text-sm font-bold flex items-center gap-2 animate-bounce">
-          <Sparkles className="w-4 h-4 text-emerald-300" />
+        <div className="fixed top-5 left-1/2 -translate-x-1/2 z-60 bg-gradient-to-r from-[#2B153D] via-[#482065] to-[#2B153D] text-[#f7fe72] px-5 py-2.5 rounded-full shadow-[0_10px_35px_rgba(0,0,0,0.8)] border border-[#f7fe72]/50 text-xs sm:text-sm font-bold flex items-center gap-2 animate-bounce">
+          <Sparkles className="w-4 h-4 text-[#f7fe72]" />
           <span>{toastMessage}</span>
         </div>
       )}
 
       {/* Top Header Navigation */}
-      <header className="sticky top-0 z-40 w-full bg-[#07100B]/90 backdrop-blur-md border-b border-white/10">
+      <header className="sticky top-0 z-40 w-full bg-[#0B0E0C]/90 backdrop-blur-md border-b border-[#757761]/25">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
           <Link
             href="/"
-            className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-lg p-1"
+            className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9c67b5] rounded-lg p-1"
             aria-label="PotatoFit Home"
           >
             <PotatoFitLogo size="sm" variant="dark" />
@@ -459,17 +442,17 @@ export default function RewardsPage() {
           <div className="flex items-center gap-2 sm:gap-3">
             <Link
               href="/leaderboards"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-emerald-300 bg-emerald-950/60 hover:bg-emerald-900/60 border border-emerald-700/50 rounded-xl transition-all shadow-xs"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[#f7fe72] bg-[#2B153D]/70 hover:bg-[#3E1F55] border border-[#9c67b5]/50 rounded-xl transition-all shadow-xs"
             >
-              <Trophy className="w-3.5 h-3.5 text-emerald-400" />
+              <Trophy className="w-3.5 h-3.5 text-[#f7fe72]" />
               <span>Live Leaderboards</span>
             </Link>
 
             <Link
               href="/dashboard"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-300 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[#CBD2C7] bg-white/5 hover:bg-white/10 border border-[#757761]/30 rounded-xl transition-all"
             >
-              <LayoutDashboard className="w-3.5 h-3.5 text-slate-400" />
+              <LayoutDashboard className="w-3.5 h-3.5 text-[#f4e76e]" />
               <span className="hidden sm:inline">Personal </span>
               <span>Dashboard</span>
             </Link>
@@ -481,20 +464,20 @@ export default function RewardsPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
         
         {/* 1. Hero Prestige Header */}
-        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0F291E] via-[#091A13] to-[#040C08] border border-emerald-800/40 p-6 sm:p-8 lg:p-10 shadow-2xl">
+        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#2D163D] via-[#1A221C] to-[#101512] border border-[#9c67b5]/35 p-6 sm:p-8 lg:p-10 shadow-2xl">
           {/* Subtle Ambient Glow Orbs */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#9c67b5]/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-[#f7fe72]/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
             <div className="space-y-3 max-w-2xl">
               <div className="flex flex-wrap items-center gap-2 text-xs font-mono font-bold tracking-wider">
-                <span className="px-3 py-1 rounded-full bg-emerald-400 text-[#07100B] font-black uppercase text-[11px]">
+                <span className="px-3 py-1 rounded-full bg-[#f7fe72] text-[#0B0E0C] font-black uppercase text-[11px] shadow-xs">
                   SEASON 4 PRESTIGE VAULT
                 </span>
                 <span className="text-white/30">·</span>
-                <span className="text-emerald-300 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" />
+                <span className="text-[#f4e76e] flex items-center gap-1.5 font-semibold">
+                  <Sparkles className="w-3.5 h-3.5 text-[#f7fe72]" />
                   Hyper-Local Rewards &amp; Vouchers
                 </span>
               </div>
@@ -503,7 +486,7 @@ export default function RewardsPage() {
                 Arena Reward Tiers &amp; Medals
               </h1>
 
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+              <p className="text-sm sm:text-base text-[#CBD2C7] leading-relaxed">
                 Elevate your athlete status through real-world biomechanical output and raw neighborhood fueling.
                 Unlock high-protein Kirana grocery vouchers, digital aura rings, custom cast-iron trophies, and priority coaching queues.
               </p>
@@ -512,42 +495,42 @@ export default function RewardsPage() {
               <div className="pt-2 flex flex-wrap items-center gap-3">
                 <button
                   onClick={handleBoostWorkout}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs transition-all shadow-md active:scale-95 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] hover:from-[#f4e76e] hover:to-[#dfd158] text-[#0B0E0C] font-black text-xs transition-all shadow-md active:scale-95 cursor-pointer"
                 >
-                  <Dumbbell className="w-4 h-4 text-slate-950" />
+                  <Dumbbell className="w-4 h-4 text-[#0B0E0C]" />
                   <span>Log Heavy Iron (+250 XP)</span>
                 </button>
 
                 <button
                   onClick={handleBoostMeal}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/10 transition-all cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#9c67b5] to-[#7B4695] hover:from-[#aa72c5] hover:to-[#8c52a8] text-white font-bold text-xs border border-[#9c67b5]/40 transition-all cursor-pointer"
                 >
-                  <Utensils className="w-4 h-4 text-emerald-400" />
+                  <Utensils className="w-4 h-4 text-[#f7fe72]" />
                   <span>Log Kirana Fuel (+100 XP)</span>
                 </button>
               </div>
             </div>
 
             {/* Active Athlete Scorecard */}
-            <div className="bg-black/40 backdrop-blur-md border border-white/15 rounded-3xl p-5 sm:p-6 lg:w-96 space-y-4 shadow-xl">
-              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+            <div className="bg-[#101512]/80 backdrop-blur-md border border-[#757761]/30 rounded-3xl p-5 sm:p-6 lg:w-96 space-y-4 shadow-xl">
+              <div className="flex items-center justify-between border-b border-[#757761]/25 pb-3">
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#A0A594] block">
                     ACTIVE ATHLETE
                   </span>
                   <div className="text-lg font-black text-white flex items-center gap-2 mt-0.5">
                     <span>David Kim</span>
-                    <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded font-mono font-bold">
+                    <span className="text-[10px] bg-[#9c67b5] text-white px-2 py-0.5 rounded font-mono font-bold">
                       YOU
                     </span>
                   </div>
                 </div>
 
                 <div className="text-right">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#A0A594] block">
                     GLOBAL RANK
                   </span>
-                  <div className="text-xl font-black font-mono text-emerald-400 mt-0.5">
+                  <div className="text-xl font-black font-mono text-[#f7fe72] mt-0.5">
                     #{userRank}
                   </div>
                 </div>
@@ -555,19 +538,19 @@ export default function RewardsPage() {
 
               <div className="space-y-1.5">
                 <div className="flex justify-between text-xs">
-                  <span className="text-slate-400">Total Arena XP:</span>
-                  <span className="font-black font-mono text-amber-300 text-sm">
+                  <span className="text-[#A0A594]">Total Arena XP:</span>
+                  <span className="font-black font-mono text-[#f7fe72] text-sm">
                     {userXp.toLocaleString()} XP
                   </span>
                 </div>
                 <div className="flex justify-between text-xs">
-                  <span className="text-slate-400">Active Tier:</span>
-                  <span className="font-bold text-emerald-300">{activeTier.name}</span>
+                  <span className="text-[#A0A594]">Active Tier:</span>
+                  <span className="font-bold text-[#D8B4E2]">{activeTier.name}</span>
                 </div>
                 <div className="flex justify-between text-xs">
-                  <span className="text-slate-400">Equipped Badge:</span>
-                  <span className="font-bold text-slate-200 flex items-center gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="text-[#A0A594]">Equipped Badge:</span>
+                  <span className="font-bold text-[#E2E7DE] flex items-center gap-1">
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#f7fe72]" />
                     {equippedBadge.name}
                   </span>
                 </div>
@@ -575,24 +558,24 @@ export default function RewardsPage() {
 
               {/* Progress to Next Tier */}
               {nextTier ? (
-                <div className="pt-2 border-t border-white/10 space-y-2">
+                <div className="pt-2 border-t border-[#757761]/25 space-y-2">
                   <div className="flex justify-between text-[11px]">
-                    <span className="text-slate-300">
+                    <span className="text-[#CBD2C7]">
                       Next: <strong className="text-white">{nextTier.name}</strong>
                     </span>
-                    <span className="font-mono text-emerald-300 font-bold">
+                    <span className="font-mono text-[#f7fe72] font-bold">
                       {xpNeeded.toLocaleString()} XP left ({Math.round(tierProgressPercent)}%)
                     </span>
                   </div>
-                  <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-2 w-full bg-black/60 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-emerald-400 to-teal-300 rounded-full transition-all duration-500"
+                      className="h-full bg-gradient-to-r from-[#9c67b5] to-[#f7fe72] rounded-full transition-all duration-500"
                       style={{ width: `${tierProgressPercent}%` }}
                     />
                   </div>
                 </div>
               ) : (
-                <div className="pt-2 border-t border-white/10 text-xs text-center font-bold text-amber-300">
+                <div className="pt-2 border-t border-[#757761]/25 text-xs text-center font-bold text-[#f7fe72]">
                   👑 Max Tier Unlocked: Apex Legend!
                 </div>
               )}
@@ -601,17 +584,17 @@ export default function RewardsPage() {
         </section>
 
         {/* 2. Interactive Tier Beam Progression */}
-        <section className="bg-white/[0.02] border border-white/10 rounded-3xl p-5 sm:p-7 space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-4">
+        <section className="bg-[#121815] border border-[#757761]/30 rounded-3xl p-5 sm:p-7 space-y-6 shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#757761]/25 pb-4">
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-[#f7fe72] font-bold">
                 PRESTIGE HIERARCHY
               </span>
               <h2 className="text-xl sm:text-2xl font-black text-white">
                 Select Tier to Inspect Badges &amp; Perks
               </h2>
             </div>
-            <span className="text-xs text-slate-400">
+            <span className="text-xs text-[#A0A594]">
               Click any tier below to browse its unlockable rewards
             </span>
           </div>
@@ -632,13 +615,12 @@ export default function RewardsPage() {
                   }}
                   className={`relative flex flex-col items-center gap-2 p-4 rounded-2xl border transition-all cursor-pointer text-center ${
                     isSelected
-                      ? "bg-white/10 border-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.2)] scale-[1.02]"
+                      ? "bg-gradient-to-b from-[#2D163D] to-[#18201B] border-[#f7fe72] shadow-[0_0_25px_rgba(247,254,114,0.18)] scale-[1.02]"
                       : isUnlocked
-                      ? "bg-white/[0.04] border-white/10 hover:bg-white/[0.08]"
-                      : "bg-black/40 border-white/5 opacity-60 hover:opacity-80"
+                      ? "bg-black/40 border-[#757761]/30 hover:border-[#9c67b5]/50"
+                      : "bg-black/60 border-white/5 opacity-55 hover:opacity-75"
                   }`}
                 >
-                  {/* Badge Miniature */}
                   <div className="relative">
                     <CanvasBadge
                       tier={tier.id}
@@ -649,27 +631,27 @@ export default function RewardsPage() {
                     />
 
                     {isUserCurrent && (
-                      <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-400 ring-4 ring-[#07100B] animate-pulse" />
+                      <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-[#f7fe72] ring-4 ring-[#0B0E0C] animate-pulse" />
                     )}
                   </div>
 
                   <div>
                     <h3 className="text-xs sm:text-sm font-bold text-white">{tier.name}</h3>
-                    <span className="text-[11px] font-mono text-slate-400 block mt-0.5">
+                    <span className="text-[11px] font-mono text-[#f4e76e] block mt-0.5">
                       {tier.xpThreshold >= 1000 ? `${tier.xpThreshold / 1000}k` : tier.xpThreshold} XP
                     </span>
                   </div>
 
                   {isUserCurrent ? (
-                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#f7fe72] text-[#0B0E0C]">
                       Active Tier
                     </span>
                   ) : isUnlocked ? (
-                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/10 text-slate-300">
+                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#9c67b5]/30 text-[#D8B4E2] border border-[#9c67b5]/40">
                       Unlocked
                     </span>
                   ) : (
-                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/5 text-slate-500 flex items-center gap-1">
+                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/5 text-[#757761] flex items-center gap-1">
                       <Lock className="w-2.5 h-2.5" />
                       Locked
                     </span>
@@ -686,12 +668,12 @@ export default function RewardsPage() {
           {/* Left Column: Canvas Medal Showcase (5 cols) */}
           <section
             aria-labelledby="medal-showcase-heading"
-            className="lg:col-span-5 rounded-3xl bg-gradient-to-b from-white/[0.04] to-black/40 border border-white/10 p-6 flex flex-col justify-between relative overflow-hidden backdrop-blur-md space-y-6"
+            className="lg:col-span-5 rounded-3xl bg-gradient-to-b from-[#18201B] to-[#101512] border border-[#757761]/35 p-6 flex flex-col justify-between relative overflow-hidden backdrop-blur-md space-y-6 shadow-xl"
           >
             <div className="space-y-5">
               <div className="flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold block">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#f7fe72] font-bold block">
                     TIER {inspectedTier.tierNumber} MEDAL
                   </span>
                   <h3 id="medal-showcase-heading" className="text-xl sm:text-2xl font-black text-white mt-0.5">
@@ -699,7 +681,7 @@ export default function RewardsPage() {
                   </h3>
                 </div>
 
-                <div className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-slate-300">
+                <div className="px-3 py-1 rounded-full bg-white/5 border border-[#757761]/30 text-xs font-mono text-[#CBD2C7]">
                   {inspectedTier.rankThreshold}
                 </div>
               </div>
@@ -724,12 +706,12 @@ export default function RewardsPage() {
                   <div className="flex items-center justify-center gap-2">
                     <h4 className="text-lg font-black text-white">{activeInspectedBadge.name}</h4>
                     {equippedBadge.id === activeInspectedBadge.id && (
-                      <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2.5 py-0.5 rounded-full font-mono font-bold">
+                      <span className="text-[10px] bg-[#f7fe72] text-[#0B0E0C] px-2.5 py-0.5 rounded-full font-mono font-black">
                         EQUIPPED
                       </span>
                     )}
                   </div>
-                  <span className="text-xs font-mono text-amber-300 font-semibold block">
+                  <span className="text-xs font-mono text-[#f4e76e] font-semibold block">
                     {activeInspectedBadge.rarity} Heraldic Medal
                   </span>
                 </div>
@@ -737,7 +719,7 @@ export default function RewardsPage() {
 
               {/* Badges in this tier selection list */}
               <div className="space-y-2">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block font-semibold">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-[#A0A594] block font-semibold">
                   Medals Available in This Tier ({inspectedTier.badges.length})
                 </span>
                 <div className="grid grid-cols-2 gap-2">
@@ -747,8 +729,8 @@ export default function RewardsPage() {
                       onClick={() => setSelectedBadgeId(b.id)}
                       className={`flex items-center gap-2.5 p-2.5 rounded-xl border transition-all cursor-pointer text-left ${
                         selectedBadgeId === b.id
-                          ? "bg-white/10 border-emerald-400/80 shadow-md"
-                          : "bg-white/5 border-white/5 hover:bg-white/10 opacity-70"
+                          ? "bg-[#2D163D] border-[#f7fe72] shadow-md"
+                          : "bg-black/30 border-[#757761]/30 hover:bg-white/5 opacity-70"
                       }`}
                     >
                       <CanvasBadge
@@ -760,7 +742,7 @@ export default function RewardsPage() {
                       />
                       <div className="min-w-0">
                         <span className="font-bold text-xs text-white block truncate">{b.name}</span>
-                        <span className="text-[10px] text-slate-400">{b.rarity}</span>
+                        <span className="text-[10px] text-[#A0A594]">{b.rarity}</span>
                       </div>
                     </button>
                   ))}
@@ -769,20 +751,20 @@ export default function RewardsPage() {
 
               {/* Requirement & Lore Text */}
               <div className="space-y-3 text-xs">
-                <div className="p-3.5 rounded-2xl bg-black/40 border border-white/5 space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-slate-400 block font-semibold">
+                <div className="p-3.5 rounded-2xl bg-black/40 border border-[#757761]/25 space-y-1">
+                  <span className="text-[10px] font-mono uppercase text-[#A0A594] block font-semibold">
                     Unlock Requirement
                   </span>
-                  <p className="text-slate-200 leading-relaxed font-medium">
+                  <p className="text-[#E2E7DE] leading-relaxed font-medium">
                     {activeInspectedBadge.requirement}
                   </p>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-emerald-950/20 border border-emerald-500/15 space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-emerald-400 block font-semibold">
+                <div className="p-3.5 rounded-2xl bg-[#2D163D]/30 border border-[#9c67b5]/30 space-y-1">
+                  <span className="text-[10px] font-mono uppercase text-[#D8B4E2] block font-semibold">
                     Prestige Lore
                   </span>
-                  <p className="text-emerald-100/90 italic leading-relaxed">
+                  <p className="text-[#EAD7F2] italic leading-relaxed">
                     &ldquo;{activeInspectedBadge.lore}&rdquo;
                   </p>
                 </div>
@@ -790,17 +772,17 @@ export default function RewardsPage() {
             </div>
 
             {/* Equip Button Action */}
-            <div className="pt-4 border-t border-white/10">
+            <div className="pt-4 border-t border-[#757761]/25">
               {activeInspectedBadge.isUnlocked ? (
                 <button
                   onClick={() => handleEquip(activeInspectedBadge)}
                   className={`w-full py-3 rounded-xl font-black text-xs sm:text-sm transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-2 shadow-lg ${
                     equippedBadge.id === activeInspectedBadge.id
-                      ? "bg-white/10 text-slate-300 border border-white/20"
-                      : "bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 shadow-emerald-900/40"
+                      ? "bg-white/10 text-[#CBD2C7] border border-white/20"
+                      : "bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] hover:from-[#f4e76e] hover:to-[#dfd158] text-[#0B0E0C] shadow-[0_0_20px_rgba(247,254,114,0.2)]"
                   }`}
                 >
-                  <ShieldCheck className="w-4 h-4" />
+                  <ShieldCheck className="w-4 h-4 text-[#0B0E0C]" />
                   <span>
                     {equippedBadge.id === activeInspectedBadge.id
                       ? "Currently Equipped on Public Profile"
@@ -808,8 +790,8 @@ export default function RewardsPage() {
                   </span>
                 </button>
               ) : (
-                <div className="w-full py-3 rounded-xl bg-white/5 border border-white/10 text-slate-400 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2">
-                  <Lock className="w-4 h-4 text-slate-500" />
+                <div className="w-full py-3 rounded-xl bg-black/40 border border-[#757761]/30 text-[#A0A594] text-xs sm:text-sm font-semibold flex items-center justify-center gap-2">
+                  <Lock className="w-4 h-4 text-[#757761]" />
                   <span>Locked — Reach {inspectedTier.xpThreshold.toLocaleString()} XP to Unlock</span>
                 </div>
               )}
@@ -820,16 +802,16 @@ export default function RewardsPage() {
           <section aria-labelledby="tier-perks-heading" className="lg:col-span-7 space-y-6">
             
             {/* Tier Privileges Card */}
-            <div className="p-6 rounded-3xl bg-gradient-to-r from-white/[0.05] via-white/[0.02] to-transparent border border-white/10 space-y-2">
+            <div className="p-6 rounded-3xl bg-gradient-to-r from-[#2D163D]/60 via-[#18201B] to-transparent border border-[#9c67b5]/35 space-y-2">
               <div className="flex items-center gap-2 text-xs font-mono font-bold">
-                <span className="text-emerald-400">TIER {inspectedTier.tierNumber} PRIVILEGES</span>
+                <span className="text-[#f7fe72]">TIER {inspectedTier.tierNumber} PRIVILEGES</span>
                 <span className="text-white/20">·</span>
-                <span className="text-slate-300 truncate">{inspectedTier.title}</span>
+                <span className="text-[#CBD2C7] truncate">{inspectedTier.title}</span>
               </div>
               <h3 id="tier-perks-heading" className="text-2xl sm:text-3xl font-black text-white">
                 Unlockable Perks &amp; Fuel Credits
               </h3>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#A0A594] leading-relaxed">
                 {inspectedTier.tagline}
               </p>
             </div>
@@ -846,26 +828,26 @@ export default function RewardsPage() {
                     key={perk.id}
                     className={`p-5 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
                       isClaimed
-                        ? "bg-white/[0.02] border-white/5"
+                        ? "bg-black/30 border-[#757761]/20"
                         : isUnlocked
-                        ? "bg-gradient-to-r from-emerald-950/30 to-black/40 border-emerald-500/30 hover:border-emerald-500/50"
-                        : "bg-white/[0.01] border-white/5 opacity-55"
+                        ? "bg-gradient-to-r from-[#2D163D]/40 to-[#18201B] border-[#9c67b5]/50 hover:border-[#f7fe72]/50"
+                        : "bg-black/40 border-[#757761]/20 opacity-55"
                     }`}
                   >
                     <div className="flex items-start gap-4 min-w-0">
                       <div
                         className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border ${
                           isUnlocked
-                            ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 shadow-inner"
-                            : "bg-white/5 text-slate-500 border-white/5"
+                            ? "bg-[#9c67b5]/20 text-[#f7fe72] border-[#9c67b5]/40 shadow-inner"
+                            : "bg-white/5 text-[#757761] border-white/5"
                         }`}
                       >
                         {perk.type === "voucher" ? (
-                          <Store className="w-6 h-6 text-emerald-400" />
+                          <Store className="w-6 h-6 text-[#f7fe72]" />
                         ) : perk.type === "aura" ? (
-                          <Sparkles className="w-6 h-6 text-amber-400" />
+                          <Sparkles className="w-6 h-6 text-[#f4e76e]" />
                         ) : (
-                          <ShieldCheck className="w-6 h-6 text-emerald-400" />
+                          <ShieldCheck className="w-6 h-6 text-[#D8B4E2]" />
                         )}
                       </div>
 
@@ -874,22 +856,22 @@ export default function RewardsPage() {
                           <h4 className="font-bold text-sm sm:text-base text-white truncate">
                             {perk.title}
                           </h4>
-                          <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/5 text-slate-400 border border-white/10 shrink-0">
+                          <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/5 text-[#A0A594] border border-white/10 shrink-0">
                             {perk.type}
                           </span>
                         </div>
-                        <p className="text-xs text-slate-400 leading-relaxed">
+                        <p className="text-xs text-[#A0A594] leading-relaxed">
                           {perk.valueDescription}
                         </p>
                       </div>
                     </div>
 
                     {/* Perk Action Buttons */}
-                    <div className="shrink-0 flex items-center justify-end gap-2 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/5">
+                    <div className="shrink-0 flex items-center justify-end gap-2 pt-2 sm:pt-0 border-t sm:border-t-0 border-[#757761]/25">
                       {isClaimed ? (
                         <div className="flex items-center gap-2">
                           {code && (
-                            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/60 border border-emerald-500/40 text-xs font-mono font-bold text-emerald-300">
+                            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/60 border border-[#9c67b5]/50 text-xs font-mono font-bold text-[#f7fe72]">
                               <span>{code}</span>
                               <button
                                 onClick={() => handleCopy(perk.id, code)}
@@ -897,14 +879,14 @@ export default function RewardsPage() {
                                 title="Copy voucher code"
                               >
                                 {copiedId === perk.id ? (
-                                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                                  <Check className="w-3.5 h-3.5 text-[#f7fe72]" />
                                 ) : (
-                                  <Copy className="w-3.5 h-3.5 text-slate-400" />
+                                  <Copy className="w-3.5 h-3.5 text-[#A0A594]" />
                                 )}
                               </button>
                             </div>
                           )}
-                          <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400">
+                          <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#f7fe72]">
                             <CheckCircle2 className="w-4 h-4" />
                             Claimed
                           </span>
@@ -912,13 +894,13 @@ export default function RewardsPage() {
                       ) : isUnlocked ? (
                         <button
                           onClick={() => handleClaim(perk)}
-                          className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs transition-all active:scale-95 cursor-pointer shadow-md flex items-center gap-1.5"
+                          className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] hover:from-[#f4e76e] hover:to-[#dfd158] text-[#0B0E0C] font-black text-xs transition-all active:scale-95 cursor-pointer shadow-md flex items-center gap-1.5"
                         >
                           <Gift className="w-3.5 h-3.5" />
                           <span>Claim Reward</span>
                         </button>
                       ) : (
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 text-slate-500 text-xs font-medium border border-white/5">
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/40 text-[#757761] text-xs font-medium border border-[#757761]/25">
                           <Lock className="w-3.5 h-3.5" />
                           <span>Locked</span>
                         </div>
@@ -930,41 +912,41 @@ export default function RewardsPage() {
             </div>
 
             {/* Kirana Voucher Explainer Card */}
-            <div className="rounded-3xl bg-gradient-to-br from-emerald-950/30 to-[#0B1C14] border border-emerald-800/40 p-6 space-y-4">
+            <div className="rounded-3xl bg-gradient-to-br from-[#2D163D]/40 to-[#121815] border border-[#9c67b5]/30 p-6 space-y-4">
               <div className="flex items-center gap-2.5">
-                <Store className="w-5 h-5 text-emerald-400" />
+                <Store className="w-5 h-5 text-[#f7fe72]" />
                 <h4 className="text-base font-bold text-white">
                   How Hyper-Local Kirana Fuel Redemption Works
                 </h4>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-slate-300">
-                <div className="bg-black/30 p-3.5 rounded-2xl border border-white/5 space-y-1">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-[#CBD2C7]">
+                <div className="bg-black/40 p-3.5 rounded-2xl border border-[#757761]/30 space-y-1">
                   <div className="font-bold text-white flex items-center gap-1.5">
-                    <span className="w-4 h-4 rounded-full bg-emerald-400 text-slate-950 flex items-center justify-center text-[10px] font-black">1</span>
+                    <span className="w-4 h-4 rounded-full bg-[#f7fe72] text-[#0B0E0C] flex items-center justify-center text-[10px] font-black">1</span>
                     Claim Voucher
                   </div>
-                  <p className="text-slate-400">
+                  <p className="text-[#A0A594]">
                     Reach target XP threshold to unlock verified Kirana fuel vouchers in your city.
                   </p>
                 </div>
 
-                <div className="bg-black/30 p-3.5 rounded-2xl border border-white/5 space-y-1">
+                <div className="bg-black/40 p-3.5 rounded-2xl border border-[#757761]/30 space-y-1">
                   <div className="font-bold text-white flex items-center gap-1.5">
-                    <span className="w-4 h-4 rounded-full bg-emerald-400 text-slate-950 flex items-center justify-center text-[10px] font-black">2</span>
+                    <span className="w-4 h-4 rounded-full bg-[#f7fe72] text-[#0B0E0C] flex items-center justify-center text-[10px] font-black">2</span>
                     Visit Merchant
                   </div>
-                  <p className="text-slate-400">
+                  <p className="text-[#A0A594]">
                     Present your alphanumeric voucher at 5,200+ partner grocery &amp; street vendors.
                   </p>
                 </div>
 
-                <div className="bg-black/30 p-3.5 rounded-2xl border border-white/5 space-y-1">
+                <div className="bg-black/40 p-3.5 rounded-2xl border border-[#757761]/30 space-y-1">
                   <div className="font-bold text-white flex items-center gap-1.5">
-                    <span className="w-4 h-4 rounded-full bg-emerald-400 text-slate-950 flex items-center justify-center text-[10px] font-black">3</span>
+                    <span className="w-4 h-4 rounded-full bg-[#f7fe72] text-[#0B0E0C] flex items-center justify-center text-[10px] font-black">3</span>
                     Fuel &amp; Overload
                   </div>
-                  <p className="text-slate-400">
+                  <p className="text-[#A0A594]">
                     Take home fresh roasted sattu, seasonal greens, paneer, and lentils for peak recovery.
                   </p>
                 </div>
@@ -974,17 +956,17 @@ export default function RewardsPage() {
         </div>
 
         {/* 4. Bottom Navigation CTA */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-3xl bg-white/[0.02] border border-white/10">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-3xl bg-[#121815] border border-[#757761]/30">
           <div className="space-y-1 text-center sm:text-left">
             <h4 className="text-base font-bold text-white">Ready to battle on the leaderboard?</h4>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-[#A0A594]">
               Check live standings, bump rivals, and see your rank climb in real time.
             </p>
           </div>
 
           <Link
             href="/leaderboards"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-xs sm:text-sm transition-all active:scale-95 shadow-lg cursor-pointer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] hover:from-[#f4e76e] hover:to-[#dfd158] text-[#0B0E0C] font-black text-xs sm:text-sm transition-all active:scale-95 shadow-lg cursor-pointer"
           >
             <span>Return to Live Standings</span>
             <ArrowRight className="w-4 h-4" />

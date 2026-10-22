@@ -43,7 +43,7 @@ function runConfettiBurst(canvas: HTMLCanvasElement | null) {
     alpha: number;
   }> = [];
 
-  const colors = ["#10B981", "#1B4332", "#34D399", "#059669", "#FCD34D", "#3B82F6", "#F59E0B"];
+  const colors = ["#9c67b5", "#f7fe72", "#f4e76e", "#757761", "#c084fc", "#eef076"];
   const centerX = window.innerWidth / 2;
   const centerY = window.innerHeight * 0.45;
 
@@ -710,7 +710,7 @@ export default function PulseAINutritionEngine() {
   return (
     <section
       id="nutrition"
-      className="relative w-full py-16 px-4 sm:px-6 lg:px-8 bg-[#F8FAF9] text-slate-900 overflow-hidden font-sans border-b border-[#1B4332]/10 scroll-mt-20 sm:scroll-mt-24"
+      className="relative w-full py-16 px-4 sm:px-6 lg:px-8 bg-[#0B0E0C] text-[#E2E7DE] overflow-hidden font-sans border-b border-[#757761]/25 scroll-mt-20 sm:scroll-mt-24"
     >
       {/* Hidden Fullscreen Canvas for celebratory confetti bursts */}
       <canvas
@@ -722,30 +722,30 @@ export default function PulseAINutritionEngine() {
         {/* Brand & Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1B4332]/10 border border-[#1B4332]/25 text-[#1B4332] text-xs font-bold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-600 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#9c67b5]/15 border border-[#9c67b5]/30 text-[#f7fe72] text-xs font-bold uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5 text-[#f7fe72] animate-pulse" />
               <span>PulseAI &bull; Hyper-Local Nutrition Engine</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-950 font-sans">
-              AI Hyper-Local Chef &amp; Mandi Radar
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-sans">
+              AI Hyper-Local Chef &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9c67b5] via-[#f4e76e] to-[#f7fe72]">Mandi Radar</span>
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base max-w-2xl leading-relaxed">
+            <p className="text-[#A0A493] text-sm sm:text-base max-w-2xl leading-relaxed">
               Dynamically maps seasonal Indian produce, local Delhi Kirana merchants, and live protein macro economics to your daily fitness goal.
             </p>
           </div>
 
           {/* User Gamification & Daily XP Status */}
-          <div className="flex items-center gap-3 bg-white px-4 py-2.5 rounded-2xl border border-slate-200/80 shadow-xs self-start md:self-auto">
-            <div className="w-10 h-10 rounded-xl bg-[#1B4332] text-emerald-400 flex items-center justify-center font-bold text-xs shadow-inner">
-              <Award className="w-5 h-5 text-emerald-400" />
+          <div className="flex items-center gap-3 bg-[#121815] px-4 py-2.5 rounded-2xl border border-[#757761]/30 shadow-xs self-start md:self-auto">
+            <div className="w-10 h-10 rounded-xl bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center font-bold text-xs shadow-inner border border-[#9c67b5]/40">
+              <Award className="w-5 h-5 text-[#f7fe72]" />
             </div>
             <div>
-              <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
+              <div className="text-[11px] font-semibold text-[#A0A493] uppercase tracking-wider">
                 Athlete XP &bull; Today ({mealsLoggedToday} Logged)
               </div>
-              <div className="text-base font-extrabold text-slate-900 flex items-center gap-1.5">
+              <div className="text-base font-extrabold text-white flex items-center gap-1.5">
                 <span>{loggedXP} XP</span>
-                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+                <span className="text-[10px] font-bold text-[#f7fe72] bg-[#9c67b5]/20 px-1.5 py-0.5 rounded border border-[#9c67b5]/30 font-mono">
                   Level 4 Mover
                 </span>
               </div>
@@ -756,7 +756,7 @@ export default function PulseAINutritionEngine() {
         {/* =========================================================================
             1. TOP GEOGRAPHIC & SOURCING BAR
             ========================================================================= */}
-        <div className="bg-white rounded-3xl p-4 sm:p-5 border border-[#1B4332]/20 shadow-xs space-y-4">
+        <div className="bg-[#121815] rounded-3xl p-4 sm:p-5 border border-[#757761]/30 shadow-xs space-y-4">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             {/* Dynamic Location Detection Badge + Radius Dropdown */}
             <div className="flex flex-wrap items-center gap-2.5">
@@ -767,18 +767,18 @@ export default function PulseAINutritionEngine() {
                     setIsLocationMenuOpen(!isLocationMenuOpen);
                     setIsRadiusMenuOpen(false);
                   }}
-                  className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-emerald-50/80 hover:bg-emerald-100/70 border border-emerald-200 text-[#1B4332] text-xs sm:text-sm font-semibold transition-all cursor-pointer group shadow-2xs"
+                  className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#0B0E0C] hover:bg-[#161c18] border border-[#757761]/35 text-[#E2E7DE] text-xs sm:text-sm font-semibold transition-all cursor-pointer group shadow-2xs"
                   title="Click to change detected neighborhood"
                 >
-                  <MapPin className="w-4 h-4 text-emerald-700 group-hover:scale-110 transition-transform" />
-                  <span className="font-bold">Current Location:</span>
-                  <span className="text-slate-900 font-medium">{currentLocation}</span>
-                  <ChevronDown className={`w-3.5 h-3.5 text-emerald-700 transition-transform ${isLocationMenuOpen ? "rotate-180" : ""}`} />
+                  <MapPin className="w-4 h-4 text-[#f7fe72] group-hover:scale-110 transition-transform" />
+                  <span className="font-bold text-[#f7fe72]">Current Location:</span>
+                  <span className="text-white font-medium">{currentLocation}</span>
+                  <ChevronDown className={`w-3.5 h-3.5 text-[#f7fe72] transition-transform ${isLocationMenuOpen ? "rotate-180" : ""}`} />
                 </button>
 
                 {isLocationMenuOpen && (
-                  <div className="absolute left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-slate-200 z-30 py-2 animate-in fade-in slide-in-from-top-1">
-                    <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-600 border-b border-slate-100">
+                  <div className="absolute left-0 mt-2 w-64 bg-[#121815] rounded-2xl shadow-2xl border border-[#757761]/40 z-30 py-2 animate-in fade-in slide-in-from-top-1">
+                    <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#A0A493] border-b border-[#757761]/25">
                       Select Delhi Micro-Hub
                     </div>
                     {LOCATIONS.map((loc) => (
@@ -788,12 +788,12 @@ export default function PulseAINutritionEngine() {
                           setCurrentLocation(loc);
                           setIsLocationMenuOpen(false);
                         }}
-                        className={`w-full text-left px-3.5 py-2 text-xs font-medium flex items-center justify-between hover:bg-emerald-50 transition-colors ${
-                          currentLocation === loc ? "text-[#1B4332] font-bold bg-emerald-50/60" : "text-slate-700"
+                        className={`w-full text-left px-3.5 py-2 text-xs font-medium flex items-center justify-between hover:bg-[#9c67b5]/20 transition-colors ${
+                          currentLocation === loc ? "text-[#f7fe72] font-bold bg-[#9c67b5]/30" : "text-[#CBD2C7]"
                         }`}
                       >
                         <span>{loc}</span>
-                        {currentLocation === loc && <Check className="w-3.5 h-3.5 text-emerald-600" />}
+                        {currentLocation === loc && <Check className="w-3.5 h-3.5 text-[#f7fe72]" />}
                       </button>
                     ))}
                   </div>
@@ -807,17 +807,17 @@ export default function PulseAINutritionEngine() {
                     setIsRadiusMenuOpen(!isRadiusMenuOpen);
                     setIsLocationMenuOpen(false);
                   }}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-800 text-xs sm:text-sm font-medium transition-colors cursor-pointer"
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#0B0E0C] hover:bg-[#161c18] border border-[#757761]/35 text-[#E2E7DE] text-xs sm:text-sm font-medium transition-colors cursor-pointer"
                   title="Filter vendor search radius"
                 >
-                  <SlidersHorizontal className="w-3.5 h-3.5 text-slate-500" />
-                  <span>Radius: <strong className="text-slate-900">{selectedRadius}</strong></span>
-                  <ChevronDown className={`w-3.5 h-3.5 text-slate-500 transition-transform ${isRadiusMenuOpen ? "rotate-180" : ""}`} />
+                  <SlidersHorizontal className="w-3.5 h-3.5 text-[#A0A493]" />
+                  <span>Radius: <strong className="text-white">{selectedRadius}</strong></span>
+                  <ChevronDown className={`w-3.5 h-3.5 text-[#A0A493] transition-transform ${isRadiusMenuOpen ? "rotate-180" : ""}`} />
                 </button>
 
                 {isRadiusMenuOpen && (
-                  <div className="absolute left-0 mt-2 w-44 bg-white rounded-2xl shadow-xl border border-slate-200 z-30 py-2 animate-in fade-in slide-in-from-top-1">
-                    <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-600 border-b border-slate-100">
+                  <div className="absolute left-0 mt-2 w-44 bg-[#121815] rounded-2xl shadow-2xl border border-[#757761]/40 z-30 py-2 animate-in fade-in slide-in-from-top-1">
+                    <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#A0A493] border-b border-[#757761]/25">
                       Search Perimeter
                     </div>
                     {RADII.map((rad) => (
@@ -827,12 +827,12 @@ export default function PulseAINutritionEngine() {
                           setSelectedRadius(rad);
                           setIsRadiusMenuOpen(false);
                         }}
-                        className={`w-full text-left px-3.5 py-2 text-xs font-medium flex items-center justify-between hover:bg-emerald-50 transition-colors ${
-                          selectedRadius === rad ? "text-[#1B4332] font-bold bg-emerald-50/60" : "text-slate-700"
+                        className={`w-full text-left px-3.5 py-2 text-xs font-medium flex items-center justify-between hover:bg-[#9c67b5]/20 transition-colors ${
+                          selectedRadius === rad ? "text-[#f7fe72] font-bold bg-[#9c67b5]/30" : "text-[#CBD2C7]"
                         }`}
                       >
                         <span>Within {rad}</span>
-                        {selectedRadius === rad && <Check className="w-3.5 h-3.5 text-emerald-600" />}
+                        {selectedRadius === rad && <Check className="w-3.5 h-3.5 text-[#f7fe72]" />}
                       </button>
                     ))}
                   </div>
@@ -841,7 +841,7 @@ export default function PulseAINutritionEngine() {
             </div>
 
             {/* Sourcing Segmented Control */}
-            <div className="flex items-center bg-[#FAF9F6] p-1 rounded-2xl border border-slate-200/90 self-stretch sm:self-auto overflow-x-auto">
+            <div className="flex items-center bg-[#0B0E0C] p-1 rounded-2xl border border-[#757761]/25 self-stretch sm:self-auto overflow-x-auto">
               {SOURCING_OPTIONS.map((mode) => {
                 const isActive = sourcingMode === mode;
                 return (
@@ -850,8 +850,8 @@ export default function PulseAINutritionEngine() {
                     onClick={() => setSourcingMode(mode)}
                     className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                       isActive
-                        ? "bg-[#1B4332] text-white shadow-xs"
-                        : "text-slate-600 hover:text-slate-950 hover:bg-slate-100/70"
+                        ? "bg-[#9c67b5] text-white shadow-xs font-bold"
+                        : "text-[#A0A493] hover:text-white hover:bg-white/5"
                     }`}
                   >
                     {mode}
@@ -862,9 +862,9 @@ export default function PulseAINutritionEngine() {
           </div>
 
           {/* Dietary & Budget Filter Pills */}
-          <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center gap-2">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mr-1 flex items-center gap-1">
-              <Tag className="w-3 h-3 text-emerald-700" />
+          <div className="pt-2 border-t border-[#757761]/25 flex flex-wrap items-center gap-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#A0A493] mr-1 flex items-center gap-1">
+              <Tag className="w-3 h-3 text-[#f7fe72]" />
               Active Filters:
             </span>
 
@@ -873,11 +873,11 @@ export default function PulseAINutritionEngine() {
               onClick={() => setFilterHighProtein(!filterHighProtein)}
               className={`px-3 py-1 rounded-full text-xs font-semibold transition-all border cursor-pointer flex items-center gap-1.5 ${
                 filterHighProtein
-                  ? "bg-emerald-100/80 text-[#1B4332] border-emerald-400 font-bold"
-                  : "bg-slate-50 text-slate-500 border-slate-200 hover:bg-slate-100"
+                  ? "bg-[#9c67b5]/25 text-[#f7fe72] border-[#9c67b5] font-bold"
+                  : "bg-[#0B0E0C] text-[#A0A493] border-[#757761]/35 hover:text-white"
               }`}
             >
-              {filterHighProtein && <Check className="w-3 h-3 text-emerald-700" />}
+              {filterHighProtein && <Check className="w-3 h-3 text-[#f7fe72]" />}
               <span>High Protein</span>
             </button>
 
@@ -886,11 +886,11 @@ export default function PulseAINutritionEngine() {
               onClick={() => setFilterVegetarian(!filterVegetarian)}
               className={`px-3 py-1 rounded-full text-xs font-semibold transition-all border cursor-pointer flex items-center gap-1.5 ${
                 filterVegetarian
-                  ? "bg-emerald-100/80 text-[#1B4332] border-emerald-400 font-bold"
-                  : "bg-slate-50 text-slate-500 border-slate-200 hover:bg-slate-100"
+                  ? "bg-[#9c67b5]/25 text-[#f7fe72] border-[#9c67b5] font-bold"
+                  : "bg-[#0B0E0C] text-[#A0A493] border-[#757761]/35 hover:text-white"
               }`}
             >
-              {filterVegetarian && <Check className="w-3 h-3 text-emerald-700" />}
+              {filterVegetarian && <Check className="w-3 h-3 text-[#f7fe72]" />}
               <span>Vegetarian / Paneer Base</span>
             </button>
 
@@ -899,11 +899,11 @@ export default function PulseAINutritionEngine() {
               onClick={() => setFilterBudget(!filterBudget)}
               className={`px-3 py-1 rounded-full text-xs font-semibold transition-all border cursor-pointer flex items-center gap-1.5 ${
                 filterBudget
-                  ? "bg-emerald-100/80 text-[#1B4332] border-emerald-400 font-bold"
-                  : "bg-slate-50 text-slate-500 border-slate-200 hover:bg-slate-100"
+                  ? "bg-[#9c67b5]/25 text-[#f7fe72] border-[#9c67b5] font-bold"
+                  : "bg-[#0B0E0C] text-[#A0A493] border-[#757761]/35 hover:text-white"
               }`}
             >
-              {filterBudget && <Check className="w-3 h-3 text-emerald-700" />}
+              {filterBudget && <Check className="w-3 h-3 text-[#f7fe72]" />}
               <span>Budget: Under ₹150/meal</span>
             </button>
 
@@ -912,11 +912,11 @@ export default function PulseAINutritionEngine() {
               onClick={() => setFilterPrepTime(!filterPrepTime)}
               className={`px-3 py-1 rounded-full text-xs font-semibold transition-all border cursor-pointer flex items-center gap-1.5 ${
                 filterPrepTime
-                  ? "bg-emerald-100/80 text-[#1B4332] border-emerald-400 font-bold"
-                  : "bg-slate-50 text-slate-500 border-slate-200 hover:bg-slate-100"
+                  ? "bg-[#9c67b5]/25 text-[#f7fe72] border-[#9c67b5] font-bold"
+                  : "bg-[#0B0E0C] text-[#A0A493] border-[#757761]/35 hover:text-white"
               }`}
             >
-              {filterPrepTime && <Check className="w-3 h-3 text-emerald-700" />}
+              {filterPrepTime && <Check className="w-3 h-3 text-[#f7fe72]" />}
               <span>Prep Time &lt; 20m</span>
             </button>
           </div>
@@ -925,30 +925,30 @@ export default function PulseAINutritionEngine() {
         {/* =========================================================================
             2. AI DYNAMIC MEAL GENERATOR CARD
             ========================================================================= */}
-        <div className="bg-white rounded-3xl border-2 border-[#1B4332] shadow-sm overflow-hidden">
+        <div className="bg-[#121815] rounded-3xl border border-[#757761]/30 shadow-xl overflow-hidden">
           {/* Card Header Bar */}
-          <div className="px-5 sm:px-7 py-4.5 bg-[#FAF9F6] border-b border-[#1B4332]/15 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="px-5 sm:px-7 py-4.5 bg-[#0B0E0C] border-b border-[#757761]/25 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="w-10 h-10 rounded-2xl bg-[#1B4332] text-white flex items-center justify-center shadow-xs">
-                  <Sparkles className="w-5 h-5 text-emerald-400" />
+                <div className="w-10 h-10 rounded-2xl bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center shadow-xs border border-[#9c67b5]/40">
+                  <Sparkles className="w-5 h-5 text-[#f7fe72]" />
                 </div>
-                {/* Pulsing emerald sparkle badge */}
+                {/* Pulsing sparkle badge */}
                 <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f7fe72] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#f7fe72] border-2 border-[#0B0E0C]"></span>
                 </span>
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight font-sans">
+                  <h3 className="text-lg sm:text-xl font-black text-white tracking-tight font-sans">
                     AI Hyper-Local Chef
                   </h3>
-                  <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-emerald-100 text-[#1B4332] border border-emerald-300">
+                  <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-[#9c67b5]/20 text-[#f7fe72] border border-[#9c67b5]/30">
                     Live Engine
                   </span>
                 </div>
-                <p className="text-xs text-slate-500 font-medium">
+                <p className="text-xs text-[#A0A493] font-medium">
                   {sourcingMode} &bull; Sourced within {selectedRadius} of {currentLocation.split("/")[0]}
                 </p>
               </div>
@@ -958,23 +958,23 @@ export default function PulseAINutritionEngine() {
             <button
               onClick={handleGenerateMeal}
               disabled={isGenerating}
-              className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-[#1B4332] hover:bg-[#245842] active:scale-95 text-white text-xs sm:text-sm font-bold tracking-wide transition-all shadow-sm cursor-pointer disabled:opacity-75 disabled:pointer-events-none"
+              className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] text-xs sm:text-sm font-black tracking-wide transition-all shadow-md hover:brightness-110 cursor-pointer disabled:opacity-75 disabled:pointer-events-none active:scale-95"
             >
-              <RefreshCw className={`w-4 h-4 text-emerald-400 ${isGenerating ? "animate-spin" : ""}`} />
+              <RefreshCw className={`w-4 h-4 text-[#0B0E0C] ${isGenerating ? "animate-spin" : ""}`} />
               <span>{isGenerating ? "Synthesizing Local Mandi Data..." : "Generate Optimal Meal from Local Markets"}</span>
             </button>
           </div>
 
           {/* Success Banner when Meal is Logged */}
           {showLogSuccess && (
-            <div className="bg-emerald-600 text-white px-6 py-3 flex items-center justify-between text-xs sm:text-sm font-bold animate-in fade-in duration-200">
+            <div className="bg-[#9c67b5] text-white px-6 py-3 flex items-center justify-between text-xs sm:text-sm font-bold animate-in fade-in duration-200">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-200 shrink-0" />
+                <CheckCircle2 className="w-5 h-5 text-[#f7fe72] shrink-0" />
                 <span>Meal successfully logged to your Athlete Dashboard! Earned +50 XP and hit daily protein target milestone!</span>
               </div>
               <button
                 onClick={() => setShowLogSuccess(false)}
-                className="text-white hover:text-emerald-200 p-1"
+                className="text-white hover:text-[#f7fe72] p-1"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -982,14 +982,14 @@ export default function PulseAINutritionEngine() {
           )}
 
           {/* Split 2-Column Recipe Card */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-slate-200">
+          <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-[#757761]/25">
             {/* =========================================================================
                 LEFT COLUMN: VISUAL & MACROS
                 ========================================================================= */}
-            <div className="lg:col-span-5 p-5 sm:p-7 flex flex-col justify-between space-y-6 bg-white">
+            <div className="lg:col-span-5 p-5 sm:p-7 flex flex-col justify-between space-y-6 bg-[#121815]">
               {/* Image & Quick Attributes */}
               <div className="space-y-4">
-                <div className="relative w-full h-56 sm:h-64 rounded-2xl overflow-hidden shadow-xs border border-slate-200 group">
+                <div className="relative w-full h-56 sm:h-64 rounded-2xl overflow-hidden shadow-xs border border-[#757761]/30 group">
                   <Image
                     src={activeMeal.imageUrl}
                     alt={activeMeal.title}
@@ -1000,23 +1000,23 @@ export default function PulseAINutritionEngine() {
                     referrerPolicy="no-referrer"
                   />
                   {/* Subtle Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
                   {/* Top Badges */}
                   <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-                    <span className="px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#1B4332] text-[11px] font-bold border border-white/50 shadow-xs flex items-center gap-1">
-                      <Flame className="w-3 h-3 text-amber-500 fill-amber-500" />
+                    <span className="px-2.5 py-1 rounded-full bg-[#121815]/90 backdrop-blur-md text-[#f7fe72] text-[11px] font-bold border border-[#757761]/40 shadow-xs flex items-center gap-1">
+                      <Flame className="w-3 h-3 text-[#f7fe72] fill-[#f7fe72]" />
                       <span>{dynamicCalories} kcal</span>
                     </span>
-                    <span className="px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-md text-slate-800 text-[11px] font-bold border border-white/50 shadow-xs flex items-center gap-1">
-                      <Clock className="w-3 h-3 text-slate-600" />
+                    <span className="px-2.5 py-1 rounded-full bg-[#121815]/90 backdrop-blur-md text-[#E2E7DE] text-[11px] font-bold border border-[#757761]/40 shadow-xs flex items-center gap-1">
+                      <Clock className="w-3 h-3 text-[#A0A493]" />
                       <span>{activeMeal.prepTimeMinutes}m prep</span>
                     </span>
                   </div>
 
                   {/* Bottom title preview */}
                   <div className="absolute bottom-3 left-3 right-3 text-white">
-                    <div className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-300">
+                    <div className="text-[10px] font-extrabold uppercase tracking-widest text-[#f7fe72]">
                       Regional Hyper-Local Recipe
                     </div>
                     <div className="text-base sm:text-lg font-bold leading-tight drop-shadow-xs">
@@ -1025,24 +1025,24 @@ export default function PulseAINutritionEngine() {
                   </div>
                 </div>
 
-                {/* Cost-to-Cook Pill (Prominently requested: Estimated Local Cost: ₹85) */}
-                <div className="flex items-center justify-between p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200/90 text-slate-800 shadow-2xs">
+                {/* Cost-to-Cook Pill */}
+                <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#0B0E0C] border border-[#757761]/30 text-[#E2E7DE] shadow-2xs">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-[#1B4332] text-emerald-400 flex items-center justify-center font-bold">
+                    <div className="w-8 h-8 rounded-xl bg-[#9c67b5]/20 text-[#f7fe72] border border-[#9c67b5]/30 flex items-center justify-center font-bold">
                       <CircleDollarSign className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
+                      <div className="text-[11px] font-semibold text-[#A0A493] uppercase tracking-wider">
                         Real Mandi Index
                       </div>
-                      <div className="text-xs font-bold text-slate-800">
+                      <div className="text-xs font-bold text-white">
                         Includes live spice &amp; vendor pricing
                       </div>
                     </div>
                   </div>
 
                   <div className="text-right">
-                    <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#1B4332] text-white text-xs sm:text-sm font-extrabold tracking-wide shadow-xs">
+                    <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] text-xs sm:text-sm font-black tracking-wide shadow-xs">
                       Estimated Local Cost: ₹{dynamicCost}
                     </div>
                   </div>
@@ -1050,10 +1050,10 @@ export default function PulseAINutritionEngine() {
               </div>
 
               {/* Circular Macro Ring Breakdown */}
-              <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-slate-200/80 space-y-3">
-                <div className="flex items-center justify-between text-xs font-bold text-slate-700">
+              <div className="p-4 rounded-2xl bg-[#0B0E0C] border border-[#757761]/25 space-y-3">
+                <div className="flex items-center justify-between text-xs font-bold text-[#CBD2C7]">
                   <span className="uppercase tracking-wider">Circular Macro Ring Breakdown</span>
-                  <span className="text-[11px] text-emerald-800 font-extrabold bg-emerald-100/60 px-2 py-0.5 rounded">
+                  <span className="text-[11px] text-[#f7fe72] font-extrabold bg-[#9c67b5]/20 border border-[#9c67b5]/30 px-2 py-0.5 rounded">
                     Goal Match: 98%
                   </span>
                 </div>
@@ -1067,40 +1067,40 @@ export default function PulseAINutritionEngine() {
                         cx="64"
                         cy="64"
                         r={radius}
-                        className="stroke-slate-200"
+                        className="stroke-[#757761]/25"
                         strokeWidth="10"
                         fill="transparent"
                       />
-                      {/* Protein Segment: Vibrant Emerald (#10B981) */}
+                      {/* Protein Segment: Electric Cyber Lime (#f7fe72) */}
                       <circle
                         cx="64"
                         cy="64"
                         r={radius}
-                        className="stroke-emerald-600 transition-all duration-700 ease-out"
+                        className="stroke-[#f7fe72] transition-all duration-700 ease-out"
                         strokeWidth="10"
                         strokeDasharray={`${proteinStroke} ${circumference}`}
                         strokeDashoffset="0"
                         strokeLinecap="round"
                         fill="transparent"
                       />
-                      {/* Carbs Segment: Forest Green Accent (#1B4332) */}
+                      {/* Carbs Segment: Royal Amethyst (#9c67b5) */}
                       <circle
                         cx="64"
                         cy="64"
                         r={radius}
-                        className="stroke-[#1B4332] transition-all duration-700 ease-out"
+                        className="stroke-[#9c67b5] transition-all duration-700 ease-out"
                         strokeWidth="10"
                         strokeDasharray={`${carbsStroke} ${circumference}`}
                         strokeDashoffset={-proteinStroke}
                         strokeLinecap="round"
                         fill="transparent"
                       />
-                      {/* Fats Segment: Amber/Ochre (#D97706) */}
+                      {/* Fats Segment: Solar Gold (#f4e76e) */}
                       <circle
                         cx="64"
                         cy="64"
                         r={radius}
-                        className="stroke-amber-500 transition-all duration-700 ease-out"
+                        className="stroke-[#f4e76e] transition-all duration-700 ease-out"
                         strokeWidth="10"
                         strokeDasharray={`${fatsStroke} ${circumference}`}
                         strokeDashoffset={-(proteinStroke + carbsStroke)}
@@ -1111,10 +1111,10 @@ export default function PulseAINutritionEngine() {
 
                     {/* Ring Center */}
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                      <span className="text-xl font-black text-slate-900 leading-none">
+                      <span className="text-xl font-black text-white leading-none">
                         {dynamicCalories}
                       </span>
-                      <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                      <span className="text-[10px] font-bold text-[#A0A493] uppercase tracking-wider">
                         kcal Total
                       </span>
                     </div>
@@ -1123,35 +1123,35 @@ export default function PulseAINutritionEngine() {
                   {/* Legend & Gram Measurements */}
                   <div className="flex-1 w-full grid grid-cols-3 sm:grid-cols-1 gap-2.5">
                     {/* Protein */}
-                    <div className="flex items-center justify-between p-2 rounded-xl bg-white border border-slate-100 shadow-2xs">
+                    <div className="flex items-center justify-between p-2 rounded-xl bg-[#121815] border border-[#757761]/30 shadow-2xs">
                       <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 shrink-0" />
-                        <span className="text-xs font-semibold text-slate-600">Protein</span>
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#f7fe72] shrink-0" />
+                        <span className="text-xs font-semibold text-[#CBD2C7]">Protein</span>
                       </div>
-                      <span className="text-xs font-black text-slate-900">
-                        {dynamicProtein}g <span className="text-[10px] text-slate-400 font-normal">({proteinPct}%)</span>
+                      <span className="text-xs font-black text-white">
+                        {dynamicProtein}g <span className="text-[10px] text-[#A0A493] font-normal">({proteinPct}%)</span>
                       </span>
                     </div>
 
                     {/* Carbs */}
-                    <div className="flex items-center justify-between p-2 rounded-xl bg-white border border-slate-100 shadow-2xs">
+                    <div className="flex items-center justify-between p-2 rounded-xl bg-[#121815] border border-[#757761]/30 shadow-2xs">
                       <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#1B4332] shrink-0" />
-                        <span className="text-xs font-semibold text-slate-600">Carbs</span>
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#9c67b5] shrink-0" />
+                        <span className="text-xs font-semibold text-[#CBD2C7]">Carbs</span>
                       </div>
-                      <span className="text-xs font-black text-slate-900">
-                        {dynamicCarbs}g <span className="text-[10px] text-slate-400 font-normal">({carbsPct}%)</span>
+                      <span className="text-xs font-black text-white">
+                        {dynamicCarbs}g <span className="text-[10px] text-[#A0A493] font-normal">({carbsPct}%)</span>
                       </span>
                     </div>
 
                     {/* Fats */}
-                    <div className="flex items-center justify-between p-2 rounded-xl bg-white border border-slate-100 shadow-2xs">
+                    <div className="flex items-center justify-between p-2 rounded-xl bg-[#121815] border border-[#757761]/30 shadow-2xs">
                       <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-amber-500 shrink-0" />
-                        <span className="text-xs font-semibold text-slate-600">Fats</span>
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#f4e76e] shrink-0" />
+                        <span className="text-xs font-semibold text-[#CBD2C7]">Fats</span>
                       </div>
-                      <span className="text-xs font-black text-slate-900">
-                        {dynamicFats}g <span className="text-[10px] text-slate-400 font-normal">({fatsPct}%)</span>
+                      <span className="text-xs font-black text-white">
+                        {dynamicFats}g <span className="text-[10px] text-[#A0A493] font-normal">({fatsPct}%)</span>
                       </span>
                     </div>
                   </div>
@@ -1162,20 +1162,20 @@ export default function PulseAINutritionEngine() {
             {/* =========================================================================
                 RIGHT COLUMN: LOCAL INGREDIENT RADAR & SWAPS
                 ========================================================================= */}
-            <div className="lg:col-span-7 p-5 sm:p-7 flex flex-col justify-between space-y-6 bg-white">
+            <div className="lg:col-span-7 p-5 sm:p-7 flex flex-col justify-between space-y-6 bg-[#121815]">
               <div className="space-y-4">
                 {/* Header */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#757761]/25">
                   <div>
-                    <h4 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
-                      <Store className="w-4 h-4 text-[#1B4332]" />
+                    <h4 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                      <Store className="w-4 h-4 text-[#f7fe72]" />
                       <span>Local Ingredient Radar &amp; Live Substitutes</span>
                     </h4>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-[#A0A493]">
                       Sourced real-time from Delhi mandis, local kirana merchants, and local dairies.
                     </p>
                   </div>
-                  <span className="self-start sm:self-auto text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                  <span className="self-start sm:self-auto text-[11px] font-bold text-[#f7fe72] bg-[#9c67b5]/20 px-2.5 py-1 rounded-full border border-[#9c67b5]/30">
                     &le; 2.0km Perimeter
                   </span>
                 </div>
@@ -1191,31 +1191,31 @@ export default function PulseAINutritionEngine() {
                         key={ing.id}
                         className={`p-3.5 sm:p-4 rounded-2xl border transition-all ${
                           hasActiveSwap
-                            ? "bg-emerald-50/50 border-emerald-300 shadow-xs"
-                            : "bg-[#FAF9F6] border-slate-200/90 hover:border-[#1B4332]/40"
+                            ? "bg-[#9c67b5]/20 border-[#9c67b5]/50 shadow-xs"
+                            : "bg-[#0B0E0C] border-[#757761]/25 hover:border-[#9c67b5]/40"
                         }`}
                       >
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                           {/* Ingredient info */}
                           <div className="space-y-1">
                             <div className="flex items-center gap-2">
-                              <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" />
-                              <span className="text-sm font-bold text-slate-900">
+                              <span className="w-2 h-2 rounded-full bg-[#f7fe72] shrink-0" />
+                              <span className="text-sm font-bold text-white">
                                 {hasActiveSwap ? activeSwap?.name : ing.name}
                               </span>
                               {hasActiveSwap && (
-                                <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-600 text-white">
+                                <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-[#9c67b5] text-white">
                                   Swapped
                                 </span>
                               )}
                             </div>
 
-                            <div className="text-xs text-slate-600 pl-4 space-y-0.5">
-                              <div className="font-medium text-emerald-800">
+                            <div className="text-xs text-[#A0A493] pl-4 space-y-0.5">
+                              <div className="font-medium text-[#f4e76e]">
                                 {hasActiveSwap ? `Portion: ${activeSwap?.portion}` : ing.substituteNote}
                               </div>
-                              <div className="flex items-center gap-1.5 text-slate-500 text-[11px]">
-                                <Store className="w-3 h-3 text-slate-400" />
+                              <div className="flex items-center gap-1.5 text-[#A0A594] text-[11px]">
+                                <Store className="w-3 h-3 text-[#757761]" />
                                 <span>{hasActiveSwap ? activeSwap?.vendorName : ing.vendor}</span>
                               </div>
                             </div>
@@ -1226,7 +1226,7 @@ export default function PulseAINutritionEngine() {
                             {hasActiveSwap && (
                               <button
                                 onClick={() => handleApplySwap(ing.id, null)}
-                                className="text-[11px] font-semibold text-slate-500 hover:text-slate-800 underline transition-colors cursor-pointer"
+                                className="text-[11px] font-semibold text-[#A0A493] hover:text-white underline transition-colors cursor-pointer"
                               >
                                 Reset
                               </button>
@@ -1234,9 +1234,9 @@ export default function PulseAINutritionEngine() {
 
                             <button
                               onClick={() => setActiveSwapIngredient(ing)}
-                              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-emerald-50 text-[#1B4332] text-xs font-bold border border-slate-300 hover:border-emerald-500 transition-all shadow-2xs active:scale-95 cursor-pointer"
+                              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#121815] hover:bg-[#181f1b] text-[#f7fe72] text-xs font-bold border border-[#757761]/40 hover:border-[#9c67b5] transition-all shadow-2xs active:scale-95 cursor-pointer"
                             >
-                              <ArrowRightLeft className="w-3.5 h-3.5 text-emerald-600" />
+                              <ArrowRightLeft className="w-3.5 h-3.5 text-[#f7fe72]" />
                               <span>Smart Swap</span>
                             </button>
                           </div>
@@ -1244,9 +1244,9 @@ export default function PulseAINutritionEngine() {
 
                         {/* If swapped, show macro and cost delta pill */}
                         {hasActiveSwap && activeSwap && (
-                          <div className="mt-2.5 pt-2 border-t border-emerald-200/60 flex items-center justify-between text-[11px] text-emerald-900 font-semibold pl-4">
+                          <div className="mt-2.5 pt-2 border-t border-[#9c67b5]/30 flex items-center justify-between text-[11px] text-[#f7fe72] font-semibold pl-4">
                             <span>Delta: {activeSwap.macroImpact}</span>
-                            <span className="font-bold text-emerald-800 bg-white px-2 py-0.5 rounded border border-emerald-200">
+                            <span className="font-bold text-white bg-[#9c67b5]/30 px-2 py-0.5 rounded border border-[#9c67b5]/50">
                               {activeSwap.priceDelta}
                             </span>
                           </div>
@@ -1258,22 +1258,22 @@ export default function PulseAINutritionEngine() {
               </div>
 
               {/* Bottom Actions & One-Click Log Meal Button */}
-              <div className="pt-4 border-t border-slate-200 space-y-3">
-                <div className="flex items-center justify-between text-xs text-slate-500">
+              <div className="pt-4 border-t border-[#757761]/25 space-y-3">
+                <div className="flex items-center justify-between text-xs text-[#A0A493]">
                   <span className="flex items-center gap-1">
-                    <Info className="w-3.5 h-3.5 text-emerald-700" />
+                    <Info className="w-3.5 h-3.5 text-[#f7fe72]" />
                     <span>Real-time local vendor pricing verified today</span>
                   </span>
-                  <span className="font-semibold text-slate-700">100% Macro Precision</span>
+                  <span className="font-semibold text-[#CBD2C7]">100% Macro Precision</span>
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center gap-3">
                   {/* One-click "Log Meal (+50 XP)" button that triggers confetti */}
                   <button
                     onClick={handleLogMeal}
-                    className="w-full sm:flex-1 flex items-center justify-center gap-2 py-3.5 px-6 rounded-2xl bg-[#1B4332] hover:bg-[#235841] active:scale-98 text-white font-extrabold text-sm tracking-wide shadow-md hover:shadow-lg transition-all cursor-pointer group"
+                    className="w-full sm:flex-1 flex items-center justify-center gap-2 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] hover:brightness-110 active:scale-98 text-[#0B0E0C] font-black text-sm tracking-wide shadow-md transition-all cursor-pointer group"
                   >
-                    <Sparkles className="w-4 h-4 text-emerald-400 group-hover:rotate-12 transition-transform" />
+                    <Sparkles className="w-4 h-4 text-[#0B0E0C] group-hover:rotate-12 transition-transform" />
                     <span>Log Meal (+50 XP)</span>
                   </button>
 
@@ -1288,10 +1288,10 @@ export default function PulseAINutritionEngine() {
                         alert("Recipe link copied to clipboard!");
                       }
                     }}
-                    className="w-full sm:w-auto px-4 py-3.5 rounded-2xl bg-[#FAF9F6] hover:bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                    className="w-full sm:w-auto px-4 py-3.5 rounded-2xl bg-[#0B0E0C] hover:bg-[#161c18] border border-[#757761]/35 text-[#E2E7DE] text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                     title="Share meal blueprint"
                   >
-                    <Share2 className="w-4 h-4 text-slate-500" />
+                    <Share2 className="w-4 h-4 text-[#A0A493]" />
                     <span>Share Blueprint</span>
                   </button>
                 </div>
@@ -1304,26 +1304,26 @@ export default function PulseAINutritionEngine() {
             3. SMART SWAP MODAL / FLYOUT (Displays 3 cheaper/closer alternatives within 2km)
             ========================================================================= */}
         {activeSwapIngredient && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-            <div className="bg-white rounded-3xl max-w-xl w-full border-2 border-[#1B4332] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+            <div className="bg-[#121815] rounded-3xl max-w-xl w-full border border-[#757761]/40 shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
               {/* Modal Header */}
-              <div className="p-5 sm:p-6 bg-[#FAF9F6] border-b border-slate-200 flex items-center justify-between">
+              <div className="p-5 sm:p-6 bg-[#0B0E0C] border-b border-[#757761]/25 flex items-center justify-between">
                 <div>
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100 text-[#1B4332] text-[10px] font-bold uppercase tracking-wider">
-                    <ArrowRightLeft className="w-3 h-3 text-emerald-700" />
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#9c67b5]/20 text-[#f7fe72] border border-[#9c67b5]/30 text-[10px] font-bold uppercase tracking-wider">
+                    <ArrowRightLeft className="w-3 h-3 text-[#f7fe72]" />
                     <span>Hyper-Local Alternative Engine</span>
                   </div>
-                  <h3 className="text-lg font-black text-slate-900 mt-1">
+                  <h3 className="text-lg font-black text-white mt-1">
                     Smart Swaps for &ldquo;{activeSwapIngredient.name}&rdquo;
                   </h3>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-[#A0A493]">
                     3 cheaper or more accessible alternatives available within 2km of {currentLocation.split("/")[0]}.
                   </p>
                 </div>
 
                 <button
                   onClick={() => setActiveSwapIngredient(null)}
-                  className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+                  className="p-2 rounded-xl text-[#A0A594] hover:text-white hover:bg-white/10 transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -1337,48 +1337,48 @@ export default function PulseAINutritionEngine() {
                   return (
                     <div
                       key={alt.name}
-                      className={`p-4 rounded-2xl border-2 transition-all ${
+                      className={`p-4 rounded-2xl border transition-all ${
                         isCurrentSelection
-                          ? "border-emerald-600 bg-emerald-50/40 shadow-xs"
-                          : "border-slate-200 hover:border-[#1B4332]/50 bg-white"
+                          ? "border-[#9c67b5] bg-[#9c67b5]/20 shadow-xs"
+                          : "border-[#757761]/30 hover:border-[#9c67b5]/50 bg-[#0B0E0C]"
                       }`}
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div className="space-y-1">
                           <div className="flex items-center gap-2">
-                            <span className="text-sm font-bold text-slate-900">
+                            <span className="text-sm font-bold text-white">
                               {alt.name}
                             </span>
-                            <span className="text-[11px] font-semibold text-slate-500">
+                            <span className="text-[11px] font-semibold text-[#A0A493]">
                               ({alt.portion})
                             </span>
                           </div>
 
-                          <div className="flex items-center gap-3 text-xs text-slate-600">
-                            <span className="flex items-center gap-1 text-slate-700 font-medium">
-                              <Store className="w-3.5 h-3.5 text-slate-400" />
+                          <div className="flex items-center gap-3 text-xs text-[#CBD2C7]">
+                            <span className="flex items-center gap-1 text-[#E2E7DE] font-medium">
+                              <Store className="w-3.5 h-3.5 text-[#757761]" />
                               {alt.vendorName}
                             </span>
-                            <span className="text-emerald-700 font-bold bg-emerald-50 px-1.5 py-0.5 rounded text-[11px]">
+                            <span className="text-[#f7fe72] font-bold bg-[#9c67b5]/20 px-1.5 py-0.5 rounded text-[11px] border border-[#9c67b5]/30">
                               {alt.distance}
                             </span>
                           </div>
 
                           <div className="flex items-center gap-2 text-xs pt-1">
-                            <span className="text-slate-500">Impact:</span>
-                            <span className="font-semibold text-[#1B4332] bg-[#1B4332]/10 px-2 py-0.5 rounded text-[11px]">
+                            <span className="text-[#A0A493]">Impact:</span>
+                            <span className="font-semibold text-[#f4e76e] bg-white/5 px-2 py-0.5 rounded text-[11px]">
                               {alt.macroImpact}
                             </span>
                           </div>
                         </div>
 
                         {/* Pricing & Apply Action */}
-                        <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100">
+                        <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-[#757761]/25">
                           <span
                             className={`text-xs font-black px-2.5 py-1 rounded-full ${
                               alt.priceDiffNumber < 0
-                                ? "bg-emerald-100 text-emerald-800"
-                                : "bg-amber-100 text-amber-900"
+                                ? "bg-[#f7fe72]/15 text-[#f7fe72] border border-[#f7fe72]/30"
+                                : "bg-[#f4e76e]/15 text-[#f4e76e] border border-[#f4e76e]/30"
                             }`}
                           >
                             {alt.priceDelta}
@@ -1388,8 +1388,8 @@ export default function PulseAINutritionEngine() {
                             onClick={() => handleApplySwap(activeSwapIngredient.id, idx)}
                             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                               isCurrentSelection
-                                ? "bg-emerald-600 text-white"
-                                : "bg-[#1B4332] hover:bg-[#235841] text-white active:scale-95"
+                                ? "bg-[#9c67b5] text-white"
+                                : "bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] font-black hover:brightness-110 active:scale-95"
                             }`}
                           >
                             {isCurrentSelection ? "Active Choice" : "Apply Swap"}
@@ -1402,11 +1402,11 @@ export default function PulseAINutritionEngine() {
               </div>
 
               {/* Modal Footer */}
-              <div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs text-slate-600">
+              <div className="p-4 bg-[#0B0E0C] border-t border-[#757761]/25 flex items-center justify-between text-xs text-[#A0A493]">
                 <span className="text-[11px]">Pricing recalculated against regional mandi indices</span>
                 <button
                   onClick={() => setActiveSwapIngredient(null)}
-                  className="px-4 py-1.5 rounded-lg text-slate-700 hover:text-slate-950 font-semibold"
+                  className="px-4 py-1.5 rounded-lg text-[#CBD2C7] hover:text-white font-semibold"
                 >
                   Close
                 </button>

@@ -14,8 +14,11 @@ import {
   User,
   Trophy,
   Award,
+  Sparkles,
+  ChevronDown,
 } from "lucide-react";
 import PotatoFitLogo from "./PotatoFitLogo";
+import { cn } from "@/lib/utils";
 
 export interface NavbarProps {
   onOpenStreak?: () => void;
@@ -34,15 +37,15 @@ export default function Navbar({
   const router = useRouter();
   const { data: session } = useSession();
 
-  // Mobile menu toggle & scroll tracking
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // Mobile/Tablet expanded state & scroll tracking
+  const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const navRef = useRef<HTMLElement | null>(null);
+  const navContainerRef = useRef<HTMLDivElement | null>(null);
 
-  // Dynamic scroll state for subtle glassmorphism elevation
+  // Dynamic scroll state for fluid floating island morphing
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 30);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -50,21 +53,26 @@ export default function Navbar({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent background scroll bleed when mobile drawer is open
+  // Close menu when clicking outside the navbar container (clean zero-overlay behavior)
   useEffect(() => {
-    if (mobileMenuOpen) {
-      const original = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = original;
-      };
-    }
-  }, [mobileMenuOpen]);
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        menuOpen &&
+        navContainerRef.current &&
+        !navContainerRef.current.contains(e.target as Node)
+      ) {
+        setMenuOpen(false);
+      }
+    };
 
-  // Clean keyboard navigation (Esc to close mobile menu)
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [menuOpen]);
+
+  // Clean keyboard navigation (Esc to close menu)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMobileMenuOpen(false);
+      if (e.key === "Escape") setMenuOpen(false);
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
@@ -74,9 +82,8 @@ export default function Navbar({
   const navLinks = [
     { label: "Programs", href: "#programs" },
     { label: "Nutrition", href: "#nutrition" },
-    { label: "Sleep & Recovery", href: "#recovery" },
+    { label: "Recovery", href: "#recovery" },
     { label: "Coaches", href: "#coaches" },
-    { label: "Community", href: "#community" },
   ];
 
   // Cross-page anchor resolver
@@ -88,7 +95,7 @@ export default function Navbar({
     e: React.MouseEvent<HTMLAnchorElement>,
     hash: string
   ) => {
-    setMobileMenuOpen(false);
+    setMenuOpen(false);
     if (pathname === "/") {
       e.preventDefault();
       const targetId = hash.replace("#", "");
@@ -101,7 +108,7 @@ export default function Navbar({
 
   // Primary action handlers
   const handleSignIn = () => {
-    setMobileMenuOpen(false);
+    setMenuOpen(false);
     if (onOpenSignIn) {
       onOpenSignIn();
     } else {
@@ -110,7 +117,7 @@ export default function Navbar({
   };
 
   const handleTrial = () => {
-    setMobileMenuOpen(false);
+    setMenuOpen(false);
     if (onOpenTrial) {
       onOpenTrial();
     } else if (pathname === "/") {
@@ -126,7 +133,7 @@ export default function Navbar({
   };
 
   const handleDashboard = () => {
-    setMobileMenuOpen(false);
+    setMenuOpen(false);
     if (onOpenDashboard) {
       onOpenDashboard();
     } else {
@@ -135,50 +142,63 @@ export default function Navbar({
   };
 
   return (
-    <>
-      {/* =========================================================================
-          TOP TICKER BAR (Commented out: Enable if live announcement banner is needed)
-          ========================================================================= */}
-      {/*
-      <div className="bg-[#1B4332] text-white text-[11px] font-semibold py-1 px-4 text-center">
-        <span>⚡ Season 4 Protocol Active • 5,200+ Kirana &amp; Grocers Mapped</span>
-      </div>
+    <header className="sticky top-0 z-40 w-full px-2 sm:px-4 pt-2 transition-all duration-300">
+      {/* 
+        NO OVERLAY CONTAINER: 
+        The floating island card expands dynamically with zero backdrop blackout
       */}
-
-      {/* Main Sticky Navbar Container */}
-      <header
-        ref={navRef}
-        className={`sticky top-0 z-40 w-full transition-all duration-200 ${
+      <div
+        ref={navContainerRef}
+        className={cn(
+          "mx-auto transition-all duration-300 rounded-2xl sm:rounded-3xl border shadow-xl backdrop-blur-xl",
+          "bg-white/95 dark:bg-[#0B0E0C]/90 text-foreground border-[#757761]/25 dark:border-[#757761]/35",
           isScrolled
-            ? "bg-[#FAF9F6]/95 backdrop-blur-xl border-b border-slate-200/90 shadow-2xs"
-            : "bg-[#FAF9F6]/85 backdrop-blur-md border-b border-slate-200/60"
-        }`}
+            ? "max-w-5xl shadow-2xl shadow-black/30 dark:shadow-black/50 py-1 sm:py-1.5 px-3 sm:px-5"
+            : "max-w-7xl py-2 px-3 sm:px-6"
+        )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+        {/* Main Navbar Bar */}
+        <div className="flex items-center justify-between gap-2 sm:gap-4 h-14 sm:h-16">
           
-          {/* 1. Left: Brand Mark */}
-          <Link
-            href="/"
-            onClick={(e) => {
-              if (pathname === "/") {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }
-            }}
-            className="group flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 rounded-xl p-1 shrink-0"
-            aria-label="PotatoFit Home"
-          >
-            <PotatoFitLogo size="sm" variant="light" />
-          </Link>
+          {/* 1. Left: Brand Mark & Home Link */}
+          <div className="flex items-center gap-3 shrink-0">
+            <Link
+              href="/"
+              onClick={(e) => {
+                if (pathname === "/") {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+                setMenuOpen(false);
+              }}
+              className="group flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9c67b5] rounded-xl p-1"
+              aria-label="PotatoFit Home"
+            >
+              <PotatoFitLogo size="sm" variant="dark" />
+            </Link>
 
-          {/* 2. Center: Direct Navigation Links (Desktop) */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+            {/* Streak Trigger Pill (If provided) */}
+            {onOpenStreak && (
+              <button
+                type="button"
+                onClick={onOpenStreak}
+                title="View Active Streak Adherence"
+                className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#f7fe72]/15 border border-[#f7fe72]/30 text-xs font-mono font-bold text-[#f7fe72] hover:bg-[#f7fe72]/25 transition-all cursor-pointer"
+              >
+                <Flame className="w-3.5 h-3.5 fill-[#f7fe72] text-[#f7fe72]" />
+                <span>14D STREAK</span>
+              </button>
+            )}
+          </div>
+
+          {/* 2. Center: Direct Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={getAnchorHref(link.href)}
                 onClick={(e) => handleAnchorClick(e, link.href)}
-                className="text-sm font-semibold text-slate-700 hover:text-[#1B4332] transition-colors whitespace-nowrap"
+                className="text-xs xl:text-sm font-semibold text-[#262A21] hover:text-[#9c67b5] dark:text-[#CBD2C7] dark:hover:text-[#f7fe72] transition-colors whitespace-nowrap"
               >
                 {link.label}
               </a>
@@ -187,73 +207,56 @@ export default function Navbar({
             {/* Arena / Leaderboards Link */}
             <Link
               href="/leaderboards"
-              className="flex items-center gap-1.5 px-3 py-1 rounded-lg text-sm font-bold text-[#1B4332] bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200 transition-colors whitespace-nowrap"
+              className={cn(
+                "flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all whitespace-nowrap shadow-xs",
+                pathname === "/leaderboards"
+                  ? "bg-[#9c67b5]/20 text-[#6C2E85] border border-[#9c67b5] dark:bg-[#9c67b5]/30 dark:text-[#f7fe72] dark:border-[#9c67b5]"
+                  : "bg-[#EAEFEA] hover:bg-[#DDE5DC] text-[#121815] border border-[#757761]/30 dark:bg-[#2D163D]/60 dark:hover:bg-[#3E1F55] dark:text-[#E2E7DE] dark:hover:text-[#f7fe72] dark:border-[#9c67b5]/40"
+              )}
             >
-              <Trophy className="w-3.5 h-3.5 text-emerald-700" />
+              <Trophy className="w-3.5 h-3.5 text-[#6C2E85] dark:text-[#f7fe72]" />
               <span>Leaderboards</span>
             </Link>
 
             {/* Dedicated Rewards Link */}
             <Link
               href="/rewards"
-              className="flex items-center gap-1.5 px-3 py-1 rounded-lg text-sm font-bold text-slate-700 hover:text-[#1B4332] hover:bg-slate-100 transition-colors whitespace-nowrap"
+              className={cn(
+                "flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all whitespace-nowrap",
+                pathname === "/rewards"
+                  ? "bg-[#f4e76e]/20 text-[#7A5A00] border border-[#f4e76e]/50 dark:bg-[#f4e76e]/20 dark:text-[#f4e76e] dark:border-[#f4e76e]/40"
+                  : "text-[#262A21] hover:text-[#9c67b5] hover:bg-[#EAEFEA] border border-transparent hover:border-[#757761]/30 dark:text-[#CBD2C7] dark:hover:text-[#f7fe72] dark:hover:bg-white/5"
+              )}
             >
-              <Award className="w-3.5 h-3.5 text-amber-600" />
+              <Award className="w-3.5 h-3.5 text-[#7A5A00] dark:text-[#f4e76e]" />
               <span>Rewards</span>
             </Link>
-
-            {/* =========================================================================
-                ATHLETE DASHBOARD LINK (Commented out if not needed in center nav)
-                ========================================================================= */}
-            {/*
-            {onOpenDashboard && (
-              <button
-                onClick={handleDashboard}
-                className="text-sm font-bold text-emerald-800 hover:text-emerald-950 flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200 transition-colors whitespace-nowrap cursor-pointer"
-              >
-                <LayoutDashboard className="w-3.5 h-3.5" />
-                <span>Dashboard</span>
-              </button>
-            )}
-            */}
           </nav>
 
-          {/* 3. Right Utility Cluster (Desktop & Tablet) */}
-          <div className="hidden sm:flex items-center gap-3 shrink-0">
-            
-            {/* =========================================================================
-                STREAK PILL (Commented out if not wanted: Uncomment anytime to display)
-                ========================================================================= */}
-            {/*
-            <button
-              onClick={onOpenStreak}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200 text-[#1B4332] text-xs font-bold transition-all shadow-2xs active:scale-95 cursor-pointer"
-              title="View habit streak status"
-            >
-              <Flame className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-              <span>Day 12 Active</span>
-            </button>
-            */}
+          {/* 3. Right Utility Cluster: Auth + Primary Action */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
 
-            {/* NextAuth Session Status or Sign In Link */}
+            {/* NextAuth Session Status (Desktop & Tablet) */}
             {session?.user ? (
-              <div className="flex items-center gap-2">
+              <div className="hidden md:flex items-center gap-2">
                 <button
+                  type="button"
                   onClick={handleDashboard}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-bold text-slate-800 transition-all cursor-pointer"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#EAEFEA] hover:bg-[#DDE5DC] dark:bg-white/5 dark:hover:bg-white/10 border border-[#757761]/30 text-xs font-bold text-[#121815] dark:text-[#E2E7DE] transition-all cursor-pointer"
                   title="Open Athlete Dashboard"
                 >
-                  <div className="w-5 h-5 rounded-full bg-[#1B4332] text-emerald-300 flex items-center justify-center text-[10px]">
+                  <div className="w-5 h-5 rounded-full bg-[#9c67b5] text-[#f7fe72] flex items-center justify-center text-[10px] font-black">
                     {session.user.name?.[0]?.toUpperCase() || <User className="w-3 h-3" />}
                   </div>
-                  <span className="max-w-[100px] truncate">
+                  <span className="max-w-[90px] truncate">
                     {session.user.name?.split(" ")[0] || "Athlete"}
                   </span>
                 </button>
 
                 <button
+                  type="button"
                   onClick={() => signOut({ redirect: false })}
-                  className="text-xs font-semibold text-slate-500 hover:text-slate-800 p-1.5 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
+                  className="text-xs font-semibold text-[#757761] hover:text-[#121815] dark:text-[#A0A594] dark:hover:text-white p-1.5 rounded-lg hover:bg-[#EAEFEA] dark:hover:bg-white/5 transition-colors cursor-pointer"
                   title="Sign Out"
                 >
                   <LogOut className="w-3.5 h-3.5" />
@@ -261,171 +264,143 @@ export default function Navbar({
               </div>
             ) : (
               <button
+                type="button"
                 onClick={handleSignIn}
-                className="text-sm font-semibold text-slate-700 hover:text-slate-950 px-2 py-1 transition-colors cursor-pointer"
+                className="hidden md:block text-xs font-bold text-[#262A21] hover:text-[#9c67b5] dark:text-[#CBD2C7] dark:hover:text-[#f7fe72] px-2.5 py-1.5 rounded-lg hover:bg-[#EAEFEA] dark:hover:bg-white/5 transition-colors cursor-pointer"
               >
                 Sign In
               </button>
             )}
 
-            {/* Primary CTA Button */}
+            {/* Primary Action Button (10% High-Voltage Accent) */}
             <button
+              type="button"
               onClick={session?.user ? handleDashboard : handleTrial}
-              className="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#1B4332] hover:bg-[#153427] text-white text-xs sm:text-sm font-bold tracking-wide transition-all shadow-sm active:scale-95 whitespace-nowrap cursor-pointer group"
+              className="flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] hover:brightness-110 text-[#0B0E0C] text-xs font-black tracking-wide shadow-md active:scale-95 transition-all cursor-pointer whitespace-nowrap"
             >
-              <span>{session?.user ? "Go to Dashboard" : "Start Free Trial"}</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              <span>{session?.user ? "Dashboard" : "Start Trial"}</span>
+              <ArrowRight className="w-3 h-3 text-[#0B0E0C]" />
             </button>
-          </div>
 
-          {/* 4. Mobile Controls: Hamburger Toggle */}
-          <div className="flex lg:hidden items-center gap-2">
-            
-            {/* =========================================================================
-                MOBILE STREAK PILL (Commented out if not wanted)
-                ========================================================================= */}
-            {/*
-            {onOpenStreak && (
-              <button
-                onClick={onOpenStreak}
-                className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-[#1B4332] text-xs font-bold"
-              >
-                <Flame className="w-3 h-3 text-amber-500 fill-amber-500" />
-                <span>12d</span>
-              </button>
-            )}
-            */}
-
-            {/* Hamburger Button */}
+            {/* Mobile / Tablet Menu Button (Zero overlay inline trigger) */}
             <button
-              onClick={() => setMobileMenuOpen((prev) => !prev)}
-              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-              aria-expanded={mobileMenuOpen}
-              className="p-2 rounded-xl text-slate-700 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-700 transition-colors"
+              type="button"
+              onClick={() => setMenuOpen((prev) => !prev)}
+              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={menuOpen}
+              className="lg:hidden p-2 rounded-xl text-[#262A21] dark:text-[#CBD2C7] hover:text-[#9c67b5] dark:hover:text-[#f7fe72] hover:bg-[#EAEFEA] dark:hover:bg-white/10 border border-[#757761]/30 transition-all cursor-pointer"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
-      </header>
 
-      {/* =========================================================================
-          MOBILE DRAWER SHEET (Properly full-width, no overlay bugs)
-          ========================================================================= */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 flex flex-col">
-          {/* Backdrop overlay */}
-          <div
-            className="fixed inset-0 bg-slate-950/50 backdrop-blur-xs transition-opacity"
-            onClick={() => setMobileMenuOpen(false)}
-            aria-hidden="true"
-          />
+        {/* 
+          =======================================================================
+          INLINE EXPANDING MENU (RESPONSIVE FOR MOBILE & TABLET, ZERO OVERLAY)
+          =======================================================================
+        */}
+        {menuOpen && (
+          <div className="lg:hidden pt-3 pb-4 border-t border-[#757761]/25 mt-1 animate-in fade-in slide-in-from-top-2 duration-200">
+            {/* Navigation Links */}
+            <nav className="grid grid-cols-2 gap-2 mb-3">
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={getAnchorHref(link.href)}
+                  onClick={(e) => handleAnchorClick(e, link.href)}
+                  className="px-3 py-2 rounded-xl bg-[#EAEFEA] dark:bg-white/5 hover:bg-[#DDE5DC] dark:hover:bg-white/10 text-xs font-semibold text-[#121815] dark:text-[#E2E7DE] hover:text-[#9c67b5] dark:hover:text-[#f7fe72] transition-colors"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
 
-          {/* Mobile Drawer Content */}
-          <div className="relative z-10 w-full max-h-[85dvh] bg-[#FAF9F6] border-b border-slate-200 shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-top duration-200">
-            {/* Drawer Header */}
-            <div className="flex items-center justify-between px-4 py-3.5 bg-white border-b border-slate-200">
-              <PotatoFitLogo size="sm" variant="light" />
-              <button
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-1.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
-                aria-label="Close navigation menu"
+            {/* Main Feature Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+              <Link
+                href="/leaderboards"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center justify-between p-2.5 rounded-xl bg-[#F6EEFA] dark:bg-[#2D163D]/70 border border-[#9c67b5]/30 dark:border-[#9c67b5]/50 text-xs font-bold text-[#6C2E85] dark:text-[#f7fe72]"
               >
-                <X className="w-5 h-5" />
-              </button>
+                <div className="flex items-center gap-2">
+                  <Trophy className="w-4 h-4 text-[#6C2E85] dark:text-[#f7fe72]" />
+                  <span>Leaderboards &amp; Arena</span>
+                </div>
+                <ArrowRight className="w-3.5 h-3.5 text-[#6C2E85] dark:text-[#f7fe72]" />
+              </Link>
+
+              <Link
+                href="/rewards"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center justify-between p-2.5 rounded-xl bg-[#EAEFEA] dark:bg-white/5 hover:bg-[#DDE5DC] dark:hover:bg-white/10 border border-[#757761]/30 text-xs font-bold text-[#121815] dark:text-[#E2E7DE]"
+              >
+                <div className="flex items-center gap-2">
+                  <Award className="w-4 h-4 text-[#7A5A00] dark:text-[#f4e76e]" />
+                  <span>Rewards &amp; Prestige</span>
+                </div>
+                <ArrowRight className="w-3.5 h-3.5 text-[#757761] dark:text-[#A0A594]" />
+              </Link>
             </div>
 
-            {/* Drawer Links */}
-            <div className="overflow-y-auto px-4 py-5 space-y-4">
-              <nav className="flex flex-col space-y-1">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={getAnchorHref(link.href)}
-                    onClick={(e) => handleAnchorClick(e, link.href)}
-                    className="px-3 py-2.5 rounded-xl text-base font-medium text-slate-800 hover:bg-slate-100 transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-
-                <Link
-                  href="/leaderboards"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2.5 rounded-xl text-base font-bold text-[#1B4332] bg-emerald-50/70 border border-emerald-200 flex items-center gap-2 mt-2"
-                >
-                  <Trophy className="w-4 h-4 text-emerald-700" />
-                  <span>Leaderboards &amp; Arena</span>
-                </Link>
-
-                <Link
-                  href="/rewards"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2.5 rounded-xl text-base font-bold text-slate-800 hover:bg-slate-100 flex items-center gap-2"
-                >
-                  <Award className="w-4 h-4 text-amber-600" />
-                  <span>Rewards &amp; Prestige</span>
-                </Link>
-
-                {onOpenDashboard && (
-                  <button
-                    onClick={handleDashboard}
-                    className="w-full text-left px-3 py-2.5 rounded-xl text-base font-bold text-emerald-900 bg-emerald-50 border border-emerald-200 flex items-center gap-2 mt-1 cursor-pointer"
-                  >
-                    <LayoutDashboard className="w-4 h-4 text-emerald-700" />
-                    <span>Personal Athlete Dashboard</span>
-                  </button>
-                )}
-              </nav>
-
-              {/* Drawer Auth & Action Buttons */}
-              <div className="pt-3 border-t border-slate-200 flex flex-col gap-2.5">
-                {session?.user ? (
-                  <div className="space-y-2">
-                    <div className="px-3 py-2 bg-slate-100 rounded-xl text-xs font-bold text-slate-800 flex items-center justify-between">
-                      <span className="truncate">Logged in as {session.user.name}</span>
-                      <button
-                        onClick={() => {
-                          setMobileMenuOpen(false);
-                          signOut({ redirect: false });
-                        }}
-                        className="text-xs text-rose-600 font-semibold cursor-pointer shrink-0 ml-2"
-                      >
-                        Sign Out
-                      </button>
+            {/* User Session Row & Action CTA */}
+            <div className="pt-2 border-t border-[#757761]/25 space-y-2">
+              {session?.user ? (
+                <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#EAEFEA] dark:bg-white/5 border border-[#757761]/30">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="w-6 h-6 rounded-full bg-[#9c67b5] text-[#f7fe72] flex items-center justify-center text-xs font-black shrink-0">
+                      {session.user.name?.[0]?.toUpperCase() || <User className="w-3.5 h-3.5" />}
                     </div>
+                    <span className="text-xs font-bold text-[#121815] dark:text-[#E2E7DE] truncate">
+                      {session.user.name}
+                    </span>
+                  </div>
 
+                  <div className="flex items-center gap-2 shrink-0">
                     <button
+                      type="button"
                       onClick={handleDashboard}
-                      className="w-full flex items-center justify-center gap-2 py-3 text-sm font-bold text-white bg-[#1B4332] rounded-xl shadow-sm cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg bg-[#9c67b5]/20 dark:bg-[#9c67b5]/30 hover:bg-[#9c67b5]/40 text-[11px] font-bold text-[#6C2E85] dark:text-[#f7fe72] transition-colors"
                     >
-                      <span>Go to Dashboard</span>
-                      <ArrowRight className="w-4 h-4" />
+                      Dashboard
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMenuOpen(false);
+                        signOut({ redirect: false });
+                      }}
+                      className="p-1 rounded-lg text-rose-500 hover:bg-rose-500/10"
+                      title="Sign Out"
+                    >
+                      <LogOut className="w-3.5 h-3.5" />
                     </button>
                   </div>
-                ) : (
-                  <>
-                    <button
-                      onClick={handleSignIn}
-                      className="w-full text-center py-2.5 text-sm font-semibold text-slate-800 bg-white border border-slate-200 rounded-xl cursor-pointer"
-                    >
-                      Sign In
-                    </button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={handleSignIn}
+                    className="py-2.5 text-center text-xs font-bold text-[#121815] dark:text-[#E2E7DE] bg-[#EAEFEA] hover:bg-[#DDE5DC] dark:bg-white/5 dark:hover:bg-white/10 border border-[#757761]/30 rounded-xl transition-colors cursor-pointer"
+                  >
+                    Sign In
+                  </button>
 
-                    <button
-                      onClick={handleTrial}
-                      className="w-full flex items-center justify-center gap-2 py-3 text-sm font-bold text-white bg-[#1B4332] rounded-xl shadow-sm cursor-pointer"
-                    >
-                      <span>Start Free Trial</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </>
-                )}
-              </div>
+                  <button
+                    type="button"
+                    onClick={handleTrial}
+                    className="py-2.5 text-center text-xs font-black text-[#0B0E0C] bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] rounded-xl shadow-md transition-all active:scale-95 cursor-pointer"
+                  >
+                    Start Free Trial
+                  </button>
+                </div>
+              )}
             </div>
+
           </div>
-        </div>
-      )}
-    </>
+        )}
+      </div>
+    </header>
   );
 }

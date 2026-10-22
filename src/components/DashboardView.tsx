@@ -237,24 +237,24 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col lg:flex-row font-sans">
+    <div className="min-h-screen bg-[#0B0E0C] text-[#E2E7DE] flex flex-col lg:flex-row font-sans">
       
       {/* Mobile Top App Bar */}
-      <div className="lg:hidden flex items-center justify-between px-4 py-3 bg-white border-b border-slate-200 sticky top-0 z-30">
+      <div className="lg:hidden flex items-center justify-between px-4 py-3 bg-[#121815] border-b border-[#757761]/30 sticky top-0 z-30">
         <div className="flex items-center gap-2.5">
           <button
             onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
-            className="p-2 text-slate-700 hover:text-slate-900 rounded-lg hover:bg-slate-100"
+            className="p-2 text-[#CBD2C7] hover:text-white rounded-lg hover:bg-[#181f1b]"
           >
             {mobileSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
-          <PotatoFitLogo size="sm" variant="light" />
+          <PotatoFitLogo size="sm" variant="dark" />
         </div>
 
         {onBackToHome && (
           <button
             onClick={onBackToHome}
-            className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200"
+            className="text-xs font-semibold text-[#f7fe72] bg-[#9c67b5]/20 px-3 py-1.5 rounded-full border border-[#9c67b5]/40"
           >
             ← Public Site
           </button>
@@ -263,19 +263,19 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
 
       {/* 1. Left Sidebar (Fixed 240px on desktop) */}
       <aside
-        className={`fixed lg:sticky top-0 left-0 z-40 h-screen w-[240px] bg-white border-r border-slate-200/90 flex flex-col justify-between p-5 transition-transform duration-200 ${
+        className={`fixed lg:sticky top-0 left-0 z-40 h-screen w-[240px] bg-[#121815] border-r border-[#757761]/30 flex flex-col justify-between p-5 transition-transform duration-200 ${
           mobileSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
         <div className="space-y-6">
           {/* Logo & Platform Wordmark */}
           <div className="flex items-center justify-between pb-2">
-            <PotatoFitLogo size="sm" variant="light" />
+            <PotatoFitLogo size="sm" variant="dark" />
             {onBackToHome && (
               <button
                 onClick={onBackToHome}
                 title="Return to Public Homepage"
-                className="text-[11px] font-semibold text-slate-500 hover:text-slate-900"
+                className="text-[11px] font-semibold text-[#A0A493] hover:text-[#f7fe72] transition-colors"
               >
                 Home
               </button>
@@ -283,7 +283,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
           </div>
 
           {/* Profile Badge */}
-          <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
+          <div className="p-3.5 rounded-2xl bg-[#0B0E0C] border border-[#757761]/30">
             <div className="flex items-center gap-3 mb-2.5">
               <Link
                 href="/rewards"
@@ -293,14 +293,14 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                 <CanvasBadge tier="gold" emblem="trophy" size={42} className="shrink-0" />
               </Link>
               <div className="min-w-0 flex-1">
-                <h3 className="text-xs font-bold text-slate-900 truncate">{userName}</h3>
+                <h3 className="text-xs font-bold text-white truncate">{userName}</h3>
                 <Link
                   href="/rewards"
-                  className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-900 bg-gradient-to-r from-emerald-100 to-emerald-200/80 hover:from-emerald-200 hover:to-emerald-300 border border-emerald-300/80 px-2 py-0.5 rounded cursor-pointer transition-all shadow-2xs"
+                  className="inline-flex items-center gap-1 text-[10px] font-bold text-[#f7fe72] bg-[#9c67b5]/20 hover:bg-[#9c67b5]/30 border border-[#9c67b5]/40 px-2 py-0.5 rounded cursor-pointer transition-all shadow-2xs"
                   title="View Dedicated Rewards Page"
                 >
-                  <Award className="w-2.5 h-2.5 text-emerald-800" />
-                  <span>Level 4 Mover (Rewards)</span>
+                  <Award className="w-2.5 h-2.5 text-[#f7fe72]" />
+                  <span>Level 4 Mover</span>
                 </Link>
               </div>
             </div>
@@ -310,9 +310,9 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               onClick={() => {
                 setWaterVolume((prev) => parseFloat((prev + 0.25).toFixed(2)));
               }}
-              className="w-full py-1.5 px-2 bg-white hover:bg-emerald-50 border border-slate-200 hover:border-emerald-300 text-[#1B4332] rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-all shadow-2xs active:scale-95 cursor-pointer"
+              className="w-full py-1.5 px-2 bg-[#121815] hover:bg-[#181f1b] border border-[#757761]/40 hover:border-[#9c67b5] text-[#f7fe72] rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-all shadow-2xs active:scale-95 cursor-pointer"
             >
-              <Droplets className="w-3.5 h-3.5 text-emerald-600 fill-emerald-100" />
+              <Droplets className="w-3.5 h-3.5 text-[#f7fe72] fill-[#f7fe72]/20" />
               <span>Quick Add +250ml</span>
             </button>
           </div>
@@ -337,15 +337,15 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                     isActive
-                      ? "bg-[#1B4332] text-white shadow-xs"
-                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                      ? "bg-[#9c67b5] text-white shadow-xs font-bold"
+                      : "text-[#A0A493] hover:bg-white/5 hover:text-white"
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <Icon className={`w-4 h-4 ${isActive ? "text-emerald-300" : "text-slate-500"}`} />
+                    <Icon className={`w-4 h-4 ${isActive ? "text-[#f7fe72]" : "text-[#757761]"}`} />
                     <span>{link.label}</span>
                   </div>
-                  {isActive && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />}
+                  {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[#f7fe72] shadow-[0_0_6px_#f7fe72]" />}
                 </button>
               );
             })}
@@ -355,13 +355,13 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
           <div className="pt-2">
             <a
               href="/leaderboards"
-              className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold text-[#1B4332] bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200/90 transition-all shadow-2xs group cursor-pointer"
+              className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold text-[#f7fe72] bg-[#9c67b5]/20 hover:bg-[#9c67b5]/30 border border-[#9c67b5]/40 transition-all shadow-2xs group cursor-pointer"
             >
               <div className="flex items-center gap-2">
-                <Trophy className="w-4 h-4 text-emerald-700 group-hover:scale-110 transition-transform" />
+                <Trophy className="w-4 h-4 text-[#f7fe72] group-hover:scale-110 transition-transform" />
                 <span>Arena &amp; Leaderboards</span>
               </div>
-              <span className="text-[10px] bg-emerald-700 text-white font-mono px-1.5 py-0.5 rounded font-bold">
+              <span className="text-[10px] bg-[#9c67b5] text-white font-mono px-1.5 py-0.5 rounded font-bold">
                 LIVE
               </span>
             </a>
@@ -369,53 +369,53 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
         </div>
 
         {/* Bottom Sidebar Status / Back */}
-        <div className="pt-4 border-t border-slate-200 space-y-1.5">
+        <div className="pt-4 border-t border-[#757761]/25 space-y-1.5">
           {session?.user && (
             <button
               onClick={() => {
                 signOut({ redirect: false });
                 if (onBackToHome) onBackToHome();
               }}
-              className="w-full py-2 px-3 text-xs font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 flex items-center gap-2 cursor-pointer transition-colors"
+              className="w-full py-2 px-3 text-xs font-semibold text-[#A0A493] hover:text-white rounded-lg hover:bg-white/5 flex items-center gap-2 cursor-pointer transition-colors"
             >
-              <LogOut className="w-4 h-4 text-slate-500" />
+              <LogOut className="w-4 h-4 text-[#757761]" />
               <span>Sign Out (NextAuth)</span>
             </button>
           )}
           {onBackToHome && (
             <button
               onClick={onBackToHome}
-              className="w-full py-2 px-3 text-xs font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 flex items-center gap-2 cursor-pointer transition-colors"
+              className="w-full py-2 px-3 text-xs font-semibold text-[#A0A493] hover:text-white rounded-lg hover:bg-white/5 flex items-center gap-2 cursor-pointer transition-colors"
             >
               <span>Back to Landing Page</span>
             </button>
           )}
-          <div className="flex items-center justify-between text-[11px] text-slate-600 font-mono pt-1">
+          <div className="flex items-center justify-between text-[11px] text-[#757761] font-mono pt-1">
             <span>SUPABASE AUTH DB</span>
-            <span className="text-emerald-800 font-semibold flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            <span className="text-[#f7fe72] font-semibold flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#f7fe72] shadow-[0_0_6px_#f7fe72]" />
               Synced
             </span>
           </div>
-          <div className="flex items-center justify-between text-[11px] text-slate-600 font-mono">
+          <div className="flex items-center justify-between text-[11px] text-[#757761] font-mono">
             <span>BIOMARKER SYNC</span>
-            <span className="text-emerald-800 font-semibold">Active</span>
+            <span className="text-[#f7fe72] font-semibold">Active</span>
           </div>
         </div>
       </aside>
 
-      {/* Main Canvas: Clean slate background (#F8FAFC) with modular card widgets */}
+      {/* Main Canvas: Obsidian canvas background (#0B0E0C) with modular card widgets */}
       <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
         
         {/* Top Header Row */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div>
-            <div className="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-wider font-mono">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#A0A493] uppercase tracking-wider font-mono">
               <span>Thursday, October 22</span>
               <span>•</span>
-              <span className="text-emerald-700">Active Training Block 2</span>
+              <span className="text-[#f7fe72]">Active Training Block 2</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-0.5">
+            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight mt-0.5">
               Personal Vitality Dashboard
             </h1>
           </div>
@@ -423,18 +423,18 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <a
               href="/leaderboards"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#1B4332] hover:bg-[#153427] text-white shadow-2xs text-xs font-bold cursor-pointer transition-all active:scale-95"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] shadow-md text-xs font-black cursor-pointer transition-all active:scale-95 hover:brightness-110"
             >
-              <Trophy className="w-3.5 h-3.5 text-emerald-400" />
+              <Trophy className="w-3.5 h-3.5 text-[#0B0E0C]" />
               <span>Global Arena (#42)</span>
             </a>
 
             <Link
               href="/rewards"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-950 shadow-2xs text-xs font-bold cursor-pointer transition-all active:scale-95"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#9c67b5]/20 hover:bg-[#9c67b5]/30 border border-[#9c67b5]/40 text-[#f7fe72] shadow-2xs text-xs font-bold cursor-pointer transition-all active:scale-95"
               title="Inspect Reward Tiers & Arena Badges"
             >
-              <Award className="w-3.5 h-3.5 text-amber-700" />
+              <Award className="w-3.5 h-3.5 text-[#f7fe72]" />
               <span>Reward Tiers</span>
             </Link>
 
@@ -444,15 +444,15 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                 setIsGoalsOpen(true);
                 document.getElementById("daily-goals-module")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 shadow-2xs text-xs font-semibold text-slate-700 hover:text-slate-900 cursor-pointer transition-all active:scale-95"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#121815] hover:bg-[#181f1b] border border-[#757761]/35 shadow-2xs text-xs font-semibold text-[#E2E7DE] hover:text-white cursor-pointer transition-all active:scale-95"
             >
-              <Target className="w-3.5 h-3.5 text-emerald-700" />
+              <Target className="w-3.5 h-3.5 text-[#f7fe72]" />
               <span>Set Daily Goals</span>
             </button>
 
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-2xs text-xs">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="font-semibold text-slate-700">Live Biometrics Connected</span>
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#121815] border border-[#757761]/30 shadow-2xs text-xs">
+              <span className="w-2 h-2 rounded-full bg-[#f7fe72] animate-pulse shadow-[0_0_6px_#f7fe72]" />
+              <span className="font-semibold text-[#CBD2C7]">Live Biometrics Connected</span>
             </div>
           </div>
         </div>
@@ -460,23 +460,23 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
         {/* 2. Top Daily Vitality Strip: 4-Card Horizontal KPI Row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           
-          {/* Card 1: Daily Energy Burned (Dynamic / Target with circular progress ring) */}
-          <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-2xs flex items-center justify-between">
+          {/* Card 1: Daily Energy Burned */}
+          <div className="bg-[#121815] rounded-2xl p-4 sm:p-5 border border-[#757761]/30 shadow-xl shadow-black/40 flex items-center justify-between">
             <div className="space-y-1">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                <span className="text-xs font-bold text-[#A0A493] uppercase tracking-wider">
                   Daily Energy Burned
                 </span>
               </div>
               <div className="flex items-baseline gap-1">
-                <span className="text-2xl font-black text-slate-900 font-mono tabular-nums">
+                <span className="text-2xl font-black text-white font-mono tabular-nums">
                   {caloriesBurned}
                 </span>
-                <span className="text-xs text-slate-400 font-medium">/ {caloriesTarget} kcal</span>
+                <span className="text-xs text-[#757761] font-medium">/ {caloriesTarget} kcal</span>
               </div>
-              <div className="flex items-center justify-between text-[11px] font-semibold text-emerald-800">
+              <div className="flex items-center justify-between text-[11px] font-semibold text-[#f7fe72]">
                 <span className="flex items-center gap-1">
-                  <Zap className="w-3 h-3 text-emerald-600 fill-emerald-500" />
+                  <Zap className="w-3 h-3 text-[#f7fe72] fill-[#f7fe72]" />
                   <span>
                     {caloriesBurned >= caloriesTarget
                       ? "Target reached!"
@@ -489,7 +489,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                     setIsGoalsOpen(true);
                     document.getElementById("daily-goals-module")?.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="text-slate-400 hover:text-slate-700 transition-colors cursor-pointer ml-1"
+                  className="text-[#757761] hover:text-white transition-colors cursor-pointer ml-1"
                   title="Adjust goal in Supabase module"
                 >
                   <Sliders className="w-3 h-3" />
@@ -501,50 +501,50 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
             <div className="relative w-14 h-14 shrink-0 flex items-center justify-center">
               <svg className="w-14 h-14 -rotate-90 transform" viewBox="0 0 36 36">
                 <path
-                  className="text-slate-100 stroke-current stroke-[3.5] fill-none"
+                  className="text-[#757761]/25 stroke-current stroke-[3.5] fill-none"
                   d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                 />
                 <path
-                  className="text-emerald-500 stroke-current stroke-[3.5] stroke-linecap-round fill-none transition-all duration-500"
+                  className="text-[#f7fe72] stroke-current stroke-[3.5] stroke-linecap-round fill-none transition-all duration-500"
                   strokeDasharray={`${Math.min(100, Math.round((caloriesBurned / caloriesTarget) * 100))}, 100`}
                   d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                 />
               </svg>
-              <span className="absolute text-[11px] font-black text-slate-900 font-mono">
+              <span className="absolute text-[11px] font-black text-white font-mono">
                 {Math.round((caloriesBurned / caloriesTarget) * 100)}%
               </span>
             </div>
           </div>
 
-          {/* Card 2: Water Intake (Dynamic / Target with interactive droplet fill animation) */}
-          <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-2xs flex items-center justify-between">
+          {/* Card 2: Water Intake */}
+          <div className="bg-[#121815] rounded-2xl p-4 sm:p-5 border border-[#757761]/30 shadow-xl shadow-black/40 flex items-center justify-between">
             <div className="space-y-1">
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#A0A493] uppercase tracking-wider">
                 Water Intake
               </span>
               <div className="flex items-baseline gap-1">
-                <span className="text-2xl font-black text-slate-900 font-mono tabular-nums">
+                <span className="text-2xl font-black text-white font-mono tabular-nums">
                   {waterVolume.toFixed(1)}L
                 </span>
-                <span className="text-xs text-slate-400 font-medium">/ {waterTarget.toFixed(1)}L</span>
+                <span className="text-xs text-[#757761] font-medium">/ {waterTarget.toFixed(1)}L</span>
               </div>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={() => setWaterVolume((v) => parseFloat((v + 0.25).toFixed(2)))}
-                  className="text-[11px] font-semibold text-[#1B4332] hover:text-emerald-800 flex items-center gap-1 cursor-pointer"
+                  className="text-[11px] font-semibold text-[#f7fe72] hover:underline flex items-center gap-1 cursor-pointer"
                 >
                   <Plus className="w-3 h-3" />
                   <span>Log +250ml</span>
                 </button>
-                <span className="text-slate-300">·</span>
+                <span className="text-[#757761]">·</span>
                 <button
                   type="button"
                   onClick={() => {
                     setIsGoalsOpen(true);
                     document.getElementById("daily-goals-module")?.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="text-[11px] font-semibold text-slate-400 hover:text-slate-700 flex items-center gap-0.5 cursor-pointer"
+                  className="text-[11px] font-semibold text-[#A0A493] hover:text-white flex items-center gap-0.5 cursor-pointer"
                   title="Adjust goal in Supabase module"
                 >
                   <Sliders className="w-2.5 h-2.5" />
@@ -554,57 +554,57 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
             </div>
 
             {/* Droplet Fill Animation Indicator */}
-            <div className="relative w-14 h-14 shrink-0 rounded-2xl bg-emerald-50 border border-emerald-200 flex flex-col items-center justify-end overflow-hidden">
+            <div className="relative w-14 h-14 shrink-0 rounded-2xl bg-[#0B0E0C] border border-[#757761]/30 flex flex-col items-center justify-end overflow-hidden">
               <div
-                className="w-full bg-gradient-to-t from-[#1B4332] to-emerald-500 transition-all duration-500 flex items-center justify-center"
+                className="w-full bg-gradient-to-t from-[#2D163D] to-[#9c67b5] transition-all duration-500 flex items-center justify-center"
                 style={{ height: `${Math.min(100, (waterVolume / waterTarget) * 100)}%` }}
               />
               <div className="absolute inset-0 flex items-center justify-center">
-                <Droplets className="w-6 h-6 text-emerald-800 fill-emerald-100" />
+                <Droplets className="w-6 h-6 text-[#f7fe72] fill-[#f7fe72]/20" />
               </div>
             </div>
           </div>
 
-          {/* Card 3: Sleep Readiness (88% • Optimal with resting heart rate tracker) */}
-          <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-2xs flex items-center justify-between">
+          {/* Card 3: Sleep Readiness */}
+          <div className="bg-[#121815] rounded-2xl p-4 sm:p-5 border border-[#757761]/30 shadow-xl shadow-black/40 flex items-center justify-between">
             <div className="space-y-1">
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#A0A493] uppercase tracking-wider">
                 Sleep Readiness
               </span>
               <div className="flex items-baseline gap-1.5">
-                <span className="text-2xl font-black text-slate-900 font-mono">88%</span>
-                <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">
+                <span className="text-2xl font-black text-white font-mono">88%</span>
+                <span className="text-xs font-bold text-[#f7fe72] bg-[#9c67b5]/20 border border-[#9c67b5]/30 px-1.5 py-0.5 rounded">
                   Optimal
                 </span>
               </div>
-              <div className="flex items-center gap-2 text-[11px] text-slate-500 font-mono">
+              <div className="flex items-center gap-2 text-[11px] text-[#A0A493] font-mono">
                 <span>RHR: 52 bpm</span>
                 <span>·</span>
                 <span>7h 48m</span>
               </div>
             </div>
 
-            <div className="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-[#1B4332] shrink-0">
+            <div className="w-14 h-14 rounded-2xl bg-[#9c67b5]/20 border border-[#9c67b5]/40 flex items-center justify-center text-[#f7fe72] shrink-0">
               <Moon className="w-6 h-6" />
             </div>
           </div>
 
-          {/* Card 4: Active Habit Streak (14 Days unbroken) */}
-          <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-2xs flex items-center justify-between">
+          {/* Card 4: Active Habit Streak */}
+          <div className="bg-[#121815] rounded-2xl p-4 sm:p-5 border border-[#757761]/30 shadow-xl shadow-black/40 flex items-center justify-between">
             <div className="space-y-1">
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#A0A493] uppercase tracking-wider">
                 Active Habit Streak
               </span>
               <div className="flex items-baseline gap-1">
-                <span className="text-2xl font-black text-[#1B4332] font-mono">14 Days</span>
+                <span className="text-2xl font-black text-[#f7fe72] font-mono">14 Days</span>
               </div>
-              <span className="text-[11px] font-semibold text-slate-600">
+              <span className="text-[11px] font-semibold text-[#A0A493]">
                 Unbroken daily consistency
               </span>
             </div>
 
-            <div className="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
-              <Flame className="w-7 h-7 fill-emerald-500 text-emerald-500" />
+            <div className="w-14 h-14 rounded-2xl bg-[#9c67b5]/20 border border-[#9c67b5]/40 flex items-center justify-center text-[#f7fe72] shrink-0">
+              <Flame className="w-7 h-7 fill-[#f7fe72] text-[#f7fe72]" />
             </div>
           </div>
 
@@ -614,24 +614,24 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
         <section
           id="daily-goals-module"
           aria-label="Set Daily Goals"
-          className="bg-white rounded-3xl border border-slate-200/90 shadow-2xs p-5 sm:p-6 mb-8 transition-all scroll-mt-6"
+          className="bg-[#121815] rounded-3xl border border-[#757761]/30 shadow-xl p-5 sm:p-6 mb-8 transition-all scroll-mt-6"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#757761]/25">
             <div className="flex items-start sm:items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-emerald-50 border border-emerald-200/80 flex items-center justify-center text-emerald-800 shrink-0">
-                <Target className="w-5 h-5 text-emerald-700" />
+              <div className="w-10 h-10 rounded-2xl bg-[#9c67b5]/20 border border-[#9c67b5]/40 flex items-center justify-center text-[#f7fe72] shrink-0">
+                <Target className="w-5 h-5 text-[#f7fe72]" />
               </div>
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
-                  <h2 className="text-base font-bold text-slate-900">
+                  <h2 className="text-base font-bold text-white">
                     Set Daily Vitality Goals
                   </h2>
-                  <span className="inline-flex items-center gap-1 text-[11px] font-mono font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                  <span className="inline-flex items-center gap-1 text-[11px] font-mono font-semibold text-[#f7fe72] bg-[#9c67b5]/20 border border-[#9c67b5]/30 px-2 py-0.5 rounded-full">
                     <Database className="w-3 h-3" />
                     Supabase Connected
                   </span>
                 </div>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-xs text-[#A0A493] mt-0.5">
                   Define your daily energy burn and hydration targets. Preferences are saved to your Supabase profile and dynamically update live progress cards.
                 </p>
               </div>
@@ -639,14 +639,14 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
 
             <div className="flex items-center gap-3 self-end sm:self-auto">
               {goalsLastSynced && (
-                <span className="text-[11px] font-mono text-slate-400 hidden md:inline">
+                <span className="text-[11px] font-mono text-[#757761] hidden md:inline">
                   {goalsLastSynced}
                 </span>
               )}
               <button
                 type="button"
                 onClick={() => setIsGoalsOpen(!isGoalsOpen)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg text-[#A0A493] hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
                 title={isGoalsOpen ? "Collapse module" : "Expand module"}
               >
                 {isGoalsOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -660,44 +660,44 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                 <div
                   className={`p-3.5 rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-all ${
                     goalsSaveStatus.includes("successfully")
-                      ? "bg-emerald-50 text-emerald-900 border border-emerald-200"
-                      : "bg-slate-100 text-slate-800 border border-slate-200"
+                      ? "bg-[#9c67b5]/25 text-[#f7fe72] border border-[#9c67b5]/40"
+                      : "bg-[#0B0E0C] text-[#E2E7DE] border border-[#757761]/35"
                   }`}
                 >
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-[#f7fe72] shrink-0" />
                   <span>{goalsSaveStatus}</span>
                 </div>
               )}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
                 {/* 1. Target Calorie Burn Card */}
-                <div className="rounded-2xl bg-slate-50/80 border border-slate-200/80 p-5 space-y-4">
+                <div className="rounded-2xl bg-[#0B0E0C] border border-[#757761]/25 p-5 space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center">
-                        <Flame className="w-4 h-4 fill-emerald-500 text-emerald-600" />
+                      <div className="w-7 h-7 rounded-lg bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center">
+                        <Flame className="w-4 h-4 fill-[#f7fe72] text-[#f7fe72]" />
                       </div>
-                      <span className="text-sm font-bold text-slate-900">
+                      <span className="text-sm font-bold text-white">
                         Target Calorie Burn
                       </span>
                     </div>
                     <div className="text-right">
-                      <span className="text-xl font-black font-mono text-slate-900">
+                      <span className="text-xl font-black font-mono text-white">
                         {inputCalories}
                       </span>
-                      <span className="text-xs text-slate-500 ml-1 font-medium">kcal/day</span>
+                      <span className="text-xs text-[#A0A493] ml-1 font-medium">kcal/day</span>
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-500">
-                    Active goal: <strong className="text-slate-800 font-mono">{caloriesTarget} kcal</strong>. Currently burned today: <span className="font-mono">{caloriesBurned} kcal</span> ({Math.round((caloriesBurned / caloriesTarget) * 100)}%).
+                  <p className="text-xs text-[#A0A493]">
+                    Active goal: <strong className="text-white font-mono">{caloriesTarget} kcal</strong>. Currently burned today: <span className="font-mono text-[#f7fe72]">{caloriesBurned} kcal</span> ({Math.round((caloriesBurned / caloriesTarget) * 100)}%).
                   </p>
 
                   {/* Range Slider + Quick Steps */}
                   <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-[11px] font-mono text-slate-400">
+                    <div className="flex items-center justify-between text-[11px] font-mono text-[#757761]">
                       <span>400 kcal</span>
-                      <span>Target: {inputCalories} kcal</span>
+                      <span className="text-[#f7fe72]">Target: {inputCalories} kcal</span>
                       <span>1,800 kcal</span>
                     </div>
                     <input
@@ -707,7 +707,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                       step={25}
                       value={inputCalories}
                       onChange={(e) => setInputCalories(Number(e.target.value))}
-                      className="w-full accent-[#1B4332] cursor-pointer"
+                      className="w-full accent-[#9c67b5] cursor-pointer"
                     />
                   </div>
 
@@ -716,14 +716,14 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                     <button
                       type="button"
                       onClick={() => setInputCalories((v) => Math.max(400, v - 50))}
-                      className="px-2.5 py-1 text-xs font-bold text-slate-600 bg-white border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer"
+                      className="px-2.5 py-1 text-xs font-bold text-[#CBD2C7] bg-[#121815] border border-[#757761]/35 rounded-lg hover:text-white cursor-pointer"
                     >
                       -50
                     </button>
                     <button
                       type="button"
                       onClick={() => setInputCalories((v) => Math.min(2000, v + 50))}
-                      className="px-2.5 py-1 text-xs font-bold text-slate-600 bg-white border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer"
+                      className="px-2.5 py-1 text-xs font-bold text-[#CBD2C7] bg-[#121815] border border-[#757761]/35 rounded-lg hover:text-white cursor-pointer"
                     >
                       +50
                     </button>
@@ -735,9 +735,9 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                         step={10}
                         value={inputCalories}
                         onChange={(e) => setInputCalories(Number(e.target.value))}
-                        className="w-full text-right pr-12 pl-3 py-1 text-xs font-mono font-bold bg-white border border-slate-200 rounded-lg focus:outline-none focus:border-emerald-600"
+                        className="w-full text-right pr-12 pl-3 py-1 text-xs font-mono font-bold bg-[#121815] border border-[#757761]/35 rounded-lg text-white focus:outline-none focus:border-[#f7fe72]"
                       />
-                      <span className="absolute right-3 top-1 text-[11px] text-slate-400 pointer-events-none">
+                      <span className="absolute right-3 top-1 text-[11px] text-[#757761] pointer-events-none">
                         kcal
                       </span>
                     </div>
@@ -745,7 +745,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
 
                   {/* Preset Pills */}
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1.5">
+                    <span className="text-[10px] uppercase font-bold text-[#A0A493] tracking-wider block mb-1.5">
                       Recommended Presets
                     </span>
                     <div className="flex flex-wrap gap-1.5">
@@ -761,8 +761,8 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                           onClick={() => setInputCalories(preset.val)}
                           className={`text-[11px] font-semibold px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
                             inputCalories === preset.val
-                              ? "bg-[#1B4332] text-white"
-                              : "bg-white text-slate-600 border border-slate-200 hover:border-slate-300"
+                              ? "bg-[#9c67b5] text-white font-bold"
+                              : "bg-[#121815] text-[#A0A493] border border-[#757761]/30 hover:border-[#9c67b5]"
                           }`}
                         >
                           {preset.label}
@@ -773,33 +773,33 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                 </div>
 
                 {/* 2. Target Water Intake Card */}
-                <div className="rounded-2xl bg-slate-50/80 border border-slate-200/80 p-5 space-y-4">
+                <div className="rounded-2xl bg-[#0B0E0C] border border-[#757761]/25 p-5 space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-emerald-100 text-[#1B4332] flex items-center justify-center">
-                        <Droplets className="w-4 h-4 text-emerald-700 fill-emerald-200" />
+                      <div className="w-7 h-7 rounded-lg bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center">
+                        <Droplets className="w-4 h-4 text-[#f7fe72] fill-[#f7fe72]/20" />
                       </div>
-                      <span className="text-sm font-bold text-slate-900">
+                      <span className="text-sm font-bold text-white">
                         Target Water Intake
                       </span>
                     </div>
                     <div className="text-right">
-                      <span className="text-xl font-black font-mono text-slate-900">
+                      <span className="text-xl font-black font-mono text-white">
                         {inputWater.toFixed(1)}
                       </span>
-                      <span className="text-xs text-slate-500 ml-1 font-medium">L/day</span>
+                      <span className="text-xs text-[#A0A493] ml-1 font-medium">L/day</span>
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-500">
-                    Active goal: <strong className="text-slate-800 font-mono">{waterTarget.toFixed(1)}L</strong>. Logged today: <span className="font-mono">{waterVolume.toFixed(1)}L</span> (~{Math.round(inputWater * 4)} glasses @ 250ml).
+                  <p className="text-xs text-[#A0A493]">
+                    Active goal: <strong className="text-white font-mono">{waterTarget.toFixed(1)}L</strong>. Logged today: <span className="font-mono text-[#f7fe72]">{waterVolume.toFixed(1)}L</span> (~{Math.round(inputWater * 4)} glasses @ 250ml).
                   </p>
 
                   {/* Range Slider + Quick Steps */}
                   <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-[11px] font-mono text-slate-400">
+                    <div className="flex items-center justify-between text-[11px] font-mono text-[#757761]">
                       <span>1.5 L</span>
-                      <span>Target: {inputWater.toFixed(1)} L</span>
+                      <span className="text-[#f7fe72]">Target: {inputWater.toFixed(1)} L</span>
                       <span>5.0 L</span>
                     </div>
                     <input
@@ -809,7 +809,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                       step={0.1}
                       value={inputWater}
                       onChange={(e) => setInputWater(parseFloat(parseFloat(e.target.value).toFixed(2)))}
-                      className="w-full accent-[#1B4332] cursor-pointer"
+                      className="w-full accent-[#9c67b5] cursor-pointer"
                     />
                   </div>
 
@@ -818,14 +818,14 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                     <button
                       type="button"
                       onClick={() => setInputWater((v) => parseFloat(Math.max(1.0, v - 0.25).toFixed(2)))}
-                      className="px-2.5 py-1 text-xs font-bold text-slate-600 bg-white border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer"
+                      className="px-2.5 py-1 text-xs font-bold text-[#CBD2C7] bg-[#121815] border border-[#757761]/35 rounded-lg hover:text-white cursor-pointer"
                     >
                       -0.25L
                     </button>
                     <button
                       type="button"
                       onClick={() => setInputWater((v) => parseFloat(Math.min(6.0, v + 0.25).toFixed(2)))}
-                      className="px-2.5 py-1 text-xs font-bold text-slate-600 bg-white border border-slate-200 rounded-lg hover:bg-slate-100 cursor-pointer"
+                      className="px-2.5 py-1 text-xs font-bold text-[#CBD2C7] bg-[#121815] border border-[#757761]/35 rounded-lg hover:text-white cursor-pointer"
                     >
                       +0.25L
                     </button>
@@ -837,9 +837,9 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                         step={0.1}
                         value={inputWater}
                         onChange={(e) => setInputWater(parseFloat(parseFloat(e.target.value).toFixed(2)))}
-                        className="w-full text-right pr-8 pl-3 py-1 text-xs font-mono font-bold bg-white border border-slate-200 rounded-lg focus:outline-none focus:border-emerald-600"
+                        className="w-full text-right pr-8 pl-3 py-1 text-xs font-mono font-bold bg-[#121815] border border-[#757761]/35 rounded-lg text-white focus:outline-none focus:border-[#f7fe72]"
                       />
-                      <span className="absolute right-3 top-1 text-[11px] text-slate-400 pointer-events-none">
+                      <span className="absolute right-3 top-1 text-[11px] text-[#757761] pointer-events-none">
                         L
                       </span>
                     </div>
@@ -847,7 +847,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
 
                   {/* Preset Pills */}
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1.5">
+                    <span className="text-[10px] uppercase font-bold text-[#A0A493] tracking-wider block mb-1.5">
                       Hydration Presets
                     </span>
                     <div className="flex flex-wrap gap-1.5">
@@ -863,8 +863,8 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                           onClick={() => setInputWater(preset.val)}
                           className={`text-[11px] font-semibold px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
                             Math.abs(inputWater - preset.val) < 0.05
-                              ? "bg-[#1B4332] text-white"
-                              : "bg-white text-slate-600 border border-slate-200 hover:border-slate-300"
+                              ? "bg-[#9c67b5] text-white font-bold"
+                              : "bg-[#121815] text-[#A0A493] border border-[#757761]/30 hover:border-[#9c67b5]"
                           }`}
                         >
                           {preset.label}
@@ -876,10 +876,10 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               </div>
 
               {/* Action Bar */}
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-slate-100">
-                <div className="text-xs text-slate-500 flex items-center gap-1.5">
-                  <Database className="w-3.5 h-3.5 text-emerald-700" />
-                  <span>Saves to athlete profile in Supabase table <code className="font-mono bg-slate-100 px-1 py-0.5 rounded text-slate-700">profiles</code></span>
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-[#757761]/25">
+                <div className="text-xs text-[#A0A493] flex items-center gap-1.5">
+                  <Database className="w-3.5 h-3.5 text-[#f7fe72]" />
+                  <span>Saves to athlete profile in Supabase table <code className="font-mono bg-[#0B0E0C] text-[#f7fe72] px-1 py-0.5 rounded">profiles</code></span>
                 </div>
 
                 <div className="flex items-center gap-3 w-full sm:w-auto">
@@ -889,7 +889,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                       setInputCalories(850);
                       setInputWater(3.0);
                     }}
-                    className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
+                    className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl text-xs font-semibold text-[#A0A493] hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
                   >
                     Reset Defaults
                   </button>
@@ -897,7 +897,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                   <button
                     type="submit"
                     disabled={isSavingGoals}
-                    className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-[#1B4332] hover:bg-[#143225] text-white text-xs font-bold shadow-xs hover:shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 active:scale-95"
+                    className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] text-xs font-black shadow-md hover:brightness-110 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 active:scale-95"
                   >
                     {isSavingGoals ? (
                       <>
@@ -906,7 +906,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                       </>
                     ) : (
                       <>
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#0B0E0C]" />
                         <span>Save Preferences to Supabase</span>
                       </>
                     )}
@@ -924,69 +924,69 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
           <div className="lg:col-span-8 space-y-6">
             
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <h2 className="text-lg font-bold text-white flex items-center gap-2">
                 <span>Today&#39;s Action Plan</span>
-                <span className="text-xs font-mono font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
+                <span className="text-xs font-mono font-bold text-[#f7fe72] bg-[#9c67b5]/20 border border-[#9c67b5]/30 px-2 py-0.5 rounded">
                   3 Protocols Scheduled
                 </span>
               </h2>
-              <span className="text-xs font-mono font-bold text-slate-500">
+              <span className="text-xs font-mono font-bold text-[#A0A493]">
                 Est. Session Vol: {calculateVolume().toLocaleString()} kg
               </span>
             </div>
 
             {/* Morning Routine: Checked-off 10-minute mobility flow */}
-            <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs transition-all">
+            <div className="bg-[#121815] rounded-2xl p-5 border border-[#757761]/30 shadow-xl transition-all">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => setMorningCompleted(!morningCompleted)}
                     className={`w-7 h-7 rounded-xl flex items-center justify-center transition-all cursor-pointer ${
                       morningCompleted
-                        ? "bg-[#1B4332] text-white shadow-xs"
-                        : "border-2 border-slate-300 hover:border-slate-400 bg-white"
+                        ? "bg-[#9c67b5] text-white shadow-xs"
+                        : "border-2 border-[#757761]/40 hover:border-[#9c67b5] bg-[#0B0E0C]"
                     }`}
                   >
                     {morningCompleted && <Check className="w-4 h-4 stroke-[3]" />}
                   </button>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className={`text-sm font-bold ${morningCompleted ? "line-through text-slate-500" : "text-slate-900"}`}>
+                      <h3 className={`text-sm font-bold ${morningCompleted ? "line-through text-[#757761]" : "text-white"}`}>
                         Morning Routine: 10-Minute Mobility Flow
                       </h3>
-                      <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-1.5 py-0.5 rounded uppercase font-mono">
+                      <span className="text-[10px] font-bold text-[#f7fe72] bg-[#9c67b5]/20 px-1.5 py-0.5 rounded uppercase font-mono border border-[#9c67b5]/30">
                         {morningCompleted ? "Completed 07:15 AM" : "Pending"}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500 mt-0.5">
+                    <p className="text-xs text-[#A0A493] mt-0.5">
                       Thoracic spine extension, 90/90 hip capsule rotations, and diaphragmatic breathing.
                     </p>
                   </div>
                 </div>
 
-                <span className="text-xs font-mono text-slate-400 shrink-0">10 min</span>
+                <span className="text-xs font-mono text-[#757761] shrink-0">10 min</span>
               </div>
             </div>
 
             {/* Main Session — Lower Body Hypertrophy Card */}
-            <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-2xs">
-              <div className="flex flex-wrap items-center justify-between gap-2 mb-4 pb-4 border-b border-slate-100">
+            <div className="bg-[#121815] rounded-2xl p-5 sm:p-6 border border-[#757761]/30 shadow-xl">
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-4 pb-4 border-b border-[#757761]/25">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-[#1B4332] flex items-center justify-center border border-emerald-100">
+                  <div className="w-10 h-10 rounded-xl bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center border border-[#9c67b5]/40">
                     <Dumbbell className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-base font-bold text-slate-900">
+                    <h3 className="text-base font-bold text-white">
                       Main Session: Lower Body Hypertrophy
                     </h3>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-[#A0A493]">
                       Strength block focus: Posterior chain &amp; knee stability
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-bold text-[#1B4332] bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
+                  <span className="text-xs font-mono font-bold text-[#f7fe72] bg-[#9c67b5]/20 px-2.5 py-1 rounded-md border border-[#9c67b5]/30">
                     Volume: {calculateVolume().toLocaleString()} kg
                   </span>
                 </div>
@@ -996,28 +996,28 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               <div className="space-y-4">
                 
                 {/* Exercise 1: Barbell Back Squat */}
-                <div className="p-4 rounded-xl bg-slate-50/80 border border-slate-200/80 space-y-3">
+                <div className="p-4 rounded-xl bg-[#0B0E0C] border border-[#757761]/25 space-y-3">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <div>
-                      <h4 className="text-sm font-bold text-slate-900">1. Barbell Back Squat</h4>
-                      <p className="text-xs text-slate-500">4 sets × 8 reps • 90s rest • Tempo 3-1-X-1</p>
+                      <h4 className="text-sm font-bold text-white">1. Barbell Back Squat</h4>
+                      <p className="text-xs text-[#A0A493]">4 sets × 8 reps • 90s rest • Tempo 3-1-X-1</p>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <label className="text-xs font-semibold text-slate-600">Load:</label>
+                      <label className="text-xs font-semibold text-[#A0A493]">Load:</label>
                       <input
                         type="number"
                         value={squatWeight}
                         onChange={(e) => setSquatWeight(Math.max(0, parseInt(e.target.value) || 0))}
-                        className="w-16 px-2 py-1 rounded-lg border border-slate-300 bg-white text-xs font-mono font-bold text-right text-slate-900 focus:outline-none focus:ring-1 focus:ring-emerald-700"
+                        className="w-16 px-2 py-1 rounded-lg border border-[#757761]/40 bg-[#121815] text-xs font-mono font-bold text-right text-white focus:outline-none focus:ring-1 focus:ring-[#f7fe72]"
                       />
-                      <span className="text-xs text-slate-500 font-mono">kg</span>
+                      <span className="text-xs text-[#A0A493] font-mono">kg</span>
                     </div>
                   </div>
 
                   {/* Set Checkboxes */}
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-semibold text-slate-500 w-12 font-mono">Sets:</span>
+                    <span className="text-xs font-semibold text-[#757761] w-12 font-mono">Sets:</span>
                     <div className="flex items-center gap-2">
                       {squatSets.map((checked, idx) => (
                         <button
@@ -1029,8 +1029,8 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                           }}
                           className={`px-3 py-1.5 rounded-lg text-xs font-bold font-mono transition-all flex items-center gap-1 cursor-pointer ${
                             checked
-                              ? "bg-[#1B4332] text-white shadow-2xs"
-                              : "bg-white border border-slate-300 text-slate-600 hover:bg-slate-100"
+                              ? "bg-[#9c67b5] text-white shadow-xs"
+                              : "bg-[#121815] border border-[#757761]/35 text-[#A0A493] hover:text-white"
                           }`}
                         >
                           <span>S{idx + 1}</span>
@@ -1042,28 +1042,28 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                 </div>
 
                 {/* Exercise 2: Romanian Deadlifts */}
-                <div className="p-4 rounded-xl bg-slate-50/80 border border-slate-200/80 space-y-3">
+                <div className="p-4 rounded-xl bg-[#0B0E0C] border border-[#757761]/25 space-y-3">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <div>
-                      <h4 className="text-sm font-bold text-slate-900">2. Romanian Deadlift</h4>
-                      <p className="text-xs text-slate-500">3 sets × 10 reps • 75s rest • Hip hinge focus</p>
+                      <h4 className="text-sm font-bold text-white">2. Romanian Deadlift</h4>
+                      <p className="text-xs text-[#A0A493]">3 sets × 10 reps • 75s rest • Hip hinge focus</p>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <label className="text-xs font-semibold text-slate-600">Load:</label>
+                      <label className="text-xs font-semibold text-[#A0A493]">Load:</label>
                       <input
                         type="number"
                         value={rdlWeight}
                         onChange={(e) => setRdlWeight(Math.max(0, parseInt(e.target.value) || 0))}
-                        className="w-16 px-2 py-1 rounded-lg border border-slate-300 bg-white text-xs font-mono font-bold text-right text-slate-900 focus:outline-none focus:ring-1 focus:ring-emerald-700"
+                        className="w-16 px-2 py-1 rounded-lg border border-[#757761]/40 bg-[#121815] text-xs font-mono font-bold text-right text-white focus:outline-none focus:ring-1 focus:ring-[#f7fe72]"
                       />
-                      <span className="text-xs text-slate-500 font-mono">kg</span>
+                      <span className="text-xs text-[#A0A493] font-mono">kg</span>
                     </div>
                   </div>
 
                   {/* Set Checkboxes */}
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-semibold text-slate-500 w-12 font-mono">Sets:</span>
+                    <span className="text-xs font-semibold text-[#757761] w-12 font-mono">Sets:</span>
                     <div className="flex items-center gap-2">
                       {rdlSets.map((checked, idx) => (
                         <button
@@ -1075,8 +1075,8 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                           }}
                           className={`px-3 py-1.5 rounded-lg text-xs font-bold font-mono transition-all flex items-center gap-1 cursor-pointer ${
                             checked
-                              ? "bg-[#1B4332] text-white shadow-2xs"
-                              : "bg-white border border-slate-300 text-slate-600 hover:bg-slate-100"
+                              ? "bg-[#9c67b5] text-white shadow-xs"
+                              : "bg-[#121815] border border-[#757761]/35 text-[#A0A493] hover:text-white"
                           }`}
                         >
                           <span>S{idx + 1}</span>
@@ -1088,28 +1088,28 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                 </div>
 
                 {/* Exercise 3: Bulgarian Split Squats */}
-                <div className="p-4 rounded-xl bg-slate-50/80 border border-slate-200/80 space-y-3">
+                <div className="p-4 rounded-xl bg-[#0B0E0C] border border-[#757761]/25 space-y-3">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <div>
-                      <h4 className="text-sm font-bold text-slate-900">3. Bulgarian Split Squats</h4>
-                      <p className="text-xs text-slate-500">3 sets × 12 reps/leg • 60s rest • Glute focus</p>
+                      <h4 className="text-sm font-bold text-white">3. Bulgarian Split Squats</h4>
+                      <p className="text-xs text-[#A0A493]">3 sets × 12 reps/leg • 60s rest • Glute focus</p>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <label className="text-xs font-semibold text-slate-600">Load (each DB):</label>
+                      <label className="text-xs font-semibold text-[#A0A493]">Load (each DB):</label>
                       <input
                         type="number"
                         value={splitSquatWeight}
                         onChange={(e) => setSplitSquatWeight(Math.max(0, parseInt(e.target.value) || 0))}
-                        className="w-16 px-2 py-1 rounded-lg border border-slate-300 bg-white text-xs font-mono font-bold text-right text-slate-900 focus:outline-none focus:ring-1 focus:ring-emerald-700"
+                        className="w-16 px-2 py-1 rounded-lg border border-[#757761]/40 bg-[#121815] text-xs font-mono font-bold text-right text-white focus:outline-none focus:ring-1 focus:ring-[#f7fe72]"
                       />
-                      <span className="text-xs text-slate-500 font-mono">kg</span>
+                      <span className="text-xs text-[#A0A493] font-mono">kg</span>
                     </div>
                   </div>
 
                   {/* Set Checkboxes */}
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-semibold text-slate-500 w-12 font-mono">Sets:</span>
+                    <span className="text-xs font-semibold text-[#757761] w-12 font-mono">Sets:</span>
                     <div className="flex items-center gap-2">
                       {splitSquatSets.map((checked, idx) => (
                         <button
@@ -1121,8 +1121,8 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                           }}
                           className={`px-3 py-1.5 rounded-lg text-xs font-bold font-mono transition-all flex items-center gap-1 cursor-pointer ${
                             checked
-                              ? "bg-[#1B4332] text-white shadow-2xs"
-                              : "bg-white border border-slate-300 text-slate-600 hover:bg-slate-100"
+                              ? "bg-[#9c67b5] text-white shadow-xs"
+                              : "bg-[#121815] border border-[#757761]/35 text-[#A0A493] hover:text-white"
                           }`}
                         >
                           <span>S{idx + 1}</span>
@@ -1136,8 +1136,8 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               </div>
 
               {/* Complete Workout Action */}
-              <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
-                <span className="text-xs text-slate-500">
+              <div className="mt-5 pt-4 border-t border-[#757761]/25 flex items-center justify-between">
+                <span className="text-xs text-[#A0A493]">
                   {sessionCompleted ? "Workout finished & logged to health graph" : "Log all sets to update weekly load accumulation"}
                 </span>
                 <button
@@ -1149,26 +1149,26 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                   }}
                   className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer ${
                     sessionCompleted
-                      ? "bg-emerald-100 text-[#1B4332] border border-emerald-300"
-                      : "bg-[#1B4332] hover:bg-[#245842] text-white"
+                      ? "bg-[#9c67b5]/30 text-[#f7fe72] border border-[#9c67b5]"
+                      : "bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] font-black hover:brightness-110"
                   }`}
                 >
-                  <Check className="w-3.5 h-3.5" />
+                  <Check className="w-3.5 h-3.5 stroke-[2.5]" />
                   <span>{sessionCompleted ? "Session Completed ✓" : "Finish & Log Session"}</span>
                 </button>
               </div>
             </div>
 
             {/* Nutrition Planner: Breakfast, Lunch, and Dinner cards with macro tags and quick photo-log trigger */}
-            <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-2xs">
+            <div className="bg-[#121815] rounded-2xl p-5 sm:p-6 border border-[#757761]/30 shadow-xl">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-50 text-[#1B4332] flex items-center justify-center border border-emerald-200">
+                  <div className="w-8 h-8 rounded-lg bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center border border-[#9c67b5]/30">
                     <Utensils className="w-4 h-4" />
                   </div>
                   <div>
-                    <h3 className="text-base font-bold text-slate-900">Nutrition &amp; Macro Planner</h3>
-                    <p className="text-xs text-slate-500">Target: 180g Protein • 240g Carbs • 70g Fats</p>
+                    <h3 className="text-base font-bold text-white">Nutrition &amp; Macro Planner</h3>
+                    <p className="text-xs text-[#A0A493]">Target: 180g Protein • 240g Carbs • 70g Fats</p>
                   </div>
                 </div>
               </div>
@@ -1177,49 +1177,49 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                 {meals.map((meal) => (
                   <div
                     key={meal.id}
-                    className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/90 flex flex-col justify-between"
+                    className="p-3.5 rounded-xl bg-[#0B0E0C] border border-[#757761]/25 flex flex-col justify-between"
                   >
                     <div>
-                      <div className="flex items-center justify-between text-[11px] font-semibold text-slate-500 mb-1">
-                        <span className="uppercase tracking-wider font-mono font-bold text-slate-700">
+                      <div className="flex items-center justify-between text-[11px] font-semibold text-[#A0A493] mb-1">
+                        <span className="uppercase tracking-wider font-mono font-bold text-[#f7fe72]">
                           {meal.id}
                         </span>
                         <span>{meal.time}</span>
                       </div>
-                      <h4 className="text-xs font-bold text-slate-900 line-clamp-2 mb-2">
+                      <h4 className="text-xs font-bold text-white line-clamp-2 mb-2">
                         {meal.name}
                       </h4>
 
                       {/* Macro Tags */}
                       <div className="flex flex-wrap gap-1 text-[10px] font-mono font-bold mb-3">
-                        <span className="px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-900">
+                        <span className="px-1.5 py-0.5 rounded bg-[#f7fe72]/15 text-[#f7fe72] border border-[#f7fe72]/30">
                           {meal.protein}g P
                         </span>
-                        <span className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-800">
+                        <span className="px-1.5 py-0.5 rounded bg-[#9c67b5]/20 text-white border border-[#9c67b5]/30">
                           {meal.carbs}g C
                         </span>
-                        <span className="px-1.5 py-0.5 rounded bg-[#1B4332]/10 text-[#1B4332]">
+                        <span className="px-1.5 py-0.5 rounded bg-[#f4e76e]/15 text-[#f4e76e] border border-[#f4e76e]/30">
                           {meal.fats}g F
                         </span>
-                        <span className="px-1.5 py-0.5 rounded bg-slate-200 text-slate-800">
+                        <span className="px-1.5 py-0.5 rounded bg-white/10 text-[#CBD2C7]">
                           {meal.calories} kcal
                         </span>
                       </div>
                     </div>
 
                     {/* Quick Photo Log Trigger */}
-                    <div className="pt-2 border-t border-slate-200/60">
+                    <div className="pt-2 border-t border-[#757761]/20">
                       {meal.photoLogged ? (
-                        <div className="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700">
+                        <div className="flex items-center gap-1.5 text-[11px] font-semibold text-[#f7fe72]">
                           <Check className="w-3.5 h-3.5 stroke-[2.5]" />
                           <span>Photo Verified ✓</span>
                         </div>
                       ) : (
                         <button
                           onClick={() => setActivePhotoModal(meal.id)}
-                          className="w-full py-1.5 px-2 bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                          className="w-full py-1.5 px-2 bg-[#121815] hover:bg-[#181f1b] border border-[#757761]/35 text-[#CBD2C7] hover:text-white rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                         >
-                          <Camera className="w-3.5 h-3.5 text-slate-500" />
+                          <Camera className="w-3.5 h-3.5 text-[#A0A493]" />
                           <span>Quick Photo Log</span>
                         </button>
                       )}
@@ -1234,23 +1234,23 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
           {/* RIGHT COLUMN (35% width / 4 cols on 12-col grid): Recovery & Habit Insights */}
           <div className="lg:col-span-4 space-y-6">
             
-            <h2 className="text-lg font-bold text-slate-900">
+            <h2 className="text-lg font-bold text-white">
               Recovery &amp; Habit Insights
             </h2>
 
             {/* Weekly Habit Consistency Heatmap (Mon-Sun check-in grid) */}
-            <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs">
+            <div className="bg-[#121815] rounded-2xl p-5 border border-[#757761]/30 shadow-xl">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-bold text-slate-700 uppercase tracking-wider font-mono">
+                <span className="text-xs font-bold text-[#CBD2C7] uppercase tracking-wider font-mono">
                   Weekly Habit Heatmap
                 </span>
-                <span className="text-xs font-bold text-emerald-700 font-mono">94% Adherence</span>
+                <span className="text-xs font-bold text-[#f7fe72] font-mono">94% Adherence</span>
               </div>
 
               {/* Heatmap Grid */}
               <div className="space-y-2 text-xs">
                 {/* Header days */}
-                <div className="grid grid-cols-8 gap-1.5 text-center text-[11px] font-semibold text-slate-500 font-mono">
+                <div className="grid grid-cols-8 gap-1.5 text-center text-[11px] font-semibold text-[#757761] font-mono">
                   <span className="text-left">Habit</span>
                   <span>M</span>
                   <span>T</span>
@@ -1268,7 +1268,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                   { name: "Sauna", days: [true, true, true, false, false, false, false] },
                 ].map((row, idx) => (
                   <div key={idx} className="grid grid-cols-8 gap-1.5 items-center text-center">
-                    <span className="text-left font-semibold text-slate-700 text-[11px] truncate">
+                    <span className="text-left font-semibold text-[#CBD2C7] text-[11px] truncate">
                       {row.name}
                     </span>
                     {row.days.map((done, dIdx) => (
@@ -1276,10 +1276,10 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                         key={dIdx}
                         className={`h-6 rounded-md flex items-center justify-center transition-colors ${
                           done
-                            ? "bg-[#1B4332] text-emerald-300"
+                            ? "bg-[#9c67b5] text-[#f7fe72]"
                             : dIdx === 3
-                            ? "bg-emerald-50 text-[#1B4332] border border-emerald-300"
-                            : "bg-slate-100 text-slate-300"
+                            ? "bg-[#0B0E0C] text-[#f7fe72] border border-[#9c67b5]/60"
+                            : "bg-[#0B0E0C] text-[#757761]"
                         }`}
                       >
                         {done && <Check className="w-3 h-3 stroke-[3]" />}
@@ -1292,40 +1292,40 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
             </div>
 
             {/* Quick Guided Recovery Player: 5-minute Box Breathing Visualizer */}
-            <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs">
+            <div className="bg-[#121815] rounded-2xl p-5 border border-[#757761]/30 shadow-xl">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-bold text-slate-700 uppercase tracking-wider font-mono">
+                <span className="text-xs font-bold text-[#CBD2C7] uppercase tracking-wider font-mono">
                   5-Min Box Breathing
                 </span>
-                <span className="text-[10px] font-bold text-[#1B4332] bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-bold text-[#f7fe72] bg-[#9c67b5]/20 border border-[#9c67b5]/30 px-2 py-0.5 rounded">
                   HRV Cadence
                 </span>
               </div>
 
               {/* Animated Expanding/Contracting Circle Guide */}
-              <div className="py-6 flex flex-col items-center justify-center bg-gradient-to-b from-slate-50 to-emerald-50/30 rounded-xl border border-slate-200/70 mb-4 overflow-hidden relative">
+              <div className="py-6 flex flex-col items-center justify-center bg-[#0B0E0C] rounded-xl border border-[#757761]/25 mb-4 overflow-hidden relative">
                 {/* Visual Circle Guide */}
                 <div
                   className={`w-28 h-28 rounded-full border-4 flex items-center justify-center transition-all duration-1000 shadow-inner ${
                     isBreathing
                       ? breathPhase.includes("Inhale")
-                        ? "scale-125 border-emerald-600 bg-emerald-100/80 shadow-emerald-200"
+                        ? "scale-125 border-[#f7fe72] bg-[#f7fe72]/20 shadow-[0_0_15px_rgba(247,254,114,0.3)] text-[#f7fe72]"
                         : breathPhase.includes("Exhale")
-                        ? "scale-90 border-[#1B4332] bg-emerald-50/80 shadow-emerald-100"
-                        : "scale-110 border-emerald-400 bg-emerald-50/60"
-                      : "border-slate-300 bg-white"
+                        ? "scale-90 border-[#9c67b5] bg-[#9c67b5]/20 shadow-inner text-white"
+                        : "scale-110 border-[#f4e76e] bg-[#f4e76e]/15 text-[#f4e76e]"
+                      : "border-[#757761]/40 bg-[#121815] text-[#A0A493]"
                   }`}
                 >
-                  <span className="text-2xl font-black text-slate-900 font-mono">
+                  <span className="text-2xl font-black font-mono">
                     {breathSeconds}s
                   </span>
                 </div>
 
                 <div className="text-center mt-4">
-                  <p className="text-sm font-bold text-slate-900">
+                  <p className="text-sm font-bold text-white">
                     {isBreathing ? breathPhase : "Ready for Recovery Flow"}
                   </p>
-                  <p className="text-[11px] text-slate-500">
+                  <p className="text-[11px] text-[#A0A493]">
                     {isBreathing ? "Sync diaphragm with visual cadence" : "Tap Start to trigger parasympathetic tone"}
                   </p>
                 </div>
@@ -1334,16 +1334,16 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               <div className="flex items-center justify-between">
                 <button
                   onClick={toggleBreathing}
-                  className="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-[#1B4332] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] text-xs font-black transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer hover:brightness-110"
                 >
                   {isBreathing ? (
                     <>
-                      <Pause className="w-3.5 h-3.5 fill-white" />
+                      <Pause className="w-3.5 h-3.5 fill-[#0B0E0C] text-[#0B0E0C]" />
                       <span>Pause Breathing Visualizer</span>
                     </>
                   ) : (
                     <>
-                      <Play className="w-3.5 h-3.5 fill-white ml-0.5" />
+                      <Play className="w-3.5 h-3.5 fill-[#0B0E0C] text-[#0B0E0C] ml-0.5" />
                       <span>Start Guided Recovery</span>
                     </>
                   )}
@@ -1352,13 +1352,13 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
             </div>
 
             {/* Upcoming Coach Check-in Appointment Card */}
-            <div className="bg-gradient-to-br from-slate-900 to-[#1B4332] text-white rounded-2xl p-5 border border-emerald-900 shadow-md">
-              <div className="flex items-center justify-between text-xs text-emerald-300 font-semibold mb-2 font-mono">
+            <div className="bg-gradient-to-br from-[#2D163D] via-[#1b1525] to-[#121815] text-white rounded-2xl p-5 border border-[#9c67b5]/40 shadow-xl">
+              <div className="flex items-center justify-between text-xs text-[#f7fe72] font-semibold mb-2 font-mono">
                 <span className="flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5" />
                   <span>Today at 4:30 PM</span>
                 </span>
-                <span className="px-2 py-0.5 rounded bg-white/10 text-white text-[10px]">
+                <span className="px-2 py-0.5 rounded bg-white/10 text-[#f4e76e] text-[10px] border border-white/10">
                   In 42 mins
                 </span>
               </div>
@@ -1366,18 +1366,18 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               <h4 className="text-base font-bold text-white">
                 1-on-1 Consultation: Marcus Vance
               </h4>
-              <p className="text-xs text-emerald-200/90 mt-1">
+              <p className="text-xs text-[#A0A493] mt-1">
                 CSCS*D, USAW-L2 • Head Strength Coach
               </p>
-              <p className="text-xs text-slate-300 mt-2 bg-white/10 p-2.5 rounded-lg border border-white/10">
-                <strong>Focus:</strong> Block 2 load adjustment &amp; knee patellar biomechanics review.
+              <p className="text-xs text-[#CBD2C7] mt-2 bg-[#0B0E0C]/60 p-2.5 rounded-lg border border-[#757761]/30">
+                <strong className="text-[#f7fe72]">Focus:</strong> Block 2 load adjustment &amp; knee patellar biomechanics review.
               </p>
 
               <button
                 onClick={() => setIsVideoCallOpen(true)}
-                className="mt-4 w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-black transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                className="mt-4 w-full py-2.5 rounded-xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] text-xs font-black transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer hover:brightness-110"
               >
-                <Video className="w-4 h-4" />
+                <Video className="w-4 h-4 text-[#0B0E0C]" />
                 <span>Join Video Call Room</span>
               </button>
             </div>
@@ -1390,39 +1390,39 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
 
       {/* Quick Photo Log Modal Simulation */}
       {activePhotoModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-sm bg-white rounded-3xl p-6 shadow-2xl border border-slate-200 text-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full max-w-sm bg-[#121815] rounded-3xl p-6 shadow-2xl border border-[#757761]/40 text-center text-white">
             <button
               onClick={() => setActivePhotoModal(null)}
-              className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-700 rounded-full"
+              className="absolute top-4 right-4 p-2 text-[#757761] hover:text-white rounded-full hover:bg-white/10"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-[#1B4332] flex items-center justify-center mx-auto mb-3">
-              <Camera className="w-6 h-6" />
+            <div className="w-12 h-12 rounded-2xl bg-[#9c67b5]/20 text-[#f7fe72] border border-[#9c67b5]/40 flex items-center justify-center mx-auto mb-3">
+              <Camera className="w-6 h-6 text-[#f7fe72]" />
             </div>
 
-            <h3 className="text-lg font-bold text-slate-900">
+            <h3 className="text-lg font-bold text-white">
               Photo Meal Verification
             </h3>
-            <p className="text-xs text-slate-500 mt-1 mb-5">
+            <p className="text-xs text-[#A0A493] mt-1 mb-5">
               AI camera scans portion size and macronutrient ratios automatically.
             </p>
 
-            <div className="border-2 border-dashed border-slate-200 rounded-2xl p-6 bg-slate-50 mb-5 flex flex-col items-center">
-              <div className="w-16 h-16 rounded-full bg-white shadow-xs flex items-center justify-center mb-2">
-                <Utensils className="w-7 h-7 text-emerald-700" />
+            <div className="border-2 border-dashed border-[#757761]/40 rounded-2xl p-6 bg-[#0B0E0C] mb-5 flex flex-col items-center">
+              <div className="w-16 h-16 rounded-full bg-[#121815] border border-[#757761]/40 shadow-xs flex items-center justify-center mb-2">
+                <Utensils className="w-7 h-7 text-[#f7fe72]" />
               </div>
-              <span className="text-xs font-semibold text-slate-700">Ready to capture meal plate</span>
-              <span className="text-[10px] text-slate-400 mt-0.5">Simulated instant AI macro recognition</span>
+              <span className="text-xs font-semibold text-[#E2E7DE]">Ready to capture meal plate</span>
+              <span className="text-[10px] text-[#A0A493] mt-0.5">Simulated instant AI macro recognition</span>
             </div>
 
             <button
               onClick={() => handlePhotoLog(activePhotoModal)}
-              className="w-full py-3 rounded-xl bg-[#1B4332] hover:bg-[#235841] text-white text-xs font-bold shadow-xs cursor-pointer flex items-center justify-center gap-2"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] text-xs font-black shadow-md cursor-pointer flex items-center justify-center gap-2 hover:brightness-110 active:scale-95"
             >
-              <Check className="w-4 h-4" />
+              <Check className="w-4 h-4 stroke-[3]" />
               <span>Verify &amp; Log Photo</span>
             </button>
           </div>
@@ -1431,57 +1431,57 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
 
       {/* Video Call Simulation Modal */}
       {isVideoCallOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="relative w-full max-w-2xl bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-slate-800 text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="relative w-full max-w-2xl bg-[#121815] rounded-3xl overflow-hidden shadow-2xl border border-[#757761]/40 text-white">
             
             {/* Call Header */}
-            <div className="p-4 bg-slate-950/60 border-b border-slate-800 flex items-center justify-between">
+            <div className="p-4 bg-[#0B0E0C] border-b border-[#757761]/30 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#f7fe72] animate-pulse shadow-[0_0_8px_#f7fe72]" />
                 <div>
                   <h3 className="text-sm font-bold text-white">1-on-1 Consultation: Marcus Vance</h3>
-                  <p className="text-[11px] text-slate-400">Encrypted HD Clinical Stream • 00:04:12</p>
+                  <p className="text-[11px] text-[#A0A493]">Encrypted HD Clinical Stream • 00:04:12</p>
                 </div>
               </div>
 
-              <span className="text-xs font-mono font-semibold text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-2 py-0.5 rounded">
+              <span className="text-xs font-mono font-semibold text-[#f7fe72] bg-[#9c67b5]/25 border border-[#9c67b5]/40 px-2 py-0.5 rounded">
                 720p HD 60fps
               </span>
             </div>
 
             {/* Video Canvas Simulation */}
-            <div className="relative aspect-[16/9] bg-gradient-to-br from-slate-950 via-slate-900 to-[#1B4332] flex items-center justify-center p-6">
+            <div className="relative aspect-[16/9] bg-gradient-to-br from-[#0B0E0C] via-[#2D163D] to-[#121815] flex items-center justify-center p-6">
               
               {/* Main Coach Window */}
               <div className="text-center">
-                <div className="w-24 h-24 rounded-full bg-slate-800 border-2 border-emerald-400/40 flex items-center justify-center text-3xl font-black text-emerald-300 mx-auto mb-3 shadow-lg">
+                <div className="w-24 h-24 rounded-full bg-[#121815] border-2 border-[#9c67b5]/60 flex items-center justify-center text-3xl font-black text-[#f7fe72] mx-auto mb-3 shadow-lg">
                   MV
                 </div>
                 <h4 className="text-lg font-bold text-white">Coach Marcus Vance</h4>
-                <p className="text-xs text-emerald-300">&ldquo;Let&#39;s review your knee bar-path on set 2 squats.&rdquo;</p>
+                <p className="text-xs text-[#f7fe72]">&ldquo;Let&#39;s review your knee bar-path on set 2 squats.&rdquo;</p>
               </div>
 
               {/* User PiP Preview */}
-              <div className="absolute bottom-4 right-4 w-32 aspect-[4/3] rounded-xl bg-slate-800 border border-slate-700 overflow-hidden flex items-center justify-center text-center p-2 shadow-lg">
+              <div className="absolute bottom-4 right-4 w-32 aspect-[4/3] rounded-xl bg-[#0B0E0C] border border-[#757761]/40 overflow-hidden flex items-center justify-center text-center p-2 shadow-lg">
                 {!isVideoDisabled ? (
                   <div>
-                    <div className="w-8 h-8 rounded-full bg-slate-700 text-emerald-300 text-xs font-bold flex items-center justify-center mx-auto mb-1">
+                    <div className="w-8 h-8 rounded-full bg-[#121815] text-[#f7fe72] text-xs font-bold flex items-center justify-center mx-auto mb-1 border border-[#757761]/30">
                       DK
                     </div>
-                    <span className="text-[10px] text-slate-300 font-semibold">David (You)</span>
+                    <span className="text-[10px] text-[#CBD2C7] font-semibold">David (You)</span>
                   </div>
                 ) : (
-                  <span className="text-[10px] text-slate-400">Camera Off</span>
+                  <span className="text-[10px] text-[#757761]">Camera Off</span>
                 )}
               </div>
             </div>
 
             {/* Call Control Strip */}
-            <div className="p-4 bg-slate-950 flex items-center justify-center gap-4 border-t border-slate-800">
+            <div className="p-4 bg-[#0B0E0C] flex items-center justify-center gap-4 border-t border-[#757761]/30">
               <button
                 onClick={() => setIsMicMuted(!isMicMuted)}
                 className={`p-3 rounded-full transition-colors cursor-pointer ${
-                  isMicMuted ? "bg-slate-700 text-emerald-400" : "bg-slate-800 hover:bg-slate-700 text-white"
+                  isMicMuted ? "bg-[#9c67b5]/30 text-[#f7fe72]" : "bg-[#121815] hover:bg-[#181f1b] text-white border border-[#757761]/30"
                 }`}
                 title={isMicMuted ? "Unmute Mic" : "Mute Mic"}
               >
@@ -1491,7 +1491,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               <button
                 onClick={() => setIsVideoDisabled(!isVideoDisabled)}
                 className={`p-3 rounded-full transition-colors cursor-pointer ${
-                  isVideoDisabled ? "bg-slate-700 text-emerald-400" : "bg-slate-800 hover:bg-slate-700 text-white"
+                  isVideoDisabled ? "bg-[#9c67b5]/30 text-[#f7fe72]" : "bg-[#121815] hover:bg-[#181f1b] text-white border border-[#757761]/30"
                 }`}
                 title={isVideoDisabled ? "Enable Video" : "Disable Video"}
               >
@@ -1500,9 +1500,9 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
 
               <button
                 onClick={() => setIsVideoCallOpen(false)}
-                className="px-6 py-3 rounded-full bg-[#1B4332] hover:bg-[#235841] border border-emerald-500/40 text-white text-xs font-bold flex items-center gap-2 cursor-pointer shadow-md"
+                className="px-6 py-3 rounded-full bg-[#9c67b5] hover:bg-[#8651a0] text-white text-xs font-bold flex items-center gap-2 cursor-pointer shadow-md"
               >
-                <PhoneOff className="w-4 h-4 text-emerald-400" />
+                <PhoneOff className="w-4 h-4 text-white" />
                 <span>End Call</span>
               </button>
             </div>

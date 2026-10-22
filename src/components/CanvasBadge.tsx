@@ -51,7 +51,7 @@ export default function CanvasBadge({
     // Tier-specific metallic color ramps
     let rimGrad: CanvasGradient;
     let coreGrad: CanvasGradient;
-    let accentColor = "#10B981";
+    let accentColor = "#f7fe72";
     let emblemColor = "#FFFFFF";
 
     if (!isUnlocked) {
@@ -103,8 +103,8 @@ export default function CanvasBadge({
 
         case "gold":
           rimGrad = ctx.createLinearGradient(0, 0, size, size);
-          rimGrad.addColorStop(0, "#FEF08A"); // Pale gold highlight
-          rimGrad.addColorStop(0.25, "#EAB308"); // Pure 24K gold
+          rimGrad.addColorStop(0, "#f7fe72"); // Electric solar highlight
+          rimGrad.addColorStop(0.25, "#f4e76e"); // Solar gold
           rimGrad.addColorStop(0.5, "#CA8A04");
           rimGrad.addColorStop(0.8, "#A16207"); // Antique gold depth
           rimGrad.addColorStop(1, "#713F12");
@@ -114,41 +114,41 @@ export default function CanvasBadge({
           coreGrad.addColorStop(0.75, "#1C0F03");
           coreGrad.addColorStop(1, "#0A0501");
 
-          accentColor = "#FACC15";
+          accentColor = "#f7fe72";
           emblemColor = "#FEF9C3";
           break;
 
         case "emerald":
           rimGrad = ctx.createLinearGradient(0, 0, size, size);
-          rimGrad.addColorStop(0, "#6EE7B7"); // Bright mint sheen
-          rimGrad.addColorStop(0.3, "#10B981"); // Vibrant emerald
-          rimGrad.addColorStop(0.7, "#047857");
-          rimGrad.addColorStop(1, "#064E3B");
+          rimGrad.addColorStop(0, "#f7fe72"); // Bright solar sheen
+          rimGrad.addColorStop(0.3, "#9c67b5"); // Royal amethyst
+          rimGrad.addColorStop(0.7, "#6b378c");
+          rimGrad.addColorStop(1, "#281436");
 
           coreGrad = ctx.createRadialGradient(cx, cy, 2, cx, cy, innerR);
-          coreGrad.addColorStop(0, "#064E3B");
-          coreGrad.addColorStop(0.8, "#022C22");
-          coreGrad.addColorStop(1, "#011611");
+          coreGrad.addColorStop(0, "#2B153D");
+          coreGrad.addColorStop(0.8, "#140A1C");
+          coreGrad.addColorStop(1, "#07030A");
 
-          accentColor = "#34D399";
-          emblemColor = "#A7F3D0";
+          accentColor = "#f7fe72";
+          emblemColor = "#F3E8FF";
           break;
 
         case "apex":
         default:
           rimGrad = ctx.createLinearGradient(0, 0, size, size);
-          rimGrad.addColorStop(0, "#C084FC"); // Royal violet
-          rimGrad.addColorStop(0.35, "#34D399"); // Emerald neon
-          rimGrad.addColorStop(0.7, "#60A5FA"); // Diamond cyan
-          rimGrad.addColorStop(1, "#1E1B4B");
+          rimGrad.addColorStop(0, "#D5B3E7"); // Amethyst highlight
+          rimGrad.addColorStop(0.35, "#9c67b5"); // Royal amethyst
+          rimGrad.addColorStop(0.7, "#f7fe72"); // Electric lime accent
+          rimGrad.addColorStop(1, "#281436");
 
           coreGrad = ctx.createRadialGradient(cx, cy, 2, cx, cy, innerR);
-          coreGrad.addColorStop(0, "#2E1065");
-          coreGrad.addColorStop(0.7, "#090514");
-          coreGrad.addColorStop(1, "#030107");
+          coreGrad.addColorStop(0, "#2B153D");
+          coreGrad.addColorStop(0.7, "#140A1C");
+          coreGrad.addColorStop(1, "#07030A");
 
-          accentColor = "#A855F7";
-          emblemColor = "#F3E8FF";
+          accentColor = "#9c67b5";
+          emblemColor = "#f7fe72";
           break;
       }
     }
@@ -435,7 +435,7 @@ export default function CanvasBadge({
         className="block drop-shadow-md"
       />
       {label && (
-        <span className="text-[11px] font-bold text-center tracking-wide text-slate-200 mt-1 truncate max-w-[120px]">
+        <span className="text-[11px] font-bold text-center tracking-wide text-[#121815] dark:text-[#E2E7DE] mt-1 truncate max-w-[120px]">
           {label}
         </span>
       )}

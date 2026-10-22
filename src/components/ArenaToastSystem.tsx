@@ -278,24 +278,25 @@ function ToastCard({ toast, onDismiss, onAction }: ToastCardProps) {
   const [isPaused, setIsPaused] = useState(false);
   const duration = toast.duration || 6500;
 
+  // Trigger onDismiss cleanly in an effect when progress reaches 0
+  useEffect(() => {
+    if (progress <= 0) {
+      onDismiss();
+    }
+  }, [progress, onDismiss]);
+
+  // Progress countdown interval
   useEffect(() => {
     if (isPaused) return;
     const interval = 50;
     const step = (interval / duration) * 100;
 
     const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev <= step) {
-          clearInterval(timer);
-          onDismiss();
-          return 0;
-        }
-        return prev - step;
-      });
+      setProgress((prev) => Math.max(0, prev - step));
     }, interval);
 
     return () => clearInterval(timer);
-  }, [duration, isPaused, onDismiss]);
+  }, [duration, isPaused]);
 
   const isRival = toast.type === "rank_surpassed";
   const isTierProximity = toast.type === "tier_proximity";
@@ -309,14 +310,14 @@ function ToastCard({ toast, onDismiss, onAction }: ToastCardProps) {
         isRival
           ? "bg-gradient-to-br from-[#1C0F0A] via-[#140B07] to-[#0A0503] border-amber-500/40 text-amber-50"
           : isTierUnlock
-          ? "bg-gradient-to-br from-[#062417] via-[#091C13] to-[#040E0A] border-emerald-400/50 text-white"
-          : "bg-gradient-to-br from-[#0B1510] via-[#0D1D16] to-[#07100B] border-emerald-500/40 text-slate-100"
+          ? "bg-gradient-to-br from-[#2D163D] via-[#1A0E24] to-[#121815] border-[#9c67b5]/50 text-white"
+          : "bg-gradient-to-br from-[#121815] via-[#0B0E0C] to-[#121815] border-[#757761]/40 text-[#E2E7DE]"
       }`}
     >
       {/* Subtle ambient light sweep */}
       <div
         className={`absolute -top-12 -right-12 w-36 h-36 rounded-full blur-2xl pointer-events-none opacity-40 ${
-          isRival ? "bg-amber-500" : "bg-emerald-400"
+          isRival ? "bg-amber-500" : isTierUnlock ? "bg-[#9c67b5]" : "bg-[#f7fe72]"
         }`}
       />
 
@@ -332,8 +333,8 @@ function ToastCard({ toast, onDismiss, onAction }: ToastCardProps) {
           ) : isTierProximity && toast.tierId ? (
             <CanvasBadge tier={toast.tierId} emblem="shield" size={42} interactive={false} />
           ) : (
-            <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center">
-              <Sparkles className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-2xl bg-[#9c67b5]/20 text-[#f7fe72] border border-[#9c67b5]/30 flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-[#f7fe72]" />
             </div>
           )}
         </div>
@@ -346,33 +347,33 @@ function ToastCard({ toast, onDismiss, onAction }: ToastCardProps) {
                 isRival
                   ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
                   : isTierUnlock
-                  ? "bg-emerald-400/20 text-emerald-300 border border-emerald-400/40"
-                  : "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+                  ? "bg-[#9c67b5]/30 text-[#f7fe72] border border-[#9c67b5]/50"
+                  : "bg-[#9c67b5]/20 text-[#f7fe72] border border-[#9c67b5]/30"
               }`}
             >
               {isRival ? "RIVAL ALERT" : isTierUnlock ? "TIER PROMOTION" : "TIER PROXIMITY"}
             </span>
-            <span className="text-[10px] text-slate-400 font-mono">{toast.timestamp}</span>
+            <span className="text-[10px] text-[#A0A594] font-mono">{toast.timestamp}</span>
           </div>
 
           <h4 className="text-sm font-black text-white tracking-tight leading-snug">
             {toast.title}
           </h4>
 
-          <p className="text-xs text-slate-300/90 mt-1 leading-relaxed">
+          <p className="text-xs text-[#CBD2C7]/90 mt-1 leading-relaxed">
             {toast.message}
           </p>
 
           {/* Tier Proximity Mini Bar */}
           {isTierProximity && toast.xpRemaining !== undefined && (
-            <div className="mt-2.5 p-2 rounded-xl bg-black/40 border border-white/5 space-y-1">
+            <div className="mt-2.5 p-2 rounded-xl bg-black/40 border border-[#757761]/25 space-y-1">
               <div className="flex items-center justify-between text-[10px] font-mono">
-                <span className="text-slate-400">Distance to {toast.targetTierName}</span>
-                <span className="text-emerald-300 font-bold">{toast.xpRemaining.toLocaleString()} XP to go</span>
+                <span className="text-[#A0A594]">Distance to {toast.targetTierName}</span>
+                <span className="text-[#f7fe72] font-bold">{toast.xpRemaining.toLocaleString()} XP to go</span>
               </div>
-              <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+              <div className="w-full h-1.5 bg-[#0B0E0C] rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-emerald-500 to-teal-300 rounded-full"
+                  className="h-full bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] rounded-full"
                   style={{ width: "85%" }}
                 />
               </div>
@@ -387,14 +388,14 @@ function ToastCard({ toast, onDismiss, onAction }: ToastCardProps) {
                 onClick={onAction}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all active:scale-95 cursor-pointer flex items-center gap-1.5 shadow-md ${
                   isRival
-                    ? "bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:from-amber-400 hover:to-yellow-300 text-slate-950"
-                    : "bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white shadow-emerald-900/30"
+                    ? "bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:from-amber-400 hover:to-yellow-300 text-[#0B0E0C] font-black"
+                    : "bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] hover:brightness-110 text-[#0B0E0C] font-black shadow-lg shadow-[#f7fe72]/20"
                 }`}
               >
                 {isRival ? (
                   <Dumbbell className="w-3.5 h-3.5" />
                 ) : (
-                  <Award className="w-3.5 h-3.5" />
+                  <Award className="w-3.5 h-3.5 text-[#0B0E0C]" />
                 )}
                 <span>{toast.actionLabel}</span>
                 <ChevronRight className="w-3 h-3 stroke-[3]" />
@@ -403,7 +404,7 @@ function ToastCard({ toast, onDismiss, onAction }: ToastCardProps) {
               <button
                 type="button"
                 onClick={onDismiss}
-                className="px-2.5 py-1.5 text-xs text-slate-400 hover:text-white rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
+                className="px-2.5 py-1.5 text-xs text-[#A0A594] hover:text-white rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
               >
                 Dismiss
               </button>
@@ -415,7 +416,7 @@ function ToastCard({ toast, onDismiss, onAction }: ToastCardProps) {
         <button
           type="button"
           onClick={onDismiss}
-          className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer shrink-0"
+          className="p-1 rounded-lg text-[#A0A594] hover:text-white hover:bg-white/10 transition-colors cursor-pointer shrink-0"
           aria-label="Dismiss toast"
         >
           <X className="w-4 h-4" />
@@ -428,7 +429,7 @@ function ToastCard({ toast, onDismiss, onAction }: ToastCardProps) {
           className={`h-full transition-all linear ${
             isRival
               ? "bg-gradient-to-r from-amber-500 to-yellow-400"
-              : "bg-gradient-to-r from-emerald-400 to-teal-300"
+              : "bg-gradient-to-r from-[#f7fe72] to-[#f4e76e]"
           }`}
           style={{ width: `${progress}%` }}
         />
@@ -468,18 +469,18 @@ function NotificationHistoryDrawer({
         {/* Drawer Header */}
         <div className="p-5 border-b border-white/10 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
-              <Bell className="w-4 h-4" />
+            <div className="w-8 h-8 rounded-xl bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center border border-[#9c67b5]/30">
+              <Bell className="w-4 h-4 text-[#f7fe72]" />
             </div>
             <div>
               <h3 className="font-black text-base text-white">Arena Notification Center</h3>
-              <p className="text-[11px] text-slate-400">Rival alerts &amp; tier qualification log</p>
+              <p className="text-[11px] text-[#A0A594]">Rival alerts &amp; tier qualification log</p>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10"
+            className="p-2 rounded-xl text-[#A0A594] hover:text-white hover:bg-white/10"
           >
             <X className="w-5 h-5" />
           </button>
@@ -487,7 +488,7 @@ function NotificationHistoryDrawer({
 
         {/* Live Simulation Controls */}
         <div className="p-4 bg-black/30 border-b border-white/5 space-y-2">
-          <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block font-bold">
+          <span className="text-[10px] font-mono uppercase tracking-wider text-[#A0A594] block font-bold">
             Simulate Arena Events (Testing)
           </span>
           <div className="grid grid-cols-2 gap-2">
@@ -501,9 +502,9 @@ function NotificationHistoryDrawer({
 
             <button
               onClick={onSimulateProximity}
-              className="px-3 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer"
+              className="px-3 py-2 rounded-xl bg-[#9c67b5]/20 hover:bg-[#9c67b5]/30 text-[#f7fe72] border border-[#9c67b5]/30 text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer"
             >
-              <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+              <Sparkles className="w-3.5 h-3.5 text-[#f7fe72]" />
               <span>Tier Proximity</span>
             </button>
           </div>
@@ -512,8 +513,8 @@ function NotificationHistoryDrawer({
         {/* History List */}
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
           {history.length === 0 ? (
-            <div className="text-center py-12 text-slate-500 space-y-2">
-              <Bell className="w-8 h-8 mx-auto text-slate-600 opacity-60" />
+            <div className="text-center py-12 text-[#757761] space-y-2">
+              <Bell className="w-8 h-8 mx-auto text-[#757761] opacity-60" />
               <p className="text-xs">No notifications yet. You are holding your ground!</p>
             </div>
           ) : (
@@ -523,13 +524,13 @@ function NotificationHistoryDrawer({
                 className={`p-3.5 rounded-2xl border text-xs space-y-1.5 ${
                   item.type === "rank_surpassed"
                     ? "bg-amber-950/20 border-amber-500/30 text-amber-100"
-                    : "bg-white/[0.03] border-white/10 text-slate-200"
+                    : "bg-white/[0.03] border-white/10 text-[#E2E7DE]"
                 }`}
               >
-                <div className="flex items-center justify-between text-[10px] text-slate-400 font-mono">
+                <div className="flex items-center justify-between text-[10px] text-[#A0A594] font-mono">
                   <span
                     className={`font-bold uppercase ${
-                      item.type === "rank_surpassed" ? "text-amber-400" : "text-emerald-400"
+                      item.type === "rank_surpassed" ? "text-amber-400" : "text-[#f7fe72]"
                     }`}
                   >
                     {item.type.replace("_", " ")}
@@ -537,7 +538,7 @@ function NotificationHistoryDrawer({
                   <span>{item.timestamp}</span>
                 </div>
                 <h5 className="font-bold text-white text-sm">{item.title}</h5>
-                <p className="text-slate-300 leading-snug">{item.message}</p>
+                <p className="text-[#CBD2C7] leading-snug">{item.message}</p>
               </div>
             ))
           )}
@@ -550,9 +551,9 @@ function NotificationHistoryDrawer({
               if (onOpenTiersModal) onOpenTiersModal();
               onClose();
             }}
-            className="text-xs font-bold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 cursor-pointer"
+            className="text-xs font-bold text-[#f7fe72] hover:underline flex items-center gap-1 cursor-pointer"
           >
-            <Trophy className="w-3.5 h-3.5" />
+            <Trophy className="w-3.5 h-3.5 text-[#f7fe72]" />
             <span>Open Reward Tiers</span>
           </button>
 
@@ -582,13 +583,13 @@ export function ArenaNotificationBell({ className = "" }: ArenaNotificationBellP
     <button
       type="button"
       onClick={() => setIsHistoryOpen(true)}
-      className={`relative p-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-colors cursor-pointer ${className}`}
+      className={`relative p-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-[#CBD2C7] hover:text-white transition-colors cursor-pointer ${className}`}
       title="Open Arena Notifications"
       aria-label="Open notifications"
     >
-      <Bell className="w-4 h-4 text-emerald-400" />
+      <Bell className="w-4 h-4 text-[#f7fe72]" />
       {unreadCount > 0 && (
-        <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-black text-[10px] flex items-center justify-center shadow-md animate-pulse">
+        <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] font-black text-[10px] flex items-center justify-center shadow-md animate-pulse">
           {unreadCount}
         </span>
       )}
@@ -616,11 +617,11 @@ export function ArenaRivalWatchWidget() {
   }, [autoSimulate, simulateRivalOvertake, simulateTierProximity]);
 
   return (
-    <div className="p-4 sm:p-5 rounded-3xl bg-gradient-to-br from-[#1B4332] via-[#143628] to-[#0D241B] border border-emerald-500/30 text-white shadow-md space-y-3">
+    <div className="p-4 sm:p-5 rounded-3xl bg-[#121815] border border-[#757761]/35 text-white shadow-md space-y-3">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-300">
+          <div className="w-2.5 h-2.5 rounded-full bg-[#f7fe72] animate-pulse" />
+          <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#f7fe72]">
             Live Rival Watch &amp; Toast Simulator
           </span>
         </div>
@@ -629,8 +630,8 @@ export function ArenaRivalWatchWidget() {
           onClick={() => setAutoSimulate(!autoSimulate)}
           className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold transition-all cursor-pointer flex items-center gap-1 w-fit ${
             autoSimulate
-              ? "bg-emerald-400 text-[#1B4332] shadow-xs"
-              : "bg-white/10 text-slate-300 hover:bg-white/20"
+              ? "bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] font-black shadow-xs"
+              : "bg-white/10 text-[#CBD2C7] hover:bg-white/20"
           }`}
         >
           <RotateCcw className={`w-3 h-3 ${autoSimulate ? "animate-spin" : ""}`} />
@@ -638,7 +639,7 @@ export function ArenaRivalWatchWidget() {
         </button>
       </div>
 
-      <p className="text-xs text-emerald-100/80 leading-relaxed">
+      <p className="text-xs text-[#A0A594] leading-relaxed">
         Test instant push toast notifications for when you are nearing a reward tier or when South Delhi contenders pass you in rank.
       </p>
 
@@ -653,9 +654,9 @@ export function ArenaRivalWatchWidget() {
 
         <button
           onClick={simulateTierProximity}
-          className="px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-200 text-xs font-bold transition-all active:scale-95 cursor-pointer flex items-center gap-1.5 shadow-xs"
+          className="px-3 py-1.5 rounded-xl bg-[#9c67b5]/20 hover:bg-[#9c67b5]/30 border border-[#9c67b5]/40 text-[#f7fe72] text-xs font-bold transition-all active:scale-95 cursor-pointer flex items-center gap-1.5 shadow-xs"
         >
-          <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+          <Sparkles className="w-3.5 h-3.5 text-[#f7fe72]" />
           <span>Trigger &ldquo;Tier Proximity&rdquo;</span>
         </button>
 
@@ -663,7 +664,7 @@ export function ArenaRivalWatchWidget() {
           onClick={simulateTierUnlocked}
           className="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white text-xs font-bold transition-all active:scale-95 cursor-pointer flex items-center gap-1.5"
         >
-          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+          <CheckCircle2 className="w-3.5 h-3.5 text-[#f7fe72]" />
           <span>Trigger &ldquo;Tier Unlocked&rdquo;</span>
         </button>
       </div>

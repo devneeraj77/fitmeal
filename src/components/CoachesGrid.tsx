@@ -34,7 +34,7 @@ export const coachesList: Coach[] = [
     rating: 4.98,
     reviewsCount: 284,
     availableSlot: "3 slots open this week",
-    accentColor: "from-[#1B4332] to-slate-900",
+    accentColor: "from-[#2D163D] to-[#121815]",
     initials: "MV",
   },
   {
@@ -48,7 +48,7 @@ export const coachesList: Coach[] = [
     rating: 4.96,
     reviewsCount: 312,
     availableSlot: "Next available tomorrow",
-    accentColor: "from-[#143427] to-[#0D2218]",
+    accentColor: "from-[#1c1829] to-[#0B0E0C]",
     initials: "ER",
   },
   {
@@ -62,32 +62,32 @@ export const coachesList: Coach[] = [
     rating: 5.0,
     reviewsCount: 196,
     availableSlot: "2 slots open Friday",
-    accentColor: "from-[#1B4332] to-[#0F291E]",
+    accentColor: "from-[#2a1b38] to-[#121815]",
     initials: "KT",
   },
 ];
 
 export default function CoachesGrid({ onSelectCoach }: CoachesGridProps) {
   return (
-    <section id="coaches" className="py-16 sm:py-24 bg-white border-t border-slate-200/80 scroll-mt-20 sm:scroll-mt-24">
+    <section id="coaches" className="py-16 sm:py-24 bg-[#0B0E0C] text-[#E2E7DE] border-t border-[#757761]/25 scroll-mt-20 sm:scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-semibold uppercase tracking-wider mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#9c67b5]/15 border border-[#9c67b5]/30 text-[#f7fe72] text-xs font-semibold uppercase tracking-wider mb-3">
               <span>Verified Clinical &amp; Performance Specialists</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 leading-tight">
-              Certified Coaches &amp; Specialists
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
+              Certified Coaches &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9c67b5] via-[#f4e76e] to-[#f7fe72]">Specialists</span>
             </h2>
-            <p className="mt-3 text-base sm:text-lg text-slate-600">
+            <p className="mt-3 text-base sm:text-lg text-[#A0A493]">
               Work 1-on-1 with practitioners who review your biometric logs, adjust your training splits, and keep you pain-free.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-600 bg-slate-50 px-4 py-2.5 rounded-2xl border border-slate-200 self-start md:self-auto">
-            <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
+          <div className="flex items-center gap-2 text-xs font-semibold text-[#CBD2C7] bg-[#121815] px-4 py-2.5 rounded-2xl border border-[#757761]/35 self-start md:self-auto">
+            <ShieldCheck className="w-4 h-4 text-[#f7fe72] shrink-0" />
             <span>100% Board Certified &amp; Vetted Protocols</span>
           </div>
         </div>
@@ -97,12 +97,12 @@ export default function CoachesGrid({ onSelectCoach }: CoachesGridProps) {
           {coachesList.map((coach) => (
             <div
               key={coach.id}
-              className="bg-[#FAF9F6] rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-sm flex flex-col justify-between hover:shadow-md hover:border-slate-300 transition-all duration-200 group"
+              className="bg-[#121815] rounded-3xl p-6 sm:p-7 border border-[#757761]/30 shadow-xl shadow-black/50 flex flex-col justify-between hover:shadow-2xl hover:border-[#9c67b5]/50 transition-all duration-200 group"
             >
               <div>
                 {/* Trainer Portrait & Top Badge */}
                 <div className="relative mb-5">
-                  <div className={`w-full aspect-[4/3] rounded-2xl bg-gradient-to-br ${coach.accentColor} flex flex-col items-center justify-center text-white relative overflow-hidden shadow-inner`}>
+                  <div className={`w-full aspect-[4/3] rounded-2xl bg-gradient-to-br ${coach.accentColor} flex flex-col items-center justify-center text-white relative overflow-hidden shadow-inner border border-[#9c67b5]/25`}>
                     {/* Background geometric pattern */}
                     <div className="absolute inset-0 opacity-15">
                       <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -117,23 +117,23 @@ export default function CoachesGrid({ onSelectCoach }: CoachesGridProps) {
 
                     {/* Trainer Portrait Badge Avatar */}
                     <div className="relative z-10 flex flex-col items-center">
-                      <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md border-2 border-white/30 flex items-center justify-center text-2xl font-black tracking-wider text-white shadow-lg mb-2">
+                      <div className="w-20 h-20 rounded-full bg-[#9c67b5]/25 backdrop-blur-md border-2 border-[#9c67b5]/50 flex items-center justify-center text-2xl font-black tracking-wider text-[#f7fe72] shadow-lg mb-2">
                         {coach.initials}
                       </div>
-                      <span className="text-xs font-semibold tracking-wide text-slate-200">
+                      <span className="text-xs font-semibold tracking-wide text-[#CBD2C7]">
                         {coach.experience}
                       </span>
                     </div>
 
                     {/* Verified Credential Checkmark Badge */}
-                    <div className="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-sm text-[#1B4332] text-xs font-bold shadow-xs">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 fill-emerald-100" />
+                    <div className="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#9c67b5]/90 backdrop-blur-sm text-white text-xs font-bold shadow-xs">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#f7fe72] fill-[#f7fe72]" />
                       <span>Verified</span>
                     </div>
 
                     {/* Rating Pill */}
-                    <div className="absolute bottom-3 left-3 flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-sm text-white text-[11px] font-semibold">
-                      <Star className="w-3 h-3 text-emerald-400 fill-emerald-400" />
+                    <div className="absolute bottom-3 left-3 flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-sm text-[#f4e76e] text-[11px] font-semibold border border-[#757761]/30">
+                      <Star className="w-3 h-3 text-[#f4e76e] fill-[#f4e76e]" />
                       <span>{coach.rating} ({coach.reviewsCount})</span>
                     </div>
                   </div>
@@ -142,17 +142,17 @@ export default function CoachesGrid({ onSelectCoach }: CoachesGridProps) {
                 {/* Name & Credentials */}
                 <div className="mb-3">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#1B4332] transition-colors">
+                    <h3 className="text-xl font-bold text-white group-hover:text-[#f7fe72] transition-colors">
                       {coach.name}
                     </h3>
                   </div>
-                  <p className="text-xs font-bold text-[#1B4332] font-mono mt-0.5">
+                  <p className="text-xs font-bold text-[#f7fe72] font-mono mt-0.5">
                     {coach.credentials} • {coach.role}
                   </p>
                 </div>
 
                 {/* Bio */}
-                <p className="text-sm text-slate-600 leading-relaxed mb-4">
+                <p className="text-sm text-[#A0A493] leading-relaxed mb-4">
                   {coach.bio}
                 </p>
 
@@ -161,7 +161,7 @@ export default function CoachesGrid({ onSelectCoach }: CoachesGridProps) {
                   {coach.specialtyTags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2.5 py-1 rounded-md text-xs font-semibold bg-white border border-slate-200 text-slate-700"
+                      className="px-2.5 py-1 rounded-md text-xs font-semibold bg-[#0B0E0C] border border-[#757761]/35 text-[#CBD2C7]"
                     >
                       {tag}
                     </span>
@@ -170,22 +170,22 @@ export default function CoachesGrid({ onSelectCoach }: CoachesGridProps) {
               </div>
 
               {/* Bottom Card Action: Book Consultation */}
-              <div className="pt-4 border-t border-slate-200/70">
-                <div className="flex items-center justify-between text-xs text-slate-500 mb-3">
-                  <span className="flex items-center gap-1 text-emerald-800 font-medium">
-                    <span className="w-2 h-2 rounded-full bg-emerald-600 inline-block" />
+              <div className="pt-4 border-t border-[#757761]/25">
+                <div className="flex items-center justify-between text-xs text-[#A0A493] mb-3">
+                  <span className="flex items-center gap-1 text-[#f7fe72] font-medium">
+                    <span className="w-2 h-2 rounded-full bg-[#f7fe72] inline-block shadow-[0_0_6px_#f7fe72]" />
                     {coach.availableSlot}
                   </span>
-                  <span className="font-semibold text-slate-700">45 Min Video Call</span>
+                  <span className="font-semibold text-[#CBD2C7]">45 Min Video Call</span>
                 </div>
 
                 <button
                   onClick={() => onSelectCoach(coach)}
-                  className="w-full py-3 px-4 rounded-xl bg-[#1B4332] hover:bg-[#235841] text-white font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-xs active:scale-98 cursor-pointer"
+                  className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] hover:brightness-110 text-[#0B0E0C] font-black text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-md active:scale-98 cursor-pointer"
                 >
-                  <Calendar className="w-4 h-4" />
+                  <Calendar className="w-4 h-4 text-[#0B0E0C]" />
                   <span>Book 1-on-1 Consultation</span>
-                  <ArrowRight className="w-4 h-4 ml-0.5 opacity-80" />
+                  <ArrowRight className="w-4 h-4 ml-0.5" />
                 </button>
               </div>
 

@@ -166,8 +166,8 @@ export default function RewardTiersModal({
       title: "Progressive Overload",
       xpThreshold: 2500,
       rankThreshold: "Top 200 Contenders",
-      accentGlow: "rgba(203, 213, 225, 0.25)",
-      gradientText: "from-slate-100 via-slate-300 to-slate-400",
+      accentGlow: "rgba(226, 231, 222, 0.25)",
+      gradientText: "from-[#E2E7DE] via-[#CBD2C7] to-[#A0A594]",
       tagline: "Demonstrated discipline, compound mechanical tension, and strict hydration adherence.",
       badges: [
         {
@@ -287,8 +287,8 @@ export default function RewardTiersModal({
       title: "Biomechanical Vanguard",
       xpThreshold: 10000,
       rankThreshold: "Top 25 Contenders",
-      accentGlow: "rgba(16, 185, 129, 0.3)",
-      gradientText: "from-emerald-300 via-teal-200 to-emerald-500",
+      accentGlow: "rgba(156, 103, 181, 0.35)",
+      gradientText: "from-[#9c67b5] via-[#f7fe72] to-[#f4e76e]",
       tagline: "Masters of physical resilience, sustainable clean fueling, and local community leadership.",
       badges: [
         {
@@ -443,36 +443,36 @@ export default function RewardTiersModal({
     >
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-60 bg-gradient-to-r from-emerald-600 via-[#1B4332] to-emerald-700 text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-2xl border border-emerald-400/40 text-xs font-bold flex items-center gap-2 animate-in slide-in-from-top-4 duration-200">
-          <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-300 animate-spin" />
-          <span className="text-[11px] sm:text-xs">{toastMessage}</span>
+        <div className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-60 bg-[#121815] text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-2xl border border-[#9c67b5]/50 text-xs font-bold flex items-center gap-2 animate-in slide-in-from-top-4 duration-200">
+          <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#f7fe72] animate-spin" />
+          <span className="text-[11px] sm:text-xs text-white">{toastMessage}</span>
         </div>
       )}
 
       {/* Main Semantic Card Container */}
-      <div className="relative w-full max-w-5xl max-h-[96vh] sm:max-h-[92vh] rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#0B1510] via-[#0E2018] to-[#08120D] text-slate-100 shadow-[0_25px_70px_rgba(0,0,0,0.85)] border border-emerald-900/40 flex flex-col overflow-hidden font-sans">
+      <div className="relative w-full max-w-5xl max-h-[96vh] sm:max-h-[92vh] rounded-2xl sm:rounded-3xl bg-[#121815] text-[#E2E7DE] shadow-[0_25px_70px_rgba(0,0,0,0.85)] border border-[#757761]/40 flex flex-col overflow-hidden font-sans">
         
         {/* Radial Ambient Lighting Glows */}
         <div
           className="absolute -top-32 -right-32 w-72 sm:w-96 h-72 sm:h-96 rounded-full blur-3xl pointer-events-none opacity-40 transition-all duration-700"
           style={{ background: inspectedTier.accentGlow }}
         />
-        <div className="absolute -bottom-24 -left-24 w-60 sm:w-80 h-60 sm:h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-60 sm:w-80 h-60 sm:h-80 bg-[#9c67b5]/15 rounded-full blur-3xl pointer-events-none" />
 
         {/* 1. Semantic Header with Responsive Sizing */}
-        <header className="relative z-10 px-4 sm:px-6 md:px-8 py-3.5 sm:py-5 border-b border-white/10 flex items-center justify-between gap-3 shrink-0">
+        <header className="relative z-10 px-4 sm:px-6 md:px-8 py-3.5 sm:py-5 border-b border-[#757761]/25 flex items-center justify-between gap-3 shrink-0">
           <div className="flex items-center gap-2.5 sm:gap-4 min-w-0">
-            <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-emerald-400/20 via-emerald-600/30 to-black/60 border border-emerald-400/30 flex items-center justify-center shadow-inner shrink-0">
-              <Trophy className="w-4 h-4 sm:w-6 sm:h-6 text-emerald-400" />
+            <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#9c67b5]/20 border border-[#9c67b5]/40 flex items-center justify-center shadow-inner shrink-0">
+              <Trophy className="w-4 h-4 sm:w-6 sm:h-6 text-[#f7fe72]" />
             </div>
 
             <div className="min-w-0">
               <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.18em] sm:tracking-[0.2em] font-bold text-emerald-400 truncate">
+                <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.18em] sm:tracking-[0.2em] font-bold text-[#f7fe72] truncate">
                   GLOBAL ARENA // SEASON 4
                 </span>
                 <span className="text-white/30 text-xs hidden sm:inline">/</span>
-                <span className="text-[10px] sm:text-xs text-slate-400 font-medium hidden sm:inline">Prestige Progression</span>
+                <span className="text-[10px] sm:text-xs text-[#A0A594] font-medium hidden sm:inline">Prestige Progression</span>
               </div>
               <h2
                 id="reward-tiers-modal-title"
@@ -486,24 +486,24 @@ export default function RewardTiersModal({
           {/* User Live Rank Badge & Close button */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {/* Desktop / Tablet status badge */}
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
-              <span className="text-xs text-slate-300 font-medium">David Kim</span>
-              <span className="w-1 h-1 rounded-full bg-emerald-400" />
-              <span className="text-xs font-mono font-bold text-emerald-300">#{currentRank} Global</span>
-              <span className="w-1 h-1 rounded-full bg-emerald-400" />
-              <span className="text-xs font-mono font-bold text-amber-300">{currentXp.toLocaleString()} XP</span>
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0B0E0C] border border-[#757761]/35 backdrop-blur-md">
+              <span className="text-xs text-[#CBD2C7] font-medium">David Kim</span>
+              <span className="w-1 h-1 rounded-full bg-[#f7fe72]" />
+              <span className="text-xs font-mono font-bold text-[#f7fe72]">#{currentRank} Global</span>
+              <span className="w-1 h-1 rounded-full bg-[#9c67b5]" />
+              <span className="text-xs font-mono font-bold text-[#f4e76e]">{currentXp.toLocaleString()} XP</span>
             </div>
 
             {/* Mobile compact badge */}
-            <div className="sm:hidden flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono">
-              <span className="font-bold text-emerald-300">#{currentRank}</span>
+            <div className="sm:hidden flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#0B0E0C] border border-[#757761]/35 text-[10px] font-mono">
+              <span className="font-bold text-[#f7fe72]">#{currentRank}</span>
               <span className="text-white/20">·</span>
-              <span className="font-bold text-amber-300">{currentXp.toLocaleString()} XP</span>
+              <span className="font-bold text-[#f4e76e]">{currentXp.toLocaleString()} XP</span>
             </div>
 
             <button
               onClick={onClose}
-              className="p-1.5 sm:p-2.5 rounded-lg sm:rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border border-white/10 transition-colors cursor-pointer"
+              className="p-1.5 sm:p-2.5 rounded-lg sm:rounded-xl bg-white/5 hover:bg-white/10 text-[#A0A594] hover:text-white border border-white/10 transition-colors cursor-pointer"
               aria-label="Close modal"
             >
               <X className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -512,14 +512,14 @@ export default function RewardTiersModal({
         </header>
 
         {/* 2. Semantic Milestone Beam Track with Responsive Scales */}
-        <nav aria-label="Reward Tiers Progression" className="relative z-10 px-3 sm:px-6 md:px-8 py-2.5 sm:py-4 bg-black/30 border-b border-white/5 shrink-0">
+        <nav aria-label="Reward Tiers Progression" className="relative z-10 px-3 sm:px-6 md:px-8 py-2.5 sm:py-4 bg-[#0B0E0C]/60 border-b border-[#757761]/20 shrink-0">
           <div className="grid grid-cols-5 gap-1 sm:gap-3 md:gap-4 relative">
             
             {/* Background connecting track */}
             <div className="absolute top-5 sm:top-6 left-6 right-6 h-0.5 bg-white/10 -z-10" />
             {/* Active filled connecting line */}
             <div
-              className="absolute top-5 sm:top-6 left-6 h-0.5 bg-gradient-to-r from-amber-500 via-emerald-400 to-teal-300 -z-10 transition-all duration-500"
+              className="absolute top-5 sm:top-6 left-6 h-0.5 bg-gradient-to-r from-[#9c67b5] via-[#f7fe72] to-[#f4e76e] -z-10 transition-all duration-500"
               style={{ width: `${Math.min(100, Math.max(10, ((activeTier.tierNumber - 0.5) / 5) * 100))}%` }}
             />
 
@@ -537,7 +537,7 @@ export default function RewardTiersModal({
                   }}
                   className={`group flex flex-col items-center gap-1 p-1 sm:p-2 rounded-xl sm:rounded-2xl transition-all cursor-pointer text-center relative ${
                     isSelected
-                      ? "bg-white/10 border border-white/20 shadow-lg scale-102"
+                      ? "bg-[#9c67b5]/20 border border-[#9c67b5]/40 shadow-lg scale-102"
                       : "hover:bg-white/5"
                   }`}
                 >
@@ -552,26 +552,26 @@ export default function RewardTiersModal({
                     />
 
                     {isUserCurrent && (
-                      <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-emerald-950 animate-pulse" />
+                      <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#f7fe72] ring-2 ring-[#121815] animate-pulse" />
                     )}
                   </div>
 
                   <div className="space-y-0.5 w-full">
                     <span
                       className={`text-[10px] sm:text-xs font-bold block truncate ${
-                        isSelected ? "text-white" : isUnlocked ? "text-slate-300" : "text-slate-500"
+                        isSelected ? "text-white" : isUnlocked ? "text-[#CBD2C7]" : "text-[#757761]"
                       }`}
                     >
                       {tier.name.split(" ")[0]} <span className="hidden sm:inline">{tier.name.split(" ")[1]}</span>
                     </span>
 
-                    <span className="text-[8px] sm:text-[10px] font-mono text-slate-400 block truncate">
+                    <span className="text-[8px] sm:text-[10px] font-mono text-[#A0A594] block truncate">
                       {tier.xpThreshold >= 1000 ? `${tier.xpThreshold / 1000}k` : tier.xpThreshold} XP
                     </span>
                   </div>
 
                   {isUserCurrent && (
-                    <span className="text-[8px] sm:text-[9px] font-mono font-bold uppercase tracking-wider px-1 py-0.2 sm:px-1.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    <span className="text-[8px] sm:text-[9px] font-mono font-bold uppercase tracking-wider px-1 py-0.2 sm:px-1.5 rounded bg-[#9c67b5]/30 text-[#f7fe72] border border-[#9c67b5]/50">
                       Active
                     </span>
                   )}
@@ -582,21 +582,21 @@ export default function RewardTiersModal({
 
           {/* Linear Progress Sub-bar for Current Milestone */}
           {nextTier && (
-            <div className="mt-2.5 sm:mt-3 pt-2 sm:pt-3 border-t border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
-              <div className="flex items-center gap-1.5 text-slate-300 truncate">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <div className="mt-2.5 sm:mt-3 pt-2 sm:pt-3 border-t border-[#757761]/20 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
+              <div className="flex items-center gap-1.5 text-[#CBD2C7] truncate">
+                <Sparkles className="w-3.5 h-3.5 text-[#f7fe72] shrink-0" />
                 <span className="truncate">
                   Target: <strong className="text-white">{nextTier.name}</strong> ({nextTier.xpThreshold.toLocaleString()} XP)
                 </span>
               </div>
 
               <div className="flex items-center justify-between sm:justify-end gap-2.5">
-                <span className="font-mono text-emerald-300 font-bold text-[10px] sm:text-xs">
+                <span className="font-mono text-[#f7fe72] font-bold text-[10px] sm:text-xs">
                   {xpNeeded.toLocaleString()} XP left ({Math.round(tierProgressPercent)}%)
                 </span>
-                <div className="w-24 sm:w-36 h-1.5 sm:h-2 bg-white/10 rounded-full overflow-hidden p-0.5 shrink-0">
+                <div className="w-24 sm:w-36 h-1.5 sm:h-2 bg-[#0B0E0C] border border-[#757761]/30 rounded-full overflow-hidden p-0.5 shrink-0">
                   <div
-                    className="h-full bg-gradient-to-r from-emerald-400 to-teal-300 rounded-full transition-all duration-500"
+                    className="h-full bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] rounded-full transition-all duration-500"
                     style={{ width: `${tierProgressPercent}%` }}
                   />
                 </div>
@@ -611,14 +611,14 @@ export default function RewardTiersModal({
           {/* Left Column: Canvas Medal Showcase & Lore (5 cols) */}
           <section
             aria-labelledby="medal-showcase-heading"
-            className="lg:col-span-5 rounded-2xl sm:rounded-3xl bg-white/[0.03] border border-white/10 p-4 sm:p-6 flex flex-col justify-between relative overflow-hidden backdrop-blur-md"
+            className="lg:col-span-5 rounded-2xl sm:rounded-3xl bg-[#0B0E0C]/70 border border-[#757761]/35 p-4 sm:p-6 flex flex-col justify-between relative overflow-hidden backdrop-blur-md"
           >
             <div className="space-y-4 sm:space-y-5">
               
               {/* Header inside showcase */}
               <div className="flex items-center justify-between gap-2">
                 <div className="min-w-0">
-                  <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.18em] sm:tracking-[0.2em] font-bold text-slate-400 block truncate">
+                  <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.18em] sm:tracking-[0.2em] font-bold text-[#9c67b5] block truncate">
                     TIER {inspectedTier.tierNumber} EMBLEM
                   </span>
                   <h3 id="medal-showcase-heading" className="text-lg sm:text-xl font-black text-white mt-0.5 truncate">
@@ -626,7 +626,7 @@ export default function RewardTiersModal({
                   </h3>
                 </div>
 
-                <div className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-[11px] font-mono text-slate-300 shrink-0">
+                <div className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-[11px] font-mono text-[#CBD2C7] shrink-0">
                   {inspectedTier.rankThreshold}
                 </div>
               </div>
@@ -652,12 +652,12 @@ export default function RewardTiersModal({
                   <div className="flex items-center justify-center gap-1.5">
                     <h4 className="text-base sm:text-lg font-bold text-white">{activeInspectedBadge.name}</h4>
                     {activeBadge === activeInspectedBadge.id && (
-                      <span className="text-[9px] sm:text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.2 rounded-full font-mono">
+                      <span className="text-[9px] sm:text-[10px] bg-[#f7fe72]/20 text-[#f7fe72] border border-[#f7fe72]/30 px-2 py-0.2 rounded-full font-mono">
                         EQUIPPED
                       </span>
                     )}
                   </div>
-                  <span className="text-[11px] sm:text-xs font-mono text-amber-300 font-semibold">
+                  <span className="text-[11px] sm:text-xs font-mono text-[#f4e76e] font-semibold">
                     {activeInspectedBadge.rarity} Medal
                   </span>
                 </div>
@@ -665,7 +665,7 @@ export default function RewardTiersModal({
 
               {/* Badge Switcher Row */}
               <div className="space-y-1.5">
-                <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
+                <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-wider text-[#A0A594] block">
                   Badges in this Tier ({inspectedTier.badges.length})
                 </span>
                 <div className="flex items-center gap-2 overflow-x-auto pb-1">
@@ -675,7 +675,7 @@ export default function RewardTiersModal({
                       onClick={() => setSelectedBadgeId(b.id)}
                       className={`flex items-center gap-2 p-1.5 sm:p-2 rounded-xl border transition-all cursor-pointer text-left shrink-0 ${
                         selectedBadgeId === b.id
-                          ? "bg-white/10 border-emerald-400/50 shadow-md"
+                          ? "bg-[#9c67b5]/20 border-[#9c67b5]/60 shadow-md"
                           : "bg-white/5 border-white/5 hover:bg-white/10 opacity-70"
                       }`}
                     >
@@ -688,7 +688,7 @@ export default function RewardTiersModal({
                       />
                       <div className="text-[11px] sm:text-xs">
                         <span className="font-bold text-white block truncate max-w-[85px] sm:max-w-[100px]">{b.name}</span>
-                        <span className="text-[9px] sm:text-[10px] text-slate-400">{b.rarity}</span>
+                        <span className="text-[9px] sm:text-[10px] text-[#A0A594]">{b.rarity}</span>
                       </div>
                     </button>
                   ))}
@@ -697,20 +697,20 @@ export default function RewardTiersModal({
 
               {/* Requirement & Lore Text with Responsive Typographic Scale */}
               <div className="space-y-2 text-[11px] sm:text-xs">
-                <div className="p-2.5 sm:p-3 rounded-xl bg-black/40 border border-white/5">
-                  <span className="text-[9px] sm:text-[10px] font-mono uppercase text-slate-400 block mb-1">
+                <div className="p-2.5 sm:p-3 rounded-xl bg-[#0B0E0C] border border-[#757761]/25">
+                  <span className="text-[9px] sm:text-[10px] font-mono uppercase text-[#A0A594] block mb-1">
                     Unlock Requirement
                   </span>
-                  <p className="text-slate-200 leading-relaxed font-medium">
+                  <p className="text-[#E2E7DE] leading-relaxed font-medium">
                     {activeInspectedBadge.requirement}
                   </p>
                 </div>
 
-                <div className="p-2.5 sm:p-3 rounded-xl bg-emerald-950/20 border border-emerald-500/10">
-                  <span className="text-[9px] sm:text-[10px] font-mono uppercase text-emerald-400 block mb-1">
+                <div className="p-2.5 sm:p-3 rounded-xl bg-[#9c67b5]/10 border border-[#9c67b5]/20">
+                  <span className="text-[9px] sm:text-[10px] font-mono uppercase text-[#9c67b5] block mb-1">
                     Prestige Lore
                   </span>
-                  <p className="text-emerald-100/90 italic leading-relaxed">
+                  <p className="text-[#E2E7DE] italic leading-relaxed">
                     &ldquo;{activeInspectedBadge.lore}&rdquo;
                   </p>
                 </div>
@@ -724,8 +724,8 @@ export default function RewardTiersModal({
                   onClick={() => handleEquip(activeInspectedBadge)}
                   className={`w-full py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-2 shadow-lg ${
                     activeBadge === activeInspectedBadge.id
-                      ? "bg-white/10 text-slate-300 border border-white/20"
-                      : "bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white shadow-emerald-900/40"
+                      ? "bg-white/10 text-[#CBD2C7] border border-white/20"
+                      : "bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] hover:brightness-110 text-[#0B0E0C] font-black shadow-[#f7fe72]/20"
                   }`}
                 >
                   <ShieldCheck className="w-4 h-4" />
@@ -734,8 +734,8 @@ export default function RewardTiersModal({
                   </span>
                 </button>
               ) : (
-                <div className="w-full py-2.5 sm:py-3 rounded-xl bg-white/5 border border-white/10 text-slate-400 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2">
-                  <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-500" />
+                <div className="w-full py-2.5 sm:py-3 rounded-xl bg-white/5 border border-white/10 text-[#A0A594] text-xs sm:text-sm font-semibold flex items-center justify-center gap-2">
+                  <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#757761]" />
                   <span>Locked — Reach {inspectedTier.xpThreshold.toLocaleString()} XP to Unlock</span>
                 </div>
               )}
@@ -746,16 +746,16 @@ export default function RewardTiersModal({
           <section aria-labelledby="tier-perks-heading" className="lg:col-span-7 space-y-4 sm:space-y-6">
             
             {/* Tier Overview Banner */}
-            <div className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-white/[0.05] via-white/[0.02] to-transparent border border-white/10 space-y-1.5 sm:space-y-2">
+            <div className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#0B0E0C]/70 border border-[#757761]/35 space-y-1.5 sm:space-y-2">
               <div className="flex items-center gap-2 text-[10px] sm:text-xs font-mono font-bold">
-                <span className="text-emerald-400">TIER {inspectedTier.tierNumber} PRIVILEGES</span>
+                <span className="text-[#f7fe72]">TIER {inspectedTier.tierNumber} PRIVILEGES</span>
                 <span className="text-white/20">·</span>
-                <span className="text-slate-300 truncate">{inspectedTier.title}</span>
+                <span className="text-[#CBD2C7] truncate">{inspectedTier.title}</span>
               </div>
               <h3 id="tier-perks-heading" className="text-lg sm:text-2xl font-black text-white">
                 Unlockable Perks &amp; Fuel Credits
               </h3>
-              <p className="text-[11px] sm:text-xs md:text-sm text-slate-400 leading-relaxed">
+              <p className="text-[11px] sm:text-xs md:text-sm text-[#A0A594] leading-relaxed">
                 {inspectedTier.tagline}
               </p>
             </div>
@@ -774,7 +774,7 @@ export default function RewardTiersModal({
                       isClaimed
                         ? "bg-white/[0.02] border-white/5"
                         : isUnlocked
-                        ? "bg-gradient-to-r from-emerald-950/30 to-black/40 border-emerald-500/30 hover:border-emerald-500/50"
+                        ? "bg-[#0B0E0C] border-[#757761]/35 hover:border-[#9c67b5]/50"
                         : "bg-white/[0.01] border-white/5 opacity-55"
                     }`}
                   >
@@ -782,27 +782,27 @@ export default function RewardTiersModal({
                       <div
                         className={`w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 border ${
                           isUnlocked
-                            ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 shadow-inner"
-                            : "bg-white/5 text-slate-500 border-white/5"
+                            ? "bg-[#9c67b5]/20 text-[#f7fe72] border-[#9c67b5]/40 shadow-inner"
+                            : "bg-white/5 text-[#757761] border-white/5"
                         }`}
                       >
                         {perk.type === "voucher" ? (
-                          <Store className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400" />
+                          <Store className="w-4 h-4 sm:w-5 sm:h-5 text-[#f7fe72]" />
                         ) : perk.type === "aura" ? (
-                          <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />
+                          <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#f4e76e]" />
                         ) : (
-                          <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400" />
+                          <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-[#f7fe72]" />
                         )}
                       </div>
 
                       <div className="space-y-0.5 min-w-0">
                         <div className="flex items-center gap-1.5 sm:gap-2">
                           <h4 className="font-bold text-xs sm:text-sm text-white truncate">{perk.title}</h4>
-                          <span className="text-[9px] sm:text-[10px] font-mono uppercase px-1.5 py-0.2 sm:px-2 sm:py-0.5 rounded bg-white/10 text-slate-300 shrink-0">
+                          <span className="text-[9px] sm:text-[10px] font-mono uppercase px-1.5 py-0.2 sm:px-2 sm:py-0.5 rounded bg-white/10 text-[#CBD2C7] shrink-0">
                             {perk.type}
                           </span>
                         </div>
-                        <p className="text-[11px] sm:text-xs text-slate-400 leading-relaxed line-clamp-2 sm:line-clamp-none max-w-md">
+                        <p className="text-[11px] sm:text-xs text-[#A0A594] leading-relaxed line-clamp-2 sm:line-clamp-none max-w-md">
                           {perk.valueDescription}
                         </p>
                       </div>
@@ -811,15 +811,15 @@ export default function RewardTiersModal({
                     {/* Claim Button / Voucher code */}
                     <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
                       {isClaimed && code ? (
-                        <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-white/10 border border-white/15 text-[11px] sm:text-xs font-mono font-bold text-emerald-300">
+                        <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-[#0B0E0C] border border-[#757761]/40 text-[11px] sm:text-xs font-mono font-bold text-[#f7fe72]">
                           <span>{code}</span>
                           <button
                             onClick={() => handleCopy(perk.id, code)}
-                            className="p-1 hover:bg-white/10 rounded text-slate-400 hover:text-white cursor-pointer"
+                            className="p-1 hover:bg-white/10 rounded text-[#A0A594] hover:text-white cursor-pointer"
                             title="Copy code"
                           >
                             {copiedId === perk.id ? (
-                              <Check className="w-3.5 h-3.5 text-emerald-400" />
+                              <Check className="w-3.5 h-3.5 text-[#f7fe72]" />
                             ) : (
                               <Copy className="w-3.5 h-3.5" />
                             )}
@@ -828,13 +828,13 @@ export default function RewardTiersModal({
                       ) : isUnlocked ? (
                         <button
                           onClick={() => handleClaim(perk)}
-                          className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-bold text-xs sm:text-sm transition-all active:scale-95 cursor-pointer shadow-md flex items-center gap-1.5"
+                          className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] hover:brightness-110 text-[#0B0E0C] font-black text-xs sm:text-sm transition-all active:scale-95 cursor-pointer shadow-md flex items-center gap-1.5"
                         >
-                          <Sparkles className="w-3.5 h-3.5" />
+                          <Sparkles className="w-3.5 h-3.5 text-[#0B0E0C]" />
                           <span>Claim Reward</span>
                         </button>
                       ) : (
-                        <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-white/5 border border-white/5 text-[11px] sm:text-xs font-medium text-slate-500">
+                        <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-white/5 border border-white/5 text-[11px] sm:text-xs font-medium text-[#757761]">
                           <Lock className="w-3.5 h-3.5" />
                           <span>Locked</span>
                         </div>
@@ -846,23 +846,23 @@ export default function RewardTiersModal({
             </div>
 
             {/* Season 4 Apex Ring Guarantee Callout */}
-            <aside aria-label="End of season reward" className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-amber-950/30 via-yellow-950/20 to-black/40 border border-amber-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+            <aside aria-label="End of season reward" className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#2D163D]/60 via-[#121815] to-[#0B0E0C] border border-[#9c67b5]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
               <div className="flex items-start sm:items-center gap-2.5 sm:gap-3">
-                <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400 shrink-0 mt-0.5 sm:mt-0" />
+                <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-[#f7fe72] shrink-0 mt-0.5 sm:mt-0" />
                 <div>
-                  <div className="text-xs sm:text-sm font-bold text-amber-300">
+                  <div className="text-xs sm:text-sm font-bold text-white">
                     Season 4 Apex Ring Guarantee
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5 leading-relaxed">
+                  <div className="text-[10px] sm:text-[11px] text-[#A0A594] mt-0.5 leading-relaxed">
                     Athletes maintaining Gold Champion tier through season conclusion receive the commemorative brass ring.
                   </div>
                 </div>
               </div>
 
               <div className="shrink-0 self-end sm:self-auto text-right">
-                <span className="text-[9px] sm:text-[10px] font-mono uppercase text-slate-500 block">Qualifier Status</span>
-                <span className="text-[11px] sm:text-xs font-mono font-bold text-emerald-400 flex items-center gap-1 justify-end">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> QUALIFIED
+                <span className="text-[9px] sm:text-[10px] font-mono uppercase text-[#757761] block">Qualifier Status</span>
+                <span className="text-[11px] sm:text-xs font-mono font-bold text-[#f7fe72] flex items-center gap-1 justify-end">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#f7fe72]" /> QUALIFIED
                 </span>
               </div>
             </aside>
@@ -870,11 +870,11 @@ export default function RewardTiersModal({
         </main>
 
         {/* 4. Semantic Footer */}
-        <footer className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 bg-black/40 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 shrink-0">
-          <div className="flex items-center gap-2 text-[10px] sm:text-xs text-slate-400">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
+        <footer className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 bg-[#0B0E0C]/80 border-t border-[#757761]/25 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-2 text-[10px] sm:text-xs text-[#A0A594]">
+            <span className="w-2 h-2 rounded-full bg-[#f7fe72] shrink-0" />
             <span className="truncate">
-              Real-time synchronization with <strong>fitmeal</strong> global verified consensus ledger.
+              Real-time synchronization with <strong>PotatoFit</strong> global verified consensus ledger.
             </span>
           </div>
 
