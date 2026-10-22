@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Flame, ArrowRight, Menu, X, LayoutDashboard, LogOut, User } from "lucide-react";
+import { Flame, ArrowRight, Menu, X, LayoutDashboard, LogOut, User, Trophy } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 
 interface NavbarProps {
@@ -62,6 +62,13 @@ export default function Navbar({
               {link.label}
             </a>
           ))}
+          <a
+            href="/leaderboards"
+            className="text-sm font-bold text-[#1B4332] hover:text-emerald-800 flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200 transition-colors whitespace-nowrap"
+          >
+            <Trophy className="w-3.5 h-3.5 text-emerald-700" />
+            <span>Leaderboards</span>
+          </a>
           {onOpenDashboard && (
             <button
               onClick={onOpenDashboard}
@@ -169,6 +176,14 @@ export default function Navbar({
                 <span>Personal Athlete Dashboard</span>
               </button>
             )}
+            <a
+              href="/leaderboards"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full text-left px-3 py-2 rounded-lg text-base font-bold text-[#1B4332] bg-emerald-50/70 border border-emerald-200 flex items-center gap-2"
+            >
+              <Trophy className="w-4 h-4 text-emerald-700" />
+              <span>Arena &amp; Leaderboards</span>
+            </a>
             {navLinks.map((link) => (
               <a
                 key={link.label}

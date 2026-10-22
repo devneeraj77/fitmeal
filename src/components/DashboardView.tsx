@@ -27,6 +27,7 @@ import {
   VideoOff,
   PhoneOff,
   Target,
+  Trophy,
   Loader2,
   CheckCircle2,
   Sliders,
@@ -35,6 +36,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
+import RewardTiersModal from "@/components/RewardTiersModal";
 
 interface DashboardViewProps {
   onBackToHome?: () => void;
@@ -226,6 +228,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
   const [isVideoCallOpen, setIsVideoCallOpen] = useState(false);
   const [isMicMuted, setIsMicMuted] = useState(false);
   const [isVideoDisabled, setIsVideoDisabled] = useState(false);
+  const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
 
   const sidebarLinks = [
     { id: "schedule", label: "Today's Schedule", icon: Calendar },
@@ -304,10 +307,15 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               </div>
               <div className="min-w-0 flex-1">
                 <h3 className="text-xs font-bold text-slate-900 truncate">{userName}</h3>
-                <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#1B4332] bg-emerald-100/80 px-1.5 py-0.5 rounded">
-                  <Award className="w-2.5 h-2.5" />
-                  Level 4 Mover
-                </span>
+                <button
+                  type="button"
+                  onClick={() => setIsRewardModalOpen(true)}
+                  className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#1B4332] bg-emerald-100/80 hover:bg-emerald-200 px-1.5 py-0.5 rounded cursor-pointer transition-colors"
+                  title="View Reward Tiers & Unlockable Perks"
+                >
+                  <Award className="w-2.5 h-2.5 text-emerald-700" />
+                  <span>Level 4 Mover (Rewards)</span>
+                </button>
               </div>
             </div>
 
@@ -356,6 +364,22 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               );
             })}
           </nav>
+
+          {/* Arena & Leaderboard Shortcut */}
+          <div className="pt-2">
+            <a
+              href="/leaderboards"
+              className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold text-[#1B4332] bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200/90 transition-all shadow-2xs group cursor-pointer"
+            >
+              <div className="flex items-center gap-2">
+                <Trophy className="w-4 h-4 text-emerald-700 group-hover:scale-110 transition-transform" />
+                <span>Arena &amp; Leaderboards</span>
+              </div>
+              <span className="text-[10px] bg-emerald-700 text-white font-mono px-1.5 py-0.5 rounded font-bold">
+                LIVE
+              </span>
+            </a>
+          </div>
         </div>
 
         {/* Bottom Sidebar Status / Back */}
@@ -410,7 +434,25 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
             </h1>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <a
+              href="/leaderboards"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#1B4332] hover:bg-[#153427] text-white shadow-2xs text-xs font-bold cursor-pointer transition-all active:scale-95"
+            >
+              <Trophy className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Global Arena (#42)</span>
+            </a>
+
+            <button
+              type="button"
+              onClick={() => setIsRewardModalOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-950 shadow-2xs text-xs font-bold cursor-pointer transition-all active:scale-95"
+              title="Inspect Reward Tiers & Arena Badges"
+            >
+              <Award className="w-3.5 h-3.5 text-amber-700" />
+              <span>Reward Tiers</span>
+            </button>
+
             <button
               type="button"
               onClick={() => {
@@ -423,7 +465,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               <span>Set Daily Goals</span>
             </button>
 
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-2xs text-xs">
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-2xs text-xs">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span className="font-semibold text-slate-700">Live Biometrics Connected</span>
             </div>
@@ -1483,6 +1525,15 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
           </div>
         </div>
       )}
+
+      {/* Reward Tiers Modal */}
+      <RewardTiersModal
+        isOpen={isRewardModalOpen}
+        onClose={() => setIsRewardModalOpen(false)}
+        currentXp={8420}
+        currentRank={42}
+        equippedBadgeId="apex_contender"
+      />
 
     </div>
   );
