@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import PotatoFitLogo from "./PotatoFitLogo";
 
 export default function Footer() {
   return (
@@ -12,19 +13,7 @@ export default function Footer() {
           
           {/* Brand Column */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-[#1B4332] text-emerald-400 flex items-center justify-center">
-                <svg
-                  className="w-5 h-5 stroke-current fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M2 12h4l3-7 4 14 3-7h6" />
-                </svg>
-              </div>
-              <span className="text-base font-black tracking-wider text-slate-900 uppercase">
-                FITMEAL <span className="text-emerald-700 font-light">{"//"}</span> <span className="text-xs font-semibold text-slate-500 tracking-widest">NUTRITION &amp; FUEL</span>
-              </span>
-            </div>
+            <PotatoFitLogo size="sm" variant="light" />
 
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-sm">
               Science-backed longevity, hybrid strength protocols, and restorative recovery engineered for everyday human performance.

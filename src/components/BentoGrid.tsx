@@ -152,7 +152,7 @@ export default function BentoGrid() {
   };
 
   return (
-    <section id="programs" className="py-16 sm:py-24 bg-[#FAF9F6]">
+    <section id="programs" className="py-16 sm:py-24 bg-[#FAF9F6] scroll-mt-20 sm:scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -417,7 +417,7 @@ export default function BentoGrid() {
           </div>
 
           {/* BLOCK 3 (Medium / 5 columns): Recovery & Sleep Hygiene */}
-          <div id="recovery" className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div id="recovery" className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm flex flex-col justify-between hover:border-slate-300 transition-all scroll-mt-20 sm:scroll-mt-24">
             <div>
               {/* Header */}
               <div className="flex items-center justify-between mb-5">
@@ -533,7 +533,7 @@ export default function BentoGrid() {
           </div>
 
           {/* BLOCK 4 (Wide / Span-full -> 7 columns on desktop): Community Accountability */}
-          <div id="community" className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div id="community" className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm flex flex-col justify-between hover:border-slate-300 transition-all scroll-mt-20 sm:scroll-mt-24">
             <div>
               {/* Header */}
               <div className="flex flex-wrap items-center justify-between gap-3 mb-6">

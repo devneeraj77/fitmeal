@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   Calendar,
   Check,
@@ -38,6 +39,7 @@ import {
 import { useSession, signOut } from "next-auth/react";
 import RewardTiersModal from "@/components/RewardTiersModal";
 import CanvasBadge from "@/components/CanvasBadge";
+import PotatoFitLogo from "@/components/PotatoFitLogo";
 
 interface DashboardViewProps {
   onBackToHome?: () => void;
@@ -246,9 +248,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
           >
             {mobileSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
-          <span className="font-black text-sm tracking-wide text-slate-900 uppercase">
-            FITMEAL <span className="text-emerald-700">{"//"}</span> DASHBOARD
-          </span>
+          <PotatoFitLogo size="sm" variant="light" />
         </div>
 
         {onBackToHome && (
@@ -270,16 +270,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
         <div className="space-y-6">
           {/* Logo & Platform Wordmark */}
           <div className="flex items-center justify-between pb-2">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-[#1B4332] text-emerald-400 flex items-center justify-center shadow-xs">
-                <svg className="w-4 h-4 stroke-current fill-none stroke-[2.2]" viewBox="0 0 24 24">
-                  <path d="M2 12h4l3-7 4 14 3-7h6" />
-                </svg>
-              </div>
-              <span className="text-xs font-black tracking-wider text-slate-900 uppercase">
-                FITMEAL
-              </span>
-            </div>
+            <PotatoFitLogo size="sm" variant="light" />
             {onBackToHome && (
               <button
                 onClick={onBackToHome}
@@ -294,25 +285,23 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
           {/* Profile Badge */}
           <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
             <div className="flex items-center gap-3 mb-2.5">
-              <button
-                type="button"
-                onClick={() => setIsRewardModalOpen(true)}
+              <Link
+                href="/rewards"
                 className="relative transition-transform hover:scale-105 cursor-pointer shrink-0"
                 title="View Arena Reward Tiers & Badges"
               >
                 <CanvasBadge tier="gold" emblem="trophy" size={42} className="shrink-0" />
-              </button>
+              </Link>
               <div className="min-w-0 flex-1">
                 <h3 className="text-xs font-bold text-slate-900 truncate">{userName}</h3>
-                <button
-                  type="button"
-                  onClick={() => setIsRewardModalOpen(true)}
+                <Link
+                  href="/rewards"
                   className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-900 bg-gradient-to-r from-emerald-100 to-emerald-200/80 hover:from-emerald-200 hover:to-emerald-300 border border-emerald-300/80 px-2 py-0.5 rounded cursor-pointer transition-all shadow-2xs"
-                  title="View Reward Tiers & Unlockable Perks"
+                  title="View Dedicated Rewards Page"
                 >
                   <Award className="w-2.5 h-2.5 text-emerald-800" />
                   <span>Level 4 Mover (Rewards)</span>
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -440,15 +429,14 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               <span>Global Arena (#42)</span>
             </a>
 
-            <button
-              type="button"
-              onClick={() => setIsRewardModalOpen(true)}
+            <Link
+              href="/rewards"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-950 shadow-2xs text-xs font-bold cursor-pointer transition-all active:scale-95"
               title="Inspect Reward Tiers & Arena Badges"
             >
               <Award className="w-3.5 h-3.5 text-amber-700" />
               <span>Reward Tiers</span>
-            </button>
+            </Link>
 
             <button
               type="button"

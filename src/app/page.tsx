@@ -70,7 +70,7 @@ export default function Home() {
         <CoachesGrid onSelectCoach={handleSelectCoach} />
 
         {/* 5. Final Conversion Anchor */}
-        <div id="trial-anchor">
+        <div id="trial-anchor" className="scroll-mt-20 sm:scroll-mt-24">
           <ConversionAnchor />
         </div>
       </main>

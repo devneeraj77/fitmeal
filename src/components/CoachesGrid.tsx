@@ -69,7 +69,7 @@ export const coachesList: Coach[] = [
 
 export default function CoachesGrid({ onSelectCoach }: CoachesGridProps) {
   return (
-    <section id="coaches" className="py-16 sm:py-24 bg-white border-t border-slate-200/80">
+    <section id="coaches" className="py-16 sm:py-24 bg-white border-t border-slate-200/80 scroll-mt-20 sm:scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

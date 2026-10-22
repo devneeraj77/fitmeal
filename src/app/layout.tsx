@@ -13,11 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FitMeal // Personalized Meal Fuel, Strength & Longevity",
-  description: "Personalized nutrition fuel, hybrid fitness training, and mindful recovery trackers engineered to fit your life.",
+  title: "PotatoFit // From Couch Potato to Global Apex",
+  description:
+    "AI-driven nutrition mapped to your nearest vegetable vendors and local grocers. Fuel smart, track daily quests, and compete with athletes worldwide.",
   openGraph: {
-    title: "FitMeal // Personalized Meal Fuel, Strength & Longevity",
-    description: "Personalized nutrition fuel, hybrid fitness training, and mindful recovery trackers engineered to fit your life.",
+    title: "PotatoFit // From Couch Potato to Global Apex",
+    description:
+      "AI-driven nutrition mapped to your nearest vegetable vendors and local grocers. Fuel smart, track daily quests, and compete with athletes worldwide.",
   },
 };
 

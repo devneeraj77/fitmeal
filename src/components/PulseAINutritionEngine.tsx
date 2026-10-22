@@ -710,7 +710,7 @@ export default function PulseAINutritionEngine() {
   return (
     <section
       id="nutrition"
-      className="relative w-full py-16 px-4 sm:px-6 lg:px-8 bg-[#F8FAF9] text-slate-900 overflow-hidden font-sans border-b border-[#1B4332]/10"
+      className="relative w-full py-16 px-4 sm:px-6 lg:px-8 bg-[#F8FAF9] text-slate-900 overflow-hidden font-sans border-b border-[#1B4332]/10 scroll-mt-20 sm:scroll-mt-24"
     >
       {/* Hidden Fullscreen Canvas for celebratory confetti bursts */}
       <canvas
