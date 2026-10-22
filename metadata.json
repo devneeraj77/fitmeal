@@ -1,0 +1,8 @@
+{
+  "name": "Pulse & Flow",
+  "description": "Comprehensive fitness and wellness platform for strength, nutrition, and daily recovery.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
