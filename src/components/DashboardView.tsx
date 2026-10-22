@@ -37,6 +37,7 @@ import {
 } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 import RewardTiersModal from "@/components/RewardTiersModal";
+import CanvasBadge from "@/components/CanvasBadge";
 
 interface DashboardViewProps {
   onBackToHome?: () => void;
@@ -45,12 +46,6 @@ interface DashboardViewProps {
 export default function DashboardView({ onBackToHome }: DashboardViewProps) {
   const { data: session } = useSession();
   const userName = session?.user?.name || "David Kim";
-  const userInitials = userName
-    .split(" ")
-    .map((w) => w[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase() || "DK";
 
   const [activeTab, setActiveTab] = useState("schedule");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
@@ -299,21 +294,23 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
           {/* Profile Badge */}
           <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
             <div className="flex items-center gap-3 mb-2.5">
-              <div className="relative">
-                <div className="w-10 h-10 rounded-xl bg-slate-900 text-emerald-400 font-black text-xs flex items-center justify-center border border-slate-700 shadow-xs">
-                  {userInitials}
-                </div>
-                <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full" />
-              </div>
+              <button
+                type="button"
+                onClick={() => setIsRewardModalOpen(true)}
+                className="relative transition-transform hover:scale-105 cursor-pointer shrink-0"
+                title="View Arena Reward Tiers & Badges"
+              >
+                <CanvasBadge tier="gold" emblem="trophy" size={42} className="shrink-0" />
+              </button>
               <div className="min-w-0 flex-1">
                 <h3 className="text-xs font-bold text-slate-900 truncate">{userName}</h3>
                 <button
                   type="button"
                   onClick={() => setIsRewardModalOpen(true)}
-                  className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#1B4332] bg-emerald-100/80 hover:bg-emerald-200 px-1.5 py-0.5 rounded cursor-pointer transition-colors"
+                  className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-900 bg-gradient-to-r from-emerald-100 to-emerald-200/80 hover:from-emerald-200 hover:to-emerald-300 border border-emerald-300/80 px-2 py-0.5 rounded cursor-pointer transition-all shadow-2xs"
                   title="View Reward Tiers & Unlockable Perks"
                 >
-                  <Award className="w-2.5 h-2.5 text-emerald-700" />
+                  <Award className="w-2.5 h-2.5 text-emerald-800" />
                   <span>Level 4 Mover (Rewards)</span>
                 </button>
               </div>

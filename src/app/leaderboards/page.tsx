@@ -23,6 +23,12 @@ import {
   Medal,
 } from "lucide-react";
 import RewardTiersModal from "@/components/RewardTiersModal";
+import CanvasBadge from "@/components/CanvasBadge";
+import {
+  ArenaToastProvider,
+  ArenaNotificationBell,
+  ArenaRivalWatchWidget,
+} from "@/components/ArenaToastSystem";
 
 // Self-contained high-performance confetti particle burst
 function triggerArenaConfetti(canvas: HTMLCanvasElement | null) {
@@ -417,7 +423,20 @@ export default function LeaderboardsPage() {
   const top3 = dynamicContenders.slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans selection:bg-emerald-100 selection:text-emerald-900 pb-28">
+    <ArenaToastProvider
+      userXp={userXp}
+      userRank={userRank}
+      onOpenTiersModal={() => setIsRewardModalOpen(true)}
+      onLogWorkout={() => handleLogWorkoutXP()}
+      onUserClimb={(newRank) => {
+        setUserRank(newRank);
+        triggerArenaConfetti(canvasRef.current);
+      }}
+      onUserRankDrop={(newRank) => {
+        setUserRank(newRank);
+      }}
+    >
+      <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans selection:bg-emerald-100 selection:text-emerald-900 pb-28">
       {/* Confetti Overlay Canvas */}
       <canvas
         ref={canvasRef}
@@ -470,18 +489,19 @@ export default function LeaderboardsPage() {
 
             <Link
               href="/dashboard"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[#1B4332] bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200 rounded-lg transition-colors shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-bold text-[#1B4332] bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200 rounded-lg transition-colors shadow-2xs"
             >
               <LayoutDashboard className="w-3.5 h-3.5 text-emerald-700" />
-              <span>Personal Dashboard</span>
+              <span className="hidden sm:inline">Personal </span>
+              <span>Dashboard</span>
             </Link>
 
             <button
               onClick={() => setIsRewardModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white bg-[#1B4332] hover:bg-[#153427] border border-[#2d5f47] rounded-lg transition-all shadow-2xs cursor-pointer active:scale-95"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-bold text-white bg-[#1B4332] hover:bg-[#153427] border border-[#2d5f47] rounded-lg transition-all shadow-2xs cursor-pointer active:scale-95"
             >
               <Award className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Reward Tiers</span>
+              <span>Rewards</span>
             </button>
 
             <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-[11px] font-mono text-slate-600">
@@ -700,11 +720,14 @@ export default function LeaderboardsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 items-end">
             {/* Rank 2 (Silver) */}
-            <div className="order-2 md:order-1 bg-white rounded-3xl p-6 border border-slate-200 shadow-2xs hover:shadow-xs transition-shadow flex flex-col items-center text-center relative md:translate-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-slate-200 text-slate-700 font-black text-base flex items-center justify-center mb-3 border-2 border-slate-300">
-                {top3[1]?.avatarText || "MP"}
-              </div>
-              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded-full mb-1">
+            <div className="order-2 md:order-1 bg-gradient-to-b from-white to-slate-50/90 rounded-3xl p-6 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-shadow flex flex-col items-center text-center relative md:translate-y-4">
+              <CanvasBadge
+                tier="silver"
+                emblem="trophy"
+                size={62}
+                className="mb-2"
+              />
+              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-full mb-1">
                 <Medal className="w-3 h-3 text-slate-500" />
                 Rank #2 · Silver Titan
               </span>
@@ -738,18 +761,21 @@ export default function LeaderboardsPage() {
             </div>
 
             {/* Rank 1 (Gold) */}
-            <div className="order-1 md:order-2 bg-gradient-to-b from-emerald-50/80 to-white rounded-3xl p-6 sm:p-7 border-2 border-emerald-400 shadow-md flex flex-col items-center text-center relative z-10">
-              <div className="absolute -top-4 bg-[#1B4332] text-emerald-300 px-3 py-1 rounded-full text-xs font-black tracking-wide flex items-center gap-1.5 shadow-sm">
-                <Crown className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
+            <div className="order-1 md:order-2 bg-gradient-to-b from-amber-50/40 via-emerald-50/30 to-white rounded-3xl p-6 sm:p-7 border-2 border-amber-400/80 shadow-md flex flex-col items-center text-center relative z-10">
+              <div className="absolute -top-4 bg-gradient-to-r from-[#1B4332] to-[#0E281C] text-emerald-300 px-3.5 py-1 rounded-full text-xs font-black tracking-wide flex items-center gap-1.5 shadow-md border border-emerald-500/30">
+                <Crown className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
                 <span>CHAMPION</span>
               </div>
 
-              <div className="w-16 h-16 rounded-2xl bg-[#1B4332] text-emerald-300 font-black text-xl flex items-center justify-center mb-3 mt-1 border-2 border-emerald-400 shadow-xs">
-                {top3[0]?.avatarText || "AS"}
-              </div>
+              <CanvasBadge
+                tier="gold"
+                emblem="crown"
+                size={74}
+                className="mb-2 mt-1"
+              />
 
-              <span className="inline-flex items-center gap-1 text-xs font-black text-emerald-900 bg-emerald-100 px-2.5 py-0.5 rounded-full mb-1">
-                <Trophy className="w-3 h-3 text-emerald-700" />
+              <span className="inline-flex items-center gap-1 text-xs font-black text-amber-900 bg-amber-100/90 px-3 py-0.5 rounded-full mb-1 border border-amber-300/60">
+                <Trophy className="w-3.5 h-3.5 text-amber-700" />
                 Rank #1 · Apex Champion
               </span>
 
@@ -782,18 +808,21 @@ export default function LeaderboardsPage() {
               <button
                 onClick={() => handleFistBump(top3[0].id)}
                 disabled={top3[0].hasFistBumped}
-                className="w-full py-2.5 px-3 bg-[#1B4332] hover:bg-[#153427] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-xs active:scale-95 cursor-pointer"
+                className="w-full py-2.5 px-3 bg-gradient-to-r from-[#1B4332] to-[#123023] hover:from-[#153427] hover:to-[#0D2218] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-xs active:scale-95 cursor-pointer"
               >
                 <span>👊 Salute Champion ({top3[0]?.fistBumps})</span>
               </button>
             </div>
 
             {/* Rank 3 (Bronze) */}
-            <div className="order-3 bg-white rounded-3xl p-6 border border-slate-200 shadow-2xs hover:shadow-xs transition-shadow flex flex-col items-center text-center relative md:translate-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-900 font-black text-base flex items-center justify-center mb-3 border-2 border-amber-300">
-                {top3[2]?.avatarText || "RV"}
-              </div>
-              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-900 bg-amber-50 px-2 py-0.5 rounded-full mb-1">
+            <div className="order-3 bg-gradient-to-b from-white to-amber-50/30 rounded-3xl p-6 border border-amber-200/70 shadow-2xs hover:shadow-xs transition-shadow flex flex-col items-center text-center relative md:translate-y-4">
+              <CanvasBadge
+                tier="bronze"
+                emblem="star"
+                size={58}
+                className="mb-2"
+              />
+              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-900 bg-amber-50 px-2.5 py-0.5 rounded-full mb-1 border border-amber-200">
                 <Medal className="w-3 h-3 text-amber-700" />
                 Rank #3 · Bronze Vanguard
               </span>
@@ -1163,9 +1192,13 @@ export default function LeaderboardsPage() {
           
           {/* User Status */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#1B4332] text-emerald-400 font-black text-xs flex items-center justify-center border border-slate-700 shrink-0">
-              DK
-            </div>
+            <button
+              onClick={() => setIsRewardModalOpen(true)}
+              className="relative transition-transform hover:scale-105 cursor-pointer shrink-0"
+              title="Click to view Reward Tiers & Badges"
+            >
+              <CanvasBadge tier="gold" emblem="trophy" size={42} className="shrink-0" />
+            </button>
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-black text-sm text-slate-900">David Kim</span>
@@ -1174,7 +1207,7 @@ export default function LeaderboardsPage() {
                 </span>
                 <button
                   onClick={() => setIsRewardModalOpen(true)}
-                  className="text-xs font-bold text-amber-900 bg-amber-100 hover:bg-amber-200 border border-amber-300 px-2 py-0.5 rounded flex items-center gap-1 transition-colors cursor-pointer"
+                  className="text-xs font-bold text-amber-900 bg-gradient-to-r from-amber-100 to-amber-200/90 hover:from-amber-200 hover:to-amber-300 border border-amber-300/80 px-2.5 py-0.5 rounded flex items-center gap-1 transition-all cursor-pointer shadow-2xs"
                   title="View your Tier and unlockable perks"
                 >
                   <Award className="w-3 h-3 text-amber-700" />
@@ -1182,7 +1215,7 @@ export default function LeaderboardsPage() {
                 </button>
                 <button
                   onClick={() => setIsRewardModalOpen(true)}
-                  className="hidden md:inline-flex items-center gap-1 text-[10px] font-mono text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-2 py-0.5 rounded-full transition-colors cursor-pointer"
+                  className="hidden md:inline-flex items-center gap-1 text-[10px] font-mono text-emerald-900 bg-emerald-100/90 hover:bg-emerald-200 border border-emerald-300 px-2.5 py-0.5 rounded-full transition-colors cursor-pointer"
                   title="Equipped Arena Badge - Click to Change"
                 >
                   <span>🛡️ {equippedBadge.name}</span>
@@ -1203,35 +1236,40 @@ export default function LeaderboardsPage() {
           </div>
 
           {/* Quick Real-Time Climb Triggers & Reward Tiers button */}
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <button
               onClick={() => setIsRewardModalOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-300 text-xs font-bold text-amber-950 transition-all active:scale-95 cursor-pointer shadow-2xs"
+              className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 text-[11px] sm:text-xs font-black transition-all active:scale-95 cursor-pointer shadow-sm"
               title="Open Reward Tiers & Unlockable Perks Modal"
             >
-              <Award className="w-3.5 h-3.5 text-amber-700" />
-              <span>Reward Tiers</span>
+              <Award className="w-3.5 h-3.5 text-slate-950" />
+              <span className="hidden sm:inline">Reward </span>
+              <span>Tiers</span>
             </button>
 
             <button
               onClick={handleLogMealXP}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-emerald-50 border border-slate-200 hover:border-emerald-300 text-xs font-bold text-[#1B4332] transition-all active:scale-95 cursor-pointer shadow-2xs"
+              className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-white hover:bg-emerald-50 border border-slate-200 hover:border-emerald-300 text-[11px] sm:text-xs font-bold text-[#1B4332] transition-all active:scale-95 cursor-pointer shadow-2xs"
             >
               <Utensils className="w-3.5 h-3.5 text-emerald-700" />
-              <span>Log Kirana Fuel (+50 XP)</span>
+              <span className="hidden sm:inline">Log Kirana Fuel</span>
+              <span className="sm:hidden">Fuel</span>
+              <span> (+50)</span>
             </button>
 
             <button
               onClick={handleLogWorkoutXP}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#1B4332] hover:bg-[#153427] text-white text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs"
+              className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-[#1B4332] hover:bg-[#153427] text-white text-[11px] sm:text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs"
             >
               <Dumbbell className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Log Session (+150 XP)</span>
+              <span className="hidden sm:inline">Log Session</span>
+              <span className="sm:hidden">Workout</span>
+              <span> (+150)</span>
             </button>
 
             <Link
               href="/dashboard"
-              className="p-2 rounded-xl border border-slate-200 hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition-colors"
+              className="p-1.5 sm:p-2 rounded-xl border border-slate-200 hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition-colors"
               title="Return to Dashboard"
             >
               <LayoutDashboard className="w-4 h-4" />
