@@ -1,8 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 
 // Retrieve Supabase environment credentials (or safe defaults for development)
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://mock-pulseflow.supabase.co";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "mock-anon-key-pulseflow-2026";
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://mock-fitmeal.supabase.co";
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "mock-anon-key-fitmeal-2026";
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
@@ -23,10 +23,10 @@ export interface SupabaseAuthProfile {
 // In-memory fallback cache when Supabase credentials are in development/mock mode
 const inMemoryUserDb = new Map<string, SupabaseAuthProfile>([
   [
-    "david.kim@pulseflow.fit",
+    "david.kim@fitmeal.fit",
     {
       id: "usr_david_kim_01",
-      email: "david.kim@pulseflow.fit",
+      email: "david.kim@fitmeal.fit",
       full_name: "David Kim",
       level: "Level 4 Mover",
       streak_days: 14,
@@ -68,7 +68,7 @@ export async function syncAuthUserToSupabase(user: {
   // If real Supabase credentials are configured, execute the upsert
   if (
     process.env.NEXT_PUBLIC_SUPABASE_URL &&
-    process.env.NEXT_PUBLIC_SUPABASE_URL !== "https://mock-pulseflow.supabase.co" &&
+    process.env.NEXT_PUBLIC_SUPABASE_URL !== "https://mock-fitmeal.supabase.co" &&
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   ) {
     try {
@@ -110,7 +110,7 @@ export async function getSupabaseProfile(email: string): Promise<SupabaseAuthPro
 
   if (
     process.env.NEXT_PUBLIC_SUPABASE_URL &&
-    process.env.NEXT_PUBLIC_SUPABASE_URL !== "https://mock-pulseflow.supabase.co" &&
+    process.env.NEXT_PUBLIC_SUPABASE_URL !== "https://mock-fitmeal.supabase.co" &&
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   ) {
     try {
@@ -158,7 +158,7 @@ export async function saveDailyGoalsToSupabase(
 
   if (
     process.env.NEXT_PUBLIC_SUPABASE_URL &&
-    process.env.NEXT_PUBLIC_SUPABASE_URL !== "https://mock-pulseflow.supabase.co" &&
+    process.env.NEXT_PUBLIC_SUPABASE_URL !== "https://mock-fitmeal.supabase.co" &&
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   ) {
     try {

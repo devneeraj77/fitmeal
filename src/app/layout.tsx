@@ -13,11 +13,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pulse & Flow // Longevity, Strength & Daily Recovery",
-  description: "Personalized hybrid workout routines, targeted nutritional planning, and mindful recovery trackers engineered to fit your life.",
+  title: "FitMeal // Personalized Meal Fuel, Strength & Longevity",
+  description: "Personalized nutrition fuel, hybrid fitness training, and mindful recovery trackers engineered to fit your life.",
   openGraph: {
-    title: "Pulse & Flow // Longevity, Strength & Daily Recovery",
-    description: "Personalized hybrid workout routines, targeted nutritional planning, and mindful recovery trackers engineered to fit your life.",
+    title: "FitMeal // Personalized Meal Fuel, Strength & Longevity",
+    description: "Personalized nutrition fuel, hybrid fitness training, and mindful recovery trackers engineered to fit your life.",
   },
 };
 

@@ -48,8 +48,8 @@ export default function SignInModal({ isOpen, onClose, onOpenDashboard }: SignIn
   const handleDemoLogin = async () => {
     setIsLoading(true);
     setError("");
-    const demoEmail = "david.kim@pulseflow.fit";
-    const demoPassword = "pulse2026";
+    const demoEmail = "david.kim@fitmeal.fit";
+    const demoPassword = "fitmeal2026";
     setEmail(demoEmail);
     setPassword(demoPassword);
 
@@ -108,7 +108,7 @@ export default function SignInModal({ isOpen, onClose, onOpenDashboard }: SignIn
             </div>
 
             <h3 className="text-2xl font-black text-slate-900 tracking-tight">
-              Sign In to Pulse &amp; Flow
+              Sign In to FitMeal
             </h3>
             <p className="text-xs text-slate-500 mt-1 mb-5">
               Secure authentication powered by NextAuth. Access your personal training splits and biomarker logs.
@@ -133,7 +133,7 @@ export default function SignInModal({ isOpen, onClose, onOpenDashboard }: SignIn
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="david.kim@pulseflow.fit"
+                    placeholder="david.kim@fitmeal.fit"
                     className="w-full pl-10 pr-3.5 py-3 rounded-xl border border-slate-200 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-700"
                   />
                 </div>
@@ -144,7 +144,7 @@ export default function SignInModal({ isOpen, onClose, onOpenDashboard }: SignIn
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
                     Password
                   </label>
-                  <span className="text-[11px] text-slate-400 font-mono">Demo: pulse2026</span>
+                  <span className="text-[11px] text-slate-400 font-mono">Demo: fitmeal2026</span>
                 </div>
                 <div className="relative">
                   <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />

@@ -7,7 +7,7 @@ export async function GET() {
     const session = await auth();
 
     // Default email if no session (e.g. demo athlete)
-    const email = session?.user?.email || "david.kim@pulseflow.fit";
+    const email = session?.user?.email || "david.kim@fitmeal.fit";
     const profile = await getSupabaseProfile(email);
 
     return NextResponse.json({
@@ -25,7 +25,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const session = await auth();
-    const email = session?.user?.email || "david.kim@pulseflow.fit";
+    const email = session?.user?.email || "david.kim@fitmeal.fit";
 
     const body = await req.json();
     const targetCalories = Number(body.target_calories);

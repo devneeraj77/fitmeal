@@ -22,7 +22,7 @@ export default function Footer() {
                 </svg>
               </div>
               <span className="text-base font-black tracking-wider text-slate-900 uppercase">
-                PULSE &amp; FLOW <span className="text-emerald-700 font-light">{"//"}</span> <span className="text-xs font-semibold text-slate-500 tracking-widest">WELLNESS</span>
+                FITMEAL <span className="text-emerald-700 font-light">{"//"}</span> <span className="text-xs font-semibold text-slate-500 tracking-widest">NUTRITION &amp; FUEL</span>
               </span>
             </div>
 
@@ -93,7 +93,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© 2026 Pulse &amp; Flow Wellness Inc. All rights reserved.</p>
+          <p>© 2026 FitMeal Inc. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <a href="#" className="hover:text-slate-800 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-slate-800 transition-colors">Terms of Service</a>

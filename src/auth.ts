@@ -19,13 +19,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         // Standard athlete credentials or demo login
-        // Demo credentials: david.kim@pulseflow.fit / pulse2026
+        // Demo credentials: david.kim@fitmeal.fit / fitmeal2026
         // Also supports any registered fitness member with valid email and password >= 6 chars
         if (
-          (email.toLowerCase() === "david.kim@pulseflow.fit" && password === "pulse2026") ||
+          (email.toLowerCase() === "david.kim@fitmeal.fit" && password === "fitmeal2026") ||
           (email.includes("@") && password.length >= 6)
         ) {
-          const displayName = email.toLowerCase() === "david.kim@pulseflow.fit"
+          const displayName = email.toLowerCase() === "david.kim@fitmeal.fit"
             ? "David Kim"
             : email.split("@")[0].replace(/[._]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
@@ -66,6 +66,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
   },
-  secret: process.env.AUTH_SECRET || "pulse-and-flow-nextauth-secret-32-chars-key",
+  secret: process.env.AUTH_SECRET || "fitmeal-nextauth-secret-32-chars-key",
   trustHost: true,
 });

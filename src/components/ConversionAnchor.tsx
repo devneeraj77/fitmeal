@@ -80,7 +80,7 @@ export default function ConversionAnchor() {
                   <div className="w-12 h-12 rounded-full bg-emerald-400 text-slate-950 flex items-center justify-center mx-auto mb-3">
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
-                  <h3 className="text-xl font-bold">Welcome to Pulse &amp; Flow!</h3>
+                  <h3 className="text-xl font-bold">Welcome to FitMeal!</h3>
                   <p className="text-sm text-emerald-100 mt-1">
                     Your 7-day full access pass and onboarding assessment link have been dispatched to{" "}
                     <strong className="text-white underline font-mono">{email}</strong>.

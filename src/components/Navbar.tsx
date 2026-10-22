@@ -46,7 +46,7 @@ export default function Navbar({
           </div>
           <div className="flex flex-col">
             <span className="text-base sm:text-lg font-black tracking-wider text-slate-900 uppercase font-sans">
-              PULSE &amp; FLOW <span className="text-emerald-700 font-light">{"//"}</span> <span className="text-xs font-semibold text-slate-500 tracking-widest">WELLNESS</span>
+              FITMEAL <span className="text-emerald-700 font-light">{"//"}</span> <span className="text-xs font-semibold text-slate-500 tracking-widest">NUTRITION &amp; FUEL</span>
             </span>
           </div>
         </a>

@@ -249,7 +249,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
             {mobileSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
           <span className="font-black text-sm tracking-wide text-slate-900 uppercase">
-            PULSE &amp; FLOW <span className="text-emerald-700">{"//"}</span> DASHBOARD
+            FITMEAL <span className="text-emerald-700">{"//"}</span> DASHBOARD
           </span>
         </div>
 
@@ -279,7 +279,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                 </svg>
               </div>
               <span className="text-xs font-black tracking-wider text-slate-900 uppercase">
-                PULSE &amp; FLOW
+                FITMEAL
               </span>
             </div>
             {onBackToHome && (
