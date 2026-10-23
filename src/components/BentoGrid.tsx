@@ -152,18 +152,18 @@ export default function BentoGrid() {
   };
 
   return (
-    <section id="programs" className="py-16 sm:py-24 bg-[#0B0E0C] text-[#E2E7DE] scroll-mt-20 sm:scroll-mt-24 border-t border-[#757761]/25">
+    <section id="programs" className="py-16 sm:py-24 bg-[#F4F6F5] dark:bg-[#0B0E0C] text-[#121815] dark:text-[#E2E7DE] scroll-mt-20 sm:scroll-mt-24 border-t border-[#757761]/25 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#9c67b5]/15 border border-[#9c67b5]/30 text-[#f7fe72] text-xs font-semibold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#757761]/15 border border-[#757761]/30 text-[#505445] dark:text-[#f7fe72] text-xs font-semibold uppercase tracking-wider mb-3">
             <span>The 4-Pillar System</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
-            Holistic Health, <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9c67b5] via-[#f4e76e] to-[#f7fe72]">Engineered Simply</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#121815] dark:text-white leading-tight">
+            Holistic Health, <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#121815] via-[#505445] to-[#7A5A00] dark:from-[#FFFFFF] dark:via-[#f4e76e] dark:to-[#f7fe72]">Engineered Simply</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#A0A493] leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-[#505445] dark:text-[#A0A493] leading-relaxed">
             Eliminate guesswork with unified protocols. Strength progression, cellular nutrition, circadian sleep, and peer accountability tuned to your physiology.
           </p>
         </div>
@@ -172,12 +172,12 @@ export default function BentoGrid() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
           {/* BLOCK 1 (Large / Span 2 on 12-col grid -> 7 columns): Adaptive Strength Training */}
-          <div className="lg:col-span-7 bg-[#121815] rounded-3xl p-6 sm:p-8 border border-[#757761]/30 shadow-xl shadow-black/50 flex flex-col justify-between hover:border-[#9c67b5]/50 transition-all">
+          <div className="lg:col-span-7 bg-[#121815] rounded-3xl p-6 sm:p-8 border border-[#757761]/30 shadow-xl shadow-black/50 flex flex-col justify-between hover:border-[#f7fe72]/50 transition-all">
             <div>
               {/* Card Header */}
               <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-2xl bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center border border-[#9c67b5]/40 shadow-inner">
+                  <div className="w-11 h-11 rounded-2xl bg-[#757761]/20 text-[#f7fe72] flex items-center justify-center border border-[#757761]/40 shadow-inner">
                     <Dumbbell className="w-5 h-5" />
                   </div>
                   <div>
@@ -206,7 +206,7 @@ export default function BentoGrid() {
                     onClick={() => setEquipmentFilter(tab.id)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap cursor-pointer ${
                       equipmentFilter === tab.id
-                        ? "bg-[#9c67b5] text-white shadow-xs font-bold"
+                        ? "bg-[#f7fe72] text-[#0B0E0C] shadow-xs font-black"
                         : "text-[#A0A493] hover:text-white"
                     }`}
                   >
@@ -220,7 +220,7 @@ export default function BentoGrid() {
                 {filteredWorkouts.map((exercise, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 rounded-2xl bg-[#0B0E0C]/80 hover:bg-[#0B0E0C] border border-[#757761]/25 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors hover:border-[#9c67b5]/40"
+                    className="p-3.5 rounded-2xl bg-[#0B0E0C]/80 hover:bg-[#0B0E0C] border border-[#757761]/25 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors hover:border-[#f7fe72]/40"
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-xl bg-[#121815] text-[#f7fe72] font-bold text-xs flex items-center justify-center border border-[#757761]/40 shrink-0 font-mono">
@@ -239,7 +239,7 @@ export default function BentoGrid() {
                     </div>
 
                     <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0">
-                      <span className="text-[11px] font-semibold text-[#f7fe72] bg-[#9c67b5]/20 border border-[#9c67b5]/30 px-2.5 py-0.5 rounded-md font-mono">
+                      <span className="text-[11px] font-semibold text-[#f7fe72] bg-[#757761]/20 border border-[#757761]/30 px-2.5 py-0.5 rounded-md font-mono">
                         {exercise.overload}
                       </span>
                       <button className="text-xs font-semibold text-[#f4e76e] hover:text-[#f7fe72] flex items-center gap-0.5 cursor-pointer transition-colors">
@@ -265,7 +265,7 @@ export default function BentoGrid() {
                   <div key={i} className="flex flex-col items-center gap-1">
                     <div
                       className={`w-full rounded-t-md transition-all ${
-                        i === 7 ? "bg-gradient-to-t from-[#9c67b5] to-[#f7fe72]" : "bg-[#757761]/30 hover:bg-[#9c67b5]/50"
+                        i === 7 ? "bg-gradient-to-t from-[#f4e76e] to-[#f7fe72]" : "bg-[#757761]/30 hover:bg-[#f7fe72]/50"
                       }`}
                       style={{ height: `${val}%` }}
                       title={`Week ${i + 1}: ${val}% load index`}
@@ -278,12 +278,12 @@ export default function BentoGrid() {
           </div>
 
           {/* BLOCK 2 (Medium / 5 columns): Macro & Meal Fuel */}
-          <div id="fuel-tracker" className="lg:col-span-5 bg-[#121815] rounded-3xl p-6 sm:p-8 border border-[#757761]/30 shadow-xl shadow-black/50 flex flex-col justify-between hover:border-[#9c67b5]/50 transition-all">
+          <div id="fuel-tracker" className="lg:col-span-5 bg-[#121815] rounded-3xl p-6 sm:p-8 border border-[#757761]/30 shadow-xl shadow-black/50 flex flex-col justify-between hover:border-[#f7fe72]/50 transition-all">
             <div>
               {/* Header */}
               <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-2xl bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center border border-[#9c67b5]/40 shadow-inner">
+                  <div className="w-11 h-11 rounded-2xl bg-[#757761]/20 text-[#f7fe72] flex items-center justify-center border border-[#757761]/40 shadow-inner">
                     <Utensils className="w-5 h-5 text-[#f7fe72]" />
                   </div>
                   <div>
@@ -298,7 +298,7 @@ export default function BentoGrid() {
                 <button
                   onClick={() => setSelectedMeal("postWorkout")}
                   className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
-                    selectedMeal === "postWorkout" ? "bg-[#9c67b5] text-white shadow-xs font-bold" : "text-[#A0A493] hover:text-white"
+                    selectedMeal === "postWorkout" ? "bg-[#f7fe72] text-[#0B0E0C] shadow-xs font-black" : "text-[#A0A493] hover:text-white"
                   }`}
                 >
                   Post-Workout
@@ -306,7 +306,7 @@ export default function BentoGrid() {
                 <button
                   onClick={() => setSelectedMeal("cleanKeto")}
                   className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
-                    selectedMeal === "cleanKeto" ? "bg-[#9c67b5] text-white shadow-xs font-bold" : "text-[#A0A493] hover:text-white"
+                    selectedMeal === "cleanKeto" ? "bg-[#f7fe72] text-[#0B0E0C] shadow-xs font-black" : "text-[#A0A493] hover:text-white"
                   }`}
                 >
                   Clean Protein
@@ -314,7 +314,7 @@ export default function BentoGrid() {
                 <button
                   onClick={() => setSelectedMeal("metabolic")}
                   className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
-                    selectedMeal === "metabolic" ? "bg-[#9c67b5] text-white shadow-xs font-bold" : "text-[#A0A493] hover:text-white"
+                    selectedMeal === "metabolic" ? "bg-[#f7fe72] text-[#0B0E0C] shadow-xs font-black" : "text-[#A0A493] hover:text-white"
                   }`}
                 >
                   Dinner Fuel
@@ -363,7 +363,7 @@ export default function BentoGrid() {
                         d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                       />
                       <path
-                        className="text-[#9c67b5] stroke-current stroke-[3.5] stroke-linecap-round fill-none"
+                        className="text-[#757761] stroke-current stroke-[3.5] stroke-linecap-round fill-none"
                         strokeDasharray={`${Math.min(100, Math.round((activeMeal.carbs / 80) * 100))}, 100`}
                         d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                       />
@@ -417,12 +417,12 @@ export default function BentoGrid() {
           </div>
 
           {/* BLOCK 3 (Medium / 5 columns): Recovery & Sleep Hygiene */}
-          <div id="recovery" className="lg:col-span-5 bg-[#121815] rounded-3xl p-6 sm:p-8 border border-[#757761]/30 shadow-xl shadow-black/50 flex flex-col justify-between hover:border-[#9c67b5]/50 transition-all scroll-mt-20 sm:scroll-mt-24">
+          <div id="recovery" className="lg:col-span-5 bg-[#121815] rounded-3xl p-6 sm:p-8 border border-[#757761]/30 shadow-xl shadow-black/50 flex flex-col justify-between hover:border-[#f7fe72]/50 transition-all scroll-mt-20 sm:scroll-mt-24">
             <div>
               {/* Header */}
               <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-2xl bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center border border-[#9c67b5]/40 shadow-inner">
+                  <div className="w-11 h-11 rounded-2xl bg-[#757761]/20 text-[#f7fe72] flex items-center justify-center border border-[#757761]/40 shadow-inner">
                     <Moon className="w-5 h-5 text-[#f7fe72]" />
                   </div>
                   <div>
@@ -430,37 +430,37 @@ export default function BentoGrid() {
                     <p className="text-xs text-[#A0A493]">Circadian entrainment, breathwork &amp; thermal contrast</p>
                   </div>
                 </div>
-                <span className="text-xs font-mono font-bold text-[#f7fe72] bg-[#9c67b5]/20 border border-[#9c67b5]/30 px-2.5 py-1 rounded-md">
+                <span className="text-xs font-mono font-bold text-[#f7fe72] bg-[#757761]/20 border border-[#757761]/30 px-2.5 py-1 rounded-md">
                   RECOVERY: 94%
                 </span>
               </div>
 
               {/* Circadian Rhythm Clock Visual Strip */}
-              <div className="p-3.5 rounded-2xl bg-gradient-to-r from-[#0B0E0C] via-[#2D163D] to-[#0B0E0C] text-white mb-5 border border-[#9c67b5]/30 shadow-xs">
+              <div className="p-3.5 rounded-2xl bg-[#EAEFEA] dark:bg-gradient-to-r dark:from-[#0B0E0C] dark:via-[#18201A] dark:to-[#0B0E0C] text-[#121815] dark:text-white mb-5 border border-[#757761]/30 shadow-xs">
                 <div className="flex items-center justify-between text-xs font-semibold mb-2">
-                  <span className="flex items-center gap-1.5 text-[#f7fe72]">
+                  <span className="flex items-center gap-1.5 text-[#7A5A00] dark:text-[#f7fe72]">
                     <Clock className="w-3.5 h-3.5" />
                     <span>24-Hour Circadian Biological Clock</span>
                   </span>
-                  <span className="text-[11px] text-[#f4e76e] font-mono">Optimal Phase</span>
+                  <span className="text-[11px] text-[#7A5A00] dark:text-[#f4e76e] font-mono">Optimal Phase</span>
                 </div>
 
                 <div className="grid grid-cols-4 gap-2 text-center text-[10px] pt-1">
-                  <div className="p-1.5 rounded bg-white/5 border border-[#757761]/25">
-                    <p className="text-[#A0A493]">07:00</p>
-                    <p className="font-semibold text-white">Morning Light</p>
+                  <div className="p-1.5 rounded bg-white dark:bg-white/5 border border-[#757761]/25">
+                    <p className="text-[#505445] dark:text-[#A0A493]">07:00</p>
+                    <p className="font-semibold text-[#121815] dark:text-white">Morning Light</p>
                   </div>
-                  <div className="p-1.5 rounded bg-white/5 border border-[#757761]/25">
-                    <p className="text-[#A0A493]">16:30</p>
-                    <p className="font-semibold text-white">Peak Strength</p>
+                  <div className="p-1.5 rounded bg-white dark:bg-white/5 border border-[#757761]/25">
+                    <p className="text-[#505445] dark:text-[#A0A493]">16:30</p>
+                    <p className="font-semibold text-[#121815] dark:text-white">Peak Strength</p>
                   </div>
-                  <div className="p-1.5 rounded bg-white/5 border border-[#757761]/25">
-                    <p className="text-[#A0A493]">21:00</p>
-                    <p className="font-semibold text-white">Melatonin</p>
+                  <div className="p-1.5 rounded bg-white dark:bg-white/5 border border-[#757761]/25">
+                    <p className="text-[#505445] dark:text-[#A0A493]">21:00</p>
+                    <p className="font-semibold text-[#121815] dark:text-white">Melatonin</p>
                   </div>
-                  <div className="p-1.5 rounded bg-[#9c67b5]/30 border border-[#f7fe72]/40">
-                    <p className="text-[#f7fe72]">22:30</p>
-                    <p className="font-semibold text-white">Deep Sleep REM</p>
+                  <div className="p-1.5 rounded bg-[#757761]/15 dark:bg-[#757761]/30 border border-[#757761]/40 dark:border-[#f7fe72]/40">
+                    <p className="text-[#7A5A00] dark:text-[#f7fe72]">22:30</p>
+                    <p className="font-semibold text-[#121815] dark:text-white">Deep Sleep REM</p>
                   </div>
                 </div>
               </div>
@@ -476,9 +476,9 @@ export default function BentoGrid() {
                   </div>
                   <button
                     onClick={toggleBreathwork}
-                    className="px-3 py-1.5 rounded-lg bg-[#9c67b5] hover:bg-[#8651a0] text-white text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+                    className="px-3 py-1.5 rounded-lg bg-[#f7fe72] hover:brightness-110 text-[#0B0E0C] text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
                   >
-                    {breathActive ? <Pause className="w-3.5 h-3.5 fill-white" /> : <Play className="w-3.5 h-3.5 fill-white" />}
+                    {breathActive ? <Pause className="w-3.5 h-3.5 fill-[#0B0E0C]" /> : <Play className="w-3.5 h-3.5 fill-[#0B0E0C]" />}
                     <span>{breathActive ? "Pause" : "Start 3m"}</span>
                   </button>
                 </div>
@@ -511,7 +511,7 @@ export default function BentoGrid() {
                   onClick={() => setPlungeLogged(!plungeLogged)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
                     plungeLogged
-                      ? "bg-[#9c67b5]/25 border-[#9c67b5] text-[#f7fe72]"
+                      ? "bg-[#f7fe72]/15 border-[#f7fe72] text-[#f7fe72]"
                       : "bg-[#0B0E0C] border-[#757761]/35 text-[#CBD2C7] hover:text-white"
                   }`}
                 >
@@ -533,12 +533,12 @@ export default function BentoGrid() {
           </div>
 
           {/* BLOCK 4 (Wide / Span-full -> 7 columns on desktop): Community Accountability */}
-          <div id="community" className="lg:col-span-7 bg-[#121815] rounded-3xl p-6 sm:p-8 border border-[#757761]/30 shadow-xl shadow-black/50 flex flex-col justify-between hover:border-[#9c67b5]/50 transition-all scroll-mt-20 sm:scroll-mt-24">
+          <div id="community" className="lg:col-span-7 bg-[#121815] rounded-3xl p-6 sm:p-8 border border-[#757761]/30 shadow-xl shadow-black/50 flex flex-col justify-between hover:border-[#f7fe72]/50 transition-all scroll-mt-20 sm:scroll-mt-24">
             <div>
               {/* Header */}
               <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-2xl bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center border border-[#9c67b5]/40 shadow-inner">
+                  <div className="w-11 h-11 rounded-2xl bg-[#757761]/20 text-[#f7fe72] flex items-center justify-center border border-[#757761]/40 shadow-inner">
                     <Users className="w-5 h-5 text-[#f7fe72]" />
                   </div>
                   <div>
@@ -555,22 +555,22 @@ export default function BentoGrid() {
               </div>
 
               {/* Sprint Challenge Banner */}
-              <div className="p-4 rounded-2xl bg-gradient-to-r from-[#2D163D] via-[#1b1525] to-[#121815] border border-[#9c67b5]/40 text-white mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="p-4 rounded-2xl bg-gradient-to-r from-[#EAEFEA] via-[#FFFFFF] to-[#EAEFEA] dark:from-[#18201A] dark:via-[#141A16] dark:to-[#121815] border border-[#757761]/35 dark:border-[#757761]/40 text-[#121815] dark:text-white mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <div className="flex items-center gap-2 text-[#f7fe72] text-xs font-bold uppercase tracking-wider">
-                    <Flame className="w-4 h-4 fill-[#f7fe72] text-[#f7fe72]" />
+                  <div className="flex items-center gap-2 text-[#7A5A00] dark:text-[#f7fe72] text-xs font-bold uppercase tracking-wider">
+                    <Flame className="w-4 h-4 fill-current" />
                     <span>Featured Sprint Challenge</span>
                   </div>
-                  <h4 className="text-base font-bold text-white mt-1">October 100km Ergometer &amp; Rower Sprint</h4>
-                  <p className="text-xs text-[#A0A493] mt-0.5">Community progress: 68.4km / 100km completed</p>
+                  <h4 className="text-base font-bold text-[#121815] dark:text-white mt-1">October 100km Ergometer &amp; Rower Sprint</h4>
+                  <p className="text-xs text-[#505445] dark:text-[#A0A493] mt-0.5">Community progress: 68.4km / 100km completed</p>
                 </div>
                 
                 <button
                   onClick={() => setJoinedSprint(!joinedSprint)}
                   className={`px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer shadow-md ${
                     joinedSprint
-                      ? "bg-[#9c67b5] text-white"
-                      : "bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] hover:brightness-110"
+                      ? "bg-[#f7fe72] text-[#0B0E0C] font-black"
+                      : "bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] font-black hover:brightness-110"
                   }`}
                 >
                   {joinedSprint ? "✓ Challenge Joined" : "Join Sprint →"}
@@ -596,13 +596,13 @@ export default function BentoGrid() {
                     key={idx}
                     className={`p-3 rounded-xl border flex items-center justify-between transition-colors ${
                       athlete.name.includes("You")
-                        ? "bg-[#9c67b5]/20 border-[#9c67b5]/50 shadow-[0_0_15px_rgba(156,103,181,0.2)]"
+                        ? "bg-[#757761]/25 border-[#f7fe72]/50 shadow-[0_0_15px_rgba(247,254,114,0.15)]"
                         : "bg-[#0B0E0C] border-[#757761]/25 hover:border-[#757761]/40"
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <span className="text-xs font-mono font-black text-[#f7fe72] w-5">{athlete.rank}</span>
-                      <div className="w-7 h-7 rounded-full bg-[#2D163D] text-[#f7fe72] border border-[#9c67b5]/40 font-bold text-[11px] flex items-center justify-center">
+                      <div className="w-7 h-7 rounded-full bg-[#18201A] text-[#f7fe72] border border-[#757761]/40 font-bold text-[11px] flex items-center justify-center">
                         {athlete.name[0]}
                       </div>
                       <div>
@@ -613,7 +613,7 @@ export default function BentoGrid() {
 
                     <div className="flex items-center gap-6">
                       <span className="text-xs font-bold text-[#f7fe72] flex items-center gap-1">
-                        <Flame className="w-3 h-3 fill-[#f7fe72] text-[#f7fe72]" />
+                        <Flame className="w-3.5 h-3.5 fill-[#f7fe72] text-[#f7fe72]" />
                         {athlete.streak}
                       </span>
                       <span className="text-xs font-mono font-bold text-white">{athlete.volume}</span>
@@ -635,7 +635,7 @@ export default function BentoGrid() {
                 onClick={handleCheer}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 ${
                   userCheered
-                    ? "bg-[#9c67b5]/30 text-[#f7fe72] border border-[#9c67b5]"
+                    ? "bg-[#f7fe72]/20 text-[#f7fe72] border border-[#f7fe72]"
                     : "bg-[#0B0E0C] hover:bg-[#161c18] border border-[#757761]/40 text-[#E2E7DE]"
                 }`}
               >

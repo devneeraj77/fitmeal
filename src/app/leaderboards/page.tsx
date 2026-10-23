@@ -53,8 +53,8 @@ function triggerArenaConfetti(canvas: HTMLCanvasElement | null) {
     alpha: number;
   }> = [];
 
-  // Harmonized palette: Amethyst #9c67b5, Electric Lime #f7fe72, Solar Gold #f4e76e, Smoked Olive #757761, Lavender #b88cd0
-  const colors = ["#9c67b5", "#f7fe72", "#f4e76e", "#b88cd0", "#757761", "#ffffff"];
+  // Strict 3-color palette: Electric Lime #f7fe72, Solar Gold #f4e76e, Smoked Olive #757761, White #ffffff
+  const colors = ["#f7fe72", "#f4e76e", "#757761", "#ffffff"];
   const centerX = window.innerWidth / 2;
   const centerY = window.innerHeight * 0.45;
 
@@ -634,11 +634,11 @@ export default function LeaderboardsPage() {
         ========================================================================
         60-30-10 PALETTE HARMONY APPLIED:
         - 60% Dominant: Deep luxury smoked obsidian slate (#0B0E0C / #121815)
-        - 30% Secondary: Royal Velvet Amethyst (#9c67b5 / #2B153D) & Olive Slate (#757761)
+        - 30% Secondary: Smoked Olive Sage (#757761) & tonal hierarchy
         - 10% Accent: Electric Solar Lime (#f7fe72) & Radiant Gold (#f4e76e)
         ========================================================================
       */}
-      <div className="min-h-screen bg-[#0B0E0C] text-[#E2E7DE] font-sans selection:bg-[#9c67b5]/30 selection:text-[#f7fe72] pb-28">
+      <div className="min-h-screen bg-[#F4F6F5] dark:bg-[#0B0E0C] text-[#121815] dark:text-[#E2E7DE] font-sans selection:bg-[#f7fe72] selection:text-[#0B0E0C] pb-28 transition-colors">
         
         {/* Confetti Overlay Canvas */}
         <canvas
@@ -646,22 +646,22 @@ export default function LeaderboardsPage() {
           className="pointer-events-none fixed inset-0 z-50 w-full h-full"
         />
 
-        {/* Floating Action Notice (10% Accent on Amethyst) */}
+        {/* Floating Action Notice */}
         {actionNotice && (
-          <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-gradient-to-r from-[#2B153D] via-[#482065] to-[#2B153D] text-[#f7fe72] px-5 py-2.5 rounded-full shadow-[0_10px_35px_rgba(0,0,0,0.8)] border border-[#f7fe72]/50 text-xs font-bold flex items-center gap-2 animate-bounce">
+          <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-gradient-to-r from-[#18201A] via-[#121815] to-[#18201A] text-[#f7fe72] px-5 py-2.5 rounded-full shadow-[0_10px_35px_rgba(0,0,0,0.8)] border border-[#f7fe72]/50 text-xs font-bold flex items-center gap-2 animate-bounce">
             <Sparkles className="w-4 h-4 text-[#f7fe72]" />
             <span>{actionNotice}</span>
           </div>
         )}
 
-        {/* 1. Global Navigation Bar (60% Foundation + 30% Amethyst Accents) */}
-        <header className="sticky top-0 z-40 w-full bg-[#0B0E0C]/90 backdrop-blur-md border-b border-[#757761]/25 shadow-2xs">
+        {/* 1. Global Navigation Bar */}
+        <header className="sticky top-0 z-40 w-full bg-white/90 dark:bg-[#0B0E0C]/90 backdrop-blur-md border-b border-[#757761]/25 shadow-2xs">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
             
             {/* Brand Mark */}
             <Link
               href="/"
-              className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9c67b5] rounded-lg p-1"
+              className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f7fe72] rounded-lg p-1"
               aria-label="PotatoFit Home"
             >
               <PotatoFitLogo size="sm" variant="dark" />
@@ -706,10 +706,10 @@ export default function LeaderboardsPage() {
         {/* Main Content Container */}
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
           
-          {/* 2. Season 4 Apex Protocol Banner (30% Amethyst Velvet + 10% Solar Accents) */}
-          <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#2D163D] via-[#1A221C] to-[#101512] text-white p-6 sm:p-8 lg:p-10 shadow-2xl border border-[#9c67b5]/35">
+          {/* 2. Season 4 Apex Protocol Banner */}
+          <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#EAEFEA] via-[#FFFFFF] to-[#F4F6F5] dark:from-[#18201A] dark:via-[#141A16] dark:to-[#0B0E0C] text-[#121815] dark:text-white p-6 sm:p-8 lg:p-10 shadow-2xl border border-[#757761]/30 dark:border-[#757761]/35">
             {/* Ambient Lighting Orbs */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#9c67b5]/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[#757761]/15 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-[#f7fe72]/10 rounded-full blur-3xl pointer-events-none" />
 
             <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
@@ -718,30 +718,30 @@ export default function LeaderboardsPage() {
                   <span className="px-3 py-1 rounded-full bg-[#f7fe72] text-[#0B0E0C] font-black uppercase text-[11px] shadow-xs">
                     ACTIVE TOURNAMENT
                   </span>
-                  <span className="text-white/30">·</span>
-                  <span className="text-[#f4e76e] flex items-center gap-1.5 font-semibold">
-                    <Clock className="w-3.5 h-3.5 text-[#f7fe72]" />
+                  <span className="text-[#505445] dark:text-white/30">·</span>
+                  <span className="text-[#7A5A00] dark:text-[#f4e76e] flex items-center gap-1.5 font-semibold">
+                    <Clock className="w-3.5 h-3.5 text-[#7A5A00] dark:text-[#f7fe72]" />
                     Ends in {formatCountdown(secondsRemaining)}
                   </span>
                 </div>
 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#121815] dark:text-white">
                   Season 4: Apex Protocol
                 </h1>
 
-                <p className="text-sm sm:text-base text-[#CBD2C7] leading-relaxed">
+                <p className="text-sm sm:text-base text-[#262A21] dark:text-[#CBD2C7] leading-relaxed">
                   The world’s first hyper-local fitness &amp; nutrition arena. Compete with 14,820+ athletes
                   globally and in South Delhi. Level up with verified Kirana fuel logging, progressive overload volume, and unbroken habit streaks.
                 </p>
 
-                <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-[#CBD2C7]">
+                <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-[#505445] dark:text-[#CBD2C7]">
                   <div className="flex items-center gap-1.5">
-                    <Trophy className="w-4 h-4 text-[#f7fe72]" />
+                    <Trophy className="w-4 h-4 text-[#7A5A00] dark:text-[#f7fe72]" />
                     <span>Prize: ₹50,000 FitMeal Credits &amp; Apex Ring</span>
                   </div>
                   <span>·</span>
                   <div className="flex items-center gap-1.5">
-                    <MapPin className="w-4 h-4 text-[#f4e76e]" />
+                    <MapPin className="w-4 h-4 text-[#7A5A00] dark:text-[#f4e76e]" />
                     <span>Active Hub: South Delhi / Lajpat Nagar</span>
                   </div>
                 </div>
@@ -750,9 +750,9 @@ export default function LeaderboardsPage() {
                 <div className="pt-2">
                   <Link
                     href="/rewards"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#9c67b5] to-[#7B4695] hover:from-[#aa72c5] hover:to-[#8c52a8] text-white font-bold text-xs transition-all shadow-md active:scale-95 cursor-pointer border border-[#9c67b5]/40"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] hover:brightness-110 font-black text-xs transition-all shadow-md active:scale-95 cursor-pointer border border-[#f7fe72]/40"
                   >
-                    <Award className="w-4 h-4 text-[#f7fe72]" />
+                    <Award className="w-4 h-4 text-[#0B0E0C]" />
                     <span>Inspect Reward Tiers &amp; Badges (Dedicated Page)</span>
                   </Link>
                 </div>
@@ -760,44 +760,44 @@ export default function LeaderboardsPage() {
 
               {/* Quick Stats Grid (Smoked Olive Slate Surfaces) */}
               <div className="grid grid-cols-2 gap-3 sm:gap-4 shrink-0 lg:w-80">
-                <div className="bg-[#101512]/80 backdrop-blur-md border border-[#757761]/30 rounded-2xl p-4">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#D8B4E2]">
+                <div className="bg-white dark:bg-[#101512]/80 backdrop-blur-md border border-[#757761]/25 dark:border-[#757761]/30 rounded-2xl p-4 shadow-sm dark:shadow-none">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#505445] dark:text-[#A0A594]">
                     Active Contenders
                   </span>
-                  <div className="text-2xl font-black font-mono text-[#f7fe72] mt-0.5">
+                  <div className="text-2xl font-black font-mono text-[#7A5A00] dark:text-[#f7fe72] mt-0.5">
                     14,820
                   </div>
-                  <span className="text-[11px] text-[#A0A594]">Worldwide Base</span>
+                  <span className="text-[11px] text-[#505445] dark:text-[#A0A594]">Worldwide Base</span>
                 </div>
 
-                <div className="bg-[#101512]/80 backdrop-blur-md border border-[#757761]/30 rounded-2xl p-4">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#D8B4E2]">
+                <div className="bg-white dark:bg-[#101512]/80 backdrop-blur-md border border-[#757761]/25 dark:border-[#757761]/30 rounded-2xl p-4 shadow-sm dark:shadow-none">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#505445] dark:text-[#A0A594]">
                     Workouts Logged
                   </span>
-                  <div className="text-2xl font-black font-mono text-white mt-0.5">
+                  <div className="text-2xl font-black font-mono text-[#121815] dark:text-white mt-0.5">
                     89,450
                   </div>
-                  <span className="text-[11px] text-[#A0A594]">This Week</span>
+                  <span className="text-[11px] text-[#505445] dark:text-[#A0A594]">This Week</span>
                 </div>
 
-                <div className="bg-[#101512]/80 backdrop-blur-md border border-[#757761]/30 rounded-2xl p-4">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#D8B4E2]">
+                <div className="bg-white dark:bg-[#101512]/80 backdrop-blur-md border border-[#757761]/25 dark:border-[#757761]/30 rounded-2xl p-4 shadow-sm dark:shadow-none">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#505445] dark:text-[#A0A594]">
                     Energy Burned
                   </span>
-                  <div className="text-2xl font-black font-mono text-white mt-0.5">
+                  <div className="text-2xl font-black font-mono text-[#121815] dark:text-white mt-0.5">
                     42.8M
                   </div>
-                  <span className="text-[11px] text-[#A0A594]">Total kcal</span>
+                  <span className="text-[11px] text-[#505445] dark:text-[#A0A594]">Total kcal</span>
                 </div>
 
-                <div className="bg-[#101512]/80 backdrop-blur-md border border-[#757761]/30 rounded-2xl p-4">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#D8B4E2]">
+                <div className="bg-white dark:bg-[#101512]/80 backdrop-blur-md border border-[#757761]/25 dark:border-[#757761]/30 rounded-2xl p-4 shadow-sm dark:shadow-none">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#505445] dark:text-[#A0A594]">
                     Kirana Savings
                   </span>
-                  <div className="text-2xl font-black font-mono text-[#f4e76e] mt-0.5">
+                  <div className="text-2xl font-black font-mono text-[#7A5A00] dark:text-[#f4e76e] mt-0.5">
                     ₹1.2M
                   </div>
-                  <span className="text-[11px] text-[#A0A594]">Saved vs Packaged</span>
+                  <span className="text-[11px] text-[#505445] dark:text-[#A0A493]">Saved vs Packaged</span>
                 </div>
               </div>
             </div>
@@ -832,7 +832,7 @@ export default function LeaderboardsPage() {
                       q.claimed
                         ? "bg-[#18201B]/50 border-[#757761]/20 opacity-70"
                         : isReady
-                        ? "bg-gradient-to-b from-[#2D163D]/50 to-[#18201B] border-[#9c67b5]/60 shadow-[0_0_20px_rgba(156,103,181,0.15)]"
+                        ? "bg-gradient-to-b from-[#18201A] to-[#141A16] border-[#757761]/60 shadow-[0_0_20px_rgba(117,119,97,0.15)]"
                         : "bg-[#18201B] border-[#757761]/30 hover:border-[#757761]/60"
                     }`}
                   >
@@ -865,7 +865,7 @@ export default function LeaderboardsPage() {
                             className={`h-full rounded-full transition-all duration-500 ${
                               q.claimed
                                 ? "bg-[#757761]"
-                                : "bg-gradient-to-r from-[#9c67b5] to-[#f7fe72]"
+                                : "bg-gradient-to-r from-[#757761] to-[#f7fe72]"
                             }`}
                             style={{ width: `${progressPct}%` }}
                           />
@@ -955,7 +955,7 @@ export default function LeaderboardsPage() {
               </div>
 
               {/* Rank 1 (Gold Champion - Radiant Accent 10%) */}
-              <div className="order-1 md:order-2 bg-gradient-to-b from-[#2D163D] via-[#1C1625] to-[#121815] rounded-3xl p-6 sm:p-7 border-2 border-[#f7fe72]/80 shadow-[0_0_40px_rgba(247,254,114,0.18)] flex flex-col items-center text-center relative z-10">
+              <div className="order-1 md:order-2 bg-gradient-to-b from-[#FFFDF0] via-[#FFFFFF] to-[#F4F6F5] dark:from-[#18201A] dark:via-[#141A16] dark:to-[#121815] text-[#121815] dark:text-white rounded-3xl p-6 sm:p-7 border-2 border-[#7A5A00]/40 dark:border-[#f7fe72]/80 shadow-xl dark:shadow-[0_0_40px_rgba(247,254,114,0.18)] flex flex-col items-center text-center relative z-10">
                 <div className="absolute -top-4 bg-[#f7fe72] text-[#0B0E0C] px-3.5 py-1 rounded-full text-xs font-black tracking-wide flex items-center gap-1.5 shadow-md">
                   <Crown className="w-3.5 h-3.5 text-[#0B0E0C] fill-[#0B0E0C]" />
                   <span>CHAMPION</span>
@@ -973,29 +973,29 @@ export default function LeaderboardsPage() {
                   Rank #1 · Apex Champion
                 </span>
 
-                <h3 className="text-lg font-black text-white">{top3[0]?.name}</h3>
-                <p className="text-xs text-[#CBD2C7] mb-3">{top3[0]?.location}</p>
+                <h3 className="text-lg font-black text-[#121815] dark:text-white">{top3[0]?.name}</h3>
+                <p className="text-xs text-[#505445] dark:text-[#CBD2C7] mb-3">{top3[0]?.location}</p>
 
-                <div className="w-full bg-black/40 rounded-xl p-3.5 border border-[#9c67b5]/40 space-y-1.5 mb-4 text-left shadow-inner">
+                <div className="w-full bg-[#F4F6F5] dark:bg-black/40 rounded-xl p-3.5 border border-[#757761]/25 dark:border-[#757761]/40 space-y-1.5 mb-4 text-left shadow-inner">
                   <div className="flex justify-between text-xs">
-                    <span className="text-[#A0A594]">Arena Rating:</span>
-                    <span className="font-black font-mono text-[#f7fe72] text-sm">
+                    <span className="text-[#505445] dark:text-[#A0A493]">Arena Rating:</span>
+                    <span className="font-black font-mono text-[#7A5A00] dark:text-[#f7fe72] text-sm">
                       {top3[0]?.xp.toLocaleString()} XP
                     </span>
                   </div>
                   <div className="flex justify-between text-xs">
-                    <span className="text-[#A0A594]">Unbroken Streak:</span>
-                    <span className="font-bold text-[#f4e76e] flex items-center gap-1">
-                      <Flame className="w-3.5 h-3.5 fill-[#f4e76e] text-[#f4e76e]" />
+                    <span className="text-[#505445] dark:text-[#A0A493]">Unbroken Streak:</span>
+                    <span className="font-bold text-[#7A5A00] dark:text-[#f4e76e] flex items-center gap-1">
+                      <Flame className="w-3.5 h-3.5 fill-current" />
                       {top3[0]?.streak} Days
                     </span>
                   </div>
                   <div className="flex justify-between text-xs">
-                    <span className="text-[#A0A594]">Volume Lifted:</span>
-                    <span className="font-mono text-[#E2E7DE]">{top3[0]?.volumeKg.toLocaleString()} kg</span>
+                    <span className="text-[#505445] dark:text-[#A0A493]">Volume Lifted:</span>
+                    <span className="font-mono text-[#121815] dark:text-[#E2E7DE]">{top3[0]?.volumeKg.toLocaleString()} kg</span>
                   </div>
-                  <div className="text-[11px] text-[#CBD2C7] pt-1.5 border-t border-white/10 truncate">
-                    ⚡ Staple Fuel: <span className="font-semibold text-white">{top3[0]?.favDish}</span>
+                  <div className="text-[11px] text-[#262A21] dark:text-[#CBD2C7] pt-1.5 border-t border-[#757761]/20 dark:border-white/10 truncate">
+                    ⚡ Staple Fuel: <span className="font-semibold text-[#121815] dark:text-white">{top3[0]?.favDish}</span>
                   </div>
                 </div>
 
@@ -1080,7 +1080,7 @@ export default function LeaderboardsPage() {
                       onClick={() => setViewMode("top10_and_user")}
                       className={`flex-1 sm:flex-none px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                         viewMode === "top10_and_user"
-                          ? "bg-[#9c67b5] text-white shadow-md font-black"
+                          ? "bg-[#f7fe72] text-[#0B0E0C] shadow-md font-black"
                           : "text-[#A0A594] hover:text-white"
                       }`}
                     >
@@ -1090,7 +1090,7 @@ export default function LeaderboardsPage() {
                       onClick={() => setViewMode("continuous")}
                       className={`flex-1 sm:flex-none px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                         viewMode === "continuous"
-                          ? "bg-[#9c67b5] text-white shadow-md font-black"
+                          ? "bg-[#f7fe72] text-[#0B0E0C] shadow-md font-black"
                           : "text-[#A0A594] hover:text-white"
                       }`}
                     >
@@ -1106,7 +1106,7 @@ export default function LeaderboardsPage() {
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder="Search 100+ athletes or city..."
-                      className="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-black/40 border border-[#757761]/40 focus:outline-none focus:ring-2 focus:ring-[#9c67b5] focus:bg-[#18201B] text-white placeholder-[#757761]"
+                      className="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-black/40 border border-[#757761]/40 focus:outline-none focus:ring-2 focus:ring-[#f7fe72] focus:bg-[#18201B] text-white placeholder-[#757761]"
                     />
                   </div>
                 </div>
@@ -1121,7 +1121,7 @@ export default function LeaderboardsPage() {
                     onClick={() => setScope("global")}
                     className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
                       scope === "global"
-                        ? "bg-[#9c67b5] text-white shadow-xs font-bold"
+                        ? "bg-[#f7fe72] text-[#0B0E0C] shadow-xs font-black"
                         : "text-[#A0A594] hover:text-white"
                     }`}
                   >
@@ -1131,7 +1131,7 @@ export default function LeaderboardsPage() {
                     onClick={() => setScope("squad")}
                     className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
                       scope === "squad"
-                        ? "bg-[#9c67b5] text-white shadow-xs font-bold"
+                        ? "bg-[#f7fe72] text-[#0B0E0C] shadow-xs font-black"
                         : "text-[#A0A594] hover:text-white"
                     }`}
                   >
@@ -1141,7 +1141,7 @@ export default function LeaderboardsPage() {
                     onClick={() => setScope("regional")}
                     className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
                       scope === "regional"
-                        ? "bg-[#9c67b5] text-white shadow-xs font-bold"
+                        ? "bg-[#f7fe72] text-[#0B0E0C] shadow-xs font-black"
                         : "text-[#A0A594] hover:text-white"
                     }`}
                   >
@@ -1151,7 +1151,7 @@ export default function LeaderboardsPage() {
                     onClick={() => setScope("local")}
                     className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
                       scope === "local"
-                        ? "bg-[#9c67b5] text-white shadow-xs font-bold"
+                        ? "bg-[#f7fe72] text-[#0B0E0C] shadow-xs font-black"
                         : "text-[#A0A594] hover:text-white"
                     }`}
                   >
@@ -1261,11 +1261,11 @@ export default function LeaderboardsPage() {
                       <React.Fragment key={`${contender.id}-${contender.rank}`}>
                         {/* Break divider for Slot 11 mode */}
                         {isRow11Break && (
-                          <tr className="bg-gradient-to-r from-[#2D163D]/60 via-[#18201B] to-[#2D163D]/60 border-y border-[#9c67b5]/50">
+                          <tr className="bg-gradient-to-r from-[#18201A]/60 via-[#141A16] to-[#18201A]/60 border-y border-[#757761]/50">
                             <td colSpan={8} className="py-2.5 px-4 text-center">
                               <div className="flex items-center justify-center gap-2 text-xs font-mono font-bold text-[#f7fe72]">
                                 <span>•••</span>
-                                <span className="bg-[#9c67b5] text-white px-2.5 py-0.5 rounded-full text-[10px] uppercase tracking-wider shadow-xs">
+                                <span className="bg-[#f7fe72] text-[#0B0E0C] font-black px-2.5 py-0.5 rounded-full text-[10px] uppercase tracking-wider shadow-xs">
                                   YOUR CURRENT PLACEMENT IN GLOBAL BASE
                                 </span>
                                 <span className="text-[#CBD2C7]">(Rank #{contender.rank} of 14,820 Contenders)</span>
@@ -1279,7 +1279,7 @@ export default function LeaderboardsPage() {
                         <tr
                           className={`transition-all ${
                             isUser
-                              ? "bg-gradient-to-r from-[#9c67b5]/25 via-[#f7fe72]/15 to-[#9c67b5]/25 border-y-2 border-[#f7fe72] shadow-[0_0_30px_rgba(247,254,114,0.15)] relative z-10"
+                              ? "bg-gradient-to-r from-[#757761]/25 via-[#f7fe72]/15 to-[#757761]/25 border-y-2 border-[#f7fe72] shadow-[0_0_30px_rgba(247,254,114,0.15)] relative z-10"
                               : "hover:bg-white/[0.04]"
                           }`}
                         >
@@ -1326,7 +1326,7 @@ export default function LeaderboardsPage() {
                               <div
                                 className={`rounded-xl flex items-center justify-center font-black shrink-0 transition-transform ${
                                   isUser
-                                    ? "w-11 h-11 sm:w-12 sm:h-12 bg-gradient-to-br from-[#9c67b5] via-[#5A2B78] to-[#2B153D] text-[#f7fe72] border-2 border-[#f7fe72] ring-4 ring-[#f7fe72]/20 shadow-md text-sm sm:text-base"
+                                    ? "w-11 h-11 sm:w-12 sm:h-12 bg-gradient-to-br from-[#18201A] via-[#141A16] to-[#0B0E0C] text-[#f7fe72] border-2 border-[#f7fe72] ring-4 ring-[#f7fe72]/20 shadow-md text-sm sm:text-base"
                                     : "w-9 h-9 bg-black/60 border border-[#757761]/40 text-[#E2E7DE] text-xs"
                                 }`}
                               >
@@ -1337,20 +1337,20 @@ export default function LeaderboardsPage() {
                                 {/* Upper status badges row above name to prevent over-width row */}
                                 {isUser && (
                                   <div className="flex flex-wrap items-center gap-1.5 mb-1">
-                                    <span className="text-[10px] bg-[#9c67b5] text-white font-black px-2 py-0.5 rounded-full shadow-2xs">
+                                    <span className="text-[10px] bg-[#f7fe72] text-[#0B0E0C] font-black px-2 py-0.5 rounded-full shadow-2xs">
                                       YOU
                                     </span>
 
                                     {/* Buffering Indicator for Logged User (10% Electric Accent) */}
                                     <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#f7fe72] text-[#0B0E0C] text-[10px] font-mono font-black tracking-wider animate-pulse shadow-xs">
-                                      <span className="w-1.5 h-1.5 rounded-full bg-[#9c67b5] animate-ping inline-block shrink-0" />
+                                      <span className="w-1.5 h-1.5 rounded-full bg-[#0B0E0C] animate-ping inline-block shrink-0" />
                                       <span>LIVE BUFFERING // SYNCED</span>
                                     </span>
 
                                     {equippedBadge && (
                                       <Link
                                         href="/rewards"
-                                        className="text-[10px] bg-[#2B153D] hover:bg-[#3E1F55] text-[#D8B4E2] border border-[#9c67b5]/60 font-bold px-2 py-0.5 rounded-full flex items-center gap-1 cursor-pointer transition-colors"
+                                        className="text-[10px] bg-[#18201A] hover:bg-[#202b23] text-[#A0A594] border border-[#757761]/60 font-bold px-2 py-0.5 rounded-full flex items-center gap-1 cursor-pointer transition-colors"
                                         title="Equipped Badge - Click to view dedicated Rewards page"
                                       >
                                         <Award className="w-2.5 h-2.5 text-[#f7fe72] shrink-0" />
@@ -1390,7 +1390,7 @@ export default function LeaderboardsPage() {
                               className={`inline-flex items-center gap-1 font-bold rounded transition-colors cursor-pointer ${
                                 isUser
                                   ? "text-xs text-[#0B0E0C] bg-[#f7fe72] hover:bg-[#f4e76e] px-2.5 py-1 border border-[#f7fe72] font-mono shadow-xs"
-                                  : "text-[11px] text-[#D8B4E2] bg-[#2B153D]/70 hover:bg-[#3E1F55] border border-[#9c67b5]/40 px-2 py-0.5"
+                                  : "text-[11px] text-[#A0A594] bg-[#18201A]/70 hover:bg-[#202b23] border border-[#757761]/40 px-2 py-0.5"
                               }`}
                               title="View Dedicated Rewards Page"
                             >
@@ -1417,7 +1417,7 @@ export default function LeaderboardsPage() {
                             <div className="flex items-center gap-2">
                               <div className={`${isUser ? "w-20 h-2 bg-black/60" : "w-16 h-1.5 bg-black/40"} rounded-full overflow-hidden`}>
                                 <div
-                                  className="h-full bg-gradient-to-r from-[#9c67b5] to-[#f7fe72] rounded-full"
+                                  className="h-full bg-gradient-to-r from-[#757761] to-[#f7fe72] rounded-full"
                                   style={{ width: `${contender.nutritionScore}%` }}
                                 />
                               </div>
@@ -1443,7 +1443,7 @@ export default function LeaderboardsPage() {
                                 isUser
                                   ? "p-2 opacity-40 cursor-not-allowed border-[#757761]/30 text-[#757761] text-xs"
                                   : contender.hasFistBumped
-                                  ? "p-1.5 bg-[#9c67b5]/30 border-[#9c67b5] text-[#f7fe72] text-xs"
+                                  ? "p-1.5 bg-[#757761]/30 border-[#757761] text-[#f7fe72] text-xs"
                                   : "p-1.5 bg-black/40 hover:bg-white/10 border-[#757761]/40 text-[#CBD2C7] text-xs"
                               }`}
                             >
@@ -1482,9 +1482,9 @@ export default function LeaderboardsPage() {
                     setViewMode("continuous");
                     setVisibleCount(50);
                   }}
-                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#9c67b5] to-[#7B4695] hover:from-[#aa72c5] hover:to-[#8c52a8] text-white font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-md border border-[#9c67b5]/40"
+                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] hover:brightness-110 font-black text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-md border border-[#f7fe72]/40"
                 >
-                  <TrendingUp className="w-4 h-4 text-[#f7fe72]" />
+                  <TrendingUp className="w-4 h-4 text-[#0B0E0C]" />
                   <span>Explore All 100+ Contenders (Continuous Roster)</span>
                 </button>
               ) : (
@@ -1517,15 +1517,15 @@ export default function LeaderboardsPage() {
                   </span>
                   <Link
                     href="/rewards"
-                    className="text-xs font-bold text-white bg-gradient-to-r from-[#9c67b5] to-[#7B4695] hover:from-[#aa72c5] hover:to-[#8c52a8] border border-[#9c67b5]/60 px-2.5 py-0.5 rounded flex items-center gap-1 transition-all cursor-pointer shadow-2xs"
+                    className="text-xs font-black text-[#0B0E0C] bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] hover:brightness-110 border border-[#f7fe72]/60 px-2.5 py-0.5 rounded flex items-center gap-1 transition-all cursor-pointer shadow-2xs"
                     title="View dedicated Rewards &amp; Tiers page"
                   >
-                    <Award className="w-3 h-3 text-[#f7fe72]" />
+                    <Award className="w-3 h-3 text-[#0B0E0C]" />
                     <span>Tier: Gold I</span>
                   </Link>
                   <Link
                     href="/rewards"
-                    className="hidden md:inline-flex items-center gap-1 text-[10px] font-mono text-[#D8B4E2] bg-[#2B153D] hover:bg-[#3E1F55] border border-[#9c67b5]/50 px-2.5 py-0.5 rounded-full transition-colors cursor-pointer"
+                    className="hidden md:inline-flex items-center gap-1 text-[10px] font-mono text-[#A0A594] bg-[#18201A] hover:bg-[#202b23] border border-[#757761]/50 px-2.5 py-0.5 rounded-full transition-colors cursor-pointer"
                     title="Equipped Arena Badge - Click to Change on Rewards Page"
                   >
                     <span>🛡️ {equippedBadge.name}</span>
@@ -1537,7 +1537,7 @@ export default function LeaderboardsPage() {
                   <span>Need {Math.max(0, 10000 - userXp)} XP to reach Emerald Titan</span>
                   <div className="w-20 h-1.5 bg-black/60 rounded-full overflow-hidden hidden md:block">
                     <div
-                      className="h-full bg-gradient-to-r from-[#9c67b5] to-[#f7fe72] rounded-full"
+                      className="h-full bg-gradient-to-r from-[#757761] to-[#f7fe72] rounded-full"
                       style={{ width: `${Math.min(100, ((userXp - 5000) / 5000) * 100)}%` }}
                     />
                   </div>
@@ -1549,10 +1549,10 @@ export default function LeaderboardsPage() {
             <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               <Link
                 href="/rewards"
-                className="flex items-center gap-1 sm:gap-1.5 px-3 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-[#9c67b5] to-[#7B4695] hover:from-[#aa72c5] hover:to-[#8c52a8] text-white text-[11px] sm:text-xs font-black transition-all active:scale-95 cursor-pointer shadow-sm border border-[#9c67b5]/50"
+                className="flex items-center gap-1 sm:gap-1.5 px-3 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] hover:brightness-110 text-[11px] sm:text-xs font-black transition-all active:scale-95 cursor-pointer shadow-sm border border-[#f7fe72]/50"
                 title="Open Dedicated Rewards Page"
               >
-                <Award className="w-3.5 h-3.5 text-[#f7fe72]" />
+                <Award className="w-3.5 h-3.5 text-[#0B0E0C]" />
                 <span className="hidden sm:inline">Rewards </span>
                 <span>Page</span>
               </Link>

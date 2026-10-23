@@ -4,19 +4,34 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
+import { AnimatePresence, motion } from "motion/react";
 import {
-  Flame,
-  ArrowRight,
+  Check,
+  ChevronDown,
+  Languages,
   Menu,
   X,
-  LayoutDashboard,
-  LogOut,
-  User,
+  Flame,
+  ArrowRight,
   Trophy,
   Award,
   Sparkles,
-  ChevronDown,
+  User,
+  LogOut,
+  Dumbbell,
+  Apple,
+  Activity,
+  HeartHandshake,
+  BookOpen,
 } from "lucide-react";
+import {
+  FaXTwitter,
+  FaInstagram,
+  FaLinkedin,
+  FaYoutube,
+  FaThreads,
+  FaWhatsapp,
+} from "react-icons/fa6";
 import PotatoFitLogo from "./PotatoFitLogo";
 import { cn } from "@/lib/utils";
 
@@ -26,6 +41,332 @@ export interface NavbarProps {
   onOpenTrial?: () => void;
   onOpenDashboard?: () => void;
 }
+
+type MegaColumn = {
+  eyebrow: string;
+  links: { label: string; href: string; active?: boolean; badge?: string; desc?: string }[];
+};
+
+type MegaMenu = {
+  columns: MegaColumn[];
+  footerLinks?: { label: string; href: string }[];
+  showSocials?: boolean;
+  image: { src: string; alt: string };
+  imageCaption?: string;
+  badgeText?: string;
+};
+
+const PROGRAMS_MENU: MegaMenu = {
+  badgeText: "Dynamic Movement",
+  columns: [
+    {
+      eyebrow: "Training Pillars",
+      links: [
+        {
+          label: "Hybrid Conditioning",
+          href: "/#programs",
+          active: true,
+          badge: "Popular",
+          desc: "Hyrox pace, high-cadence intervals & street sprints",
+        },
+        {
+          label: "Street Calisthenics",
+          href: "/#programs",
+          desc: "Bodyweight mastery, ring dips & explosive pull volume",
+        },
+        {
+          label: "Biomechanical Mobility",
+          href: "/#recovery",
+          desc: "Thoracic openers, hip decompression & sleep prep",
+        },
+      ],
+    },
+    {
+      eyebrow: "Interactive Tools",
+      links: [
+        {
+          label: "5-Min Box Breathing",
+          href: "/#recovery",
+          badge: "Bio-Harmonize",
+          desc: "Sync parasympathetic recovery between sets",
+        },
+        {
+          label: "Set & Volume Tracker",
+          href: "/#programs",
+          desc: "Log tonnage with real-time rest interval audio cues",
+        },
+        {
+          label: "1-on-1 Coach Queue",
+          href: "/#coaches",
+          desc: "Direct video clinics with Dr. Vance & Coach Jenkins",
+        },
+      ],
+    },
+  ],
+  footerLinks: [
+    { label: "Full Workout Routine Builder", href: "/#programs" },
+    { label: "Injury Prevention Protocol", href: "/#recovery" },
+    { label: "Coach Video Clinic Booking", href: "/#coaches" },
+  ],
+  showSocials: true,
+  image: {
+    src: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80",
+    alt: "Athletic Volume Training",
+  },
+  imageCaption: "Hyper-responsive kinetic tracking & athletic load discipline",
+};
+
+const NUTRITION_MENU: MegaMenu = {
+  badgeText: "PulseAI Engine",
+  columns: [
+    {
+      eyebrow: "Local Fuel Radar",
+      links: [
+        {
+          label: "Mandi & Street Sourcing",
+          href: "/#nutrition",
+          active: true,
+          badge: "AI Live",
+          desc: "Live geospatial pricing across verified wholesale hubs",
+        },
+        {
+          label: "Macro Density Radar",
+          href: "/#nutrition",
+          desc: "Interactive visualizer of protein-to-cost efficiency",
+        },
+        {
+          label: "High-Protein Under ₹120",
+          href: "/#nutrition",
+          badge: "Budget King",
+          desc: "Targeted recipes built from roasted sattu, sprouts & dal",
+        },
+      ],
+    },
+    {
+      eyebrow: "Vouchers & Supply",
+      links: [
+        {
+          label: "Kirana Partner Network",
+          href: "/rewards",
+          desc: "5,200+ partner grocery counters accepting XP fuel vouchers",
+        },
+        {
+          label: "Smart Macro Swaps",
+          href: "/#nutrition",
+          desc: "Substitute paneer, tofu, soya chunks with 1-tap recalculation",
+        },
+        {
+          label: "Electrolyte & Hydration",
+          href: "/dashboard",
+          desc: "Calculates salt intake for high-humidity endurance sessions",
+        },
+      ],
+    },
+  ],
+  footerLinks: [
+    { label: "Live Delhi Mandi Price Indices", href: "/#nutrition" },
+    { label: "Sourcing Maestro Verification Guide", href: "/rewards" },
+  ],
+  showSocials: true,
+  image: {
+    src: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=800&q=80",
+    alt: "Whole Food Fuel",
+  },
+  imageCaption: "Wholesale street pulses, unpolished lentils & seasonal greens",
+};
+
+const ARENA_MENU: MegaMenu = {
+  badgeText: "Live Season 4",
+  columns: [
+    {
+      eyebrow: "Competition Ranks",
+      links: [
+        {
+          label: "Global Leaderboard",
+          href: "/leaderboards",
+          active: true,
+          badge: "Live XP",
+          desc: "Real-time standings across 4,800+ verified contenders",
+        },
+        {
+          label: "South Delhi Cohort",
+          href: "/leaderboards",
+          desc: "Local cluster rivalry with live distance & volume bumpers",
+        },
+        {
+          label: "Champions Podium",
+          href: "/leaderboards",
+          desc: "Top 3 grandmasters defending Apex Legend crowns",
+        },
+      ],
+    },
+    {
+      eyebrow: "Prestige & Perks",
+      links: [
+        {
+          label: "5 Reward Tiers",
+          href: "/rewards",
+          badge: "Vouchers",
+          desc: "Unlock ₹250 to ₹500 Kirana credits + custom cast-iron trophy",
+        },
+        {
+          label: "14-Day Streak Bonus",
+          href: "/rewards",
+          desc: "1.25x XP multiplier when logging meals & mobility unbroken",
+        },
+        {
+          label: "Aura Glow Cosmetics",
+          href: "/rewards",
+          desc: "Gold Shimmer and Emerald Particle profile badges",
+        },
+      ],
+    },
+  ],
+  footerLinks: [
+    { label: "Season 4 Tournament Schedule", href: "/leaderboards" },
+    { label: "Claim Verified Grocery Codes", href: "/rewards" },
+  ],
+  showSocials: true,
+  image: {
+    src: "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=800&q=80",
+    alt: "Arena Competition",
+  },
+  imageCaption: "Battle on live leaderboards & redeem fuel vouchers at local kiranas",
+};
+
+const LEARN_MENU: MegaMenu = {
+  badgeText: "Athletic Academy",
+  columns: [
+    {
+      eyebrow: "Programs",
+      links: [
+        {
+          label: "Hybrid Conditioning",
+          href: "/#programs",
+          active: true,
+          badge: "Popular",
+          desc: "Hyrox pace, high-cadence intervals & street sprints",
+        },
+        {
+          label: "Street Calisthenics",
+          href: "/#programs",
+          desc: "Bodyweight mastery, ring dips & explosive pull volume",
+        },
+        {
+          label: "Set & Volume Tracker",
+          href: "/#programs",
+          desc: "Log tonnage with real-time audio interval pacing",
+        },
+        {
+          label: "Biomechanical Mobility",
+          href: "/#recovery",
+          desc: "Thoracic openers, hip decompression & sleep prep",
+        },
+      ],
+    },
+    {
+      eyebrow: "Nutrition",
+      links: [
+        {
+          label: "Mandi & Street Sourcing",
+          href: "/#nutrition",
+          active: true,
+          badge: "AI Live",
+          desc: "Live geospatial pricing across verified wholesale hubs",
+        },
+        {
+          label: "High-Protein Under ₹120",
+          href: "/#nutrition",
+          badge: "Budget King",
+          desc: "Targeted recipes built from roasted sattu, sprouts & dal",
+        },
+        {
+          label: "Macro Density Radar",
+          href: "/#nutrition",
+          desc: "Interactive visualizer of protein-to-cost efficiency",
+        },
+        {
+          label: "Smart Macro Swaps",
+          href: "/#nutrition",
+          desc: "Substitute paneer, tofu, soya chunks with 1-tap recalculation",
+        },
+      ],
+    },
+    {
+      eyebrow: "Coaches",
+      links: [
+        {
+          label: "1-on-1 Video Queue",
+          href: "/#coaches",
+          active: true,
+          badge: "Live Clinics",
+          desc: "Direct video clinics with Dr. Vance & Coach Jenkins",
+        },
+        {
+          label: "Coach Sarah Jenkins",
+          href: "/#coaches",
+          desc: "Hyrox endurance lead & Olympic barbell specialist",
+        },
+        {
+          label: "Dr. Marcus Vance",
+          href: "/#coaches",
+          desc: "Biomechanical kinetic rehab & injury mitigation",
+        },
+        {
+          label: "Movement Form Audits",
+          href: "/#coaches",
+          desc: "Video postural review & cadence optimization",
+        },
+      ],
+    },
+  ],
+  footerLinks: [
+    { label: "Full Workout Routine Builder", href: "/#programs" },
+    { label: "Live Delhi Mandi Price Indices", href: "/#nutrition" },
+    { label: "Book Specialist Coach Clinic", href: "/#coaches" },
+  ],
+  showSocials: true,
+  image: {
+    src: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80",
+    alt: "PotatoFit Athletic Academy",
+  },
+  imageCaption: "Complete athlete education: Programs, PulseAI nutrition & certified coach clinics",
+};
+
+const MEGA_MENUS: Record<string, MegaMenu> = {
+  Learn: LEARN_MENU,
+  Programs: PROGRAMS_MENU,
+  Nutrition: NUTRITION_MENU,
+  Arena: ARENA_MENU,
+};
+
+type NavItem = {
+  label: string;
+  hasMenu: boolean;
+  icon: React.ComponentType<{ className?: string }>;
+  href?: string;
+};
+
+const NAV_ITEMS: NavItem[] = [
+  { label: "Learn", hasMenu: true, icon: BookOpen },
+  { label: "Arena", hasMenu: true, icon: Trophy },
+];
+
+const LANGUAGES = [
+  { code: "EN", label: "English", sub: "Global" },
+  { code: "HI", label: "हिन्दी", sub: "National" },
+  { code: "PA", label: "ਪੰਜਾਬੀ", sub: "Regional" },
+  { code: "BN", label: "বাংলা", sub: "Regional" },
+] as const;
+
+const SOCIALS = [
+  { href: "https://twitter.com", label: "X", icon: FaXTwitter },
+  { href: "https://instagram.com", label: "Instagram", icon: FaInstagram },
+  { href: "https://linkedin.com", label: "LinkedIn", icon: FaLinkedin },
+  { href: "https://youtube.com", label: "YouTube", icon: FaYoutube },
+  { href: "https://threads.net", label: "Threads", icon: FaThreads },
+  { href: "https://whatsapp.com", label: "WhatsApp", icon: FaWhatsapp },
+];
 
 export default function Navbar({
   onOpenStreak,
@@ -37,68 +378,65 @@ export default function Navbar({
   const router = useRouter();
   const { data: session } = useSession();
 
-  // Mobile/Tablet expanded state & scroll tracking
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  // Mega-menu and interaction states
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const [language, setLanguage] = useState<(typeof LANGUAGES)[number]>(LANGUAGES[0]);
+
   const navContainerRef = useRef<HTMLDivElement | null>(null);
+  const langRef = useRef<HTMLDivElement | null>(null);
 
-  // Dynamic scroll state for fluid floating island morphing
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Close menu when clicking outside the navbar container (clean zero-overlay behavior)
+  // Close menus on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
-        menuOpen &&
         navContainerRef.current &&
         !navContainerRef.current.contains(e.target as Node)
       ) {
-        setMenuOpen(false);
+        setOpenMenu(null);
+        setMobileOpen(false);
+        setLangOpen(false);
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [menuOpen]);
+  }, []);
 
-  // Clean keyboard navigation (Esc to close menu)
+  // Escape key closes menus
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMenuOpen(false);
+      if (e.key === "Escape") {
+        setOpenMenu(null);
+        setMobileOpen(false);
+        setLangOpen(false);
+      }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Standard direct section links
-  const navLinks = [
-    { label: "Programs", href: "#programs" },
-    { label: "Nutrition", href: "#nutrition" },
-    { label: "Recovery", href: "#recovery" },
-    { label: "Coaches", href: "#coaches" },
-  ];
-
-  // Cross-page anchor resolver
-  const getAnchorHref = (hash: string) => {
-    return pathname === "/" ? hash : `/${hash}`;
+  // Toggle mega dropdown
+  const toggleMenu = (label: string, hasMenu: boolean) => {
+    if (!hasMenu) {
+      setOpenMenu(null);
+      return;
+    }
+    setLangOpen(false);
+    setOpenMenu((current) => (current === label ? null : label));
   };
 
+  // Cross-page anchor resolver
   const handleAnchorClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    hash: string
+    href: string
   ) => {
-    setMenuOpen(false);
-    if (pathname === "/") {
+    setOpenMenu(null);
+    setMobileOpen(false);
+    if (href.startsWith("/#") && pathname === "/") {
       e.preventDefault();
-      const targetId = hash.replace("#", "");
+      const targetId = href.replace("/#", "");
       const elem = document.getElementById(targetId);
       if (elem) {
         elem.scrollIntoView({ behavior: "smooth" });
@@ -106,9 +444,10 @@ export default function Navbar({
     }
   };
 
-  // Primary action handlers
+  // Action handlers
   const handleSignIn = () => {
-    setMenuOpen(false);
+    setOpenMenu(null);
+    setMobileOpen(false);
     if (onOpenSignIn) {
       onOpenSignIn();
     } else {
@@ -117,7 +456,8 @@ export default function Navbar({
   };
 
   const handleTrial = () => {
-    setMenuOpen(false);
+    setOpenMenu(null);
+    setMobileOpen(false);
     if (onOpenTrial) {
       onOpenTrial();
     } else if (pathname === "/") {
@@ -133,7 +473,8 @@ export default function Navbar({
   };
 
   const handleDashboard = () => {
-    setMenuOpen(false);
+    setOpenMenu(null);
+    setMobileOpen(false);
     if (onOpenDashboard) {
       onOpenDashboard();
     } else {
@@ -141,265 +482,578 @@ export default function Navbar({
     }
   };
 
+  const activeMenu = openMenu ? MEGA_MENUS[openMenu] : null;
+
   return (
-    <header className="sticky top-0 z-40 w-full px-2 sm:px-4 pt-2 transition-all duration-300">
-      {/* 
-        NO OVERLAY CONTAINER: 
-        The floating island card expands dynamically with zero backdrop blackout
-      */}
-      <div
-        ref={navContainerRef}
-        className={cn(
-          "mx-auto transition-all duration-300 rounded-2xl sm:rounded-3xl border shadow-xl backdrop-blur-xl",
-          "bg-white/95 dark:bg-[#0B0E0C]/90 text-foreground border-[#757761]/25 dark:border-[#757761]/35",
-          isScrolled
-            ? "max-w-5xl shadow-2xl shadow-black/30 dark:shadow-black/50 py-1 sm:py-1.5 px-3 sm:px-5"
-            : "max-w-7xl py-2 px-3 sm:px-6"
-        )}
-      >
-        {/* Main Navbar Bar */}
-        <div className="flex items-center justify-between gap-2 sm:gap-4 h-14 sm:h-16">
-          
-          {/* 1. Left: Brand Mark & Home Link */}
-          <div className="flex items-center gap-3 shrink-0">
-            <Link
-              href="/"
-              onClick={(e) => {
-                if (pathname === "/") {
-                  e.preventDefault();
-                  window.scrollTo({ top: 0, behavior: "smooth" });
+    <header className="sticky top-0 z-40 w-full flex justify-center px-3 sm:px-6 py-3 sm:py-4 transition-all duration-300">
+      <div ref={navContainerRef} className="w-full max-w-7xl">
+        <motion.div
+          layout
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className="overflow-hidden rounded-3xl border border-[#757761]/25 dark:border-[#757761]/35 bg-white/95 dark:bg-[#121815]/95 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_12px_32px_-8px_rgba(0,0,0,0.15)] backdrop-blur-xl text-[#121815] dark:text-[#E2E7DE]"
+        >
+          {/* Top Navbar Row */}
+          <div className="flex items-center justify-between gap-4 px-6 py-4 sm:px-8">
+            {/* 1. Left: PotatoFit Brand Mark & Streak Pill */}
+            <div className="flex items-center gap-3 shrink-0">
+              <Link
+                href="/"
+                onClick={(e) => {
+                  if (pathname === "/") {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                  setOpenMenu(null);
+                  setMobileOpen(false);
+                }}
+                className="group flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f7fe72] rounded-xl p-1"
+                aria-label="PotatoFit Home"
+              >
+                <PotatoFitLogo size="sm" variant="dark" />
+              </Link>
+
+              {/* Streak Trigger Pill */}
+              {onOpenStreak && (
+                <button
+                  type="button"
+                  onClick={onOpenStreak}
+                  title="View Active Streak Adherence"
+                  className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#f7fe72]/15 border border-[#f7fe72]/30 text-xs font-mono font-bold text-[#7A5A00] dark:text-[#f7fe72] hover:bg-[#f7fe72]/25 transition-all cursor-pointer"
+                >
+                  <Flame className="w-3.5 h-3.5 fill-[#f7fe72] text-[#f7fe72]" />
+                  <span>14D STREAK</span>
+                </button>
+              )}
+            </div>
+
+            {/* 2. Center: Desktop Interactive Mega Nav Items */}
+            <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2">
+              {NAV_ITEMS.map((item) => {
+                const isOpen = openMenu === item.label;
+                const Icon = item.icon;
+
+                if (!item.hasMenu) {
+                  return (
+                    <a
+                      key={item.label}
+                      href={item.href ?? "#"}
+                      onClick={(e) => handleAnchorClick(e, item.href ?? "#")}
+                      className="flex items-center gap-1.5 rounded-full px-3.5 py-2 text-xs xl:text-sm font-semibold text-[#505445] hover:text-[#121815] dark:text-[#CBD2C7] dark:hover:text-[#f7fe72] hover:bg-[#EAEFEA] dark:hover:bg-white/5 transition-colors cursor-pointer"
+                    >
+                      <Icon className="w-3.5 h-3.5 opacity-70" />
+                      <span>{item.label}</span>
+                    </a>
+                  );
                 }
-                setMenuOpen(false);
-              }}
-              className="group flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9c67b5] rounded-xl p-1"
-              aria-label="PotatoFit Home"
-            >
-              <PotatoFitLogo size="sm" variant="dark" />
-            </Link>
 
-            {/* Streak Trigger Pill (If provided) */}
-            {onOpenStreak && (
-              <button
-                type="button"
-                onClick={onOpenStreak}
-                title="View Active Streak Adherence"
-                className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#f7fe72]/15 border border-[#f7fe72]/30 text-xs font-mono font-bold text-[#f7fe72] hover:bg-[#f7fe72]/25 transition-all cursor-pointer"
-              >
-                <Flame className="w-3.5 h-3.5 fill-[#f7fe72] text-[#f7fe72]" />
-                <span>14D STREAK</span>
-              </button>
-            )}
-          </div>
+                return (
+                  <button
+                    key={item.label}
+                    onClick={() => toggleMenu(item.label, item.hasMenu)}
+                    aria-expanded={isOpen}
+                    className={cn(
+                      "flex items-center gap-1.5 rounded-full px-3.5 py-2 text-xs xl:text-sm font-semibold transition-all cursor-pointer",
+                      isOpen
+                        ? "bg-[#EAEFEA] dark:bg-white/10 text-[#121815] dark:text-[#f7fe72] shadow-xs"
+                        : "text-[#505445] hover:text-[#121815] dark:text-[#CBD2C7] dark:hover:text-[#f7fe72] hover:bg-[#EAEFEA] dark:hover:bg-white/5"
+                    )}
+                  >
+                    <Icon className="w-3.5 h-3.5 opacity-70" />
+                    <span>{item.label}</span>
+                    <ChevronDown
+                      className={cn(
+                        "h-3.5 w-3.5 transition-transform duration-300 opacity-60",
+                        isOpen && "rotate-180 opacity-100"
+                      )}
+                    />
+                  </button>
+                );
+              })}
 
-          {/* 2. Center: Direct Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={getAnchorHref(link.href)}
-                onClick={(e) => handleAnchorClick(e, link.href)}
-                className="text-xs xl:text-sm font-semibold text-[#262A21] hover:text-[#9c67b5] dark:text-[#CBD2C7] dark:hover:text-[#f7fe72] transition-colors whitespace-nowrap"
-              >
-                {link.label}
-              </a>
-            ))}
-
-            {/* Arena / Leaderboards Link */}
-            <Link
-              href="/leaderboards"
-              className={cn(
-                "flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all whitespace-nowrap shadow-xs",
-                pathname === "/leaderboards"
-                  ? "bg-[#9c67b5]/20 text-[#6C2E85] border border-[#9c67b5] dark:bg-[#9c67b5]/30 dark:text-[#f7fe72] dark:border-[#9c67b5]"
-                  : "bg-[#EAEFEA] hover:bg-[#DDE5DC] text-[#121815] border border-[#757761]/30 dark:bg-[#2D163D]/60 dark:hover:bg-[#3E1F55] dark:text-[#E2E7DE] dark:hover:text-[#f7fe72] dark:border-[#9c67b5]/40"
-              )}
-            >
-              <Trophy className="w-3.5 h-3.5 text-[#6C2E85] dark:text-[#f7fe72]" />
-              <span>Leaderboards</span>
-            </Link>
-
-            {/* Dedicated Rewards Link */}
-            <Link
-              href="/rewards"
-              className={cn(
-                "flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all whitespace-nowrap",
-                pathname === "/rewards"
-                  ? "bg-[#f4e76e]/20 text-[#7A5A00] border border-[#f4e76e]/50 dark:bg-[#f4e76e]/20 dark:text-[#f4e76e] dark:border-[#f4e76e]/40"
-                  : "text-[#262A21] hover:text-[#9c67b5] hover:bg-[#EAEFEA] border border-transparent hover:border-[#757761]/30 dark:text-[#CBD2C7] dark:hover:text-[#f7fe72] dark:hover:bg-white/5"
-              )}
-            >
-              <Award className="w-3.5 h-3.5 text-[#7A5A00] dark:text-[#f4e76e]" />
-              <span>Rewards</span>
-            </Link>
-          </nav>
-
-          {/* 3. Right Utility Cluster: Auth + Primary Action */}
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-
-            {/* NextAuth Session Status (Desktop & Tablet) */}
-            {session?.user ? (
-              <div className="hidden md:flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={handleDashboard}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#EAEFEA] hover:bg-[#DDE5DC] dark:bg-white/5 dark:hover:bg-white/10 border border-[#757761]/30 text-xs font-bold text-[#121815] dark:text-[#E2E7DE] transition-all cursor-pointer"
-                  title="Open Athlete Dashboard"
-                >
-                  <div className="w-5 h-5 rounded-full bg-[#9c67b5] text-[#f7fe72] flex items-center justify-center text-[10px] font-black">
-                    {session.user.name?.[0]?.toUpperCase() || <User className="w-3 h-3" />}
-                  </div>
-                  <span className="max-w-[90px] truncate">
-                    {session.user.name?.split(" ")[0] || "Athlete"}
-                  </span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => signOut({ redirect: false })}
-                  className="text-xs font-semibold text-[#757761] hover:text-[#121815] dark:text-[#A0A594] dark:hover:text-white p-1.5 rounded-lg hover:bg-[#EAEFEA] dark:hover:bg-white/5 transition-colors cursor-pointer"
-                  title="Sign Out"
-                >
-                  <LogOut className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            ) : (
-              <button
-                type="button"
-                onClick={handleSignIn}
-                className="hidden md:block text-xs font-bold text-[#262A21] hover:text-[#9c67b5] dark:text-[#CBD2C7] dark:hover:text-[#f7fe72] px-2.5 py-1.5 rounded-lg hover:bg-[#EAEFEA] dark:hover:bg-white/5 transition-colors cursor-pointer"
-              >
-                Sign In
-              </button>
-            )}
-
-            {/* Primary Action Button (10% High-Voltage Accent) */}
-            <button
-              type="button"
-              onClick={session?.user ? handleDashboard : handleTrial}
-              className="flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] hover:brightness-110 text-[#0B0E0C] text-xs font-black tracking-wide shadow-md active:scale-95 transition-all cursor-pointer whitespace-nowrap"
-            >
-              <span>{session?.user ? "Dashboard" : "Start Trial"}</span>
-              <ArrowRight className="w-3 h-3 text-[#0B0E0C]" />
-            </button>
-
-            {/* Mobile / Tablet Menu Button (Zero overlay inline trigger) */}
-            <button
-              type="button"
-              onClick={() => setMenuOpen((prev) => !prev)}
-              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-              aria-expanded={menuOpen}
-              className="lg:hidden p-2 rounded-xl text-[#262A21] dark:text-[#CBD2C7] hover:text-[#9c67b5] dark:hover:text-[#f7fe72] hover:bg-[#EAEFEA] dark:hover:bg-white/10 border border-[#757761]/30 transition-all cursor-pointer"
-            >
-              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-        </div>
-
-        {/* 
-          =======================================================================
-          INLINE EXPANDING MENU (RESPONSIVE FOR MOBILE & TABLET, ZERO OVERLAY)
-          =======================================================================
-        */}
-        {menuOpen && (
-          <div className="lg:hidden pt-3 pb-4 border-t border-[#757761]/25 mt-1 animate-in fade-in slide-in-from-top-2 duration-200">
-            {/* Navigation Links */}
-            <nav className="grid grid-cols-2 gap-2 mb-3">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={getAnchorHref(link.href)}
-                  onClick={(e) => handleAnchorClick(e, link.href)}
-                  className="px-3 py-2 rounded-xl bg-[#EAEFEA] dark:bg-white/5 hover:bg-[#DDE5DC] dark:hover:bg-white/10 text-xs font-semibold text-[#121815] dark:text-[#E2E7DE] hover:text-[#9c67b5] dark:hover:text-[#f7fe72] transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-
-            {/* Main Feature Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+              {/* Direct Quick Badges for Standings & Vouchers */}
               <Link
                 href="/leaderboards"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center justify-between p-2.5 rounded-xl bg-[#F6EEFA] dark:bg-[#2D163D]/70 border border-[#9c67b5]/30 dark:border-[#9c67b5]/50 text-xs font-bold text-[#6C2E85] dark:text-[#f7fe72]"
+                className={cn(
+                  "hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all shadow-xs ml-1",
+                  pathname === "/leaderboards"
+                    ? "bg-[#757761]/25 text-[#121815] dark:text-[#f7fe72] border border-[#757761]/50 dark:border-[#f7fe72]"
+                    : "bg-[#EAEFEA] hover:bg-[#DDE5DC] text-[#121815] border border-[#757761]/30 dark:bg-[#18201A] dark:hover:bg-[#1f2821] dark:text-[#E2E7DE] dark:hover:text-[#f7fe72] dark:border-[#757761]/40"
+                )}
               >
-                <div className="flex items-center gap-2">
-                  <Trophy className="w-4 h-4 text-[#6C2E85] dark:text-[#f7fe72]" />
-                  <span>Leaderboards &amp; Arena</span>
-                </div>
-                <ArrowRight className="w-3.5 h-3.5 text-[#6C2E85] dark:text-[#f7fe72]" />
+                <Trophy className="w-3.5 h-3.5 text-[#7A5A00] dark:text-[#f7fe72]" />
+                <span>Leaderboards</span>
               </Link>
 
               <Link
                 href="/rewards"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center justify-between p-2.5 rounded-xl bg-[#EAEFEA] dark:bg-white/5 hover:bg-[#DDE5DC] dark:hover:bg-white/10 border border-[#757761]/30 text-xs font-bold text-[#121815] dark:text-[#E2E7DE]"
+                className={cn(
+                  "hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all ml-1",
+                  pathname === "/rewards"
+                    ? "bg-[#f4e76e]/20 text-[#7A5A00] border border-[#f4e76e]/50 dark:bg-[#f4e76e]/20 dark:text-[#f4e76e] dark:border-[#f4e76e]/40"
+                    : "text-[#505445] hover:text-[#121815] hover:bg-[#EAEFEA] border border-transparent hover:border-[#757761]/30 dark:text-[#CBD2C7] dark:hover:text-[#f7fe72] dark:hover:bg-white/5"
+                )}
               >
-                <div className="flex items-center gap-2">
-                  <Award className="w-4 h-4 text-[#7A5A00] dark:text-[#f4e76e]" />
-                  <span>Rewards &amp; Prestige</span>
-                </div>
-                <ArrowRight className="w-3.5 h-3.5 text-[#757761] dark:text-[#A0A594]" />
+                <Award className="w-3.5 h-3.5 text-[#7A5A00] dark:text-[#f4e76e]" />
+                <span>Rewards</span>
               </Link>
-            </div>
+            </nav>
 
-            {/* User Session Row & Action CTA */}
-            <div className="pt-2 border-t border-[#757761]/25 space-y-2">
+            {/* 3. Right Utility Cluster: Language + Auth + CTA */}
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+              
+              {/* Language Selector Popover (Desktop) */}
+              <div className="relative hidden md:block" ref={langRef}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpenMenu(null);
+                    setLangOpen((v) => !v);
+                  }}
+                  aria-expanded={langOpen}
+                  aria-label="Select Athlete Locale"
+                  className={cn(
+                    "flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-xs font-mono font-bold transition-colors cursor-pointer border",
+                    langOpen
+                      ? "bg-[#EAEFEA] dark:bg-white/10 text-[#121815] dark:text-white border-[#757761]/40"
+                      : "text-[#505445] dark:text-[#A0A594] hover:text-[#121815] dark:hover:text-white border-transparent hover:border-[#757761]/30"
+                  )}
+                >
+                  <Languages className="h-3.5 w-3.5 text-[#757761]" />
+                  <span>{language.code}</span>
+                  <ChevronDown
+                    className={cn(
+                      "h-3 w-3 transition-transform duration-300 opacity-60",
+                      langOpen && "rotate-180"
+                    )}
+                  />
+                </button>
+
+                <AnimatePresence>
+                  {langOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -6, scale: 0.96 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -6, scale: 0.96 }}
+                      transition={{ duration: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                      className="absolute right-0 top-full z-30 mt-2 w-48 overflow-hidden rounded-2xl border border-[#757761]/30 bg-white dark:bg-[#121815] p-1.5 shadow-xl shadow-black/25"
+                    >
+                      <div className="px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-[#757761] border-b border-[#757761]/20 mb-1">
+                        Select Local Dialect
+                      </div>
+                      {LANGUAGES.map((lng) => (
+                        <button
+                          key={lng.code}
+                          type="button"
+                          onClick={() => {
+                            setLanguage(lng);
+                            setLangOpen(false);
+                          }}
+                          className={cn(
+                            "flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-xs font-semibold transition-colors cursor-pointer",
+                            lng.code === language.code
+                              ? "bg-[#EAEFEA] dark:bg-[#18201A] text-[#121815] dark:text-[#f7fe72]"
+                              : "text-[#505445] dark:text-[#CBD2C7] hover:bg-[#F4F6F5] dark:hover:bg-white/5"
+                          )}
+                        >
+                          <div className="flex flex-col">
+                            <span>{lng.label}</span>
+                            <span className="text-[10px] text-[#A0A594]">{lng.sub}</span>
+                          </div>
+                          {lng.code === language.code && (
+                            <Check className="h-4 w-4 text-[#7A5A00] dark:text-[#f7fe72]" />
+                          )}
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Session Profile / Sign In */}
               {session?.user ? (
-                <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#EAEFEA] dark:bg-white/5 border border-[#757761]/30">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <div className="w-6 h-6 rounded-full bg-[#9c67b5] text-[#f7fe72] flex items-center justify-center text-xs font-black shrink-0">
-                      {session.user.name?.[0]?.toUpperCase() || <User className="w-3.5 h-3.5" />}
+                <div className="hidden sm:flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={handleDashboard}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#EAEFEA] hover:bg-[#DDE5DC] dark:bg-white/5 dark:hover:bg-white/10 border border-[#757761]/30 text-xs font-bold text-[#121815] dark:text-[#E2E7DE] transition-all cursor-pointer"
+                    title="Open Athlete Dashboard"
+                  >
+                    <div className="w-5 h-5 rounded-full bg-[#18201A] text-[#f7fe72] border border-[#757761]/40 flex items-center justify-center text-[10px] font-black">
+                      {session.user.name?.[0]?.toUpperCase() || <User className="w-3 h-3" />}
                     </div>
-                    <span className="text-xs font-bold text-[#121815] dark:text-[#E2E7DE] truncate">
-                      {session.user.name}
+                    <span className="max-w-[80px] truncate text-xs">
+                      {session.user.name?.split(" ")[0] || "Athlete"}
                     </span>
-                  </div>
+                  </button>
 
-                  <div className="flex items-center gap-2 shrink-0">
-                    <button
-                      type="button"
-                      onClick={handleDashboard}
-                      className="px-2.5 py-1 rounded-lg bg-[#9c67b5]/20 dark:bg-[#9c67b5]/30 hover:bg-[#9c67b5]/40 text-[11px] font-bold text-[#6C2E85] dark:text-[#f7fe72] transition-colors"
-                    >
-                      Dashboard
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setMenuOpen(false);
-                        signOut({ redirect: false });
-                      }}
-                      className="p-1 rounded-lg text-rose-500 hover:bg-rose-500/10"
-                      title="Sign Out"
-                    >
-                      <LogOut className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => signOut({ redirect: false })}
+                    className="text-xs font-semibold text-[#757761] hover:text-[#121815] dark:text-[#A0A594] dark:hover:text-white p-1.5 rounded-lg hover:bg-[#EAEFEA] dark:hover:bg-white/5 transition-colors cursor-pointer"
+                    title="Sign Out"
+                  >
+                    <LogOut className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               ) : (
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    type="button"
-                    onClick={handleSignIn}
-                    className="py-2.5 text-center text-xs font-bold text-[#121815] dark:text-[#E2E7DE] bg-[#EAEFEA] hover:bg-[#DDE5DC] dark:bg-white/5 dark:hover:bg-white/10 border border-[#757761]/30 rounded-xl transition-colors cursor-pointer"
-                  >
-                    Sign In
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={handleTrial}
-                    className="py-2.5 text-center text-xs font-black text-[#0B0E0C] bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] rounded-xl shadow-md transition-all active:scale-95 cursor-pointer"
-                  >
-                    Start Free Trial
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  onClick={handleSignIn}
+                  className="hidden sm:block text-xs font-bold text-[#505445] hover:text-[#121815] dark:text-[#CBD2C7] dark:hover:text-[#f7fe72] px-2.5 py-1.5 rounded-lg hover:bg-[#EAEFEA] dark:hover:bg-white/5 transition-colors cursor-pointer"
+                >
+                  Sign In
+                </button>
               )}
-            </div>
 
+              {/* Primary High-Voltage Accent Button */}
+              <button
+                type="button"
+                onClick={session?.user ? handleDashboard : handleTrial}
+                className="group inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] hover:brightness-110 text-[#0B0E0C] text-xs font-black tracking-wide shadow-md active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+              >
+                <span>{session?.user ? "Dashboard" : "Start Trial"}</span>
+                <ArrowRight className="w-3 h-3 text-[#0B0E0C] transition-transform duration-200 group-hover:translate-x-0.5" />
+              </button>
+
+              {/* Mobile / Tablet Menu Button */}
+              <button
+                type="button"
+                onClick={() => setMobileOpen((v) => !v)}
+                className="lg:hidden p-2 rounded-xl text-[#121815] dark:text-[#CBD2C7] hover:bg-[#EAEFEA] dark:hover:bg-white/10 border border-[#757761]/30 transition-all cursor-pointer"
+                aria-label={mobileOpen ? "Close menu" : "Open menu"}
+                aria-expanded={mobileOpen}
+              >
+                {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </button>
+            </div>
           </div>
-        )}
+
+          {/* Desktop Mega Dropdown (Animated with Motion layout) */}
+          <AnimatePresence initial={false}>
+            {activeMenu && (
+              <motion.div
+                key={openMenu}
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="hidden overflow-hidden lg:block border-t border-[#757761]/20 bg-[#F4F6F5]/50 dark:bg-[#0B0E0C]/40"
+              >
+                <div
+                  className={cn(
+                    "grid gap-6 px-8 pb-7 pt-5",
+                    activeMenu.columns.length >= 3
+                      ? "grid-cols-[repeat(3,minmax(0,1fr))_auto]"
+                      : "grid-cols-[1fr_1fr_auto]"
+                  )}
+                >
+                  {activeMenu.columns.map((col, colIdx) => (
+                    <div key={col.eyebrow} className="flex flex-col gap-4">
+                      <div className="flex items-center gap-2">
+                        <span className="w-fit rounded-full border border-[#757761]/30 bg-[#EAEFEA] dark:bg-[#18201A] px-3 py-1 text-[11px] font-mono font-bold uppercase tracking-wider text-[#505445] dark:text-[#CBD2C7]">
+                          {col.eyebrow}
+                        </span>
+                        {colIdx === 0 && activeMenu.badgeText && (
+                          <span className="flex items-center gap-1 text-[10px] font-mono font-bold text-[#7A5A00] dark:text-[#f7fe72]">
+                            <Sparkles className="w-3 h-3" />
+                            {activeMenu.badgeText}
+                          </span>
+                        )}
+                      </div>
+
+                      <ul className="flex flex-col gap-3">
+                        {col.links.map((link) => (
+                          <li key={link.label}>
+                            <a
+                              href={link.href}
+                              onClick={(e) => handleAnchorClick(e, link.href)}
+                              className="group block rounded-xl p-2.5 transition-all hover:bg-white dark:hover:bg-[#18201A] border border-transparent hover:border-[#757761]/25 shadow-xs hover:shadow-md"
+                            >
+                              <div className="flex items-center gap-2">
+                                <span
+                                  className={cn(
+                                    "text-sm font-bold transition-colors group-hover:text-[#7A5A00] dark:group-hover:text-[#f7fe72]",
+                                    link.active
+                                      ? "text-[#121815] dark:text-[#f7fe72]"
+                                      : "text-[#121815] dark:text-[#E2E7DE]"
+                                  )}
+                                >
+                                  {link.label}
+                                </span>
+                                {link.badge && (
+                                  <span className="rounded-full bg-[#f7fe72] text-[#0B0E0C] px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">
+                                    {link.badge}
+                                  </span>
+                                )}
+                              </div>
+                              {link.desc && (
+                                <p className="text-xs text-[#505445] dark:text-[#A0A594] mt-0.5 line-clamp-1">
+                                  {link.desc}
+                                </p>
+                              )}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+
+                      {/* Footer links under the second column */}
+                      {colIdx === activeMenu.columns.length - 1 && activeMenu.footerLinks && (
+                        <div className="mt-auto flex flex-col gap-1.5 pt-4 border-t border-[#757761]/20">
+                          {activeMenu.footerLinks.map((item) => (
+                            <a
+                              key={item.label}
+                              href={item.href}
+                              onClick={(e) => handleAnchorClick(e, item.href)}
+                              className="flex items-center gap-1 text-xs font-medium text-[#757761] hover:text-[#121815] dark:text-[#A0A594] dark:hover:text-[#f7fe72] transition-colors"
+                            >
+                              <ArrowRight className="w-3 h-3 text-[#757761]" />
+                              <span>{item.label}</span>
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+
+                  {/* Mega Menu Visual Preview Card */}
+                  <div className="relative hidden h-64 w-80 flex-col justify-end overflow-hidden rounded-2xl md:flex border border-[#757761]/30 shadow-lg group">
+                    <img
+                      src={activeMenu.image.src}
+                      alt={activeMenu.image.alt}
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E0C] via-[#0B0E0C]/40 to-transparent" />
+                    {activeMenu.imageCaption && (
+                      <div className="relative z-10 p-4 space-y-1">
+                        <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#f7fe72] uppercase tracking-wider">
+                          <Activity className="w-3 h-3" />
+                          <span>PotatoFit Verified Engine</span>
+                        </div>
+                        <p className="text-xs font-semibold text-white leading-relaxed">
+                          {activeMenu.imageCaption}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Social Community Strip */}
+                {activeMenu.showSocials && (
+                  <div className="flex items-center justify-between border-t border-[#757761]/20 px-8 py-3 bg-[#EAEFEA]/40 dark:bg-black/20">
+                    <div className="flex items-center gap-2 text-xs text-[#505445] dark:text-[#A0A594]">
+                      <HeartHandshake className="w-3.5 h-3.5 text-[#7A5A00] dark:text-[#f7fe72]" />
+                      <span>Join 12,000+ athletes across Delhi NCR</span>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      {SOCIALS.map(({ href, label, icon: Icon }) => (
+                        <a
+                          key={label}
+                          href={href}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={label}
+                          className="text-[#757761] hover:text-[#121815] dark:text-[#A0A594] dark:hover:text-[#f7fe72] transition-colors p-1"
+                        >
+                          <Icon className="h-4 w-4" />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Mobile Panel Accordion (Zero Overlay, Built into Island) */}
+          <AnimatePresence initial={false}>
+            {mobileOpen && (
+              <motion.div
+                key="mobile-panel"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden lg:hidden border-t border-[#757761]/25 px-5 py-4 space-y-4"
+              >
+                {/* Primary Nav Accordions */}
+                <div className="flex flex-col gap-1.5">
+                  {NAV_ITEMS.map((item) => {
+                    const isExpanded = openMenu === item.label;
+                    const Icon = item.icon;
+
+                    if (!item.hasMenu) {
+                      return (
+                        <a
+                          key={item.label}
+                          href={item.href ?? "#"}
+                          onClick={(e) => handleAnchorClick(e, item.href ?? "#")}
+                          className="flex items-center justify-between rounded-xl p-3 text-xs font-bold text-[#121815] dark:text-[#E2E7DE] hover:bg-[#EAEFEA] dark:hover:bg-white/5 transition-colors"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Icon className="w-4 h-4 text-[#757761]" />
+                            <span>{item.label}</span>
+                          </div>
+                          <ArrowRight className="w-3.5 h-3.5 text-[#757761]" />
+                        </a>
+                      );
+                    }
+
+                    return (
+                      <div key={item.label} className="rounded-xl overflow-hidden border border-[#757761]/20">
+                        <button
+                          type="button"
+                          onClick={() => toggleMenu(item.label, true)}
+                          className="flex w-full items-center justify-between p-3 text-left text-xs font-bold text-[#121815] dark:text-[#E2E7DE] bg-[#EAEFEA]/50 dark:bg-white/5 cursor-pointer"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Icon className="w-4 h-4 text-[#7A5A00] dark:text-[#f7fe72]" />
+                            <span>{item.label}</span>
+                          </div>
+                          <ChevronDown
+                            className={cn(
+                              "h-4 w-4 transition-transform text-[#757761]",
+                              isExpanded && "rotate-180"
+                            )}
+                          />
+                        </button>
+
+                        {isExpanded && activeMenu && (
+                          <div className="p-3 bg-white dark:bg-[#18201A] space-y-3 border-t border-[#757761]/20">
+                            {activeMenu.columns.map((c) => (
+                              <div key={c.eyebrow} className="space-y-1">
+                                <div className="px-2 py-0.5 text-[10px] font-mono font-bold uppercase tracking-wider text-[#7A5A00] dark:text-[#f7fe72]">
+                                  {c.eyebrow}
+                                </div>
+                                <div className="space-y-1">
+                                  {c.links.map((link) => (
+                                    <a
+                                      key={link.label}
+                                      href={link.href}
+                                      onClick={(e) => handleAnchorClick(e, link.href)}
+                                      className="flex items-center justify-between p-2 rounded-lg text-xs font-medium text-[#505445] dark:text-[#CBD2C7] hover:bg-[#F4F6F5] dark:hover:bg-white/5 transition-colors"
+                                    >
+                                      <span>{link.label}</span>
+                                      {link.badge && (
+                                        <span className="rounded-full bg-[#f7fe72] text-[#0B0E0C] px-1.5 py-0.5 text-[9px] font-black uppercase">
+                                          {link.badge}
+                                        </span>
+                                      )}
+                                    </a>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Direct Links: Leaderboards & Rewards */}
+                <div className="grid grid-cols-2 gap-2 pt-2 border-t border-[#757761]/20">
+                  <Link
+                    href="/leaderboards"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl bg-[#EAEFEA] dark:bg-[#18201A] border border-[#757761]/30 text-xs font-bold text-[#121815] dark:text-[#f7fe72]"
+                  >
+                    <Trophy className="w-3.5 h-3.5 text-[#7A5A00] dark:text-[#f7fe72]" />
+                    <span>Leaderboards</span>
+                  </Link>
+
+                  <Link
+                    href="/rewards"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl bg-[#EAEFEA] dark:bg-white/5 border border-[#757761]/30 text-xs font-bold text-[#121815] dark:text-[#E2E7DE]"
+                  >
+                    <Award className="w-3.5 h-3.5 text-[#7A5A00] dark:text-[#f4e76e]" />
+                    <span>Rewards</span>
+                  </Link>
+                </div>
+
+                {/* Mobile Language Switcher */}
+                <div className="pt-2 border-t border-[#757761]/20 space-y-1.5">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#757761]">
+                    Language / बोली
+                  </span>
+                  <div className="grid grid-cols-4 gap-1.5">
+                    {LANGUAGES.map((lng) => (
+                      <button
+                        key={lng.code}
+                        type="button"
+                        onClick={() => setLanguage(lng)}
+                        className={cn(
+                          "rounded-lg border py-1.5 text-center text-xs font-mono font-bold transition-all cursor-pointer",
+                          lng.code === language.code
+                            ? "border-[#7A5A00] dark:border-[#f7fe72] bg-[#f7fe72] text-[#0B0E0C]"
+                            : "border-[#757761]/30 text-[#505445] dark:text-[#CBD2C7] bg-[#EAEFEA]/60 dark:bg-white/5"
+                        )}
+                      >
+                        {lng.code}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Mobile Session Status & CTA */}
+                <div className="pt-2 border-t border-[#757761]/20 space-y-2">
+                  {session?.user ? (
+                    <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#EAEFEA] dark:bg-white/5 border border-[#757761]/30">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div className="w-6 h-6 rounded-full bg-[#18201A] text-[#f7fe72] border border-[#757761]/40 flex items-center justify-center text-xs font-black shrink-0">
+                          {session.user.name?.[0]?.toUpperCase() || <User className="w-3.5 h-3.5" />}
+                        </div>
+                        <span className="text-xs font-bold text-[#121815] dark:text-[#E2E7DE] truncate">
+                          {session.user.name}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-2 shrink-0">
+                        <button
+                          type="button"
+                          onClick={handleDashboard}
+                          className="px-2.5 py-1 rounded-lg bg-[#757761]/20 dark:bg-[#757761]/30 text-[11px] font-bold text-[#121815] dark:text-[#f7fe72]"
+                        >
+                          Dashboard
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setMobileOpen(false);
+                            signOut({ redirect: false });
+                          }}
+                          className="p-1 rounded-lg text-rose-500 hover:bg-rose-500/10 cursor-pointer"
+                          title="Sign Out"
+                        >
+                          <LogOut className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        type="button"
+                        onClick={handleSignIn}
+                        className="py-2.5 text-center text-xs font-bold text-[#121815] dark:text-[#E2E7DE] bg-[#EAEFEA] hover:bg-[#DDE5DC] dark:bg-white/5 dark:hover:bg-white/10 border border-[#757761]/30 rounded-xl transition-colors cursor-pointer"
+                      >
+                        Sign In
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={handleTrial}
+                        className="py-2.5 text-center text-xs font-black text-[#0B0E0C] bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] rounded-xl shadow-md transition-all active:scale-95 cursor-pointer"
+                      >
+                        Start Trial
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </header>
   );

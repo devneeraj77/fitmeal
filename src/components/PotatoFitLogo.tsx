@@ -3,30 +3,31 @@
 import React from "react";
 
 interface PotatoFitLogoProps {
-  size?: "sm" | "md" | "lg" | "xl";
   className?: string;
+  size?: "sm" | "md" | "lg" | "xl";
   showText?: boolean;
-  variant?: "dark" | "light";
+  variant?: "dark" | "light" | string;
 }
 
 export default function PotatoFitLogo({
-  size = "md",
   className = "",
+  size = "md",
   showText = true,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   variant = "dark",
 }: PotatoFitLogoProps) {
   const sizeMap = {
-    sm: "w-8 h-8",
-    md: "w-11 h-11",
-    lg: "w-16 h-16",
-    xl: "w-24 h-24",
+    sm: "w-7 h-7",
+    md: "w-9 h-9",
+    lg: "w-12 h-12",
+    xl: "w-16 h-16",
   };
 
   const textMap = {
-    sm: "text-lg",
-    md: "text-2xl",
-    lg: "text-3xl sm:text-4xl",
-    xl: "text-4xl sm:text-5xl",
+    sm: "text-base",
+    md: "text-lg",
+    lg: "text-2xl",
+    xl: "text-3xl",
   };
 
   return (
@@ -36,7 +37,7 @@ export default function PotatoFitLogo({
         className={`relative ${sizeMap[size]} shrink-0 group flex items-center justify-center`}
       >
         {/* Ambient subtle glow ring */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#9c67b5]/30 via-[#f7fe72]/20 to-[#9c67b5]/30 blur-md group-hover:blur-lg transition-all duration-300 opacity-80" />
+        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#757761]/30 via-[#f7fe72]/20 to-[#757761]/30 blur-md group-hover:blur-lg transition-all duration-300 opacity-80" />
 
         <svg
           viewBox="0 0 120 120"
@@ -55,12 +56,12 @@ export default function PotatoFitLogo({
               <stop offset="100%" stopColor="#d4c448" />
             </linearGradient>
             <linearGradient id="facetAmberDark" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#9c67b5" />
-              <stop offset="100%" stopColor="#582b75" />
+              <stop offset="0%" stopColor="#757761" />
+              <stop offset="100%" stopColor="#44493f" />
             </linearGradient>
             <linearGradient id="facetSlateDark" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#281436" />
-              <stop offset="100%" stopColor="#120919" />
+              <stop offset="0%" stopColor="#1E2721" />
+              <stop offset="100%" stopColor="#0B0E0C" />
             </linearGradient>
             <linearGradient id="facetSlateMid" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#757761" />
@@ -71,7 +72,7 @@ export default function PotatoFitLogo({
             <linearGradient id="solarBoltGradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#f7fe72" />
               <stop offset="50%" stopColor="#f4e76e" />
-              <stop offset="100%" stopColor="#9c67b5" />
+              <stop offset="100%" stopColor="#ffffff" />
             </linearGradient>
 
             {/* Electric Glow Filter */}
@@ -127,7 +128,7 @@ export default function PotatoFitLogo({
             />
             <polyline
               points="18,46 52,50 88,44"
-              stroke="#9c67b5"
+              stroke="#757761"
               strokeWidth="0.8"
               strokeOpacity="0.4"
             />
@@ -174,16 +175,16 @@ export default function PotatoFitLogo({
             <span
               className={`font-black tracking-tight uppercase font-sans text-[#121815] dark:text-[#F0F4EE] ${textMap[size]}`}
             >
-              POTATO<span className="text-[#8436A4] dark:text-[#f7fe72]">FIT</span>
+              POTATO<span className="text-[#7A5A00] dark:text-[#f7fe72]">FIT</span>
             </span>
             <span
-              className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono font-bold tracking-widest uppercase bg-[#2D163D] text-[#D8B4E2] border border-[#9c67b5]/50 shadow-2xs"
+              className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono font-bold tracking-widest uppercase bg-[#EAEFEA] dark:bg-[#18201A] text-[#505445] dark:text-[#CBD2C7] border border-[#757761]/30 dark:border-[#757761]/50 shadow-2xs"
             >
               APEX v2.4
             </span>
           </div>
           <span
-            className="hidden sm:block text-[10px] sm:text-xs font-semibold tracking-wider uppercase -mt-0.5 text-[#757761] dark:text-[#A0A594]"
+            className="hidden sm:block text-[10px] sm:text-xs font-semibold tracking-wider uppercase -mt-0.5 text-[#505445] dark:text-[#A0A594]"
           >
             Hyper-Local Athletic Fuel
           </span>

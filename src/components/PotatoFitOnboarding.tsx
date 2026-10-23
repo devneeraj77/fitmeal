@@ -61,11 +61,11 @@ const ATHLETE_LEVELS: AthleteLevel[] = [
     name: "Spud Rookie",
     tagline: "Just getting started, focusing on hitting water and step goals.",
     tag: "TIER 01 • FOUNDATION",
-    badgeColor: "bg-[#9c67b5]/15 text-[#f7fe72] border-[#9c67b5]/30",
-    borderColor: "hover:border-[#9c67b5]/60",
-    glowColor: "rgba(156, 103, 181, 0.25)",
+    badgeColor: "bg-[#757761]/20 text-[#f7fe72] border-[#757761]/35",
+    borderColor: "hover:border-[#757761]/60",
+    glowColor: "rgba(117, 119, 97, 0.25)",
     icon: Droplets,
-    iconBg: "bg-[#9c67b5]/20 text-[#f7fe72] border border-[#9c67b5]/30",
+    iconBg: "bg-[#757761]/20 text-[#f7fe72] border border-[#757761]/30",
     iconColor: "text-[#f7fe72]",
     metrics: {
       hydration: "3.0L Water / day",
@@ -82,11 +82,11 @@ const ATHLETE_LEVELS: AthleteLevel[] = [
     name: "Street Athlete",
     tagline: "Workouts established, need hyper-local macro planning.",
     tag: "TIER 02 • OPTIMIZATION",
-    badgeColor: "bg-[#9c67b5]/25 text-[#f4e76e] border-[#9c67b5]/40",
+    badgeColor: "bg-[#f4e76e]/15 text-[#f4e76e] border-[#f4e76e]/30",
     borderColor: "hover:border-[#f4e76e]/70",
     glowColor: "rgba(244, 231, 110, 0.25)",
     icon: Dumbbell,
-    iconBg: "bg-[#9c67b5]/25 text-[#f4e76e] border border-[#9c67b5]/40",
+    iconBg: "bg-[#f4e76e]/15 text-[#f4e76e] border border-[#f4e76e]/30",
     iconColor: "text-[#f4e76e]",
     metrics: {
       hydration: "3.8L Water / day",
@@ -103,11 +103,11 @@ const ATHLETE_LEVELS: AthleteLevel[] = [
     name: "Apex Competitor",
     tagline: "Aiming for top 5% on the global leaderboard.",
     tag: "TIER 03 • GLOBAL APEX",
-    badgeColor: "bg-gradient-to-r from-[#9c67b5]/30 to-[#f7fe72]/20 text-[#f7fe72] border-[#f7fe72]/40",
+    badgeColor: "bg-gradient-to-r from-[#757761]/30 to-[#f7fe72]/20 text-[#f7fe72] border-[#f7fe72]/40",
     borderColor: "hover:border-[#f7fe72]",
     glowColor: "rgba(247, 254, 114, 0.35)",
     icon: Trophy,
-    iconBg: "bg-gradient-to-tr from-[#9c67b5]/40 via-[#2D163D] to-[#f7fe72]/20 text-[#f7fe72] border border-[#f7fe72]/40",
+    iconBg: "bg-gradient-to-tr from-[#757761]/30 via-[#18201A] to-[#f7fe72]/20 text-[#f7fe72] border border-[#f7fe72]/40",
     iconColor: "text-[#f7fe72]",
     metrics: {
       hydration: "4.5L Electrolyte Water",
@@ -220,10 +220,10 @@ export default function PotatoFitOnboarding({
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#0B0E0C] text-[#E2E7DE] font-sans selection:bg-[#9c67b5]/30 selection:text-[#f7fe72] flex flex-col relative overflow-x-hidden">
+    <div className="min-h-screen w-full bg-[#F4F6F5] dark:bg-[#0B0E0C] text-[#121815] dark:text-[#E2E7DE] font-sans selection:bg-[#f7fe72]/30 selection:text-[#f7fe72] flex flex-col relative overflow-x-hidden transition-colors">
       {/* Dynamic Ambient Background Lighting */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] pointer-events-none overflow-hidden z-0">
-        <div className="absolute -top-32 left-1/4 w-[500px] h-[500px] bg-[#9c67b5]/15 rounded-full blur-[140px]" />
+        <div className="absolute -top-32 left-1/4 w-[500px] h-[500px] bg-[#757761]/15 rounded-full blur-[140px]" />
         <div className="absolute top-20 right-1/4 w-[450px] h-[450px] bg-[#f7fe72]/10 rounded-full blur-[140px]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#f4e76e]/5 rounded-full blur-[160px]" />
         {/* Subtle athletic coordinate grid */}
@@ -237,7 +237,7 @@ export default function PotatoFitOnboarding({
       </div>
 
       {/* 1. Header Bar */}
-      <header className="relative z-10 w-full border-b border-[#757761]/25 bg-[#121815]/80 backdrop-blur-md">
+      <header className="relative z-10 w-full border-b border-[#757761]/25 bg-white/80 dark:bg-[#121815]/80 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           {/* Modern PotatoFit Faceted Logo */}
           <PotatoFitLogo size="md" variant="dark" />
@@ -284,7 +284,7 @@ export default function PotatoFitOnboarding({
       <main className="relative z-10 flex-1 flex flex-col justify-center max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 w-full">
         {/* Athletic Badge Tag */}
         <div className="flex items-center justify-center mb-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#9c67b5]/15 border border-[#9c67b5]/30 text-[#f7fe72] text-xs sm:text-sm font-semibold tracking-wide shadow-[0_0_15px_rgba(156,103,181,0.2)] animate-fade-in">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#757761]/15 border border-[#757761]/30 text-[#f7fe72] text-xs sm:text-sm font-semibold tracking-wide shadow-[0_0_15px_rgba(247,254,114,0.15)] animate-fade-in">
             <Zap className="w-4 h-4 text-[#f7fe72] fill-[#f7fe72]/20" />
             <span>HYPER-LOCAL ATHLETIC NUTRITION PLATFORM</span>
             <span className="hidden sm:inline text-[#757761]">•</span>
@@ -296,7 +296,7 @@ export default function PotatoFitOnboarding({
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-[1.1] mb-5">
             From Couch Potato to{" "}
-            <span className="bg-gradient-to-r from-[#9c67b5] via-[#f4e76e] to-[#f7fe72] bg-clip-text text-transparent drop-shadow-sm">
+            <span className="bg-gradient-to-r from-[#121815] via-[#505445] to-[#7A5A00] dark:from-[#FFFFFF] dark:via-[#f4e76e] dark:to-[#f7fe72] bg-clip-text text-transparent drop-shadow-sm">
               Global Apex.
             </span>
           </h1>
@@ -321,7 +321,7 @@ export default function PotatoFitOnboarding({
               Daily Habit Quests
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#121815] border border-[#757761]/35">
-              <Globe2 className="w-3.5 h-3.5 text-[#9c67b5]" />
+              <Globe2 className="w-3.5 h-3.5 text-[#f7fe72]" />
               Global Leaderboard
             </span>
           </div>
@@ -363,7 +363,7 @@ export default function PotatoFitOnboarding({
                   className={`relative group rounded-2xl p-6 sm:p-7 flex flex-col justify-between cursor-pointer transition-all duration-300 transform text-left select-none outline-none focus-visible:ring-2 focus-visible:ring-[#f7fe72] ${
                     isSelected
                       ? "bg-[#121815] border-2 border-[#f7fe72] shadow-[0_0_35px_rgba(247,254,114,0.25)] -translate-y-2 ring-1 ring-[#f7fe72]/50"
-                      : "bg-[#121815]/80 border border-[#757761]/30 hover:border-[#9c67b5]/70 hover:shadow-[0_0_28px_rgba(156,103,181,0.2)] hover:-translate-y-1.5"
+                      : "bg-[#121815]/80 border border-[#757761]/30 hover:border-[#f7fe72]/70 hover:shadow-[0_0_28px_rgba(247,254,114,0.2)] hover:-translate-y-1.5"
                   }`}
                 >
                   {/* Glowing selection corner accent */}
@@ -442,7 +442,7 @@ export default function PotatoFitOnboarding({
 
                       <div className="flex items-center justify-between text-[#A0A493]">
                         <span className="flex items-center gap-1.5">
-                          <ShoppingBag className="w-3.5 h-3.5 text-[#9c67b5]" />
+                          <ShoppingBag className="w-3.5 h-3.5 text-[#f7fe72]" />
                           Macro Planning
                         </span>
                         <span className="font-semibold text-[#E2E7DE]">
@@ -577,16 +577,16 @@ export default function PotatoFitOnboarding({
       {/* 5. Interactive Radar Modal: Triggered after "Detect My Local Food Radius & Begin →" */}
       {isRadarModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md animate-fade-in">
-          <div className="relative w-full max-w-2xl bg-[#121815] border-2 border-[#9c67b5]/60 rounded-3xl p-6 sm:p-8 shadow-[0_0_60px_rgba(156,103,181,0.3)] flex flex-col max-h-[92vh] overflow-y-auto">
+          <div className="relative w-full max-w-2xl bg-[#121815] border-2 border-[#f7fe72]/60 rounded-3xl p-6 sm:p-8 shadow-[0_0_60px_rgba(247,254,114,0.2)] flex flex-col max-h-[92vh] overflow-y-auto">
             {/* Modal Header */}
             <div className="flex items-start justify-between gap-4 mb-6">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#9c67b5]/20 border border-[#9c67b5]/40 text-[#f7fe72] flex items-center justify-center">
+                <div className="w-12 h-12 rounded-2xl bg-[#757761]/20 border border-[#757761]/40 text-[#f7fe72] flex items-center justify-center">
                   <Radar className="w-6 h-6 animate-pulse" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#9c67b5]/20 text-[#f7fe72] border border-[#9c67b5]/30 uppercase">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#757761]/20 text-[#f7fe72] border border-[#757761]/30 uppercase">
                       Radius Locked
                     </span>
                     <span className="text-xs text-[#A0A493] font-mono">GPS 30.2672° N, 97.7431° W</span>
@@ -608,13 +608,13 @@ export default function PotatoFitOnboarding({
             {/* Radar Visualizer Animation */}
             <div className="relative w-full h-44 rounded-2xl bg-[#0B0E0C] border border-[#757761]/30 overflow-hidden flex items-center justify-center mb-6">
               {/* Radar concentric range circles */}
-              <div className="absolute w-24 h-24 rounded-full border border-[#9c67b5]/30" />
-              <div className="absolute w-44 h-44 rounded-full border border-[#9c67b5]/20" />
-              <div className="absolute w-64 h-64 rounded-full border border-[#9c67b5]/10" />
+              <div className="absolute w-24 h-24 rounded-full border border-[#757761]/30" />
+              <div className="absolute w-44 h-44 rounded-full border border-[#757761]/20" />
+              <div className="absolute w-64 h-64 rounded-full border border-[#757761]/10" />
 
               {/* Crosshairs */}
-              <div className="absolute w-full h-[1px] bg-[#9c67b5]/20" />
-              <div className="absolute h-full w-[1px] bg-[#9c67b5]/20" />
+              <div className="absolute w-full h-[1px] bg-[#757761]/20" />
+              <div className="absolute h-full w-[1px] bg-[#757761]/20" />
 
               {/* Sweeping radar line */}
               <div
@@ -650,8 +650,8 @@ export default function PotatoFitOnboarding({
               </div>
 
               <div className="absolute top-8 right-24 flex items-center gap-1">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#9c67b5] shadow-[0_0_8px_#9c67b5]" />
-                <span className="text-[9px] font-mono text-[#9c67b5] bg-[#121815] px-1 rounded border border-[#757761]/30">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#f7fe72] shadow-[0_0_8px_#f7fe72]" />
+                <span className="text-[9px] font-mono text-[#f7fe72] bg-[#121815] px-1 rounded border border-[#757761]/30">
                   Verdant Valley (2.1km)
                 </span>
               </div>
@@ -671,16 +671,16 @@ export default function PotatoFitOnboarding({
                 {SAMPLE_VENDORS.map((v) => (
                   <div
                     key={v.id}
-                    className="p-3.5 rounded-xl bg-[#0B0E0C] border border-[#757761]/25 hover:border-[#9c67b5]/50 transition-colors flex items-center justify-between gap-3"
+                    className="p-3.5 rounded-xl bg-[#0B0E0C] border border-[#757761]/25 hover:border-[#f7fe72]/50 transition-colors flex items-center justify-between gap-3"
                   >
                     <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-[#9c67b5]/20 border border-[#9c67b5]/30 text-[#f7fe72] flex items-center justify-center shrink-0 mt-0.5">
+                      <div className="w-8 h-8 rounded-lg bg-[#757761]/20 border border-[#757761]/30 text-[#f7fe72] flex items-center justify-center shrink-0 mt-0.5">
                         <ShoppingBag className="w-4 h-4" />
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
                           <h5 className="text-sm font-bold text-white">{v.name}</h5>
-                          <span className="text-[10px] font-mono text-[#f7fe72] bg-[#9c67b5]/20 px-1.5 py-0.2 rounded border border-[#9c67b5]/30">
+                          <span className="text-[10px] font-mono text-[#f7fe72] bg-[#757761]/20 px-1.5 py-0.2 rounded border border-[#757761]/30">
                             {v.distance}
                           </span>
                         </div>
@@ -700,7 +700,7 @@ export default function PotatoFitOnboarding({
             </div>
 
             {/* Personalized Day 1 Quest Card */}
-            <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-[#9c67b5]/20 via-[#121815] to-[#f7fe72]/10 border border-[#9c67b5]/40">
+            <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-[#757761]/20 via-[#121815] to-[#f7fe72]/10 border border-[#757761]/40">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs font-mono font-bold text-[#f7fe72] uppercase tracking-wider flex items-center gap-1.5">
                   <Zap className="w-3.5 h-3.5 text-[#f7fe72]" />

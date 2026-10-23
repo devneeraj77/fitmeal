@@ -75,7 +75,7 @@ export function ThemeToggleGlide({ className = "", size = "sm" }: ThemeToggleGli
     >
       {/* Smooth Sliding Glide Pill Indicator with Brand Theme Colors */}
       <div
-        className="absolute top-1 bottom-1 rounded-full bg-[#9c67b5] dark:bg-gradient-to-r dark:from-[#9c67b5] dark:to-[#2D163D] shadow-md transition-transform duration-300 ease-out pointer-events-none"
+        className="absolute top-1 bottom-1 rounded-full bg-[#121815] dark:bg-gradient-to-r dark:from-[#f7fe72] dark:to-[#f4e76e] shadow-md transition-transform duration-300 ease-out pointer-events-none"
         style={{
           width: "calc(33.333% - 2.66px)",
           left: "1.33px",
@@ -98,11 +98,11 @@ export function ThemeToggleGlide({ className = "", size = "sm" }: ThemeToggleGli
             onClick={() => handleSelect(opt.id)}
             className={`relative z-10 flex items-center justify-center gap-1.5 rounded-full font-bold transition-all cursor-pointer ${
               isActive
-                ? "text-white dark:text-[#f7fe72] font-black drop-shadow-xs"
-                : "text-[#505445] hover:text-[#9c67b5] dark:text-[#CBD2C7] dark:hover:text-[#f7fe72]"
+                ? "text-white dark:text-[#0B0E0C] font-black drop-shadow-xs"
+                : "text-[#505445] hover:text-[#121815] dark:text-[#CBD2C7] dark:hover:text-[#f7fe72]"
             } ${size === "sm" ? "text-[11px] h-6" : "text-xs h-7"}`}
           >
-            <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? "text-white dark:text-[#f7fe72]" : ""}`} />
+            <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? "text-white dark:text-[#0B0E0C]" : ""}`} />
             <span className="font-mono text-[10px] uppercase tracking-wider">
               {opt.label}
             </span>

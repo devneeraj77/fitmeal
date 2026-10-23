@@ -102,7 +102,7 @@ export default function SignInModal({ isOpen, onClose, onOpenDashboard }: SignIn
 
         {!loggedIn ? (
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#9c67b5]/20 border border-[#9c67b5]/30 text-xs font-bold text-[#f7fe72] uppercase tracking-wider mb-3 font-mono">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#757761]/20 border border-[#757761]/30 text-xs font-bold text-[#f7fe72] uppercase tracking-wider mb-3 font-mono">
               <Lock className="w-3.5 h-3.5 text-[#f7fe72]" />
               <span>NextAuth v5 Credentials</span>
             </div>

@@ -121,33 +121,33 @@ export default function CanvasBadge({
         case "emerald":
           rimGrad = ctx.createLinearGradient(0, 0, size, size);
           rimGrad.addColorStop(0, "#f7fe72"); // Bright solar sheen
-          rimGrad.addColorStop(0.3, "#9c67b5"); // Royal amethyst
-          rimGrad.addColorStop(0.7, "#6b378c");
-          rimGrad.addColorStop(1, "#281436");
+          rimGrad.addColorStop(0.3, "#f4e76e"); // Solar gold
+          rimGrad.addColorStop(0.7, "#757761"); // Smoked olive sage
+          rimGrad.addColorStop(1, "#18201A");
 
           coreGrad = ctx.createRadialGradient(cx, cy, 2, cx, cy, innerR);
-          coreGrad.addColorStop(0, "#2B153D");
-          coreGrad.addColorStop(0.8, "#140A1C");
-          coreGrad.addColorStop(1, "#07030A");
+          coreGrad.addColorStop(0, "#18201A");
+          coreGrad.addColorStop(0.8, "#121815");
+          coreGrad.addColorStop(1, "#0B0E0C");
 
           accentColor = "#f7fe72";
-          emblemColor = "#F3E8FF";
+          emblemColor = "#FFFFFF";
           break;
 
         case "apex":
         default:
           rimGrad = ctx.createLinearGradient(0, 0, size, size);
-          rimGrad.addColorStop(0, "#D5B3E7"); // Amethyst highlight
-          rimGrad.addColorStop(0.35, "#9c67b5"); // Royal amethyst
+          rimGrad.addColorStop(0, "#FFFFFF"); // Diamond highlight
+          rimGrad.addColorStop(0.35, "#f4e76e"); // Solar gold
           rimGrad.addColorStop(0.7, "#f7fe72"); // Electric lime accent
-          rimGrad.addColorStop(1, "#281436");
+          rimGrad.addColorStop(1, "#18201A");
 
           coreGrad = ctx.createRadialGradient(cx, cy, 2, cx, cy, innerR);
-          coreGrad.addColorStop(0, "#2B153D");
-          coreGrad.addColorStop(0.7, "#140A1C");
-          coreGrad.addColorStop(1, "#07030A");
+          coreGrad.addColorStop(0, "#18201A");
+          coreGrad.addColorStop(0.7, "#121815");
+          coreGrad.addColorStop(1, "#0B0E0C");
 
-          accentColor = "#9c67b5";
+          accentColor = "#f7fe72";
           emblemColor = "#f7fe72";
           break;
       }

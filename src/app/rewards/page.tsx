@@ -257,8 +257,8 @@ export default function RewardsPage() {
       title: "Biomechanical Vanguard",
       xpThreshold: 10000,
       rankThreshold: "Top 25 Contenders",
-      accentGlow: "rgba(156, 103, 181, 0.35)",
-      gradientText: "from-[#9c67b5] via-[#b88cd0] to-[#f7fe72]",
+      accentGlow: "rgba(117, 119, 97, 0.35)",
+      gradientText: "from-[#A0A594] via-[#CBD2C7] to-[#f7fe72]",
       tagline: "Masters of physical resilience, sustainable clean fueling, and local community leadership.",
       badges: [
         {
@@ -285,9 +285,9 @@ export default function RewardsPage() {
       perks: [
         {
           id: "rew_emerald_particles",
-          title: "Amethyst Particle Profile Halo",
+          title: "Solar Kinetic Profile Halo",
           type: "aura",
-          valueDescription: "Continuous floating amethyst & solar embers orbiting your profile badge across the entire platform.",
+          valueDescription: "Continuous floating solar embers and sage kinetic particles orbiting your profile badge across the entire platform.",
           isUnlocked: userXp >= 10000,
           isClaimed: !!claimedCodes["rew_emerald_particles"],
         },
@@ -309,8 +309,8 @@ export default function RewardsPage() {
       title: "Immortal Pantheon",
       xpThreshold: 20000,
       rankThreshold: "Top 10 Grandmasters",
-      accentGlow: "rgba(156, 103, 181, 0.45)",
-      gradientText: "from-[#9c67b5] via-[#d5b3e7] to-[#f7fe72]",
+      accentGlow: "rgba(247, 254, 114, 0.45)",
+      gradientText: "from-[#CBD2C7] via-[#f4e76e] to-[#f7fe72]",
       tagline: "The immortal pantheon of FitMeal athletes. Absolute perfection of nutrition & power output.",
       badges: [
         {
@@ -419,21 +419,21 @@ export default function RewardsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0E0C] text-[#E2E7DE] font-sans selection:bg-[#9c67b5]/30 selection:text-[#f7fe72] pb-24">
+    <div className="min-h-screen bg-[#F4F6F5] dark:bg-[#0B0E0C] text-[#121815] dark:text-[#E2E7DE] font-sans selection:bg-[#f7fe72] selection:text-[#0B0E0C] pb-24 transition-colors">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-5 left-1/2 -translate-x-1/2 z-60 bg-gradient-to-r from-[#2B153D] via-[#482065] to-[#2B153D] text-[#f7fe72] px-5 py-2.5 rounded-full shadow-[0_10px_35px_rgba(0,0,0,0.8)] border border-[#f7fe72]/50 text-xs sm:text-sm font-bold flex items-center gap-2 animate-bounce">
+        <div className="fixed top-5 left-1/2 -translate-x-1/2 z-60 bg-gradient-to-r from-[#18201A] via-[#121815] to-[#18201A] text-[#f7fe72] px-5 py-2.5 rounded-full shadow-[0_10px_35px_rgba(0,0,0,0.8)] border border-[#f7fe72]/50 text-xs sm:text-sm font-bold flex items-center gap-2 animate-bounce">
           <Sparkles className="w-4 h-4 text-[#f7fe72]" />
           <span>{toastMessage}</span>
         </div>
       )}
 
       {/* Top Header Navigation */}
-      <header className="sticky top-0 z-40 w-full bg-[#0B0E0C]/90 backdrop-blur-md border-b border-[#757761]/25">
+      <header className="sticky top-0 z-40 w-full bg-white/90 dark:bg-[#0B0E0C]/90 backdrop-blur-md border-b border-[#757761]/25">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
           <Link
             href="/"
-            className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9c67b5] rounded-lg p-1"
+            className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f7fe72] rounded-lg p-1"
             aria-label="PotatoFit Home"
           >
             <PotatoFitLogo size="sm" variant="dark" />
@@ -442,7 +442,7 @@ export default function RewardsPage() {
           <div className="flex items-center gap-2 sm:gap-3">
             <Link
               href="/leaderboards"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[#f7fe72] bg-[#2B153D]/70 hover:bg-[#3E1F55] border border-[#9c67b5]/50 rounded-xl transition-all shadow-xs"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[#505445] dark:text-[#f7fe72] bg-[#EAEFEA] dark:bg-[#18201A]/70 hover:bg-[#D5DCD5] dark:hover:bg-[#202b23] border border-[#757761]/30 dark:border-[#757761]/50 rounded-xl transition-all shadow-xs"
             >
               <Trophy className="w-3.5 h-3.5 text-[#f7fe72]" />
               <span>Live Leaderboards</span>
@@ -464,9 +464,9 @@ export default function RewardsPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
         
         {/* 1. Hero Prestige Header */}
-        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#2D163D] via-[#1A221C] to-[#101512] border border-[#9c67b5]/35 p-6 sm:p-8 lg:p-10 shadow-2xl">
+        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#EAEFEA] via-[#FFFFFF] to-[#F4F6F5] dark:from-[#18201A] dark:via-[#141A16] dark:to-[#0B0E0C] border border-[#757761]/30 dark:border-[#757761]/35 text-[#121815] dark:text-white p-6 sm:p-8 lg:p-10 shadow-2xl">
           {/* Subtle Ambient Glow Orbs */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#9c67b5]/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#757761]/15 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-[#f7fe72]/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
@@ -475,18 +475,18 @@ export default function RewardsPage() {
                 <span className="px-3 py-1 rounded-full bg-[#f7fe72] text-[#0B0E0C] font-black uppercase text-[11px] shadow-xs">
                   SEASON 4 PRESTIGE VAULT
                 </span>
-                <span className="text-white/30">·</span>
-                <span className="text-[#f4e76e] flex items-center gap-1.5 font-semibold">
-                  <Sparkles className="w-3.5 h-3.5 text-[#f7fe72]" />
+                <span className="text-[#505445] dark:text-white/30">·</span>
+                <span className="text-[#7A5A00] dark:text-[#f4e76e] flex items-center gap-1.5 font-semibold">
+                  <Sparkles className="w-3.5 h-3.5 text-[#7A5A00] dark:text-[#f7fe72]" />
                   Hyper-Local Rewards &amp; Vouchers
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#121815] dark:text-white">
                 Arena Reward Tiers &amp; Medals
               </h1>
 
-              <p className="text-sm sm:text-base text-[#CBD2C7] leading-relaxed">
+              <p className="text-sm sm:text-base text-[#262A21] dark:text-[#CBD2C7] leading-relaxed">
                 Elevate your athlete status through real-world biomechanical output and raw neighborhood fueling.
                 Unlock high-protein Kirana grocery vouchers, digital aura rings, custom cast-iron trophies, and priority coaching queues.
               </p>
@@ -503,7 +503,7 @@ export default function RewardsPage() {
 
                 <button
                   onClick={handleBoostMeal}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#9c67b5] to-[#7B4695] hover:from-[#aa72c5] hover:to-[#8c52a8] text-white font-bold text-xs border border-[#9c67b5]/40 transition-all cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#18201A] hover:bg-[#202b23] text-[#f7fe72] font-bold text-xs border border-[#757761]/40 transition-all cursor-pointer"
                 >
                   <Utensils className="w-4 h-4 text-[#f7fe72]" />
                   <span>Log Kirana Fuel (+100 XP)</span>
@@ -512,25 +512,25 @@ export default function RewardsPage() {
             </div>
 
             {/* Active Athlete Scorecard */}
-            <div className="bg-[#101512]/80 backdrop-blur-md border border-[#757761]/30 rounded-3xl p-5 sm:p-6 lg:w-96 space-y-4 shadow-xl">
+            <div className="bg-white dark:bg-[#101512]/80 backdrop-blur-md border border-[#757761]/25 dark:border-[#757761]/30 rounded-3xl p-5 sm:p-6 lg:w-96 space-y-4 shadow-xl dark:shadow-none">
               <div className="flex items-center justify-between border-b border-[#757761]/25 pb-3">
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#A0A594] block">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#505445] dark:text-[#A0A594] block font-semibold">
                     ACTIVE ATHLETE
                   </span>
-                  <div className="text-lg font-black text-white flex items-center gap-2 mt-0.5">
+                  <div className="text-lg font-black text-[#121815] dark:text-white flex items-center gap-2 mt-0.5">
                     <span>David Kim</span>
-                    <span className="text-[10px] bg-[#9c67b5] text-white px-2 py-0.5 rounded font-mono font-bold">
+                    <span className="text-[10px] bg-[#f7fe72] text-[#0B0E0C] px-2 py-0.5 rounded font-mono font-bold">
                       YOU
                     </span>
                   </div>
                 </div>
 
                 <div className="text-right">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#A0A594] block">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#505445] dark:text-[#A0A594] block font-semibold">
                     GLOBAL RANK
                   </span>
-                  <div className="text-xl font-black font-mono text-[#f7fe72] mt-0.5">
+                  <div className="text-xl font-black font-mono text-[#7A5A00] dark:text-[#f7fe72] mt-0.5">
                     #{userRank}
                   </div>
                 </div>
@@ -545,7 +545,7 @@ export default function RewardsPage() {
                 </div>
                 <div className="flex justify-between text-xs">
                   <span className="text-[#A0A594]">Active Tier:</span>
-                  <span className="font-bold text-[#D8B4E2]">{activeTier.name}</span>
+                  <span className="font-bold text-[#f7fe72]">{activeTier.name}</span>
                 </div>
                 <div className="flex justify-between text-xs">
                   <span className="text-[#A0A594]">Equipped Badge:</span>
@@ -569,7 +569,7 @@ export default function RewardsPage() {
                   </div>
                   <div className="h-2 w-full bg-black/60 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-[#9c67b5] to-[#f7fe72] rounded-full transition-all duration-500"
+                      className="h-full bg-gradient-to-r from-[#757761] to-[#f7fe72] rounded-full transition-all duration-500"
                       style={{ width: `${tierProgressPercent}%` }}
                     />
                   </div>
@@ -615,9 +615,9 @@ export default function RewardsPage() {
                   }}
                   className={`relative flex flex-col items-center gap-2 p-4 rounded-2xl border transition-all cursor-pointer text-center ${
                     isSelected
-                      ? "bg-gradient-to-b from-[#2D163D] to-[#18201B] border-[#f7fe72] shadow-[0_0_25px_rgba(247,254,114,0.18)] scale-[1.02]"
+                      ? "bg-gradient-to-b from-[#18201A] to-[#121815] border-[#f7fe72] shadow-[0_0_25px_rgba(247,254,114,0.18)] scale-[1.02]"
                       : isUnlocked
-                      ? "bg-black/40 border-[#757761]/30 hover:border-[#9c67b5]/50"
+                      ? "bg-black/40 border-[#757761]/30 hover:border-[#757761]/60"
                       : "bg-black/60 border-white/5 opacity-55 hover:opacity-75"
                   }`}
                 >
@@ -647,7 +647,7 @@ export default function RewardsPage() {
                       Active Tier
                     </span>
                   ) : isUnlocked ? (
-                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#9c67b5]/30 text-[#D8B4E2] border border-[#9c67b5]/40">
+                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#757761]/30 text-[#CBD2C7] border border-[#757761]/40">
                       Unlocked
                     </span>
                   ) : (
@@ -668,15 +668,15 @@ export default function RewardsPage() {
           {/* Left Column: Canvas Medal Showcase (5 cols) */}
           <section
             aria-labelledby="medal-showcase-heading"
-            className="lg:col-span-5 rounded-3xl bg-gradient-to-b from-[#18201B] to-[#101512] border border-[#757761]/35 p-6 flex flex-col justify-between relative overflow-hidden backdrop-blur-md space-y-6 shadow-xl"
+            className="lg:col-span-5 rounded-3xl bg-gradient-to-b from-[#FFFFFF] to-[#F4F6F5] dark:from-[#18201B] dark:to-[#101512] border border-[#757761]/25 dark:border-[#757761]/35 p-6 flex flex-col justify-between relative overflow-hidden backdrop-blur-md space-y-6 shadow-xl dark:shadow-none"
           >
             <div className="space-y-5">
               <div className="flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#f7fe72] font-bold block">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#7A5A00] dark:text-[#f7fe72] font-bold block">
                     TIER {inspectedTier.tierNumber} MEDAL
                   </span>
-                  <h3 id="medal-showcase-heading" className="text-xl sm:text-2xl font-black text-white mt-0.5">
+                  <h3 id="medal-showcase-heading" className="text-xl sm:text-2xl font-black text-[#121815] dark:text-white mt-0.5">
                     {inspectedTier.name}
                   </h3>
                 </div>
@@ -729,7 +729,7 @@ export default function RewardsPage() {
                       onClick={() => setSelectedBadgeId(b.id)}
                       className={`flex items-center gap-2.5 p-2.5 rounded-xl border transition-all cursor-pointer text-left ${
                         selectedBadgeId === b.id
-                          ? "bg-[#2D163D] border-[#f7fe72] shadow-md"
+                          ? "bg-[#18201A] border-[#f7fe72] shadow-md"
                           : "bg-black/30 border-[#757761]/30 hover:bg-white/5 opacity-70"
                       }`}
                     >
@@ -760,11 +760,11 @@ export default function RewardsPage() {
                   </p>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-[#2D163D]/30 border border-[#9c67b5]/30 space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-[#D8B4E2] block font-semibold">
+                <div className="p-3.5 rounded-2xl bg-[#18201A] border border-[#757761]/30 space-y-1">
+                  <span className="text-[10px] font-mono uppercase text-[#A0A594] block font-semibold">
                     Prestige Lore
                   </span>
-                  <p className="text-[#EAD7F2] italic leading-relaxed">
+                  <p className="text-[#CBD2C7] italic leading-relaxed">
                     &ldquo;{activeInspectedBadge.lore}&rdquo;
                   </p>
                 </div>
@@ -802,13 +802,13 @@ export default function RewardsPage() {
           <section aria-labelledby="tier-perks-heading" className="lg:col-span-7 space-y-6">
             
             {/* Tier Privileges Card */}
-            <div className="p-6 rounded-3xl bg-gradient-to-r from-[#2D163D]/60 via-[#18201B] to-transparent border border-[#9c67b5]/35 space-y-2">
+            <div className="p-6 rounded-3xl bg-gradient-to-r from-[#F4F6F5] via-[#FFFFFF] to-[#F4F6F5] dark:from-[#18201A] dark:via-[#121815] dark:to-transparent border border-[#757761]/25 dark:border-[#757761]/35 space-y-2">
               <div className="flex items-center gap-2 text-xs font-mono font-bold">
-                <span className="text-[#f7fe72]">TIER {inspectedTier.tierNumber} PRIVILEGES</span>
+                <span className="text-[#505445] dark:text-[#f7fe72]">TIER {inspectedTier.tierNumber} PRIVILEGES</span>
                 <span className="text-white/20">·</span>
                 <span className="text-[#CBD2C7] truncate">{inspectedTier.title}</span>
               </div>
-              <h3 id="tier-perks-heading" className="text-2xl sm:text-3xl font-black text-white">
+              <h3 id="tier-perks-heading" className="text-2xl sm:text-3xl font-black text-[#121815] dark:text-white">
                 Unlockable Perks &amp; Fuel Credits
               </h3>
               <p className="text-xs sm:text-sm text-[#A0A594] leading-relaxed">
@@ -830,7 +830,7 @@ export default function RewardsPage() {
                       isClaimed
                         ? "bg-black/30 border-[#757761]/20"
                         : isUnlocked
-                        ? "bg-gradient-to-r from-[#2D163D]/40 to-[#18201B] border-[#9c67b5]/50 hover:border-[#f7fe72]/50"
+                        ? "bg-gradient-to-r from-[#18201A]/60 to-[#121815] border-[#757761]/40 hover:border-[#f7fe72]/50"
                         : "bg-black/40 border-[#757761]/20 opacity-55"
                     }`}
                   >
@@ -838,7 +838,7 @@ export default function RewardsPage() {
                       <div
                         className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border ${
                           isUnlocked
-                            ? "bg-[#9c67b5]/20 text-[#f7fe72] border-[#9c67b5]/40 shadow-inner"
+                            ? "bg-[#757761]/20 text-[#f7fe72] border-[#757761]/40 shadow-inner"
                             : "bg-white/5 text-[#757761] border-white/5"
                         }`}
                       >
@@ -847,7 +847,7 @@ export default function RewardsPage() {
                         ) : perk.type === "aura" ? (
                           <Sparkles className="w-6 h-6 text-[#f4e76e]" />
                         ) : (
-                          <ShieldCheck className="w-6 h-6 text-[#D8B4E2]" />
+                          <ShieldCheck className="w-6 h-6 text-[#f7fe72]" />
                         )}
                       </div>
 
@@ -871,7 +871,7 @@ export default function RewardsPage() {
                       {isClaimed ? (
                         <div className="flex items-center gap-2">
                           {code && (
-                            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/60 border border-[#9c67b5]/50 text-xs font-mono font-bold text-[#f7fe72]">
+                            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/60 border border-[#757761]/50 text-xs font-mono font-bold text-[#f7fe72]">
                               <span>{code}</span>
                               <button
                                 onClick={() => handleCopy(perk.id, code)}
@@ -912,7 +912,7 @@ export default function RewardsPage() {
             </div>
 
             {/* Kirana Voucher Explainer Card */}
-            <div className="rounded-3xl bg-gradient-to-br from-[#2D163D]/40 to-[#121815] border border-[#9c67b5]/30 p-6 space-y-4">
+            <div className="rounded-3xl bg-gradient-to-br from-[#18201A]/60 to-[#121815] border border-[#757761]/30 p-6 space-y-4">
               <div className="flex items-center gap-2.5">
                 <Store className="w-5 h-5 text-[#f7fe72]" />
                 <h4 className="text-base font-bold text-white">

@@ -35,7 +35,7 @@ export default function StreakModal({ isOpen, onClose }: StreakModalProps) {
 
         {/* Flame Header Icon */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 rounded-2xl bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center border border-[#9c67b5]/40">
+          <div className="w-12 h-12 rounded-2xl bg-[#757761]/20 text-[#f7fe72] flex items-center justify-center border border-[#757761]/40">
             <Flame className="w-7 h-7 fill-[#f7fe72] text-[#f7fe72]" />
           </div>
           <div>
@@ -65,7 +65,7 @@ export default function StreakModal({ isOpen, onClose }: StreakModalProps) {
                 key={i}
                 className={`py-2 px-1 rounded-xl flex flex-col items-center gap-1 ${
                   d.status === "completed"
-                    ? "bg-[#9c67b5]/25 text-[#f7fe72] border border-[#9c67b5]/50"
+                    ? "bg-[#757761]/30 text-[#f7fe72] border border-[#757761]/50"
                     : d.status === "today"
                     ? "bg-[#f7fe72]/15 text-[#f7fe72] border border-[#f7fe72] ring-2 ring-[#f7fe72]/30"
                     : "bg-[#121815] text-[#757761] border border-[#757761]/30"
@@ -85,8 +85,8 @@ export default function StreakModal({ isOpen, onClose }: StreakModalProps) {
         </div>
 
         {/* Milestone Card */}
-        <div className="p-3.5 rounded-2xl bg-[#0B0E0C] border border-[#9c67b5]/30 flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-xl bg-[#9c67b5]/20 text-[#f7fe72] border border-[#9c67b5]/40 flex items-center justify-center shrink-0">
+        <div className="p-3.5 rounded-2xl bg-[#0B0E0C] border border-[#757761]/30 flex items-center gap-3 mb-6">
+          <div className="w-10 h-10 rounded-xl bg-[#757761]/20 text-[#f7fe72] border border-[#757761]/40 flex items-center justify-center shrink-0">
             <Award className="w-5 h-5 text-[#f7fe72]" />
           </div>
           <div>

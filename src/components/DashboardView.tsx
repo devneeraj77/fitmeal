@@ -237,7 +237,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0B0E0C] text-[#E2E7DE] flex flex-col lg:flex-row font-sans">
+    <div className="min-h-screen bg-[#F4F6F5] dark:bg-[#0B0E0C] text-[#121815] dark:text-[#E2E7DE] flex flex-col lg:flex-row font-sans transition-colors">
       
       {/* Mobile Top App Bar */}
       <div className="lg:hidden flex items-center justify-between px-4 py-3 bg-[#121815] border-b border-[#757761]/30 sticky top-0 z-30">
@@ -254,7 +254,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
         {onBackToHome && (
           <button
             onClick={onBackToHome}
-            className="text-xs font-semibold text-[#f7fe72] bg-[#9c67b5]/20 px-3 py-1.5 rounded-full border border-[#9c67b5]/40"
+            className="text-xs font-semibold text-[#f7fe72] bg-[#757761]/20 px-3 py-1.5 rounded-full border border-[#757761]/40"
           >
             ← Public Site
           </button>
@@ -296,7 +296,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                 <h3 className="text-xs font-bold text-white truncate">{userName}</h3>
                 <Link
                   href="/rewards"
-                  className="inline-flex items-center gap-1 text-[10px] font-bold text-[#f7fe72] bg-[#9c67b5]/20 hover:bg-[#9c67b5]/30 border border-[#9c67b5]/40 px-2 py-0.5 rounded cursor-pointer transition-all shadow-2xs"
+                  className="inline-flex items-center gap-1 text-[10px] font-bold text-[#f7fe72] bg-[#757761]/20 hover:bg-[#757761]/30 border border-[#757761]/40 px-2 py-0.5 rounded cursor-pointer transition-all shadow-2xs"
                   title="View Dedicated Rewards Page"
                 >
                   <Award className="w-2.5 h-2.5 text-[#f7fe72]" />
@@ -310,7 +310,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               onClick={() => {
                 setWaterVolume((prev) => parseFloat((prev + 0.25).toFixed(2)));
               }}
-              className="w-full py-1.5 px-2 bg-[#121815] hover:bg-[#181f1b] border border-[#757761]/40 hover:border-[#9c67b5] text-[#f7fe72] rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-all shadow-2xs active:scale-95 cursor-pointer"
+              className="w-full py-1.5 px-2 bg-[#121815] hover:bg-[#181f1b] border border-[#757761]/40 hover:border-[#f7fe72] text-[#f7fe72] rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-all shadow-2xs active:scale-95 cursor-pointer"
             >
               <Droplets className="w-3.5 h-3.5 text-[#f7fe72] fill-[#f7fe72]/20" />
               <span>Quick Add +250ml</span>
@@ -337,7 +337,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                     isActive
-                      ? "bg-[#9c67b5] text-white shadow-xs font-bold"
+                      ? "bg-[#757761]/25 text-[#f7fe72] border border-[#757761]/40 shadow-xs font-bold"
                       : "text-[#A0A493] hover:bg-white/5 hover:text-white"
                   }`}
                 >
@@ -355,13 +355,13 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
           <div className="pt-2">
             <a
               href="/leaderboards"
-              className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold text-[#f7fe72] bg-[#9c67b5]/20 hover:bg-[#9c67b5]/30 border border-[#9c67b5]/40 transition-all shadow-2xs group cursor-pointer"
+              className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold text-[#f7fe72] bg-[#757761]/20 hover:bg-[#757761]/30 border border-[#757761]/40 transition-all shadow-2xs group cursor-pointer"
             >
               <div className="flex items-center gap-2">
                 <Trophy className="w-4 h-4 text-[#f7fe72] group-hover:scale-110 transition-transform" />
                 <span>Arena &amp; Leaderboards</span>
               </div>
-              <span className="text-[10px] bg-[#9c67b5] text-white font-mono px-1.5 py-0.5 rounded font-bold">
+              <span className="text-[10px] bg-[#f7fe72] text-[#0B0E0C] font-mono px-1.5 py-0.5 rounded font-black">
                 LIVE
               </span>
             </a>
@@ -431,7 +431,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
 
             <Link
               href="/rewards"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#9c67b5]/20 hover:bg-[#9c67b5]/30 border border-[#9c67b5]/40 text-[#f7fe72] shadow-2xs text-xs font-bold cursor-pointer transition-all active:scale-95"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#757761]/20 hover:bg-[#757761]/30 border border-[#757761]/40 text-[#f7fe72] shadow-2xs text-xs font-bold cursor-pointer transition-all active:scale-95"
               title="Inspect Reward Tiers & Arena Badges"
             >
               <Award className="w-3.5 h-3.5 text-[#f7fe72]" />
@@ -556,7 +556,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
             {/* Droplet Fill Animation Indicator */}
             <div className="relative w-14 h-14 shrink-0 rounded-2xl bg-[#0B0E0C] border border-[#757761]/30 flex flex-col items-center justify-end overflow-hidden">
               <div
-                className="w-full bg-gradient-to-t from-[#2D163D] to-[#9c67b5] transition-all duration-500 flex items-center justify-center"
+                className="w-full bg-gradient-to-t from-[#757761] to-[#f7fe72]/60 transition-all duration-500 flex items-center justify-center"
                 style={{ height: `${Math.min(100, (waterVolume / waterTarget) * 100)}%` }}
               />
               <div className="absolute inset-0 flex items-center justify-center">
@@ -573,7 +573,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               </span>
               <div className="flex items-baseline gap-1.5">
                 <span className="text-2xl font-black text-white font-mono">88%</span>
-                <span className="text-xs font-bold text-[#f7fe72] bg-[#9c67b5]/20 border border-[#9c67b5]/30 px-1.5 py-0.5 rounded">
+                <span className="text-xs font-bold text-[#f7fe72] bg-[#757761]/20 border border-[#757761]/30 px-1.5 py-0.5 rounded">
                   Optimal
                 </span>
               </div>
@@ -584,7 +584,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               </div>
             </div>
 
-            <div className="w-14 h-14 rounded-2xl bg-[#9c67b5]/20 border border-[#9c67b5]/40 flex items-center justify-center text-[#f7fe72] shrink-0">
+            <div className="w-14 h-14 rounded-2xl bg-[#757761]/20 border border-[#757761]/40 flex items-center justify-center text-[#f7fe72] shrink-0">
               <Moon className="w-6 h-6" />
             </div>
           </div>
@@ -603,7 +603,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               </span>
             </div>
 
-            <div className="w-14 h-14 rounded-2xl bg-[#9c67b5]/20 border border-[#9c67b5]/40 flex items-center justify-center text-[#f7fe72] shrink-0">
+            <div className="w-14 h-14 rounded-2xl bg-[#757761]/20 border border-[#757761]/40 flex items-center justify-center text-[#f7fe72] shrink-0">
               <Flame className="w-7 h-7 fill-[#f7fe72] text-[#f7fe72]" />
             </div>
           </div>
@@ -618,7 +618,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#757761]/25">
             <div className="flex items-start sm:items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-[#9c67b5]/20 border border-[#9c67b5]/40 flex items-center justify-center text-[#f7fe72] shrink-0">
+              <div className="w-10 h-10 rounded-2xl bg-[#757761]/20 border border-[#757761]/40 flex items-center justify-center text-[#f7fe72] shrink-0">
                 <Target className="w-5 h-5 text-[#f7fe72]" />
               </div>
               <div>
@@ -626,7 +626,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                   <h2 className="text-base font-bold text-white">
                     Set Daily Vitality Goals
                   </h2>
-                  <span className="inline-flex items-center gap-1 text-[11px] font-mono font-semibold text-[#f7fe72] bg-[#9c67b5]/20 border border-[#9c67b5]/30 px-2 py-0.5 rounded-full">
+                  <span className="inline-flex items-center gap-1 text-[11px] font-mono font-semibold text-[#f7fe72] bg-[#757761]/20 border border-[#757761]/30 px-2 py-0.5 rounded-full">
                     <Database className="w-3 h-3" />
                     Supabase Connected
                   </span>
@@ -660,7 +660,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                 <div
                   className={`p-3.5 rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-all ${
                     goalsSaveStatus.includes("successfully")
-                      ? "bg-[#9c67b5]/25 text-[#f7fe72] border border-[#9c67b5]/40"
+                      ? "bg-[#757761]/25 text-[#f7fe72] border border-[#757761]/40"
                       : "bg-[#0B0E0C] text-[#E2E7DE] border border-[#757761]/35"
                   }`}
                 >
@@ -674,7 +674,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                 <div className="rounded-2xl bg-[#0B0E0C] border border-[#757761]/25 p-5 space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center">
+                      <div className="w-7 h-7 rounded-lg bg-[#757761]/20 text-[#f7fe72] flex items-center justify-center">
                         <Flame className="w-4 h-4 fill-[#f7fe72] text-[#f7fe72]" />
                       </div>
                       <span className="text-sm font-bold text-white">
@@ -707,7 +707,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                       step={25}
                       value={inputCalories}
                       onChange={(e) => setInputCalories(Number(e.target.value))}
-                      className="w-full accent-[#9c67b5] cursor-pointer"
+                      className="w-full accent-[#f7fe72] cursor-pointer"
                     />
                   </div>
 
@@ -761,8 +761,8 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                           onClick={() => setInputCalories(preset.val)}
                           className={`text-[11px] font-semibold px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
                             inputCalories === preset.val
-                              ? "bg-[#9c67b5] text-white font-bold"
-                              : "bg-[#121815] text-[#A0A493] border border-[#757761]/30 hover:border-[#9c67b5]"
+                              ? "bg-[#f7fe72] text-[#0B0E0C] font-black"
+                              : "bg-[#121815] text-[#A0A493] border border-[#757761]/30 hover:border-[#f7fe72]"
                           }`}
                         >
                           {preset.label}
@@ -776,7 +776,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                 <div className="rounded-2xl bg-[#0B0E0C] border border-[#757761]/25 p-5 space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center">
+                      <div className="w-7 h-7 rounded-lg bg-[#757761]/20 text-[#f7fe72] flex items-center justify-center">
                         <Droplets className="w-4 h-4 text-[#f7fe72] fill-[#f7fe72]/20" />
                       </div>
                       <span className="text-sm font-bold text-white">
@@ -809,7 +809,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                       step={0.1}
                       value={inputWater}
                       onChange={(e) => setInputWater(parseFloat(parseFloat(e.target.value).toFixed(2)))}
-                      className="w-full accent-[#9c67b5] cursor-pointer"
+                      className="w-full accent-[#f7fe72] cursor-pointer"
                     />
                   </div>
 
@@ -863,8 +863,8 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                           onClick={() => setInputWater(preset.val)}
                           className={`text-[11px] font-semibold px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
                             Math.abs(inputWater - preset.val) < 0.05
-                              ? "bg-[#9c67b5] text-white font-bold"
-                              : "bg-[#121815] text-[#A0A493] border border-[#757761]/30 hover:border-[#9c67b5]"
+                              ? "bg-[#f7fe72] text-[#0B0E0C] font-black"
+                              : "bg-[#121815] text-[#A0A493] border border-[#757761]/30 hover:border-[#f7fe72]"
                           }`}
                         >
                           {preset.label}
@@ -926,7 +926,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-bold text-white flex items-center gap-2">
                 <span>Today&#39;s Action Plan</span>
-                <span className="text-xs font-mono font-bold text-[#f7fe72] bg-[#9c67b5]/20 border border-[#9c67b5]/30 px-2 py-0.5 rounded">
+                <span className="text-xs font-mono font-bold text-[#f7fe72] bg-[#757761]/20 border border-[#757761]/30 px-2 py-0.5 rounded">
                   3 Protocols Scheduled
                 </span>
               </h2>
@@ -943,8 +943,8 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                     onClick={() => setMorningCompleted(!morningCompleted)}
                     className={`w-7 h-7 rounded-xl flex items-center justify-center transition-all cursor-pointer ${
                       morningCompleted
-                        ? "bg-[#9c67b5] text-white shadow-xs"
-                        : "border-2 border-[#757761]/40 hover:border-[#9c67b5] bg-[#0B0E0C]"
+                        ? "bg-[#f7fe72] text-[#0B0E0C] shadow-xs"
+                        : "border-2 border-[#757761]/40 hover:border-[#f7fe72] bg-[#0B0E0C]"
                     }`}
                   >
                     {morningCompleted && <Check className="w-4 h-4 stroke-[3]" />}
@@ -954,7 +954,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                       <h3 className={`text-sm font-bold ${morningCompleted ? "line-through text-[#757761]" : "text-white"}`}>
                         Morning Routine: 10-Minute Mobility Flow
                       </h3>
-                      <span className="text-[10px] font-bold text-[#f7fe72] bg-[#9c67b5]/20 px-1.5 py-0.5 rounded uppercase font-mono border border-[#9c67b5]/30">
+                      <span className="text-[10px] font-bold text-[#f7fe72] bg-[#757761]/20 px-1.5 py-0.5 rounded uppercase font-mono border border-[#757761]/30">
                         {morningCompleted ? "Completed 07:15 AM" : "Pending"}
                       </span>
                     </div>
@@ -972,7 +972,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
             <div className="bg-[#121815] rounded-2xl p-5 sm:p-6 border border-[#757761]/30 shadow-xl">
               <div className="flex flex-wrap items-center justify-between gap-2 mb-4 pb-4 border-b border-[#757761]/25">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center border border-[#9c67b5]/40">
+                  <div className="w-10 h-10 rounded-xl bg-[#757761]/20 text-[#f7fe72] flex items-center justify-center border border-[#757761]/40">
                     <Dumbbell className="w-5 h-5" />
                   </div>
                   <div>
@@ -986,7 +986,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-bold text-[#f7fe72] bg-[#9c67b5]/20 px-2.5 py-1 rounded-md border border-[#9c67b5]/30">
+                  <span className="text-xs font-mono font-bold text-[#f7fe72] bg-[#757761]/20 px-2.5 py-1 rounded-md border border-[#757761]/30">
                     Volume: {calculateVolume().toLocaleString()} kg
                   </span>
                 </div>
@@ -1029,7 +1029,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                           }}
                           className={`px-3 py-1.5 rounded-lg text-xs font-bold font-mono transition-all flex items-center gap-1 cursor-pointer ${
                             checked
-                              ? "bg-[#9c67b5] text-white shadow-xs"
+                              ? "bg-[#f7fe72] text-[#0B0E0C] font-black shadow-xs"
                               : "bg-[#121815] border border-[#757761]/35 text-[#A0A493] hover:text-white"
                           }`}
                         >
@@ -1075,7 +1075,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                           }}
                           className={`px-3 py-1.5 rounded-lg text-xs font-bold font-mono transition-all flex items-center gap-1 cursor-pointer ${
                             checked
-                              ? "bg-[#9c67b5] text-white shadow-xs"
+                              ? "bg-[#f7fe72] text-[#0B0E0C] font-black shadow-xs"
                               : "bg-[#121815] border border-[#757761]/35 text-[#A0A493] hover:text-white"
                           }`}
                         >
@@ -1121,7 +1121,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                           }}
                           className={`px-3 py-1.5 rounded-lg text-xs font-bold font-mono transition-all flex items-center gap-1 cursor-pointer ${
                             checked
-                              ? "bg-[#9c67b5] text-white shadow-xs"
+                              ? "bg-[#f7fe72] text-[#0B0E0C] font-black shadow-xs"
                               : "bg-[#121815] border border-[#757761]/35 text-[#A0A493] hover:text-white"
                           }`}
                         >
@@ -1149,7 +1149,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                   }}
                   className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer ${
                     sessionCompleted
-                      ? "bg-[#9c67b5]/30 text-[#f7fe72] border border-[#9c67b5]"
+                      ? "bg-[#757761]/30 text-[#f7fe72] border border-[#757761]"
                       : "bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] font-black hover:brightness-110"
                   }`}
                 >
@@ -1163,7 +1163,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
             <div className="bg-[#121815] rounded-2xl p-5 sm:p-6 border border-[#757761]/30 shadow-xl">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center border border-[#9c67b5]/30">
+                  <div className="w-8 h-8 rounded-lg bg-[#757761]/20 text-[#f7fe72] flex items-center justify-center border border-[#757761]/30">
                     <Utensils className="w-4 h-4" />
                   </div>
                   <div>
@@ -1195,7 +1195,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                         <span className="px-1.5 py-0.5 rounded bg-[#f7fe72]/15 text-[#f7fe72] border border-[#f7fe72]/30">
                           {meal.protein}g P
                         </span>
-                        <span className="px-1.5 py-0.5 rounded bg-[#9c67b5]/20 text-white border border-[#9c67b5]/30">
+                        <span className="px-1.5 py-0.5 rounded bg-[#757761]/20 text-[#CBD2C7] border border-[#757761]/30">
                           {meal.carbs}g C
                         </span>
                         <span className="px-1.5 py-0.5 rounded bg-[#f4e76e]/15 text-[#f4e76e] border border-[#f4e76e]/30">
@@ -1276,13 +1276,13 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                         key={dIdx}
                         className={`h-6 rounded-md flex items-center justify-center transition-colors ${
                           done
-                            ? "bg-[#9c67b5] text-[#f7fe72]"
+                            ? "bg-[#f7fe72] text-[#0B0E0C]"
                             : dIdx === 3
-                            ? "bg-[#0B0E0C] text-[#f7fe72] border border-[#9c67b5]/60"
+                            ? "bg-[#0B0E0C] text-[#f7fe72] border border-[#f7fe72]/60"
                             : "bg-[#0B0E0C] text-[#757761]"
                         }`}
                       >
-                        {done && <Check className="w-3 h-3 stroke-[3]" />}
+                        {done && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                         {!done && dIdx === 3 && <span className="text-[10px] font-bold">•</span>}
                       </div>
                     ))}
@@ -1297,7 +1297,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                 <span className="text-xs font-bold text-[#CBD2C7] uppercase tracking-wider font-mono">
                   5-Min Box Breathing
                 </span>
-                <span className="text-[10px] font-bold text-[#f7fe72] bg-[#9c67b5]/20 border border-[#9c67b5]/30 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-bold text-[#f7fe72] bg-[#757761]/20 border border-[#757761]/30 px-2 py-0.5 rounded">
                   HRV Cadence
                 </span>
               </div>
@@ -1311,7 +1311,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                       ? breathPhase.includes("Inhale")
                         ? "scale-125 border-[#f7fe72] bg-[#f7fe72]/20 shadow-[0_0_15px_rgba(247,254,114,0.3)] text-[#f7fe72]"
                         : breathPhase.includes("Exhale")
-                        ? "scale-90 border-[#9c67b5] bg-[#9c67b5]/20 shadow-inner text-white"
+                        ? "scale-90 border-[#757761] bg-[#757761]/20 shadow-inner text-white"
                         : "scale-110 border-[#f4e76e] bg-[#f4e76e]/15 text-[#f4e76e]"
                       : "border-[#757761]/40 bg-[#121815] text-[#A0A493]"
                   }`}
@@ -1352,7 +1352,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
             </div>
 
             {/* Upcoming Coach Check-in Appointment Card */}
-            <div className="bg-gradient-to-br from-[#2D163D] via-[#1b1525] to-[#121815] text-white rounded-2xl p-5 border border-[#9c67b5]/40 shadow-xl">
+            <div className="bg-gradient-to-br from-[#18201A] via-[#121815] to-[#0B0E0C] text-white rounded-2xl p-5 border border-[#757761]/40 shadow-xl">
               <div className="flex items-center justify-between text-xs text-[#f7fe72] font-semibold mb-2 font-mono">
                 <span className="flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5" />
@@ -1399,7 +1399,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               <X className="w-5 h-5" />
             </button>
 
-            <div className="w-12 h-12 rounded-2xl bg-[#9c67b5]/20 text-[#f7fe72] border border-[#9c67b5]/40 flex items-center justify-center mx-auto mb-3">
+            <div className="w-12 h-12 rounded-2xl bg-[#757761]/20 text-[#f7fe72] border border-[#757761]/40 flex items-center justify-center mx-auto mb-3">
               <Camera className="w-6 h-6 text-[#f7fe72]" />
             </div>
 
@@ -1444,17 +1444,17 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
                 </div>
               </div>
 
-              <span className="text-xs font-mono font-semibold text-[#f7fe72] bg-[#9c67b5]/25 border border-[#9c67b5]/40 px-2 py-0.5 rounded">
+              <span className="text-xs font-mono font-semibold text-[#f7fe72] bg-[#757761]/25 border border-[#757761]/40 px-2 py-0.5 rounded">
                 720p HD 60fps
               </span>
             </div>
 
             {/* Video Canvas Simulation */}
-            <div className="relative aspect-[16/9] bg-gradient-to-br from-[#0B0E0C] via-[#2D163D] to-[#121815] flex items-center justify-center p-6">
+            <div className="relative aspect-[16/9] bg-gradient-to-br from-[#0B0E0C] via-[#18201A] to-[#121815] flex items-center justify-center p-6">
               
               {/* Main Coach Window */}
               <div className="text-center">
-                <div className="w-24 h-24 rounded-full bg-[#121815] border-2 border-[#9c67b5]/60 flex items-center justify-center text-3xl font-black text-[#f7fe72] mx-auto mb-3 shadow-lg">
+                <div className="w-24 h-24 rounded-full bg-[#121815] border-2 border-[#757761]/60 flex items-center justify-center text-3xl font-black text-[#f7fe72] mx-auto mb-3 shadow-lg">
                   MV
                 </div>
                 <h4 className="text-lg font-bold text-white">Coach Marcus Vance</h4>
@@ -1481,7 +1481,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               <button
                 onClick={() => setIsMicMuted(!isMicMuted)}
                 className={`p-3 rounded-full transition-colors cursor-pointer ${
-                  isMicMuted ? "bg-[#9c67b5]/30 text-[#f7fe72]" : "bg-[#121815] hover:bg-[#181f1b] text-white border border-[#757761]/30"
+                  isMicMuted ? "bg-[#757761]/30 text-[#f7fe72]" : "bg-[#121815] hover:bg-[#181f1b] text-white border border-[#757761]/30"
                 }`}
                 title={isMicMuted ? "Unmute Mic" : "Mute Mic"}
               >
@@ -1491,7 +1491,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
               <button
                 onClick={() => setIsVideoDisabled(!isVideoDisabled)}
                 className={`p-3 rounded-full transition-colors cursor-pointer ${
-                  isVideoDisabled ? "bg-[#9c67b5]/30 text-[#f7fe72]" : "bg-[#121815] hover:bg-[#181f1b] text-white border border-[#757761]/30"
+                  isVideoDisabled ? "bg-[#757761]/30 text-[#f7fe72]" : "bg-[#121815] hover:bg-[#181f1b] text-white border border-[#757761]/30"
                 }`}
                 title={isVideoDisabled ? "Enable Video" : "Disable Video"}
               >
@@ -1500,7 +1500,7 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
 
               <button
                 onClick={() => setIsVideoCallOpen(false)}
-                className="px-6 py-3 rounded-full bg-[#9c67b5] hover:bg-[#8651a0] text-white text-xs font-bold flex items-center gap-2 cursor-pointer shadow-md"
+                className="px-6 py-3 rounded-full bg-[#18201A] hover:bg-[#202b23] border border-[#757761]/40 text-white text-xs font-bold flex items-center gap-2 cursor-pointer shadow-md"
               >
                 <PhoneOff className="w-4 h-4 text-white" />
                 <span>End Call</span>

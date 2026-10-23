@@ -90,7 +90,7 @@ export default function GuidedSessionModal({ isOpen, onClose }: GuidedSessionMod
       <div className="relative w-full max-w-xl bg-[#121815] rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#757761]/40 overflow-hidden text-white">
         
         {/* Glow ambient background accents */}
-        <div className="absolute -top-24 -right-24 w-56 h-56 bg-[#9c67b5]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-24 -right-24 w-56 h-56 bg-[#757761]/20 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 w-56 h-56 bg-[#f7fe72]/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Close button */}
@@ -107,7 +107,7 @@ export default function GuidedSessionModal({ isOpen, onClose }: GuidedSessionMod
         {/* Modal Header */}
         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider mb-2 font-mono relative z-10">
           <Activity className="w-4 h-4 text-[#f7fe72]" />
-          <span className="text-[#9c67b5]">Daily 5-Min Guided Flow // Protocol 01</span>
+          <span className="text-[#f7fe72]">Daily 5-Min Guided Flow // Protocol 01</span>
         </div>
 
         <h3 className="text-2xl font-black text-white tracking-tight relative z-10">
@@ -124,7 +124,7 @@ export default function GuidedSessionModal({ isOpen, onClose }: GuidedSessionMod
               key={idx}
               className={`h-2 flex-1 rounded-full transition-all duration-300 ${
                 idx < currentStepIdx
-                  ? "bg-[#9c67b5]"
+                  ? "bg-[#757761]"
                   : idx === currentStepIdx
                   ? "bg-[#f7fe72] shadow-sm shadow-[#f7fe72]/50"
                   : "bg-[#757761]/30"
@@ -137,7 +137,7 @@ export default function GuidedSessionModal({ isOpen, onClose }: GuidedSessionMod
         <div className="p-5 rounded-2xl bg-[#0B0E0C] border border-[#757761]/35 mb-6 relative z-10">
           <div className="flex items-start justify-between gap-4 mb-2">
             <div>
-              <span className="text-[11px] font-bold text-[#f7fe72] bg-[#9c67b5]/20 border border-[#9c67b5]/30 px-2 py-0.5 rounded uppercase font-mono">
+              <span className="text-[11px] font-bold text-[#f7fe72] bg-[#757761]/20 border border-[#757761]/30 px-2 py-0.5 rounded uppercase font-mono">
                 {currentStep.target}
               </span>
               <h4 className="text-lg font-bold text-white mt-2">{currentStep.title}</h4>

@@ -32,7 +32,7 @@ export default function RoutineBuilderModal({ isOpen, onClose }: RoutineBuilderM
       <div className="relative w-full max-w-2xl bg-[#121815] rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#757761]/40 overflow-hidden text-white">
         
         {/* Glow backdrop accent */}
-        <div className="absolute -top-24 -right-24 w-60 h-60 bg-[#9c67b5]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-24 -right-24 w-60 h-60 bg-[#757761]/20 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 w-60 h-60 bg-[#f7fe72]/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Close Button */}
@@ -48,7 +48,7 @@ export default function RoutineBuilderModal({ isOpen, onClose }: RoutineBuilderM
             {/* Modal Header */}
             <div className="flex items-center gap-2 text-xs font-bold text-[#f7fe72] uppercase tracking-wider mb-2 font-mono">
               <Sparkles className="w-4 h-4 text-[#f7fe72]" />
-              <span className="text-[#9c67b5]">Personalized Routine Architect // Step {step} of 3</span>
+              <span className="text-[#f7fe72]">Personalized Routine Architect // Step {step} of 3</span>
             </div>
             
             <h3 className="text-2xl font-black text-white tracking-tight">
@@ -76,7 +76,7 @@ export default function RoutineBuilderModal({ isOpen, onClose }: RoutineBuilderM
                     onClick={() => setGoal(opt.id)}
                     className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
                       goal === opt.id
-                        ? "border-[#9c67b5] bg-[#9c67b5]/20 ring-1 ring-[#9c67b5] shadow-lg shadow-[#9c67b5]/10"
+                        ? "border-[#f7fe72] bg-[#f7fe72]/15 ring-1 ring-[#f7fe72] shadow-lg shadow-[#f7fe72]/10"
                         : "border-[#757761]/30 hover:border-[#757761]/60 bg-[#0B0E0C]"
                     }`}
                   >
@@ -103,7 +103,7 @@ export default function RoutineBuilderModal({ isOpen, onClose }: RoutineBuilderM
                     onClick={() => setDays(opt.id)}
                     className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
                       days === opt.id
-                        ? "border-[#9c67b5] bg-[#9c67b5]/20 ring-1 ring-[#9c67b5] shadow-lg shadow-[#9c67b5]/10"
+                        ? "border-[#f7fe72] bg-[#f7fe72]/15 ring-1 ring-[#f7fe72] shadow-lg shadow-[#f7fe72]/10"
                         : "border-[#757761]/30 hover:border-[#757761]/60 bg-[#0B0E0C]"
                     }`}
                   >
@@ -130,7 +130,7 @@ export default function RoutineBuilderModal({ isOpen, onClose }: RoutineBuilderM
                     onClick={() => setEquipment(opt.id)}
                     className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
                       equipment === opt.id
-                        ? "border-[#9c67b5] bg-[#9c67b5]/20 ring-1 ring-[#9c67b5] shadow-lg shadow-[#9c67b5]/10"
+                        ? "border-[#f7fe72] bg-[#f7fe72]/15 ring-1 ring-[#f7fe72] shadow-lg shadow-[#f7fe72]/10"
                         : "border-[#757761]/30 hover:border-[#757761]/60 bg-[#0B0E0C]"
                     }`}
                   >
@@ -177,7 +177,7 @@ export default function RoutineBuilderModal({ isOpen, onClose }: RoutineBuilderM
           </div>
         ) : (
           <div className="text-center py-4 relative z-10">
-            <div className="w-14 h-14 rounded-full bg-[#9c67b5]/20 border border-[#9c67b5]/40 text-[#f7fe72] flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#9c67b5]/20">
+            <div className="w-14 h-14 rounded-full bg-[#757761]/20 border border-[#757761]/40 text-[#f7fe72] flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#757761]/20">
               <ShieldCheck className="w-8 h-8 text-[#f7fe72]" />
             </div>
             <h3 className="text-2xl font-black text-white">Protocol Generated Successfully!</h3>

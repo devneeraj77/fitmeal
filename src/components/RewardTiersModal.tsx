@@ -287,8 +287,8 @@ export default function RewardTiersModal({
       title: "Biomechanical Vanguard",
       xpThreshold: 10000,
       rankThreshold: "Top 25 Contenders",
-      accentGlow: "rgba(156, 103, 181, 0.35)",
-      gradientText: "from-[#9c67b5] via-[#f7fe72] to-[#f4e76e]",
+      accentGlow: "rgba(247, 254, 114, 0.35)",
+      gradientText: "from-[#CBD2C7] via-[#f7fe72] to-[#f4e76e]",
       tagline: "Masters of physical resilience, sustainable clean fueling, and local community leadership.",
       badges: [
         {
@@ -339,8 +339,8 @@ export default function RewardTiersModal({
       title: "Immortal Pantheon",
       xpThreshold: 20000,
       rankThreshold: "Top 10 Grandmasters",
-      accentGlow: "rgba(168, 85, 247, 0.3)",
-      gradientText: "from-purple-300 via-fuchsia-200 to-indigo-400",
+      accentGlow: "rgba(247, 254, 114, 0.45)",
+      gradientText: "from-[#f7fe72] via-[#f4e76e] to-[#CBD2C7]",
       tagline: "The immortal pantheon of FitMeal athletes. Absolute perfection of nutrition & power output.",
       badges: [
         {
@@ -443,7 +443,7 @@ export default function RewardTiersModal({
     >
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-60 bg-[#121815] text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-2xl border border-[#9c67b5]/50 text-xs font-bold flex items-center gap-2 animate-in slide-in-from-top-4 duration-200">
+        <div className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-60 bg-[#121815] text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-2xl border border-[#f7fe72]/50 text-xs font-bold flex items-center gap-2 animate-in slide-in-from-top-4 duration-200">
           <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#f7fe72] animate-spin" />
           <span className="text-[11px] sm:text-xs text-white">{toastMessage}</span>
         </div>
@@ -457,12 +457,12 @@ export default function RewardTiersModal({
           className="absolute -top-32 -right-32 w-72 sm:w-96 h-72 sm:h-96 rounded-full blur-3xl pointer-events-none opacity-40 transition-all duration-700"
           style={{ background: inspectedTier.accentGlow }}
         />
-        <div className="absolute -bottom-24 -left-24 w-60 sm:w-80 h-60 sm:h-80 bg-[#9c67b5]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-60 sm:w-80 h-60 sm:h-80 bg-[#757761]/15 rounded-full blur-3xl pointer-events-none" />
 
         {/* 1. Semantic Header with Responsive Sizing */}
         <header className="relative z-10 px-4 sm:px-6 md:px-8 py-3.5 sm:py-5 border-b border-[#757761]/25 flex items-center justify-between gap-3 shrink-0">
           <div className="flex items-center gap-2.5 sm:gap-4 min-w-0">
-            <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#9c67b5]/20 border border-[#9c67b5]/40 flex items-center justify-center shadow-inner shrink-0">
+            <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#757761]/20 border border-[#757761]/40 flex items-center justify-center shadow-inner shrink-0">
               <Trophy className="w-4 h-4 sm:w-6 sm:h-6 text-[#f7fe72]" />
             </div>
 
@@ -490,7 +490,7 @@ export default function RewardTiersModal({
               <span className="text-xs text-[#CBD2C7] font-medium">David Kim</span>
               <span className="w-1 h-1 rounded-full bg-[#f7fe72]" />
               <span className="text-xs font-mono font-bold text-[#f7fe72]">#{currentRank} Global</span>
-              <span className="w-1 h-1 rounded-full bg-[#9c67b5]" />
+              <span className="w-1 h-1 rounded-full bg-[#757761]" />
               <span className="text-xs font-mono font-bold text-[#f4e76e]">{currentXp.toLocaleString()} XP</span>
             </div>
 
@@ -519,7 +519,7 @@ export default function RewardTiersModal({
             <div className="absolute top-5 sm:top-6 left-6 right-6 h-0.5 bg-white/10 -z-10" />
             {/* Active filled connecting line */}
             <div
-              className="absolute top-5 sm:top-6 left-6 h-0.5 bg-gradient-to-r from-[#9c67b5] via-[#f7fe72] to-[#f4e76e] -z-10 transition-all duration-500"
+              className="absolute top-5 sm:top-6 left-6 h-0.5 bg-gradient-to-r from-[#757761] via-[#f7fe72] to-[#f4e76e] -z-10 transition-all duration-500"
               style={{ width: `${Math.min(100, Math.max(10, ((activeTier.tierNumber - 0.5) / 5) * 100))}%` }}
             />
 
@@ -537,7 +537,7 @@ export default function RewardTiersModal({
                   }}
                   className={`group flex flex-col items-center gap-1 p-1 sm:p-2 rounded-xl sm:rounded-2xl transition-all cursor-pointer text-center relative ${
                     isSelected
-                      ? "bg-[#9c67b5]/20 border border-[#9c67b5]/40 shadow-lg scale-102"
+                      ? "bg-[#757761]/25 border border-[#f7fe72]/50 shadow-lg scale-102"
                       : "hover:bg-white/5"
                   }`}
                 >
@@ -571,7 +571,7 @@ export default function RewardTiersModal({
                   </div>
 
                   {isUserCurrent && (
-                    <span className="text-[8px] sm:text-[9px] font-mono font-bold uppercase tracking-wider px-1 py-0.2 sm:px-1.5 rounded bg-[#9c67b5]/30 text-[#f7fe72] border border-[#9c67b5]/50">
+                    <span className="text-[8px] sm:text-[9px] font-mono font-bold uppercase tracking-wider px-1 py-0.2 sm:px-1.5 rounded bg-[#757761]/30 text-[#f7fe72] border border-[#757761]/50">
                       Active
                     </span>
                   )}
@@ -618,7 +618,7 @@ export default function RewardTiersModal({
               {/* Header inside showcase */}
               <div className="flex items-center justify-between gap-2">
                 <div className="min-w-0">
-                  <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.18em] sm:tracking-[0.2em] font-bold text-[#9c67b5] block truncate">
+                  <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.18em] sm:tracking-[0.2em] font-bold text-[#f7fe72] block truncate">
                     TIER {inspectedTier.tierNumber} EMBLEM
                   </span>
                   <h3 id="medal-showcase-heading" className="text-lg sm:text-xl font-black text-white mt-0.5 truncate">
@@ -675,7 +675,7 @@ export default function RewardTiersModal({
                       onClick={() => setSelectedBadgeId(b.id)}
                       className={`flex items-center gap-2 p-1.5 sm:p-2 rounded-xl border transition-all cursor-pointer text-left shrink-0 ${
                         selectedBadgeId === b.id
-                          ? "bg-[#9c67b5]/20 border-[#9c67b5]/60 shadow-md"
+                          ? "bg-[#757761]/25 border-[#f7fe72]/60 shadow-md"
                           : "bg-white/5 border-white/5 hover:bg-white/10 opacity-70"
                       }`}
                     >
@@ -706,8 +706,8 @@ export default function RewardTiersModal({
                   </p>
                 </div>
 
-                <div className="p-2.5 sm:p-3 rounded-xl bg-[#9c67b5]/10 border border-[#9c67b5]/20">
-                  <span className="text-[9px] sm:text-[10px] font-mono uppercase text-[#9c67b5] block mb-1">
+                <div className="p-2.5 sm:p-3 rounded-xl bg-[#757761]/15 border border-[#757761]/30">
+                  <span className="text-[9px] sm:text-[10px] font-mono uppercase text-[#A0A594] block mb-1">
                     Prestige Lore
                   </span>
                   <p className="text-[#E2E7DE] italic leading-relaxed">
@@ -774,7 +774,7 @@ export default function RewardTiersModal({
                       isClaimed
                         ? "bg-white/[0.02] border-white/5"
                         : isUnlocked
-                        ? "bg-[#0B0E0C] border-[#757761]/35 hover:border-[#9c67b5]/50"
+                        ? "bg-[#0B0E0C] border-[#757761]/35 hover:border-[#f7fe72]/50"
                         : "bg-white/[0.01] border-white/5 opacity-55"
                     }`}
                   >
@@ -782,7 +782,7 @@ export default function RewardTiersModal({
                       <div
                         className={`w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 border ${
                           isUnlocked
-                            ? "bg-[#9c67b5]/20 text-[#f7fe72] border-[#9c67b5]/40 shadow-inner"
+                            ? "bg-[#757761]/20 text-[#f7fe72] border-[#757761]/40 shadow-inner"
                             : "bg-white/5 text-[#757761] border-white/5"
                         }`}
                       >
@@ -846,7 +846,7 @@ export default function RewardTiersModal({
             </div>
 
             {/* Season 4 Apex Ring Guarantee Callout */}
-            <aside aria-label="End of season reward" className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#2D163D]/60 via-[#121815] to-[#0B0E0C] border border-[#9c67b5]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+            <aside aria-label="End of season reward" className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#18201A] via-[#121815] to-[#0B0E0C] border border-[#757761]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
               <div className="flex items-start sm:items-center gap-2.5 sm:gap-3">
                 <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-[#f7fe72] shrink-0 mt-0.5 sm:mt-0" />
                 <div>

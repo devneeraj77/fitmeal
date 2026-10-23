@@ -42,7 +42,7 @@ export default function BookingModal({ coach, isOpen, onClose }: BookingModalPro
       <div className="relative w-full max-w-lg bg-[#121815] rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#757761]/40 overflow-hidden text-white">
         
         {/* Glow ambient background accents */}
-        <div className="absolute -top-24 -right-24 w-56 h-56 bg-[#9c67b5]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-24 -right-24 w-56 h-56 bg-[#757761]/20 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 w-56 h-56 bg-[#f7fe72]/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Close Button */}
@@ -58,7 +58,7 @@ export default function BookingModal({ coach, isOpen, onClose }: BookingModalPro
             {/* Header */}
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider mb-2 font-mono">
               <UserCheck className="w-4 h-4 text-[#f7fe72]" />
-              <span className="text-[#9c67b5]">Direct Specialist Consultation</span>
+              <span className="text-[#f7fe72]">Direct Specialist Consultation</span>
             </div>
 
             <h3 className="text-2xl font-black text-white tracking-tight">
@@ -80,7 +80,7 @@ export default function BookingModal({ coach, isOpen, onClose }: BookingModalPro
                   onClick={() => setSelectedDate(d.label)}
                   className={`p-2.5 rounded-xl border text-left text-xs font-semibold transition-all cursor-pointer ${
                     selectedDate === d.label
-                      ? "border-[#9c67b5] bg-[#9c67b5]/20 text-white shadow-sm ring-1 ring-[#9c67b5]"
+                      ? "border-[#f7fe72] bg-[#f7fe72]/15 text-white shadow-sm ring-1 ring-[#f7fe72]"
                       : "border-[#757761]/30 text-[#CBD2C7] hover:border-[#757761]/60 bg-[#0B0E0C]"
                   }`}
                 >
@@ -138,7 +138,7 @@ export default function BookingModal({ coach, isOpen, onClose }: BookingModalPro
           </form>
         ) : (
           <div className="text-center py-4 relative z-10">
-            <div className="w-14 h-14 rounded-full bg-[#9c67b5]/20 border border-[#9c67b5]/40 text-[#f7fe72] flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#9c67b5]/20">
+            <div className="w-14 h-14 rounded-full bg-[#757761]/20 border border-[#757761]/40 text-[#f7fe72] flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#757761]/20">
               <Check className="w-8 h-8 text-[#f7fe72]" />
             </div>
             <h3 className="text-2xl font-black text-white">Consultation Confirmed!</h3>

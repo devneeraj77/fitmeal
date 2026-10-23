@@ -43,7 +43,7 @@ function runConfettiBurst(canvas: HTMLCanvasElement | null) {
     alpha: number;
   }> = [];
 
-  const colors = ["#9c67b5", "#f7fe72", "#f4e76e", "#757761", "#c084fc", "#eef076"];
+  const colors = ["#f7fe72", "#f4e76e", "#757761", "#ffffff", "#d4c448"];
   const centerX = window.innerWidth / 2;
   const centerY = window.innerHeight * 0.45;
 
@@ -710,7 +710,7 @@ export default function PulseAINutritionEngine() {
   return (
     <section
       id="nutrition"
-      className="relative w-full py-16 px-4 sm:px-6 lg:px-8 bg-[#0B0E0C] text-[#E2E7DE] overflow-hidden font-sans border-b border-[#757761]/25 scroll-mt-20 sm:scroll-mt-24"
+      className="relative w-full py-16 px-4 sm:px-6 lg:px-8 bg-[#F4F6F5] dark:bg-[#0B0E0C] text-[#121815] dark:text-[#E2E7DE] overflow-hidden font-sans border-b border-[#757761]/25 scroll-mt-20 sm:scroll-mt-24 transition-colors"
     >
       {/* Hidden Fullscreen Canvas for celebratory confetti bursts */}
       <canvas
@@ -722,21 +722,21 @@ export default function PulseAINutritionEngine() {
         {/* Brand & Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#9c67b5]/15 border border-[#9c67b5]/30 text-[#f7fe72] text-xs font-bold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-[#f7fe72] animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#757761]/15 border border-[#757761]/30 text-[#505445] dark:text-[#f7fe72] text-xs font-bold uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5 text-[#505445] dark:text-[#f7fe72] animate-pulse" />
               <span>PulseAI &bull; Hyper-Local Nutrition Engine</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-sans">
-              AI Hyper-Local Chef &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9c67b5] via-[#f4e76e] to-[#f7fe72]">Mandi Radar</span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#121815] dark:text-white font-sans">
+              AI Hyper-Local Chef &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#121815] via-[#505445] to-[#7A5A00] dark:from-[#FFFFFF] dark:via-[#f4e76e] dark:to-[#f7fe72]">Mandi Radar</span>
             </h2>
-            <p className="text-[#A0A493] text-sm sm:text-base max-w-2xl leading-relaxed">
+            <p className="text-[#505445] dark:text-[#A0A493] text-sm sm:text-base max-w-2xl leading-relaxed">
               Dynamically maps seasonal Indian produce, local Delhi Kirana merchants, and live protein macro economics to your daily fitness goal.
             </p>
           </div>
 
           {/* User Gamification & Daily XP Status */}
           <div className="flex items-center gap-3 bg-[#121815] px-4 py-2.5 rounded-2xl border border-[#757761]/30 shadow-xs self-start md:self-auto">
-            <div className="w-10 h-10 rounded-xl bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center font-bold text-xs shadow-inner border border-[#9c67b5]/40">
+            <div className="w-10 h-10 rounded-xl bg-[#757761]/20 text-[#f7fe72] flex items-center justify-center font-bold text-xs shadow-inner border border-[#757761]/40">
               <Award className="w-5 h-5 text-[#f7fe72]" />
             </div>
             <div>
@@ -745,7 +745,7 @@ export default function PulseAINutritionEngine() {
               </div>
               <div className="text-base font-extrabold text-white flex items-center gap-1.5">
                 <span>{loggedXP} XP</span>
-                <span className="text-[10px] font-bold text-[#f7fe72] bg-[#9c67b5]/20 px-1.5 py-0.5 rounded border border-[#9c67b5]/30 font-mono">
+                <span className="text-[10px] font-bold text-[#f7fe72] bg-[#757761]/20 px-1.5 py-0.5 rounded border border-[#757761]/30 font-mono">
                   Level 4 Mover
                 </span>
               </div>
@@ -788,8 +788,8 @@ export default function PulseAINutritionEngine() {
                           setCurrentLocation(loc);
                           setIsLocationMenuOpen(false);
                         }}
-                        className={`w-full text-left px-3.5 py-2 text-xs font-medium flex items-center justify-between hover:bg-[#9c67b5]/20 transition-colors ${
-                          currentLocation === loc ? "text-[#f7fe72] font-bold bg-[#9c67b5]/30" : "text-[#CBD2C7]"
+                        className={`w-full text-left px-3.5 py-2 text-xs font-medium flex items-center justify-between hover:bg-[#757761]/20 transition-colors ${
+                          currentLocation === loc ? "text-[#f7fe72] font-bold bg-[#757761]/30" : "text-[#CBD2C7]"
                         }`}
                       >
                         <span>{loc}</span>
@@ -827,8 +827,8 @@ export default function PulseAINutritionEngine() {
                           setSelectedRadius(rad);
                           setIsRadiusMenuOpen(false);
                         }}
-                        className={`w-full text-left px-3.5 py-2 text-xs font-medium flex items-center justify-between hover:bg-[#9c67b5]/20 transition-colors ${
-                          selectedRadius === rad ? "text-[#f7fe72] font-bold bg-[#9c67b5]/30" : "text-[#CBD2C7]"
+                        className={`w-full text-left px-3.5 py-2 text-xs font-medium flex items-center justify-between hover:bg-[#757761]/20 transition-colors ${
+                          selectedRadius === rad ? "text-[#f7fe72] font-bold bg-[#757761]/30" : "text-[#CBD2C7]"
                         }`}
                       >
                         <span>Within {rad}</span>
@@ -850,7 +850,7 @@ export default function PulseAINutritionEngine() {
                     onClick={() => setSourcingMode(mode)}
                     className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                       isActive
-                        ? "bg-[#9c67b5] text-white shadow-xs font-bold"
+                        ? "bg-[#f7fe72] text-[#0B0E0C] shadow-xs font-black"
                         : "text-[#A0A493] hover:text-white hover:bg-white/5"
                     }`}
                   >
@@ -873,7 +873,7 @@ export default function PulseAINutritionEngine() {
               onClick={() => setFilterHighProtein(!filterHighProtein)}
               className={`px-3 py-1 rounded-full text-xs font-semibold transition-all border cursor-pointer flex items-center gap-1.5 ${
                 filterHighProtein
-                  ? "bg-[#9c67b5]/25 text-[#f7fe72] border-[#9c67b5] font-bold"
+                  ? "bg-[#757761]/30 text-[#f7fe72] border-[#f7fe72] font-bold"
                   : "bg-[#0B0E0C] text-[#A0A493] border-[#757761]/35 hover:text-white"
               }`}
             >
@@ -886,7 +886,7 @@ export default function PulseAINutritionEngine() {
               onClick={() => setFilterVegetarian(!filterVegetarian)}
               className={`px-3 py-1 rounded-full text-xs font-semibold transition-all border cursor-pointer flex items-center gap-1.5 ${
                 filterVegetarian
-                  ? "bg-[#9c67b5]/25 text-[#f7fe72] border-[#9c67b5] font-bold"
+                  ? "bg-[#757761]/30 text-[#f7fe72] border-[#f7fe72] font-bold"
                   : "bg-[#0B0E0C] text-[#A0A493] border-[#757761]/35 hover:text-white"
               }`}
             >
@@ -899,7 +899,7 @@ export default function PulseAINutritionEngine() {
               onClick={() => setFilterBudget(!filterBudget)}
               className={`px-3 py-1 rounded-full text-xs font-semibold transition-all border cursor-pointer flex items-center gap-1.5 ${
                 filterBudget
-                  ? "bg-[#9c67b5]/25 text-[#f7fe72] border-[#9c67b5] font-bold"
+                  ? "bg-[#757761]/30 text-[#f7fe72] border-[#f7fe72] font-bold"
                   : "bg-[#0B0E0C] text-[#A0A493] border-[#757761]/35 hover:text-white"
               }`}
             >
@@ -912,7 +912,7 @@ export default function PulseAINutritionEngine() {
               onClick={() => setFilterPrepTime(!filterPrepTime)}
               className={`px-3 py-1 rounded-full text-xs font-semibold transition-all border cursor-pointer flex items-center gap-1.5 ${
                 filterPrepTime
-                  ? "bg-[#9c67b5]/25 text-[#f7fe72] border-[#9c67b5] font-bold"
+                  ? "bg-[#757761]/30 text-[#f7fe72] border-[#f7fe72] font-bold"
                   : "bg-[#0B0E0C] text-[#A0A493] border-[#757761]/35 hover:text-white"
               }`}
             >
@@ -930,7 +930,7 @@ export default function PulseAINutritionEngine() {
           <div className="px-5 sm:px-7 py-4.5 bg-[#0B0E0C] border-b border-[#757761]/25 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="w-10 h-10 rounded-2xl bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center shadow-xs border border-[#9c67b5]/40">
+                <div className="w-10 h-10 rounded-2xl bg-[#757761]/20 text-[#f7fe72] flex items-center justify-center shadow-xs border border-[#757761]/40">
                   <Sparkles className="w-5 h-5 text-[#f7fe72]" />
                 </div>
                 {/* Pulsing sparkle badge */}
@@ -944,7 +944,7 @@ export default function PulseAINutritionEngine() {
                   <h3 className="text-lg sm:text-xl font-black text-white tracking-tight font-sans">
                     AI Hyper-Local Chef
                   </h3>
-                  <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-[#9c67b5]/20 text-[#f7fe72] border border-[#9c67b5]/30">
+                  <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-[#757761]/20 text-[#f7fe72] border border-[#757761]/30">
                     Live Engine
                   </span>
                 </div>
@@ -967,7 +967,7 @@ export default function PulseAINutritionEngine() {
 
           {/* Success Banner when Meal is Logged */}
           {showLogSuccess && (
-            <div className="bg-[#9c67b5] text-white px-6 py-3 flex items-center justify-between text-xs sm:text-sm font-bold animate-in fade-in duration-200">
+            <div className="bg-[#18201A] border-b border-[#f7fe72]/40 text-white px-6 py-3 flex items-center justify-between text-xs sm:text-sm font-bold animate-in fade-in duration-200">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-[#f7fe72] shrink-0" />
                 <span>Meal successfully logged to your Athlete Dashboard! Earned +50 XP and hit daily protein target milestone!</span>
@@ -1028,7 +1028,7 @@ export default function PulseAINutritionEngine() {
                 {/* Cost-to-Cook Pill */}
                 <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#0B0E0C] border border-[#757761]/30 text-[#E2E7DE] shadow-2xs">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-[#9c67b5]/20 text-[#f7fe72] border border-[#9c67b5]/30 flex items-center justify-center font-bold">
+                    <div className="w-8 h-8 rounded-xl bg-[#757761]/20 text-[#f7fe72] border border-[#757761]/30 flex items-center justify-center font-bold">
                       <CircleDollarSign className="w-4 h-4" />
                     </div>
                     <div>
@@ -1053,7 +1053,7 @@ export default function PulseAINutritionEngine() {
               <div className="p-4 rounded-2xl bg-[#0B0E0C] border border-[#757761]/25 space-y-3">
                 <div className="flex items-center justify-between text-xs font-bold text-[#CBD2C7]">
                   <span className="uppercase tracking-wider">Circular Macro Ring Breakdown</span>
-                  <span className="text-[11px] text-[#f7fe72] font-extrabold bg-[#9c67b5]/20 border border-[#9c67b5]/30 px-2 py-0.5 rounded">
+                  <span className="text-[11px] text-[#f7fe72] font-extrabold bg-[#757761]/20 border border-[#757761]/30 px-2 py-0.5 rounded">
                     Goal Match: 98%
                   </span>
                 </div>
@@ -1083,12 +1083,12 @@ export default function PulseAINutritionEngine() {
                         strokeLinecap="round"
                         fill="transparent"
                       />
-                      {/* Carbs Segment: Royal Amethyst (#9c67b5) */}
+                      {/* Carbs Segment: Smoked Olive Sage (#757761) */}
                       <circle
                         cx="64"
                         cy="64"
                         r={radius}
-                        className="stroke-[#9c67b5] transition-all duration-700 ease-out"
+                        className="stroke-[#757761] transition-all duration-700 ease-out"
                         strokeWidth="10"
                         strokeDasharray={`${carbsStroke} ${circumference}`}
                         strokeDashoffset={-proteinStroke}
@@ -1136,7 +1136,7 @@ export default function PulseAINutritionEngine() {
                     {/* Carbs */}
                     <div className="flex items-center justify-between p-2 rounded-xl bg-[#121815] border border-[#757761]/30 shadow-2xs">
                       <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#9c67b5] shrink-0" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#757761] shrink-0" />
                         <span className="text-xs font-semibold text-[#CBD2C7]">Carbs</span>
                       </div>
                       <span className="text-xs font-black text-white">
@@ -1175,7 +1175,7 @@ export default function PulseAINutritionEngine() {
                       Sourced real-time from Delhi mandis, local kirana merchants, and local dairies.
                     </p>
                   </div>
-                  <span className="self-start sm:self-auto text-[11px] font-bold text-[#f7fe72] bg-[#9c67b5]/20 px-2.5 py-1 rounded-full border border-[#9c67b5]/30">
+                  <span className="self-start sm:self-auto text-[11px] font-bold text-[#f7fe72] bg-[#757761]/20 px-2.5 py-1 rounded-full border border-[#757761]/30">
                     &le; 2.0km Perimeter
                   </span>
                 </div>
@@ -1191,8 +1191,8 @@ export default function PulseAINutritionEngine() {
                         key={ing.id}
                         className={`p-3.5 sm:p-4 rounded-2xl border transition-all ${
                           hasActiveSwap
-                            ? "bg-[#9c67b5]/20 border-[#9c67b5]/50 shadow-xs"
-                            : "bg-[#0B0E0C] border-[#757761]/25 hover:border-[#9c67b5]/40"
+                            ? "bg-[#757761]/20 border-[#f7fe72]/50 shadow-xs"
+                            : "bg-[#0B0E0C] border-[#757761]/25 hover:border-[#757761]/50"
                         }`}
                       >
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -1204,7 +1204,7 @@ export default function PulseAINutritionEngine() {
                                 {hasActiveSwap ? activeSwap?.name : ing.name}
                               </span>
                               {hasActiveSwap && (
-                                <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-[#9c67b5] text-white">
+                                <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-[#f7fe72] text-[#0B0E0C]">
                                   Swapped
                                 </span>
                               )}
@@ -1234,7 +1234,7 @@ export default function PulseAINutritionEngine() {
 
                             <button
                               onClick={() => setActiveSwapIngredient(ing)}
-                              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#121815] hover:bg-[#181f1b] text-[#f7fe72] text-xs font-bold border border-[#757761]/40 hover:border-[#9c67b5] transition-all shadow-2xs active:scale-95 cursor-pointer"
+                              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#121815] hover:bg-[#181f1b] text-[#f7fe72] text-xs font-bold border border-[#757761]/40 hover:border-[#f7fe72] transition-all shadow-2xs active:scale-95 cursor-pointer"
                             >
                               <ArrowRightLeft className="w-3.5 h-3.5 text-[#f7fe72]" />
                               <span>Smart Swap</span>
@@ -1244,9 +1244,9 @@ export default function PulseAINutritionEngine() {
 
                         {/* If swapped, show macro and cost delta pill */}
                         {hasActiveSwap && activeSwap && (
-                          <div className="mt-2.5 pt-2 border-t border-[#9c67b5]/30 flex items-center justify-between text-[11px] text-[#f7fe72] font-semibold pl-4">
+                          <div className="mt-2.5 pt-2 border-t border-[#757761]/30 flex items-center justify-between text-[11px] text-[#f7fe72] font-semibold pl-4">
                             <span>Delta: {activeSwap.macroImpact}</span>
-                            <span className="font-bold text-white bg-[#9c67b5]/30 px-2 py-0.5 rounded border border-[#9c67b5]/50">
+                            <span className="font-bold text-[#0B0E0C] bg-[#f7fe72] px-2 py-0.5 rounded border border-[#f7fe72]/50">
                               {activeSwap.priceDelta}
                             </span>
                           </div>
@@ -1309,7 +1309,7 @@ export default function PulseAINutritionEngine() {
               {/* Modal Header */}
               <div className="p-5 sm:p-6 bg-[#0B0E0C] border-b border-[#757761]/25 flex items-center justify-between">
                 <div>
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#9c67b5]/20 text-[#f7fe72] border border-[#9c67b5]/30 text-[10px] font-bold uppercase tracking-wider">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#757761]/20 text-[#f7fe72] border border-[#757761]/30 text-[10px] font-bold uppercase tracking-wider">
                     <ArrowRightLeft className="w-3 h-3 text-[#f7fe72]" />
                     <span>Hyper-Local Alternative Engine</span>
                   </div>
@@ -1339,8 +1339,8 @@ export default function PulseAINutritionEngine() {
                       key={alt.name}
                       className={`p-4 rounded-2xl border transition-all ${
                         isCurrentSelection
-                          ? "border-[#9c67b5] bg-[#9c67b5]/20 shadow-xs"
-                          : "border-[#757761]/30 hover:border-[#9c67b5]/50 bg-[#0B0E0C]"
+                          ? "border-[#f7fe72] bg-[#757761]/20 shadow-xs"
+                          : "border-[#757761]/30 hover:border-[#757761]/60 bg-[#0B0E0C]"
                       }`}
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -1359,7 +1359,7 @@ export default function PulseAINutritionEngine() {
                               <Store className="w-3.5 h-3.5 text-[#757761]" />
                               {alt.vendorName}
                             </span>
-                            <span className="text-[#f7fe72] font-bold bg-[#9c67b5]/20 px-1.5 py-0.5 rounded text-[11px] border border-[#9c67b5]/30">
+                            <span className="text-[#f7fe72] font-bold bg-[#757761]/20 px-1.5 py-0.5 rounded text-[11px] border border-[#757761]/30">
                               {alt.distance}
                             </span>
                           </div>
@@ -1388,7 +1388,7 @@ export default function PulseAINutritionEngine() {
                             onClick={() => handleApplySwap(activeSwapIngredient.id, idx)}
                             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                               isCurrentSelection
-                                ? "bg-[#9c67b5] text-white"
+                                ? "bg-[#757761] text-white"
                                 : "bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] font-black hover:brightness-110 active:scale-95"
                             }`}
                           >

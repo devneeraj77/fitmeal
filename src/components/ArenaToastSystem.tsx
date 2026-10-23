@@ -310,14 +310,14 @@ function ToastCard({ toast, onDismiss, onAction }: ToastCardProps) {
         isRival
           ? "bg-gradient-to-br from-[#1C0F0A] via-[#140B07] to-[#0A0503] border-amber-500/40 text-amber-50"
           : isTierUnlock
-          ? "bg-gradient-to-br from-[#2D163D] via-[#1A0E24] to-[#121815] border-[#9c67b5]/50 text-white"
+          ? "bg-gradient-to-br from-[#18201A] via-[#141A16] to-[#121815] border-[#f7fe72]/50 text-white"
           : "bg-gradient-to-br from-[#121815] via-[#0B0E0C] to-[#121815] border-[#757761]/40 text-[#E2E7DE]"
       }`}
     >
       {/* Subtle ambient light sweep */}
       <div
         className={`absolute -top-12 -right-12 w-36 h-36 rounded-full blur-2xl pointer-events-none opacity-40 ${
-          isRival ? "bg-amber-500" : isTierUnlock ? "bg-[#9c67b5]" : "bg-[#f7fe72]"
+          isRival ? "bg-amber-500" : isTierUnlock ? "bg-[#f4e76e]" : "bg-[#f7fe72]"
         }`}
       />
 
@@ -333,7 +333,7 @@ function ToastCard({ toast, onDismiss, onAction }: ToastCardProps) {
           ) : isTierProximity && toast.tierId ? (
             <CanvasBadge tier={toast.tierId} emblem="shield" size={42} interactive={false} />
           ) : (
-            <div className="w-10 h-10 rounded-2xl bg-[#9c67b5]/20 text-[#f7fe72] border border-[#9c67b5]/30 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-2xl bg-[#757761]/20 text-[#f7fe72] border border-[#757761]/30 flex items-center justify-center">
               <Sparkles className="w-5 h-5 text-[#f7fe72]" />
             </div>
           )}
@@ -347,8 +347,8 @@ function ToastCard({ toast, onDismiss, onAction }: ToastCardProps) {
                 isRival
                   ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
                   : isTierUnlock
-                  ? "bg-[#9c67b5]/30 text-[#f7fe72] border border-[#9c67b5]/50"
-                  : "bg-[#9c67b5]/20 text-[#f7fe72] border border-[#9c67b5]/30"
+                  ? "bg-[#f7fe72]/20 text-[#f7fe72] border border-[#f7fe72]/40"
+                  : "bg-[#757761]/20 text-[#f7fe72] border border-[#757761]/30"
               }`}
             >
               {isRival ? "RIVAL ALERT" : isTierUnlock ? "TIER PROMOTION" : "TIER PROXIMITY"}
@@ -469,7 +469,7 @@ function NotificationHistoryDrawer({
         {/* Drawer Header */}
         <div className="p-5 border-b border-white/10 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-[#9c67b5]/20 text-[#f7fe72] flex items-center justify-center border border-[#9c67b5]/30">
+            <div className="w-8 h-8 rounded-xl bg-[#757761]/20 text-[#f7fe72] flex items-center justify-center border border-[#757761]/30">
               <Bell className="w-4 h-4 text-[#f7fe72]" />
             </div>
             <div>
@@ -502,7 +502,7 @@ function NotificationHistoryDrawer({
 
             <button
               onClick={onSimulateProximity}
-              className="px-3 py-2 rounded-xl bg-[#9c67b5]/20 hover:bg-[#9c67b5]/30 text-[#f7fe72] border border-[#9c67b5]/30 text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer"
+              className="px-3 py-2 rounded-xl bg-[#757761]/20 hover:bg-[#757761]/30 text-[#f7fe72] border border-[#757761]/30 text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#f7fe72]" />
               <span>Tier Proximity</span>
@@ -654,7 +654,7 @@ export function ArenaRivalWatchWidget() {
 
         <button
           onClick={simulateTierProximity}
-          className="px-3 py-1.5 rounded-xl bg-[#9c67b5]/20 hover:bg-[#9c67b5]/30 border border-[#9c67b5]/40 text-[#f7fe72] text-xs font-bold transition-all active:scale-95 cursor-pointer flex items-center gap-1.5 shadow-xs"
+          className="px-3 py-1.5 rounded-xl bg-[#757761]/20 hover:bg-[#757761]/30 border border-[#757761]/40 text-[#f7fe72] text-xs font-bold transition-all active:scale-95 cursor-pointer flex items-center gap-1.5 shadow-xs"
         >
           <Sparkles className="w-3.5 h-3.5 text-[#f7fe72]" />
           <span>Trigger &ldquo;Tier Proximity&rdquo;</span>

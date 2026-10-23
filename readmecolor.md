@@ -6,16 +6,16 @@ Comprehensive documentation for the custom **60-30-10** color palette, typograph
 
 ## 🎨 1. Core Palette Overview
 
-The design system is built strictly around the golden interior & digital design rule:
-- **60% Dominant (Canvas & Elevation)**: Smoked Obsidian & Crisp Ivory
-- **30% Secondary (Structure & Brand Depth)**: Royal Velvet Amethyst & Smoked Olive Sage
-- **10% Accent (Interactive Action & Energy)**: Electric Cyber Lime & Solar Gold
+The design system is built strictly around the golden interior & digital design rule of **three colors**:
+- **60% Dominant (Canvas & Elevation)**: Smoked Obsidian (`#0B0E0C` / `#121815`) & Crisp Ivory (`#F4F6F5` / `#FFFFFF`)
+- **30% Secondary (Structure & Brand Depth)**: Smoked Olive Sage (`#757761`)
+- **10% Accent (Interactive Action & Energy)**: Electric Cyber Lime (`#f7fe72`) & Solar Gold (`#f4e76e`)
 
 ```
 ┌──────────────────────────────────────┬────────────────────────┬─────────────┐
 │                 60%                  │          30%           │     10%     │
 │        Canvas & Surface Space        │    Brand Structure     │ Action/Fuel │
-│   #0B0E0C / #121815 / #F4F6F5        │   #9c67b5 / #757761    │  #f7fe72    │
+│   #0B0E0C / #121815 / #F4F6F5        │        #757761         │   #f7fe72   │
 └──────────────────────────────────────┴────────────────────────┴─────────────┘
 ```
 
@@ -29,6 +29,7 @@ The design system is built strictly around the golden interior & digital design 
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Obsidian Canvas** | `#0B0E0C` | `rgb(11, 14, 12)` | `hsl(140, 12%, 5%)` | Dark | Main app background, page wrapper |
 | **Obsidian Card Surface** | `#121815` | `rgb(18, 24, 21)` | `hsl(150, 14%, 8%)` | Dark | Elevated cards, dialogs, drawers, sticky HUD |
+| **Obsidian Recessed / Elevation** | `#18201A` | `rgb(24, 32, 26)` | `hsl(135, 14%, 11%)` | Dark | Nested cards, pill bases, active containers |
 | **Ivory Canvas** | `#F4F6F5` | `rgb(244, 246, 245)` | `hsl(150, 6%, 96%)` | Light | Clean light mode app background |
 | **Pure White Card** | `#FFFFFF` | `rgb(255, 255, 255)` | `hsl(0, 0%, 100%)` | Light | Light mode card surface with subtle drop shadow |
 
@@ -36,18 +37,17 @@ The design system is built strictly around the golden interior & digital design 
 
 | Color Token | Hex Code | RGB | HSL | Mode | Purpose |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Royal Amethyst** | `#9c67b5` | `rgb(156, 103, 181)` | `hsl(281, 35%, 56%)` | Dark / Accent | Primary brand purple, glowing borders, active tabs |
-| **Deep Amethyst** | `#2D163D` | `rgb(45, 22, 61)` | `hsl(275, 47%, 16%)` | Dark | Secondary pill badges, gradient base, aura glows |
-| **Velvet Amethyst (Light)**| `#793594` / `#6C2E85` | `rgb(121, 53, 148)` | `hsl(283, 47%, 39%)` | Light | High-contrast purple headings, light buttons |
-| **Smoked Olive Sage** | `#757761` | `rgb(117, 119, 97)` | `hsl(66, 10%, 42%)` | Both | Structural borders, neutral pill separators, icons |
+| **Smoked Olive Sage** | `#757761` | `rgb(117, 119, 97)` | `hsl(66, 10%, 42%)` | Both | Structural borders, neutral pill separators, icons, dividers |
+| **Muted Sage** | `#A0A594` | `rgb(160, 165, 148)` | `hsl(78, 9%, 61%)` | Dark | Metadata, subtext, subtle badges, unselected icons |
+| **Deep Olive Sage (Light)**| `#505445` | `rgb(80, 84, 69)` | `hsl(76, 10%, 30%)` | Light | High-contrast sage headings, labels, muted text |
 
 ### 2.3 Interactive Accents & Vitality (10%)
 
 | Color Token | Hex Code | RGB | HSL | Mode | Purpose |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Electric Cyber Lime** | `#f7fe72` | `rgb(247, 254, 114)` | `hsl(63, 98%, 72%)` | Both | Primary CTA buttons, Rank #1 podium, XP gain |
+| **Electric Cyber Lime** | `#f7fe72` | `rgb(247, 254, 114)` | `hsl(63, 98%, 72%)` | Both | Primary CTA buttons, active tabs, glowing highlights, XP gain |
 | **Solar Gold** | `#f4e76e` | `rgb(244, 231, 110)` | `hsl(54, 85%, 69%)` | Dark | Secondary gradient stop, streak flames, badges |
-| **Solar Ochre (Light)** | `#7A5A00` | `rgb(122, 90, 0)` | `hsl(44, 100%, 24%)` | Light | High-contrast accessible gold for light mode text |
+| **Solar Ochre (Light)** | `#7A5A00` | `rgb(122, 90, 0)` | `hsl(44, 100%, 24%)` | Light | High-contrast accessible gold for light mode text & accents |
 
 ---
 
@@ -72,7 +72,7 @@ The design system is built strictly around the golden interior & digital design 
 | **Primary / High Emphasis** | `text-[#121815]` | `#121815` | **15.8 : 1** (AAA) | Page headers, card titles, prominent text |
 | **Secondary / Body** | `text-[#262A21]` | `#262A21` | **11.2 : 1** (AAA) | Descriptions, coach bios, recipe ingredients |
 | **Muted / Metadata** | `text-[#575C4B]` | `#575C4B` | **5.2 : 1** (AA) | Subtext, timestamps, search placeholders |
-| **Brand Accent Text** | `text-[#6C2E85]` | `#6C2E85` | **5.6 : 1** (AA) | Hyperlinks, featured tags, active tabs |
+| **Brand Structure Text** | `text-[#505445]` | `#505445` | **5.5 : 1** (AA) | Tags, labels, active borders |
 | **Solar Accent Text** | `text-[#7A5A00]` | `#7A5A00` | **5.8 : 1** (AA) | Streak numbers, high-priority highlights |
 
 ---
@@ -109,8 +109,8 @@ bg-gradient-to-r from-[#f7fe72] to-[#f4e76e]
 
 ### 5.2 Category Badges & Division Tiers
 ```tsx
-// Amethyst Secondary Badge
-<span className="bg-[#2B153D] text-[#D8B4E2] border border-[#9c67b5]/50 px-2.5 py-0.5 rounded-full text-xs font-mono font-bold">
+// Smoked Olive Sage Secondary Badge
+<span className="bg-[#18201A] text-[#CBD2C7] border border-[#757761]/50 px-2.5 py-0.5 rounded-full text-xs font-mono font-bold">
   Tier: Gold I
 </span>
 
@@ -127,7 +127,7 @@ bg-gradient-to-r from-[#f7fe72] to-[#f4e76e]
   <input
     type="text"
     placeholder="Search contenders or city..."
-    className="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-black/40 border border-[#757761]/40 text-white placeholder-[#757761] focus:ring-2 focus:ring-[#9c67b5] focus:outline-none"
+    className="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-black/40 border border-[#757761]/40 text-white placeholder-[#757761] focus:ring-2 focus:ring-[#f7fe72] focus:outline-none"
   />
 </div>
 ```
@@ -159,7 +159,7 @@ bg-gradient-to-r from-[#f7fe72] to-[#f4e76e]
 
 ## ⚙️ 6. Tailwind & CSS Tokens
 
-Implemented in [`src/app/globals.css`](file:///workspaces/potatofit/src/app/globals.css):
+Implemented in `src/app/globals.css`:
 
 ```css
 :root {
@@ -169,7 +169,7 @@ Implemented in [`src/app/globals.css`](file:///workspaces/potatofit/src/app/glob
   --card-foreground: #121815;
   --popover: #FFFFFF;
   --popover-foreground: #121815;
-  --primary: #793594;
+  --primary: #121815;
   --primary-foreground: #FFFFFF;
   --secondary: #EAEFEA;
   --secondary-foreground: #121815;
@@ -179,7 +179,7 @@ Implemented in [`src/app/globals.css`](file:///workspaces/potatofit/src/app/glob
   --accent-foreground: #FFFFFF;
   --border: rgba(117, 119, 97, 0.22);
   --input: rgba(117, 119, 97, 0.25);
-  --ring: #793594;
+  --ring: #757761;
 }
 
 .dark, [data-theme="dark"] {
@@ -189,9 +189,9 @@ Implemented in [`src/app/globals.css`](file:///workspaces/potatofit/src/app/glob
   --card-foreground: #E2E7DE;
   --popover: #121815;
   --popover-foreground: #E2E7DE;
-  --primary: #9c67b5;
-  --primary-foreground: #FFFFFF;
-  --secondary: #2D163D;
+  --primary: #f7fe72;
+  --primary-foreground: #0B0E0C;
+  --secondary: #18201A;
   --secondary-foreground: #E2E7DE;
   --muted: #1A221E;
   --muted-foreground: #A0A594;
@@ -209,8 +209,9 @@ Implemented in [`src/app/globals.css`](file:///workspaces/potatofit/src/app/glob
 
 | Rule | ✅ DO | ❌ DON'T |
 | :--- | :--- | :--- |
+| **Strict 3 Colors** | Use Obsidian `#0B0E0C` (60%), Olive Sage `#757761` (30%), Cyber Lime `#f7fe72` (10%) | Never introduce extraneous hues (purple, violet, pink, etc.) |
 | **Text Contrast** | Use `text-[#E2E7DE]` / `text-[#CBD2C7]` for dark mode | Do not use `text-slate-300`, `text-slate-400` |
 | **Muted Labels** | Use `text-[#A0A594]` or `text-[#757761]` | Do not use `text-zinc-500` or `text-gray-400` |
 | **Accent Buttons** | Pair `#f7fe72` buttons strictly with `text-[#0B0E0C]` | Never put white text on lime/gold buttons |
-| **Borders & Dividers**| Use `border-[#757761]/30` or `border-[#9c67b5]/40` | Do not use `border-slate-700` or `border-zinc-800` |
+| **Borders & Dividers**| Use `border-[#757761]/30` or `border-[#f7fe72]/40` | Do not use `border-slate-700` or `border-zinc-800` |
 | **Theme Toggle** | Place theme toggles in footer glide component | Do not overlay theme switches over floating nav items |
