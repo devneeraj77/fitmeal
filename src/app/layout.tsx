@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -12,21 +12,37 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  themeColor: "#0B0E0C",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
-  title: "PotatoFit // From Couch Potato to Global Apex",
+  title: "FitMeal Pro // Athletic Longevity, Local Nutrition & Health Sync",
   description:
-    "AI-driven nutrition mapped to your nearest vegetable vendors and local grocers. Fuel smart, track daily quests, and compete with athletes worldwide.",
+    "AI-driven fitness syncing with Google Fit, Apple Health, & Strava. Dynamic macro nutrition, recovery readiness, and global arena quests.",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "FitMeal",
+  },
+  icons: {
+    icon: "/icon.svg",
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
-    title: "PotatoFit // From Couch Potato to Global Apex",
+    title: "FitMeal Pro // Athletic Longevity, Local Nutrition & Health Sync",
     description:
-      "AI-driven nutrition mapped to your nearest vegetable vendors and local grocers. Fuel smart, track daily quests, and compete with athletes worldwide.",
+      "AI-driven fitness syncing with Google Fit, Apple Health, & Strava. Dynamic macro nutrition, recovery readiness, and global arena quests.",
   },
 };
 
 import AuthProvider from "@/components/AuthProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { OfflineIndicator } from "@/components/PWAInstallButton";
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
@@ -40,7 +56,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           enableSystem
           disableTransitionOnChange={false}
         >
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            {children}
+            <OfflineIndicator />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

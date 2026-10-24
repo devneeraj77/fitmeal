@@ -14,6 +14,8 @@ import StreakModal from "@/components/StreakModal";
 import SignInModal from "@/components/SignInModal";
 import DashboardView from "@/components/DashboardView";
 import PulseAINutritionEngine from "@/components/PulseAINutritionEngine";
+import ConnectedHealthEngine from "@/components/ConnectedHealthEngine";
+import { PWAInstallButton } from "@/components/PWAInstallButton";
 
 export default function Home() {
   const [viewMode, setViewMode] = useState<"landing" | "dashboard">("landing");
@@ -53,12 +55,24 @@ export default function Home() {
         onOpenDashboard={() => setViewMode("dashboard")}
       />
 
+      {/* PWA Install Notification Bar */}
+      <PWAInstallButton variant="banner" />
+
       <main className="flex-1">
         {/* 2. Kinetic Hero Banner */}
         <Hero
           onOpenRoutineBuilder={() => setIsRoutineBuilderOpen(true)}
           onOpenGuidedSession={() => setIsGuidedSessionOpen(true)}
         />
+
+        {/* 3. Connected Health, Wearables & Biometric Diet Sync Engine */}
+        <section id="health-sync-section" className="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full scroll-mt-24">
+          <ConnectedHealthEngine
+            onOpenLocalMeals={() => {
+              document.getElementById("nutrition-engine-section")?.scrollIntoView({ behavior: "smooth" });
+            }}
+          />
+        </section>
 
         {/* PulseAI Hyper-Local Nutrition Engine */}
         <PulseAINutritionEngine />

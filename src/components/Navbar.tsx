@@ -34,6 +34,7 @@ import {
 } from "react-icons/fa6";
 import PotatoFitLogo from "./PotatoFitLogo";
 import { cn } from "@/lib/utils";
+import { PWAInstallButton } from "./PWAInstallButton";
 
 export interface NavbarProps {
   onOpenStreak?: () => void;
@@ -704,6 +705,22 @@ export default function Navbar({
                   Sign In
                 </button>
               )}
+
+              {/* Health Sync Quick Link */}
+              <Link
+                href="/#health-sync-section"
+                className="hidden xl:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-[#757761]/35 text-xs font-bold text-[#E2E7DE] hover:text-[#f7fe72] transition-colors whitespace-nowrap"
+                title="Google Fit, Apple Health & Strava Biometrics"
+              >
+                <Activity className="w-3.5 h-3.5 text-[#f7fe72]" />
+                <span>Health Sync</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              </Link>
+
+              {/* In-App PWA Install Button */}
+              <div className="hidden sm:block">
+                <PWAInstallButton variant="pill" />
+              </div>
 
               {/* Primary High-Voltage Accent Button */}
               <button
