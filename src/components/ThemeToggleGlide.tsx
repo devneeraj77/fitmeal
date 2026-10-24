@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTheme } from "next-themes";
 import { Sun, Moon, Monitor } from "lucide-react";
 
@@ -10,13 +10,12 @@ interface ThemeToggleGlideProps {
 }
 
 export function ThemeToggleGlide({ className = "", size = "sm" }: ThemeToggleGlideProps) {
-  const [mounted, setMounted] = useState(false);
+  const mounted = React.useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
   const { theme, setTheme } = useTheme();
-
-  // Ensure DOM is ready and state is hydrated
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const currentTheme = mounted ? theme || "system" : "system";
 
@@ -49,12 +48,12 @@ export function ThemeToggleGlide({ className = "", size = "sm" }: ThemeToggleGli
         root.classList.add("dark");
         root.classList.remove("light");
         root.setAttribute("data-theme", "dark");
-        root.style.colorScheme = "dark";
+        root.style.setProperty("color-scheme", "dark");
       } else {
         root.classList.remove("dark");
         root.classList.add("light");
         root.setAttribute("data-theme", "light");
-        root.style.colorScheme = "light";
+        root.style.setProperty("color-scheme", "light");
       }
 
       try {
