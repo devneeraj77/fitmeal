@@ -470,13 +470,110 @@ html.dark .bg-clip-text,
   color: transparent !important;
 }
 
-/* Dark Media & Video Demo canvas preserves dark aesthetic with razor-sharp contrast */
+/* Dark Media & Dark Hero sections preserve cinematic contrast in both light and dark modes */
 html:not(.dark) .dark-media-canvas,
 html.light .dark-media-canvas,
-[data-theme="light"] .dark-media-canvas {
-  background: linear-gradient(135deg, #121815 0%, #161c18 50%, #18201A 100%) !important;
+[data-theme="light"] .dark-media-canvas,
+html:not(.dark) .dark-hero,
+html.light .dark-hero,
+[data-theme="light"] .dark-hero {
   color: #FFFFFF !important;
 }
+
+html:not(.dark) .dark-hero .text-white,
+html.light .dark-hero .text-white {
+  color: #FFFFFF !important;
+}
+
+html:not(.dark) .dark-hero .text-\[\#CBD2C7\],
+html.light .dark-hero .text-\[\#CBD2C7\] {
+  color: #CBD2C7 !important;
+}
+
+html:not(.dark) .dark-hero .text-\[\#A0A493\],
+html.light .dark-hero .text-\[\#A0A493\],
+html:not(.dark) .dark-hero .text-\[\#A0A594\],
+html.light .dark-hero .text-\[\#A0A594\] {
+  color: #A0A594 !important;
+}
+
+html:not(.dark) .dark-hero .text-\[\#f7fe72\],
+html.light .dark-hero .text-\[\#f7fe72\] {
+  color: #f7fe72 !important;
+}
+
+html:not(.dark) .dark-hero .text-\[\#f4e76e\],
+html.light .dark-hero .text-\[\#f4e76e\] {
+  color: #f4e76e !important;
+}
+
+html:not(.dark) .dark-hero .bg-\[\#121815\],
+html.light .dark-hero .bg-\[\#121815\] {
+  background-color: #121815 !important;
+}
+
+html:not(.dark) .dark-hero .bg-\[\#0B0E0C\],
+html.light .dark-hero .bg-\[\#0B0E0C\] {
+  background-color: #0B0E0C !important;
+}
+
+/* HeroUI / Radix Avatar & AvatarGroup Styles */
+.avatar,
+[data-slot="avatar"],
+span.avatar {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  min-width: 2.5rem !important;
+  min-height: 2.5rem !important;
+  border-radius: 9999px !important;
+  overflow: hidden !important;
+  background-color: #18201A !important;
+  flex-shrink: 0 !important;
+  border: 2px solid #121815 !important;
+}
+
+.avatar__image,
+img.avatar__image,
+[data-slot="avatar-image"] {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 9999px !important;
+}
+
+.avatar__fallback,
+span.avatar__fallback,
+[data-slot="avatar-fallback"] {
+  display: flex !important;
+  width: 100% !important;
+  height: 100% !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 9999px !important;
+  background-color: #18201A !important;
+  color: #f7fe72 !important;
+  font-weight: 700 !important;
+  font-size: 0.75rem !important;
+  line-height: 1 !important;
+}
+
+.avatar-group,
+[data-slot="avatar-group"] {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.avatar-group > .avatar + .avatar,
+.avatar-group > span.avatar + span.avatar,
+[data-slot="avatar-group"] > * + * {
+  margin-inline-start: -0.65rem !important;
+}
+
 
 html:not(.dark) .dark-media-canvas h1,
 html.light .dark-media-canvas h1,

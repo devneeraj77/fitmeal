@@ -40,12 +40,14 @@ import { useSession, signOut } from "next-auth/react";
 import RewardTiersModal from "@/components/RewardTiersModal";
 import CanvasBadge from "@/components/CanvasBadge";
 import PotatoFitLogo from "@/components/PotatoFitLogo";
+import RecoveryInsightCard from "@/components/RecoveryInsightCard";
 
 interface DashboardViewProps {
   onBackToHome?: () => void;
+  onOpenGuidedSession?: () => void;
 }
 
-export default function DashboardView({ onBackToHome }: DashboardViewProps) {
+export default function DashboardView({ onBackToHome, onOpenGuidedSession }: DashboardViewProps) {
   const { data: session } = useSession();
   const userName = session?.user?.name || "David Kim";
 
@@ -609,6 +611,14 @@ export default function DashboardView({ onBackToHome }: DashboardViewProps) {
           </div>
 
         </div>
+ 
+        {/* Recovery Insight & Adaptive Prescription Card */}
+        <RecoveryInsightCard
+          onStartRecoverySession={onOpenGuidedSession}
+          onApplyDietAdjustments={() => {
+            setCaloriesBurned((prev) => prev + 150);
+          }}
+        />
 
         {/* 'Set Daily Goals' Module (Supabase Connected) */}
         <section

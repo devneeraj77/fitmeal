@@ -42,7 +42,12 @@ export default function Home() {
   };
 
   if (viewMode === "dashboard") {
-    return <DashboardView onBackToHome={() => setViewMode("landing")} />;
+    return (
+      <DashboardView
+        onBackToHome={() => setViewMode("landing")}
+        onOpenGuidedSession={() => setIsGuidedSessionOpen(true)}
+      />
+    );
   }
 
   return (
