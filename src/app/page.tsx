@@ -51,7 +51,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F4F6F5] dark:bg-[#0B0E0C] text-[#121815] dark:text-[#E2E7DE] selection:bg-[#f7fe72]/30 selection:text-[#f7fe72] font-sans transition-colors">
+    <div className="min-h-screen flex flex-col bg-[#0B0E0C] text-[#E2E7DE] selection:bg-[#f7fe72]/30 selection:text-[#f7fe72] font-sans">
       {/* 1. Top Sticky Navigation Bar */}
       <Navbar
         onOpenStreak={() => setIsStreakModalOpen(true)}

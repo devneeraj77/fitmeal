@@ -244,7 +244,7 @@ export default function Hero({ onOpenRoutineBuilder, onOpenGuidedSession }: Hero
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black tracking-tight text-white leading-[1.08] text-balance drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
               {activeSlideData.headlineMain}{" "}
               <br className="hidden sm:inline" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#f4e76e] to-[#f7fe72]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f7fe72] via-[#f4e76e] to-white drop-shadow-md">
                 {activeSlideData.headlineAccent}
               </span>
             </h1>
@@ -298,12 +298,12 @@ export default function Hero({ onOpenRoutineBuilder, onOpenGuidedSession }: Hero
               {/* Secondary Ghost Button: Styled with consistent #121815 and #757761 border */}
               <button
                 onClick={currentSlide === 1 ? onOpenRoutineBuilder : onOpenGuidedSession}
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-[#121815] hover:bg-[#181f1b] border border-[#757761]/40 text-[#E2E7DE] hover:text-white font-semibold text-sm sm:text-base shadow-md transition-all duration-200 active:scale-95 cursor-pointer whitespace-nowrap"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-[#121815] hover:bg-[#181f1b] border border-[#757761]/40 hover:border-[#f7fe72] text-white hover:text-[#f7fe72] font-semibold text-sm sm:text-base shadow-md transition-all duration-200 active:scale-95 cursor-pointer whitespace-nowrap"
               >
                 <div className="w-5 h-5 rounded-full bg-[#757761]/30 text-[#f7fe72] flex items-center justify-center">
-                  <Play className="w-3 h-3 fill-current ml-0.5" />
+                  <Play className="w-3 h-3 fill-current ml-0.5 text-[#f7fe72]" />
                 </div>
-                <span>{activeSlideData.secondaryActionText}</span>
+                <span className="text-white font-semibold">{activeSlideData.secondaryActionText}</span>
               </button>
             </div>
 

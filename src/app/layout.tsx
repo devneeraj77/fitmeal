@@ -19,22 +19,22 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "FitMeal Pro // Athletic Longevity, Local Nutrition & Health Sync",
+  title: "PotatoFit // From Couch Potato to Global Apex",
   description:
-    "AI-driven fitness syncing with Google Fit, Apple Health, & Strava. Dynamic macro nutrition, recovery readiness, and global arena quests.",
+    "From Couch Potato to Global Apex. AI-driven nutrition mapped to your nearest vegetable vendors and local grocers. Fuel smart, track daily quests, and compete with athletes worldwide.",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "FitMeal",
+    title: "PotatoFit",
   },
   icons: {
     icon: "/icon.svg",
     apple: "/apple-touch-icon.png",
   },
   openGraph: {
-    title: "FitMeal Pro // Athletic Longevity, Local Nutrition & Health Sync",
+    title: "PotatoFit // From Couch Potato to Global Apex",
     description:
-      "AI-driven fitness syncing with Google Fit, Apple Health, & Strava. Dynamic macro nutrition, recovery readiness, and global arena quests.",
+      "From Couch Potato to Global Apex. AI-driven nutrition mapped to your nearest vegetable vendors and local grocers. Fuel smart, track daily quests, and compete with athletes worldwide.",
   },
 };
 
@@ -47,13 +47,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-200">
+      <body className="min-h-full flex flex-col bg-[#0B0E0C] text-[#E2E7DE]">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          forcedTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange={false}
         >
           <AuthProvider>

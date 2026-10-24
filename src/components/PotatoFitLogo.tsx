@@ -173,9 +173,9 @@ export default function PotatoFitLogo({
         <div className="flex flex-col">
           <div className="flex items-center gap-1.5">
             <span
-              className={`font-black tracking-tight uppercase font-sans text-[#121815] dark:text-[#F0F4EE] ${textMap[size]}`}
+              className={`font-black tracking-tight uppercase font-sans text-white ${textMap[size]}`}
             >
-              POTATO<span className="text-[#7A5A00] dark:text-[#f7fe72]">FIT</span>
+              POTATO<span className="text-[#f7fe72]">FIT</span>
             </span>
             <span
               className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono font-bold tracking-widest uppercase bg-[#EAEFEA] dark:bg-[#18201A] text-[#505445] dark:text-[#CBD2C7] border border-[#757761]/30 dark:border-[#757761]/50 shadow-2xs"

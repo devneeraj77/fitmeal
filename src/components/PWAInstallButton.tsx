@@ -94,18 +94,18 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({
     return (
       <>
         {iosModal}
-        <div className="bg-gradient-to-r from-[#143427] via-[#121815] to-[#143427] border-y border-[#757761]/30 py-2 px-4 text-white text-xs sm:text-sm shadow-md">
+        <div className="bg-[#121815] border-b border-[#757761]/35 py-2.5 px-4 text-white text-xs sm:text-sm shadow-md">
           <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2.5">
-              <span className="flex h-7 w-7 rounded-lg bg-[#f7fe72]/20 text-[#f7fe72] items-center justify-center shrink-0">
+              <span className="flex h-7 w-7 rounded-lg bg-[#f7fe72]/15 text-[#f7fe72] items-center justify-center shrink-0 border border-[#f7fe72]/30">
                 <Smartphone className="w-4 h-4" />
               </span>
               <div>
                 <p className="font-bold text-white text-xs sm:text-sm">
-                  Install FitMeal Pro Web App
+                  Install PotatoFit Web App
                 </p>
-                <p className="text-[11px] text-slate-300 hidden sm:block">
-                  Offline syncing, instant service worker alerts, and fullscreen athletic telemetry.
+                <p className="text-[11px] text-[#A0A493] hidden sm:block">
+                  Offline biometric caching, instant workout pacing, and fullscreen athletic telemetry.
                 </p>
               </div>
             </div>

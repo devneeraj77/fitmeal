@@ -491,11 +491,11 @@ export default function Navbar({
         <motion.div
           layout
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="overflow-hidden rounded-3xl border border-[#757761]/25 dark:border-[#757761]/35 bg-white/95 dark:bg-[#121815]/95 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_12px_32px_-8px_rgba(0,0,0,0.15)] backdrop-blur-xl text-[#121815] dark:text-[#E2E7DE]"
+          className="overflow-hidden rounded-2xl border border-[#757761]/35 bg-[#121815]/95 shadow-2xl shadow-black/60 backdrop-blur-xl text-[#E2E7DE]"
         >
           {/* Top Navbar Row */}
-          <div className="flex items-center justify-between gap-4 px-6 py-4 sm:px-8">
-            {/* 1. Left: PotatoFit Brand Mark & Streak Pill */}
+          <div className="flex items-center justify-between gap-6 px-5 py-3.5 sm:px-7">
+            {/* 1. Left: PotatoFit Brand Mark & Subtle Streak Badge */}
             <div className="flex items-center gap-3 shrink-0">
               <Link
                 href="/"
@@ -507,19 +507,19 @@ export default function Navbar({
                   setOpenMenu(null);
                   setMobileOpen(false);
                 }}
-                className="group flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f7fe72] rounded-xl p-1"
+                className="group flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f7fe72] rounded-xl p-0.5"
                 aria-label="PotatoFit Home"
               >
                 <PotatoFitLogo size="sm" variant="dark" />
               </Link>
 
-              {/* Streak Trigger Pill */}
+              {/* Streak Trigger */}
               {onOpenStreak && (
                 <button
                   type="button"
                   onClick={onOpenStreak}
                   title="View Active Streak Adherence"
-                  className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#f7fe72]/15 border border-[#f7fe72]/30 text-xs font-mono font-bold text-[#7A5A00] dark:text-[#f7fe72] hover:bg-[#f7fe72]/25 transition-all cursor-pointer"
+                  className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#f7fe72]/15 border border-[#f7fe72]/30 text-xs font-mono font-bold text-[#f7fe72] hover:bg-[#f7fe72]/25 transition-all cursor-pointer"
                 >
                   <Flame className="w-3.5 h-3.5 fill-[#f7fe72] text-[#f7fe72]" />
                   <span>14D STREAK</span>
@@ -527,8 +527,8 @@ export default function Navbar({
               )}
             </div>
 
-            {/* 2. Center: Desktop Interactive Mega Nav Items */}
-            <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2">
+            {/* 2. Center: Desktop Clean Single-Line Nav Links */}
+            <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
               {NAV_ITEMS.map((item) => {
                 const isOpen = openMenu === item.label;
                 const Icon = item.icon;
@@ -539,7 +539,7 @@ export default function Navbar({
                       key={item.label}
                       href={item.href ?? "#"}
                       onClick={(e) => handleAnchorClick(e, item.href ?? "#")}
-                      className="flex items-center gap-1.5 rounded-full px-3.5 py-2 text-xs xl:text-sm font-semibold text-[#505445] hover:text-[#121815] dark:text-[#CBD2C7] dark:hover:text-[#f7fe72] hover:bg-[#EAEFEA] dark:hover:bg-white/5 transition-colors cursor-pointer"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-semibold text-[#CBD2C7] hover:text-[#f7fe72] hover:bg-white/5 transition-colors cursor-pointer"
                     >
                       <Icon className="w-3.5 h-3.5 opacity-70" />
                       <span>{item.label}</span>
@@ -553,10 +553,10 @@ export default function Navbar({
                     onClick={() => toggleMenu(item.label, item.hasMenu)}
                     aria-expanded={isOpen}
                     className={cn(
-                      "flex items-center gap-1.5 rounded-full px-3.5 py-2 text-xs xl:text-sm font-semibold transition-all cursor-pointer",
+                      "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-semibold transition-all cursor-pointer",
                       isOpen
-                        ? "bg-[#EAEFEA] dark:bg-white/10 text-[#121815] dark:text-[#f7fe72] shadow-xs"
-                        : "text-[#505445] hover:text-[#121815] dark:text-[#CBD2C7] dark:hover:text-[#f7fe72] hover:bg-[#EAEFEA] dark:hover:bg-white/5"
+                        ? "bg-white/10 text-[#f7fe72]"
+                        : "text-[#CBD2C7] hover:text-[#f7fe72] hover:bg-white/5"
                     )}
                   >
                     <Icon className="w-3.5 h-3.5 opacity-70" />
@@ -571,35 +571,44 @@ export default function Navbar({
                 );
               })}
 
-              {/* Direct Quick Badges for Standings & Vouchers */}
               <Link
                 href="/leaderboards"
                 className={cn(
-                  "hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all shadow-xs ml-1",
+                  "hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-semibold transition-all",
                   pathname === "/leaderboards"
-                    ? "bg-[#757761]/25 text-[#121815] dark:text-[#f7fe72] border border-[#757761]/50 dark:border-[#f7fe72]"
-                    : "bg-[#EAEFEA] hover:bg-[#DDE5DC] text-[#121815] border border-[#757761]/30 dark:bg-[#18201A] dark:hover:bg-[#1f2821] dark:text-[#E2E7DE] dark:hover:text-[#f7fe72] dark:border-[#757761]/40"
+                    ? "bg-[#757761]/25 text-[#f7fe72] border border-[#757761]/50"
+                    : "text-[#CBD2C7] hover:text-[#f7fe72] hover:bg-white/5"
                 )}
               >
-                <Trophy className="w-3.5 h-3.5 text-[#7A5A00] dark:text-[#f7fe72]" />
+                <Trophy className="w-3.5 h-3.5 text-[#f7fe72]" />
                 <span>Leaderboards</span>
               </Link>
 
               <Link
                 href="/rewards"
                 className={cn(
-                  "hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all ml-1",
+                  "hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-semibold transition-all",
                   pathname === "/rewards"
-                    ? "bg-[#f4e76e]/20 text-[#7A5A00] border border-[#f4e76e]/50 dark:bg-[#f4e76e]/20 dark:text-[#f4e76e] dark:border-[#f4e76e]/40"
-                    : "text-[#505445] hover:text-[#121815] hover:bg-[#EAEFEA] border border-transparent hover:border-[#757761]/30 dark:text-[#CBD2C7] dark:hover:text-[#f7fe72] dark:hover:bg-white/5"
+                    ? "bg-[#f4e76e]/20 text-[#f4e76e] border border-[#f4e76e]/40"
+                    : "text-[#CBD2C7] hover:text-[#f7fe72] hover:bg-white/5"
                 )}
               >
-                <Award className="w-3.5 h-3.5 text-[#7A5A00] dark:text-[#f4e76e]" />
+                <Award className="w-3.5 h-3.5 text-[#f4e76e]" />
                 <span>Rewards</span>
+              </Link>
+
+              <Link
+                href="/#health-sync-section"
+                className="hidden xl:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-semibold text-[#CBD2C7] hover:text-[#f7fe72] hover:bg-white/5 transition-colors whitespace-nowrap"
+                title="Google Fit, Apple Health & Strava Biometrics"
+              >
+                <Activity className="w-3.5 h-3.5 text-[#f7fe72]" />
+                <span>Health Sync</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               </Link>
             </nav>
 
-            {/* 3. Right Utility Cluster: Language + Auth + CTA */}
+            {/* 3. Right Utility Cluster: Language + Auth + High-Voltage CTA */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               
               {/* Language Selector Popover (Desktop) */}
@@ -613,10 +622,10 @@ export default function Navbar({
                   aria-expanded={langOpen}
                   aria-label="Select Athlete Locale"
                   className={cn(
-                    "flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-xs font-mono font-bold transition-colors cursor-pointer border",
+                    "flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-mono font-bold transition-colors cursor-pointer border",
                     langOpen
-                      ? "bg-[#EAEFEA] dark:bg-white/10 text-[#121815] dark:text-white border-[#757761]/40"
-                      : "text-[#505445] dark:text-[#A0A594] hover:text-[#121815] dark:hover:text-white border-transparent hover:border-[#757761]/30"
+                      ? "bg-white/10 text-white border-[#757761]/40"
+                      : "text-[#A0A594] hover:text-white border-transparent hover:border-[#757761]/30"
                   )}
                 >
                   <Languages className="h-3.5 w-3.5 text-[#757761]" />
@@ -636,7 +645,7 @@ export default function Navbar({
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -6, scale: 0.96 }}
                       transition={{ duration: 0.15, ease: [0.22, 1, 0.36, 1] }}
-                      className="absolute right-0 top-full z-30 mt-2 w-48 overflow-hidden rounded-2xl border border-[#757761]/30 bg-white dark:bg-[#121815] p-1.5 shadow-xl shadow-black/25"
+                      className="absolute right-0 top-full z-30 mt-2 w-48 overflow-hidden rounded-2xl border border-[#757761]/35 bg-[#121815] p-1.5 shadow-2xl shadow-black/60"
                     >
                       <div className="px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-[#757761] border-b border-[#757761]/20 mb-1">
                         Select Local Dialect
@@ -652,8 +661,8 @@ export default function Navbar({
                           className={cn(
                             "flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-xs font-semibold transition-colors cursor-pointer",
                             lng.code === language.code
-                              ? "bg-[#EAEFEA] dark:bg-[#18201A] text-[#121815] dark:text-[#f7fe72]"
-                              : "text-[#505445] dark:text-[#CBD2C7] hover:bg-[#F4F6F5] dark:hover:bg-white/5"
+                              ? "bg-[#18201A] text-[#f7fe72]"
+                              : "text-[#CBD2C7] hover:bg-white/5"
                           )}
                         >
                           <div className="flex flex-col">
@@ -661,7 +670,7 @@ export default function Navbar({
                             <span className="text-[10px] text-[#A0A594]">{lng.sub}</span>
                           </div>
                           {lng.code === language.code && (
-                            <Check className="h-4 w-4 text-[#7A5A00] dark:text-[#f7fe72]" />
+                            <Check className="h-4 w-4 text-[#f7fe72]" />
                           )}
                         </button>
                       ))}
@@ -676,7 +685,7 @@ export default function Navbar({
                   <button
                     type="button"
                     onClick={handleDashboard}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#EAEFEA] hover:bg-[#DDE5DC] dark:bg-white/5 dark:hover:bg-white/10 border border-[#757761]/30 text-xs font-bold text-[#121815] dark:text-[#E2E7DE] transition-all cursor-pointer"
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-[#757761]/35 text-xs font-bold text-[#E2E7DE] hover:text-[#f7fe72] transition-all cursor-pointer"
                     title="Open Athlete Dashboard"
                   >
                     <div className="w-5 h-5 rounded-full bg-[#18201A] text-[#f7fe72] border border-[#757761]/40 flex items-center justify-center text-[10px] font-black">
@@ -690,7 +699,7 @@ export default function Navbar({
                   <button
                     type="button"
                     onClick={() => signOut({ redirect: false })}
-                    className="text-xs font-semibold text-[#757761] hover:text-[#121815] dark:text-[#A0A594] dark:hover:text-white p-1.5 rounded-lg hover:bg-[#EAEFEA] dark:hover:bg-white/5 transition-colors cursor-pointer"
+                    className="text-xs font-semibold text-[#A0A594] hover:text-white p-1.5 rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
                     title="Sign Out"
                   >
                     <LogOut className="w-3.5 h-3.5" />
@@ -700,33 +709,17 @@ export default function Navbar({
                 <button
                   type="button"
                   onClick={handleSignIn}
-                  className="hidden sm:block text-xs font-bold text-[#505445] hover:text-[#121815] dark:text-[#CBD2C7] dark:hover:text-[#f7fe72] px-2.5 py-1.5 rounded-lg hover:bg-[#EAEFEA] dark:hover:bg-white/5 transition-colors cursor-pointer"
+                  className="hidden sm:block text-xs font-bold text-[#CBD2C7] hover:text-[#f7fe72] px-2.5 py-1.5 rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
                 >
                   Sign In
                 </button>
               )}
 
-              {/* Health Sync Quick Link */}
-              <Link
-                href="/#health-sync-section"
-                className="hidden xl:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-[#757761]/35 text-xs font-bold text-[#E2E7DE] hover:text-[#f7fe72] transition-colors whitespace-nowrap"
-                title="Google Fit, Apple Health & Strava Biometrics"
-              >
-                <Activity className="w-3.5 h-3.5 text-[#f7fe72]" />
-                <span>Health Sync</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              </Link>
-
-              {/* In-App PWA Install Button */}
-              <div className="hidden sm:block">
-                <PWAInstallButton variant="pill" />
-              </div>
-
               {/* Primary High-Voltage Accent Button */}
               <button
                 type="button"
                 onClick={session?.user ? handleDashboard : handleTrial}
-                className="group inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] hover:brightness-110 text-[#0B0E0C] text-xs font-black tracking-wide shadow-md active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+                className="group inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] hover:brightness-110 text-[#0B0E0C] text-xs font-black tracking-wide shadow-md active:scale-95 transition-all cursor-pointer whitespace-nowrap"
               >
                 <span>{session?.user ? "Dashboard" : "Start Trial"}</span>
                 <ArrowRight className="w-3 h-3 text-[#0B0E0C] transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -736,7 +729,7 @@ export default function Navbar({
               <button
                 type="button"
                 onClick={() => setMobileOpen((v) => !v)}
-                className="lg:hidden p-2 rounded-xl text-[#121815] dark:text-[#CBD2C7] hover:bg-[#EAEFEA] dark:hover:bg-white/10 border border-[#757761]/30 transition-all cursor-pointer"
+                className="lg:hidden p-2 rounded-xl text-[#CBD2C7] hover:bg-white/10 border border-[#757761]/30 transition-all cursor-pointer"
                 aria-label={mobileOpen ? "Close menu" : "Open menu"}
                 aria-expanded={mobileOpen}
               >
@@ -754,7 +747,7 @@ export default function Navbar({
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                className="hidden overflow-hidden lg:block border-t border-[#757761]/20 bg-[#F4F6F5]/50 dark:bg-[#0B0E0C]/40"
+                className="hidden overflow-hidden lg:block border-t border-[#757761]/30 bg-[#0B0E0C]/95 text-[#E2E7DE]"
               >
                 <div
                   className={cn(
@@ -767,44 +760,44 @@ export default function Navbar({
                   {activeMenu.columns.map((col, colIdx) => (
                     <div key={col.eyebrow} className="flex flex-col gap-4">
                       <div className="flex items-center gap-2">
-                        <span className="w-fit rounded-full border border-[#757761]/30 bg-[#EAEFEA] dark:bg-[#18201A] px-3 py-1 text-[11px] font-mono font-bold uppercase tracking-wider text-[#505445] dark:text-[#CBD2C7]">
+                        <span className="w-fit rounded-lg border border-[#757761]/30 bg-[#18201A] px-2.5 py-0.5 text-[11px] font-mono font-bold uppercase tracking-wider text-[#A0A493]">
                           {col.eyebrow}
                         </span>
                         {colIdx === 0 && activeMenu.badgeText && (
-                          <span className="flex items-center gap-1 text-[10px] font-mono font-bold text-[#7A5A00] dark:text-[#f7fe72]">
+                          <span className="flex items-center gap-1 text-[10px] font-mono font-bold text-[#f7fe72]">
                             <Sparkles className="w-3 h-3" />
                             {activeMenu.badgeText}
                           </span>
                         )}
                       </div>
 
-                      <ul className="flex flex-col gap-3">
+                      <ul className="flex flex-col gap-2">
                         {col.links.map((link) => (
                           <li key={link.label}>
                             <a
                               href={link.href}
                               onClick={(e) => handleAnchorClick(e, link.href)}
-                              className="group block rounded-xl p-2.5 transition-all hover:bg-white dark:hover:bg-[#18201A] border border-transparent hover:border-[#757761]/25 shadow-xs hover:shadow-md"
+                              className="group block rounded-xl p-2.5 transition-all hover:bg-[#18201A] border border-transparent hover:border-[#757761]/35 shadow-xs"
                             >
                               <div className="flex items-center gap-2">
                                 <span
                                   className={cn(
-                                    "text-sm font-bold transition-colors group-hover:text-[#7A5A00] dark:group-hover:text-[#f7fe72]",
+                                    "text-sm font-bold transition-colors group-hover:text-[#f7fe72]",
                                     link.active
-                                      ? "text-[#121815] dark:text-[#f7fe72]"
-                                      : "text-[#121815] dark:text-[#E2E7DE]"
+                                      ? "text-[#f7fe72]"
+                                      : "text-[#E2E7DE]"
                                   )}
                                 >
                                   {link.label}
                                 </span>
                                 {link.badge && (
-                                  <span className="rounded-full bg-[#f7fe72] text-[#0B0E0C] px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">
+                                  <span className="rounded-md bg-[#f7fe72] text-[#0B0E0C] px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider">
                                     {link.badge}
                                   </span>
                                 )}
                               </div>
                               {link.desc && (
-                                <p className="text-xs text-[#505445] dark:text-[#A0A594] mt-0.5 line-clamp-1">
+                                <p className="text-xs text-[#A0A493] mt-0.5 line-clamp-1">
                                   {link.desc}
                                 </p>
                               )}
@@ -815,15 +808,15 @@ export default function Navbar({
 
                       {/* Footer links under the second column */}
                       {colIdx === activeMenu.columns.length - 1 && activeMenu.footerLinks && (
-                        <div className="mt-auto flex flex-col gap-1.5 pt-4 border-t border-[#757761]/20">
+                        <div className="mt-auto flex flex-col gap-1.5 pt-4 border-t border-[#757761]/25">
                           {activeMenu.footerLinks.map((item) => (
                             <a
                               key={item.label}
                               href={item.href}
                               onClick={(e) => handleAnchorClick(e, item.href)}
-                              className="flex items-center gap-1 text-xs font-medium text-[#757761] hover:text-[#121815] dark:text-[#A0A594] dark:hover:text-[#f7fe72] transition-colors"
+                              className="flex items-center gap-1 text-xs font-medium text-[#A0A493] hover:text-[#f7fe72] transition-colors"
                             >
-                              <ArrowRight className="w-3 h-3 text-[#757761]" />
+                              <ArrowRight className="w-3 h-3 text-[#f7fe72]" />
                               <span>{item.label}</span>
                             </a>
                           ))}
@@ -833,13 +826,13 @@ export default function Navbar({
                   ))}
 
                   {/* Mega Menu Visual Preview Card */}
-                  <div className="relative hidden h-64 w-80 flex-col justify-end overflow-hidden rounded-2xl md:flex border border-[#757761]/30 shadow-lg group">
+                  <div className="relative hidden h-64 w-80 flex-col justify-end overflow-hidden rounded-2xl md:flex border border-[#757761]/35 shadow-lg group">
                     <img
                       src={activeMenu.image.src}
                       alt={activeMenu.image.alt}
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E0C] via-[#0B0E0C]/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E0C] via-[#0B0E0C]/50 to-transparent" />
                     {activeMenu.imageCaption && (
                       <div className="relative z-10 p-4 space-y-1">
                         <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#f7fe72] uppercase tracking-wider">
@@ -856,9 +849,9 @@ export default function Navbar({
 
                 {/* Social Community Strip */}
                 {activeMenu.showSocials && (
-                  <div className="flex items-center justify-between border-t border-[#757761]/20 px-8 py-3 bg-[#EAEFEA]/40 dark:bg-black/20">
-                    <div className="flex items-center gap-2 text-xs text-[#505445] dark:text-[#A0A594]">
-                      <HeartHandshake className="w-3.5 h-3.5 text-[#7A5A00] dark:text-[#f7fe72]" />
+                  <div className="flex items-center justify-between border-t border-[#757761]/25 px-8 py-3 bg-[#0B0E0C]/80">
+                    <div className="flex items-center gap-2 text-xs text-[#A0A493]">
+                      <HeartHandshake className="w-3.5 h-3.5 text-[#f7fe72]" />
                       <span>Join 12,000+ athletes across Delhi NCR</span>
                     </div>
 
@@ -870,7 +863,7 @@ export default function Navbar({
                           target="_blank"
                           rel="noreferrer"
                           aria-label={label}
-                          className="text-[#757761] hover:text-[#121815] dark:text-[#A0A594] dark:hover:text-[#f7fe72] transition-colors p-1"
+                          className="text-[#A0A493] hover:text-[#f7fe72] transition-colors p-1"
                         >
                           <Icon className="h-4 w-4" />
                         </a>
@@ -891,7 +884,7 @@ export default function Navbar({
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="overflow-hidden lg:hidden border-t border-[#757761]/25 px-5 py-4 space-y-4"
+                className="overflow-hidden lg:hidden border-t border-[#757761]/25 px-5 py-4 space-y-4 bg-[#121815] text-[#E2E7DE]"
               >
                 {/* Primary Nav Accordions */}
                 <div className="flex flex-col gap-1.5">
@@ -905,7 +898,7 @@ export default function Navbar({
                           key={item.label}
                           href={item.href ?? "#"}
                           onClick={(e) => handleAnchorClick(e, item.href ?? "#")}
-                          className="flex items-center justify-between rounded-xl p-3 text-xs font-bold text-[#121815] dark:text-[#E2E7DE] hover:bg-[#EAEFEA] dark:hover:bg-white/5 transition-colors"
+                          className="flex items-center justify-between rounded-xl p-3 text-xs font-bold text-[#E2E7DE] hover:bg-white/5 transition-colors"
                         >
                           <div className="flex items-center gap-2">
                             <Icon className="w-4 h-4 text-[#757761]" />
@@ -917,14 +910,14 @@ export default function Navbar({
                     }
 
                     return (
-                      <div key={item.label} className="rounded-xl overflow-hidden border border-[#757761]/20">
+                      <div key={item.label} className="rounded-xl overflow-hidden border border-[#757761]/25">
                         <button
                           type="button"
                           onClick={() => toggleMenu(item.label, true)}
-                          className="flex w-full items-center justify-between p-3 text-left text-xs font-bold text-[#121815] dark:text-[#E2E7DE] bg-[#EAEFEA]/50 dark:bg-white/5 cursor-pointer"
+                          className="flex w-full items-center justify-between p-3 text-left text-xs font-bold text-[#E2E7DE] bg-white/5 cursor-pointer"
                         >
                           <div className="flex items-center gap-2">
-                            <Icon className="w-4 h-4 text-[#7A5A00] dark:text-[#f7fe72]" />
+                            <Icon className="w-4 h-4 text-[#f7fe72]" />
                             <span>{item.label}</span>
                           </div>
                           <ChevronDown
@@ -936,10 +929,10 @@ export default function Navbar({
                         </button>
 
                         {isExpanded && activeMenu && (
-                          <div className="p-3 bg-white dark:bg-[#18201A] space-y-3 border-t border-[#757761]/20">
+                          <div className="p-3 bg-[#18201A] space-y-3 border-t border-[#757761]/25">
                             {activeMenu.columns.map((c) => (
                               <div key={c.eyebrow} className="space-y-1">
-                                <div className="px-2 py-0.5 text-[10px] font-mono font-bold uppercase tracking-wider text-[#7A5A00] dark:text-[#f7fe72]">
+                                <div className="px-2 py-0.5 text-[10px] font-mono font-bold uppercase tracking-wider text-[#f7fe72]">
                                   {c.eyebrow}
                                 </div>
                                 <div className="space-y-1">
@@ -948,11 +941,11 @@ export default function Navbar({
                                       key={link.label}
                                       href={link.href}
                                       onClick={(e) => handleAnchorClick(e, link.href)}
-                                      className="flex items-center justify-between p-2 rounded-lg text-xs font-medium text-[#505445] dark:text-[#CBD2C7] hover:bg-[#F4F6F5] dark:hover:bg-white/5 transition-colors"
+                                      className="flex items-center justify-between p-2 rounded-lg text-xs font-medium text-[#CBD2C7] hover:bg-white/5 transition-colors"
                                     >
                                       <span>{link.label}</span>
                                       {link.badge && (
-                                        <span className="rounded-full bg-[#f7fe72] text-[#0B0E0C] px-1.5 py-0.5 text-[9px] font-black uppercase">
+                                        <span className="rounded-md bg-[#f7fe72] text-[#0B0E0C] px-1.5 py-0.5 text-[9px] font-black uppercase">
                                           {link.badge}
                                         </span>
                                       )}
@@ -973,18 +966,18 @@ export default function Navbar({
                   <Link
                     href="/leaderboards"
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl bg-[#EAEFEA] dark:bg-[#18201A] border border-[#757761]/30 text-xs font-bold text-[#121815] dark:text-[#f7fe72]"
+                    className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl bg-[#18201A] border border-[#757761]/35 text-xs font-bold text-[#f7fe72]"
                   >
-                    <Trophy className="w-3.5 h-3.5 text-[#7A5A00] dark:text-[#f7fe72]" />
+                    <Trophy className="w-3.5 h-3.5 text-[#f7fe72]" />
                     <span>Leaderboards</span>
                   </Link>
 
                   <Link
                     href="/rewards"
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl bg-[#EAEFEA] dark:bg-white/5 border border-[#757761]/30 text-xs font-bold text-[#121815] dark:text-[#E2E7DE]"
+                    className="flex items-center justify-center gap-1.5 p-2.5 rounded-xl bg-white/5 border border-[#757761]/35 text-xs font-bold text-[#E2E7DE]"
                   >
-                    <Award className="w-3.5 h-3.5 text-[#7A5A00] dark:text-[#f4e76e]" />
+                    <Award className="w-3.5 h-3.5 text-[#f4e76e]" />
                     <span>Rewards</span>
                   </Link>
                 </div>
@@ -1003,8 +996,8 @@ export default function Navbar({
                         className={cn(
                           "rounded-lg border py-1.5 text-center text-xs font-mono font-bold transition-all cursor-pointer",
                           lng.code === language.code
-                            ? "border-[#7A5A00] dark:border-[#f7fe72] bg-[#f7fe72] text-[#0B0E0C]"
-                            : "border-[#757761]/30 text-[#505445] dark:text-[#CBD2C7] bg-[#EAEFEA]/60 dark:bg-white/5"
+                            ? "border-[#f7fe72] bg-[#f7fe72] text-[#0B0E0C]"
+                            : "border-[#757761]/35 text-[#CBD2C7] bg-white/5"
                         )}
                       >
                         {lng.code}
@@ -1016,12 +1009,12 @@ export default function Navbar({
                 {/* Mobile Session Status & CTA */}
                 <div className="pt-2 border-t border-[#757761]/20 space-y-2">
                   {session?.user ? (
-                    <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#EAEFEA] dark:bg-white/5 border border-[#757761]/30">
+                    <div className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-[#757761]/35">
                       <div className="flex items-center gap-2 min-w-0">
                         <div className="w-6 h-6 rounded-full bg-[#18201A] text-[#f7fe72] border border-[#757761]/40 flex items-center justify-center text-xs font-black shrink-0">
                           {session.user.name?.[0]?.toUpperCase() || <User className="w-3.5 h-3.5" />}
                         </div>
-                        <span className="text-xs font-bold text-[#121815] dark:text-[#E2E7DE] truncate">
+                        <span className="text-xs font-bold text-[#E2E7DE] truncate">
                           {session.user.name}
                         </span>
                       </div>
@@ -1030,7 +1023,7 @@ export default function Navbar({
                         <button
                           type="button"
                           onClick={handleDashboard}
-                          className="px-2.5 py-1 rounded-lg bg-[#757761]/20 dark:bg-[#757761]/30 text-[11px] font-bold text-[#121815] dark:text-[#f7fe72]"
+                          className="px-2.5 py-1 rounded-lg bg-[#757761]/30 text-[11px] font-bold text-[#f7fe72]"
                         >
                           Dashboard
                         </button>
@@ -1052,7 +1045,7 @@ export default function Navbar({
                       <button
                         type="button"
                         onClick={handleSignIn}
-                        className="py-2.5 text-center text-xs font-bold text-[#121815] dark:text-[#E2E7DE] bg-[#EAEFEA] hover:bg-[#DDE5DC] dark:bg-white/5 dark:hover:bg-white/10 border border-[#757761]/30 rounded-xl transition-colors cursor-pointer"
+                        className="py-2.5 text-center text-xs font-bold text-[#E2E7DE] bg-white/5 hover:bg-white/10 border border-[#757761]/35 rounded-xl transition-colors cursor-pointer"
                       >
                         Sign In
                       </button>

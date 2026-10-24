@@ -3,27 +3,27 @@
 @variant dark (&:where(.dark, .dark *, [data-theme=dark], [data-theme=dark] *));
 
 :root {
-  --background: #F4F6F5;
-  --foreground: #121815;
-  --card: #FFFFFF;
-  --card-foreground: #121815;
-  --popover: #FFFFFF;
-  --popover-foreground: #121815;
-  --primary: #121815;
-  --primary-foreground: #FFFFFF;
-  --secondary: #EAEFEA;
-  --secondary-foreground: #121815;
-  --muted: #E2E8F0;
-  --muted-foreground: #575C4B;
-  --accent: #7A5A00;
-  --accent-foreground: #FFFFFF;
-  --border: rgba(117, 119, 97, 0.22);
-  --input: rgba(117, 119, 97, 0.25);
-  --ring: #757761;
-  --color-sage: #505445;
-  --color-gold: #7A5A00;
-  --color-lime: #6B5000;
-  color-scheme: light;
+  --background: #0B0E0C;
+  --foreground: #E2E7DE;
+  --card: #121815;
+  --card-foreground: #E2E7DE;
+  --popover: #121815;
+  --popover-foreground: #E2E7DE;
+  --primary: #f7fe72;
+  --primary-foreground: #0B0E0C;
+  --secondary: #18201A;
+  --secondary-foreground: #E2E7DE;
+  --muted: #1A221E;
+  --muted-foreground: #A0A594;
+  --accent: #f7fe72;
+  --accent-foreground: #0B0E0C;
+  --border: rgba(117, 119, 97, 0.35);
+  --input: rgba(117, 119, 97, 0.4);
+  --ring: #f7fe72;
+  --color-sage: #757761;
+  --color-gold: #f4e76e;
+  --color-lime: #f7fe72;
+  color-scheme: dark;
 }
 
 .dark, [data-theme="dark"] {
@@ -41,8 +41,8 @@
   --muted-foreground: #A0A594;
   --accent: #f7fe72;
   --accent-foreground: #0B0E0C;
-  --border: rgba(117, 119, 97, 0.4);
-  --input: rgba(117, 119, 97, 0.45);
+  --border: rgba(117, 119, 97, 0.35);
+  --input: rgba(117, 119, 97, 0.4);
   --ring: #f7fe72;
   --color-sage: #757761;
   --color-gold: #f4e76e;
@@ -74,15 +74,16 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #0B0E0C;
+  color: #E2E7DE;
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: #0B0E0C;
+  color: #E2E7DE;
   font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 /* Custom subtle smoked obsidian & sage scrollbar */
@@ -91,7 +92,7 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: #0B0E0C;
 }
 ::-webkit-scrollbar-thumb {
   background: #18201A;
@@ -102,419 +103,10 @@ body {
   background: #757761;
 }
 
-/* =========================================================================
-   DARK THEME CONTRAST SYSTEM (60-30-10 PALETTE TOKENS)
-   ========================================================================= */
-
-/* Boost secondary text contrast in dark mode to WCAG AA/AAA (>5.5:1) */
-html.dark .text-\[\#757761\],
-[data-theme="dark"] .text-\[\#757761\],
-html.dark .text-\[\#A0A493\],
-[data-theme="dark"] .text-\[\#A0A493\],
-html.dark .text-\[\#A0A594\],
-[data-theme="dark"] .text-\[\#A0A594\] {
-  color: #A0A594;
-}
-
-/* Form inputs in dark mode */
-html.dark input,
-html.dark textarea,
-html.dark select,
-[data-theme="dark"] input,
-[data-theme="dark"] textarea,
-[data-theme="dark"] select {
-  color: #E2E7DE !important;
-}
-
-html.dark input::placeholder,
-html.dark textarea::placeholder,
-[data-theme="dark"] input::placeholder,
-[data-theme="dark"] textarea::placeholder {
-  color: #757761 !important;
-}
-
-/* =========================================================================
-   LIGHT THEME CONTRAST SYSTEM (WCAG AA/AAA RATIOS)
-   ========================================================================= */
-
-html:not(.dark),
-html.light,
-[data-theme="light"] {
-  color-scheme: light;
-}
-
-html:not(.dark) body,
-html.light body,
-[data-theme="light"] body {
-  background-color: #F4F6F5 !important;
-  color: #121815 !important;
-}
-
-/* Page base wrappers */
-html:not(.dark) .bg-\[\#0B0E0C\],
-html.light .bg-\[\#0B0E0C\],
-[data-theme="light"] .bg-\[\#0B0E0C\],
-html:not(.dark) .bg-\[\#0B1510\],
-html.light .bg-\[\#0B1510\],
-[data-theme="light"] .bg-\[\#0B1510\],
-html:not(.dark) .bg-\[\#0E1210\],
-html.light .bg-\[\#0E1210\],
-[data-theme="light"] .bg-\[\#0E1210\] {
-  background-color: #F4F6F5 !important;
-}
-
-html:not(.dark) .bg-\[\#0B0E0C\]\/90,
-html.light .bg-\[\#0B0E0C\]\/90,
-html:not(.dark) .bg-\[\#0B0E0C\]\/95,
-html.light .bg-\[\#0B0E0C\]\/95,
-html:not(.dark) .bg-\[\#0B0E0C\]\/80,
-html.light .bg-\[\#0B0E0C\]\/80,
-html:not(.dark) .bg-\[\#0B0E0C\]\/85,
-html.light .bg-\[\#0B0E0C\]\/85,
-[data-theme="light"] .bg-\[\#0B0E0C\]\/90,
-[data-theme="light"] .bg-\[\#0B0E0C\]\/95 {
-  background-color: rgba(244, 246, 245, 0.96) !important;
-}
-
-/* Card surfaces: clean crisp white with subtle elevation */
-html:not(.dark) .bg-\[\#121815\],
-html.light .bg-\[\#121815\],
-[data-theme="light"] .bg-\[\#121815\],
-html:not(.dark) .bg-\[\#101512\],
-html.light .bg-\[\#101512\],
-[data-theme="light"] .bg-\[\#101512\],
-html:not(.dark) .bg-\[\#141A16\],
-html.light .bg-\[\#141A16\],
-[data-theme="light"] .bg-\[\#141A16\],
-html:not(.dark) .bg-\[\#18201A\],
-html.light .bg-\[\#18201A\],
-[data-theme="light"] .bg-\[\#18201A\],
-html:not(.dark) .bg-\[\#18201B\],
-html.light .bg-\[\#18201B\],
-[data-theme="light"] .bg-\[\#18201B\] {
-  background-color: #FFFFFF !important;
-  box-shadow: 0 4px 20px -2px rgba(18, 24, 21, 0.06), 0 1px 3px 0 rgba(18, 24, 21, 0.04);
-}
-
-html:not(.dark) .bg-\[\#121815\]\/80,
-html.light .bg-\[\#121815\]\/80,
-html:not(.dark) .bg-\[\#121815\]\/90,
-html.light .bg-\[\#121815\]\/90,
-html:not(.dark) .bg-\[\#101512\]\/80,
-html.light .bg-\[\#101512\]\/80,
-[data-theme="light"] .bg-\[\#121815\]\/80,
-[data-theme="light"] .bg-\[\#121815\]\/90,
-[data-theme="light"] .bg-\[\#101512\]\/80 {
-  background-color: rgba(255, 255, 255, 0.96) !important;
-}
-
-/* Recessed nested cards & hover states in light mode */
-html:not(.dark) .bg-\[\#181f1b\],
-html.light .bg-\[\#181f1b\],
-[data-theme="light"] .bg-\[\#181f1b\],
-html:not(.dark) .bg-\[\#161c18\],
-html.light .bg-\[\#161c18\],
-[data-theme="light"] .bg-\[\#161c18\] {
-  background-color: #EAEFEA !important;
-}
-
-/* Secondary sage / slate panels in light mode */
-html:not(.dark) .bg-\[\#18201A\],
-html.light .bg-\[\#18201A\],
-[data-theme="light"] .bg-\[\#18201A\] {
-  background-color: #EAEFEA !important;
-}
-
-html:not(.dark) .bg-\[\#18201A\]\/60,
-html.light .bg-\[\#18201A\]\/60,
-html:not(.dark) .bg-\[\#18201A\]\/70,
-html.light .bg-\[\#18201A\]\/70,
-html:not(.dark) .bg-\[\#18201A\]\/80,
-html.light .bg-\[\#18201A\]\/80,
-[data-theme="light"] .bg-\[\#18201A\]\/60,
-[data-theme="light"] .bg-\[\#18201A\]\/70,
-[data-theme="light"] .bg-\[\#18201A\]\/80 {
-  background-color: rgba(234, 239, 234, 0.9) !important;
-}
-
-/* Dark card hero gradients converted to elegant light mode cards */
-html:not(.dark) section[class*="from-[#18201A]"],
-html.light section[class*="from-[#18201A]"],
-[data-theme="light"] section[class*="from-[#18201A]"],
-html:not(.dark) section[class*="from-[#18201B]"],
-html.light section[class*="from-[#18201B]"],
-[data-theme="light"] section[class*="from-[#18201B]"],
-html:not(.dark) aside[class*="from-[#18201A]"],
-html.light aside[class*="from-[#18201A]"],
-[data-theme="light"] aside[class*="from-[#18201A]"],
-html:not(.dark) article[class*="from-[#18201A]"],
-html.light article[class*="from-[#18201A]"],
-[data-theme="light"] article[class*="from-[#18201A]"],
-html:not(.dark) div[class*="from-[#18201A]"][class*="rounded-3xl"],
-html.light div[class*="from-[#18201A]"][class*="rounded-3xl"],
-[data-theme="light"] div[class*="from-[#18201A]"][class*="rounded-3xl"],
-html:not(.dark) div[class*="from-[#18201A]"][class*="rounded-2xl"]:not(button),
-html.light div[class*="from-[#18201A]"][class*="rounded-2xl"]:not(button),
-[data-theme="light"] div[class*="from-[#18201A]"][class*="rounded-2xl"]:not(button) {
-  background: linear-gradient(135deg, #EAEFEA 0%, #FFFFFF 50%, #F4F6F5 100%) !important;
-  color: #121815 !important;
-}
-
-/* High-contrast accessible text gradient for light mode */
-.bg-clip-text,
-html:not(.dark) .bg-clip-text,
-html.light .bg-clip-text,
-[data-theme="light"] .bg-clip-text {
+/* Ensure text gradient clips are properly visible */
+.bg-clip-text {
   -webkit-background-clip: text !important;
   background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  color: transparent !important;
-}
-
-html:not(.dark) .bg-clip-text,
-html.light .bg-clip-text,
-[data-theme="light"] .bg-clip-text {
-  background-image: linear-gradient(to right, #121815 0%, #505445 50%, #7A5A00 100%) !important;
-}
-
-html.dark .bg-clip-text,
-[data-theme="dark"] .bg-clip-text {
-  background-image: linear-gradient(to right, #FFFFFF 0%, #f4e76e 50%, #f7fe72 100%) !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  color: transparent !important;
-}
-
-/* Typography in light mode - deep obsidian charcoal for 16:1 contrast */
-html:not(.dark) h1,
-html.light h1,
-html:not(.dark) h2,
-html.light h2,
-html:not(.dark) h3,
-html.light h3,
-html:not(.dark) h4,
-html.light h4,
-html:not(.dark) h5,
-html.light h5,
-[data-theme="light"] h1,
-[data-theme="light"] h2,
-[data-theme="light"] h3,
-[data-theme="light"] h4,
-[data-theme="light"] h5 {
-  color: #121815;
-}
-
-/* General white text overrides to obsidian charcoal in light mode */
-html:not(.dark) .text-white:not(.keep-white),
-html.light .text-white:not(.keep-white),
-[data-theme="light"] .text-white:not(.keep-white) {
-  color: #121815;
-}
-
-html:not(.dark) .text-\[\#E2E7DE\],
-html.light .text-\[\#E2E7DE\],
-[data-theme="light"] .text-\[\#E2E7DE\],
-html:not(.dark) .text-\[\#F0F4EE\],
-html.light .text-\[\#F0F4EE\],
-[data-theme="light"] .text-\[\#F0F4EE\],
-html:not(.dark) .text-\[\#FFF7F0\],
-html.light .text-\[\#FFF7F0\],
-[data-theme="light"] .text-\[\#FFF7F0\],
-html:not(.dark) .text-\[\#FFFDE5\],
-html.light .text-\[\#FFFDE5\],
-[data-theme="light"] .text-\[\#FFFDE5\] {
-  color: #121815 !important;
-}
-
-/* Secondary body text: 11.2:1 AAA contrast */
-html:not(.dark) .text-\[\#CBD2C7\],
-html.light .text-\[\#CBD2C7\],
-[data-theme="light"] .text-\[\#CBD2C7\] {
-  color: #262A21 !important;
-}
-
-/* Muted metadata: >5.5:1 AA contrast */
-html:not(.dark) .text-\[\#A0A594\],
-html.light .text-\[\#A0A594\],
-[data-theme="light"] .text-\[\#A0A594\],
-html:not(.dark) .text-\[\#A0A493\],
-html.light .text-\[\#A0A493\],
-[data-theme="light"] .text-\[\#A0A493\],
-html:not(.dark) .text-\[\#757761\],
-html.light .text-\[\#757761\],
-[data-theme="light"] .text-\[\#757761\] {
-  color: #505445 !important;
-}
-
-/* Accent colors in light mode: deep legible solar ochre (5.8:1 against light canvas) */
-html:not(.dark) .text-\[\#f7fe72\],
-html.light .text-\[\#f7fe72\],
-[data-theme="light"] .text-\[\#f7fe72\],
-html:not(.dark) .text-\[\#f4e76e\],
-html.light .text-\[\#f4e76e\],
-[data-theme="light"] .text-\[\#f4e76e\],
-html:not(.dark) .text-amber-50,
-html.light .text-amber-50,
-[data-theme="light"] .text-amber-50,
-html:not(.dark) .text-amber-100,
-html.light .text-amber-100,
-[data-theme="light"] .text-amber-100,
-html:not(.dark) .text-amber-200,
-html.light .text-amber-200,
-[data-theme="light"] .text-amber-200,
-html:not(.dark) .text-amber-300,
-html.light .text-amber-300,
-[data-theme="light"] .text-amber-300,
-html:not(.dark) .text-amber-400,
-html.light .text-amber-400,
-[data-theme="light"] .text-amber-400 {
-  color: #7A5A00 !important;
-}
-
-html:not(.dark) [class*="bg-amber-950"],
-html.light [class*="bg-amber-950"],
-[data-theme="light"] [class*="bg-amber-950"] {
-  background-color: rgba(254, 243, 199, 0.7) !important;
-}
-
-html:not(.dark) [class*="from-[#1C0F0A]"],
-html.light [class*="from-[#1C0F0A]"],
-[data-theme="light"] [class*="from-[#1C0F0A]"] {
-  background: linear-gradient(135deg, #FFFBEB 0%, #FFFFFF 50%, #FEF3C7 100%) !important;
-  color: #121815 !important;
-}
-
-/* Subtle borders in light mode */
-html:not(.dark) [class*="border-[#757761]"],
-html.light [class*="border-[#757761]"],
-[data-theme="light"] [class*="border-[#757761]"] {
-  border-color: rgba(117, 119, 97, 0.25) !important;
-}
-
-html:not(.dark) [class*="border-white/5"],
-html.light [class*="border-white/5"],
-html:not(.dark) [class*="border-white/10"],
-html.light [class*="border-white/10"],
-html:not(.dark) [class*="border-white/20"],
-html.light [class*="border-white/20"],
-[data-theme="light"] [class*="border-white/5"],
-[data-theme="light"] [class*="border-white/10"],
-[data-theme="light"] [class*="border-white/20"] {
-  border-color: rgba(18, 24, 21, 0.12) !important;
-}
-
-html:not(.dark) [class*="bg-white/5"],
-html.light [class*="bg-white/5"],
-[data-theme="light"] [class*="bg-white/5"] {
-  background-color: rgba(18, 24, 21, 0.05) !important;
-}
-
-html:not(.dark) [class*="bg-white/10"],
-html.light [class*="bg-white/10"],
-[data-theme="light"] [class*="bg-white/10"] {
-  background-color: rgba(18, 24, 21, 0.08) !important;
-}
-
-html:not(.dark) [class*="bg-black/40"],
-html.light [class*="bg-black/40"],
-[data-theme="light"] [class*="bg-black/40"] {
-  background-color: rgba(234, 239, 234, 0.8) !important;
-}
-
-html:not(.dark) [class*="bg-black/30"],
-html.light [class*="bg-black/30"],
-[data-theme="light"] [class*="bg-black/30"] {
-  background-color: rgba(234, 239, 234, 0.6) !important;
-}
-
-html:not(.dark) [class*="bg-black/20"],
-html.light [class*="bg-black/20"],
-[data-theme="light"] [class*="bg-black/20"] {
-  background-color: rgba(234, 239, 234, 0.45) !important;
-}
-
-/* Primary buttons keep dark obsidian text on electric lime in both light and dark */
-html:not(.dark) button[class*="from-[#f7fe72]"],
-html.light button[class*="from-[#f7fe72]"],
-[data-theme="light"] button[class*="from-[#f7fe72]"],
-html:not(.dark) a[class*="from-[#f7fe72]"],
-html.light a[class*="from-[#f7fe72]"],
-[data-theme="light"] a[class*="from-[#f7fe72]"],
-html:not(.dark) button[class*="from-[#f7fe72]"] *,
-html.light button[class*="from-[#f7fe72]"] *,
-[data-theme="light"] button[class*="from-[#f7fe72]"] *,
-html:not(.dark) a[class*="from-[#f7fe72]"] *,
-html.light a[class*="from-[#f7fe72]"] *,
-[data-theme="light"] a[class*="from-[#f7fe72]"] *,
-html:not(.dark) .bg-\[\#f7fe72\]:not(.bg-clip-text),
-html.light .bg-\[\#f7fe72\]:not(.bg-clip-text),
-[data-theme="light"] .bg-\[\#f7fe72\]:not(.bg-clip-text),
-html:not(.dark) .bg-\[\#f7fe72\]:not(.bg-clip-text) *,
-html.light .bg-\[\#f7fe72\]:not(.bg-clip-text) *,
-[data-theme="light"] .bg-\[\#f7fe72\]:not(.bg-clip-text) * {
-  color: #0B0E0C !important;
-  stroke: #0B0E0C;
-}
-
-/* FINAL OVERRIDE: All gradient text headings MUST ALWAYS maintain transparent fill */
-.bg-clip-text,
-html:not(.dark) .bg-clip-text,
-html.light .bg-clip-text,
-[data-theme="light"] .bg-clip-text,
-html.dark .bg-clip-text,
-[data-theme="dark"] .bg-clip-text {
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  color: transparent !important;
-}
-
-/* Dark Media & Dark Hero sections preserve cinematic contrast in both light and dark modes */
-html:not(.dark) .dark-media-canvas,
-html.light .dark-media-canvas,
-[data-theme="light"] .dark-media-canvas,
-html:not(.dark) .dark-hero,
-html.light .dark-hero,
-[data-theme="light"] .dark-hero {
-  color: #FFFFFF !important;
-}
-
-html:not(.dark) .dark-hero .text-white,
-html.light .dark-hero .text-white {
-  color: #FFFFFF !important;
-}
-
-html:not(.dark) .dark-hero .text-\[\#CBD2C7\],
-html.light .dark-hero .text-\[\#CBD2C7\] {
-  color: #CBD2C7 !important;
-}
-
-html:not(.dark) .dark-hero .text-\[\#A0A493\],
-html.light .dark-hero .text-\[\#A0A493\],
-html:not(.dark) .dark-hero .text-\[\#A0A594\],
-html.light .dark-hero .text-\[\#A0A594\] {
-  color: #A0A594 !important;
-}
-
-html:not(.dark) .dark-hero .text-\[\#f7fe72\],
-html.light .dark-hero .text-\[\#f7fe72\] {
-  color: #f7fe72 !important;
-}
-
-html:not(.dark) .dark-hero .text-\[\#f4e76e\],
-html.light .dark-hero .text-\[\#f4e76e\] {
-  color: #f4e76e !important;
-}
-
-html:not(.dark) .dark-hero .bg-\[\#121815\],
-html.light .dark-hero .bg-\[\#121815\] {
-  background-color: #121815 !important;
-}
-
-html:not(.dark) .dark-hero .bg-\[\#0B0E0C\],
-html.light .dark-hero .bg-\[\#0B0E0C\] {
-  background-color: #0B0E0C !important;
 }
 
 /* HeroUI / Radix Avatar & AvatarGroup Styles */
@@ -572,59 +164,4 @@ span.avatar__fallback,
 .avatar-group > span.avatar + span.avatar,
 [data-slot="avatar-group"] > * + * {
   margin-inline-start: -0.65rem !important;
-}
-
-
-html:not(.dark) .dark-media-canvas h1,
-html.light .dark-media-canvas h1,
-html:not(.dark) .dark-media-canvas h2,
-html.light .dark-media-canvas h2,
-html:not(.dark) .dark-media-canvas h3,
-html.light .dark-media-canvas h3,
-html:not(.dark) .dark-media-canvas h4,
-html.light .dark-media-canvas h4,
-html:not(.dark) .dark-media-canvas p,
-html.light .dark-media-canvas p,
-html:not(.dark) .dark-media-canvas span,
-html.light .dark-media-canvas span {
-  color: #FFFFFF;
-}
-
-html:not(.dark) .dark-media-canvas .text-white,
-html.light .dark-media-canvas .text-white {
-  color: #FFFFFF !important;
-}
-
-html:not(.dark) .dark-media-canvas .text-\[\#CBD2C7\],
-html.light .dark-media-canvas .text-\[\#CBD2C7\] {
-  color: #CBD2C7 !important;
-}
-
-html:not(.dark) .dark-media-canvas .text-\[\#f7fe72\],
-html.light .dark-media-canvas .text-\[\#f7fe72\] {
-  color: #f7fe72 !important;
-}
-
-html:not(.dark) .dark-media-canvas .text-\[\#f4e76e\],
-html.light .dark-media-canvas .text-\[\#f4e76e\] {
-  color: #f4e76e !important;
-}
-
-/* Form inputs in light mode */
-html.light input,
-html.light textarea,
-html.light select,
-html:not(.dark) input,
-html:not(.dark) textarea,
-html:not(.dark) select {
-  background-color: #FFFFFF !important;
-  color: #121815 !important;
-  border-color: rgba(117, 119, 97, 0.35) !important;
-}
-
-html.light input::placeholder,
-html.light textarea::placeholder,
-html:not(.dark) input::placeholder,
-html:not(.dark) textarea::placeholder {
-  color: #505445 !important;
 }
