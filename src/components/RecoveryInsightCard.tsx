@@ -13,6 +13,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { usePWA } from "@/hooks/usePWA";
+import { useHealthSync } from "@/hooks/useHealthSync";
 
 interface RecoveryInsightCardProps {
   onStartRecoverySession?: () => void;
@@ -26,15 +27,31 @@ export default function RecoveryInsightCard({
   className = "",
 }: RecoveryInsightCardProps) {
   const { triggerNotification } = usePWA();
+  const {
+    hasAnyConnected,
+    primaryProvider,
+    hrvMs: hookHrvMs,
+    sleepHours: hookSleepHours,
+    activeBurnExtraKcal,
+    connectProvider,
+  } = useHealthSync();
 
-  // User's recent training volume & sleep metrics state (interactive simulator)
-  const [sleepHours, setSleepHours] = useState(7.4); // 7h 24m
-  const [deepSleepPercent, setDeepSleepPercent] = useState(24); // 24% deep sleep
-  const [hrvMs, setHrvMs] = useState(72); // HRV 72ms
-  const [trainingTonnageKg, setTrainingTonnageKg] = useState(21600); // 21,600 kg volume
-  const [activeBurnKcal, setActiveBurnKcal] = useState(640); // 640 kcal burn
+  const isTrackerConnected = hasAnyConnected;
+
+  // User's recent training volume & sleep metrics state (interactive simulator overrides)
+  const [customSleepHours, setCustomSleepHours] = useState<number | null>(null);
+  const [customDeepSleepPercent, setCustomDeepSleepPercent] = useState<number | null>(null);
+  const [customHrvMs, setCustomHrvMs] = useState<number | null>(null);
+  const [customActiveBurnKcal, setCustomActiveBurnKcal] = useState<number | null>(null);
+  const [trainingTonnageKg, setTrainingTonnageKg] = useState(21600);
   const [isSimulating, setIsSimulating] = useState(false);
   const [appliedNotice, setAppliedNotice] = useState<string | null>(null);
+
+  // Derived metrics dynamically reflect connected wearable/tracker state unless customized via simulator
+  const sleepHours = customSleepHours ?? (hookSleepHours ?? (isTrackerConnected ? 7.4 : 6.2));
+  const deepSleepPercent = customDeepSleepPercent ?? (isTrackerConnected ? 24 : 14);
+  const hrvMs = customHrvMs ?? (hookHrvMs ?? (isTrackerConnected ? 72 : 48));
+  const activeBurnKcal = customActiveBurnKcal ?? (activeBurnExtraKcal > 0 ? activeBurnExtraKcal : 250);
 
   // Dynamic calculation of autonomic recovery readiness score
   // Factors: HRV baseline (ideal 65-85), Sleep duration (ideal 7.5-8.5), Deep sleep (ideal >20%)
@@ -213,6 +230,79 @@ export default function RecoveryInsightCard({
         </div>
       </div>
 
+      {/* Tracker Connection Gate Banner */}
+      {!isTrackerConnected && (
+        <div className="mt-4 p-4 rounded-2xl bg-[#0B0E0C] border border-[#f7fe72]/30 text-white text-xs space-y-3 animate-in fade-in duration-200">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping shrink-0" />
+              <span className="font-bold text-[#f7fe72] uppercase font-mono tracking-wider text-[11px]">
+                CHOOSE YOUR FITNESS APP (1 APP SUPPLIES ALL METRICS)
+              </span>
+            </div>
+            <span className="text-[11px] text-[#f7fe72] font-semibold">
+              Only 1 app needed
+            </span>
+          </div>
+
+          <p className="text-slate-300 text-xs">
+            Pick whichever app you use daily. A single app streams all your sleep architecture, HRV recovery, and workout volume without needing secondary devices.
+          </p>
+
+          <div className="flex flex-wrap gap-2 pt-1">
+            <button
+              type="button"
+              onClick={() => connectProvider("googlefit")}
+              className="px-3 py-1.5 rounded-xl bg-[#4285F4]/20 hover:bg-[#4285F4]/30 border border-[#4285F4]/40 text-[#4285F4] text-xs font-bold transition-all hover:scale-102 cursor-pointer flex items-center gap-1.5"
+            >
+              <span className="w-2 h-2 rounded-full bg-[#4285F4]" />
+              <span>Use Google Fit</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => connectProvider("applehealth")}
+              className="px-3 py-1.5 rounded-xl bg-[#FA2D48]/20 hover:bg-[#FA2D48]/30 border border-[#FA2D48]/40 text-[#FA2D48] text-xs font-bold transition-all hover:scale-102 cursor-pointer flex items-center gap-1.5"
+            >
+              <span className="w-2 h-2 rounded-full bg-[#FA2D48]" />
+              <span>Use Apple Health</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => connectProvider("strava")}
+              className="px-3 py-1.5 rounded-xl bg-[#FC4C02]/20 hover:bg-[#FC4C02]/30 border border-[#FC4C02]/40 text-[#FC4C02] text-xs font-bold transition-all hover:scale-102 cursor-pointer flex items-center gap-1.5"
+            >
+              <span className="w-2 h-2 rounded-full bg-[#FC4C02]" />
+              <span>Use Strava</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => connectProvider("whoop")}
+              className="px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-400 text-xs font-bold transition-all hover:scale-102 cursor-pointer flex items-center gap-1.5"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <span>Use Whoop</span>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {isTrackerConnected && (
+        <div className="mt-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-mono animate-in fade-in duration-200">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400" />
+            <span>
+              Live Biometrics Active: All data streamed from <strong className="text-white font-sans">{primaryProvider?.name || "Fitness App"}</strong> ({hrvMs}ms HRV • {sleepHours}h Sleep • +{activeBurnKcal} kcal Burn)
+            </span>
+          </div>
+          <span className="text-[10px] text-emerald-400 font-bold px-2 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/30 self-start sm:self-auto">
+            100% TELEMETRY READY
+          </span>
+        </div>
+      )}
+
       {/* Applied Banner Feedback */}
       {appliedNotice && (
         <div className="mt-4 p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-semibold flex items-center justify-between animate-in fade-in duration-200">
@@ -233,11 +323,11 @@ export default function RecoveryInsightCard({
             </span>
             <button
               onClick={() => {
-                setSleepHours(7.4);
-                setDeepSleepPercent(24);
-                setHrvMs(72);
+                setCustomSleepHours(null);
+                setCustomDeepSleepPercent(null);
+                setCustomHrvMs(null);
+                setCustomActiveBurnKcal(null);
                 setTrainingTonnageKg(21600);
-                setActiveBurnKcal(640);
               }}
               className="text-[11px] text-slate-400 hover:text-white flex items-center gap-1 cursor-pointer"
             >
@@ -258,7 +348,7 @@ export default function RecoveryInsightCard({
                 max="9.5"
                 step="0.1"
                 value={sleepHours}
-                onChange={(e) => setSleepHours(parseFloat(e.target.value))}
+                onChange={(e) => setCustomSleepHours(parseFloat(e.target.value))}
                 className="w-full accent-[#f7fe72] cursor-pointer"
               />
             </div>
@@ -274,7 +364,7 @@ export default function RecoveryInsightCard({
                 max="35"
                 step="1"
                 value={deepSleepPercent}
-                onChange={(e) => setDeepSleepPercent(parseInt(e.target.value, 10))}
+                onChange={(e) => setCustomDeepSleepPercent(parseInt(e.target.value, 10))}
                 className="w-full accent-[#f7fe72] cursor-pointer"
               />
             </div>
@@ -290,7 +380,7 @@ export default function RecoveryInsightCard({
                 max="95"
                 step="1"
                 value={hrvMs}
-                onChange={(e) => setHrvMs(parseInt(e.target.value, 10))}
+                onChange={(e) => setCustomHrvMs(parseInt(e.target.value, 10))}
                 className="w-full accent-[#f7fe72] cursor-pointer"
               />
             </div>

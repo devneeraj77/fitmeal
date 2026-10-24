@@ -35,12 +35,17 @@ import {
   Database,
   ChevronDown,
   ChevronUp,
+  TrendingUp,
+  CalendarDays,
 } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 import RewardTiersModal from "@/components/RewardTiersModal";
 import CanvasBadge from "@/components/CanvasBadge";
 import PotatoFitLogo from "@/components/PotatoFitLogo";
 import RecoveryInsightCard from "@/components/RecoveryInsightCard";
+import FitnessInsightsChart from "@/components/FitnessInsightsChart";
+import ActivityCalendarHeatmap from "@/components/ActivityCalendarHeatmap";
+import { useHealthSync } from "@/hooks/useHealthSync";
 
 interface DashboardViewProps {
   onBackToHome?: () => void;
@@ -50,6 +55,14 @@ interface DashboardViewProps {
 export default function DashboardView({ onBackToHome, onOpenGuidedSession }: DashboardViewProps) {
   const { data: session } = useSession();
   const userName = session?.user?.name || "David Kim";
+  const {
+    hasAnyConnected,
+    primaryProvider,
+    activeBurnExtraKcal,
+    restingHeartRate,
+    sleepFormatted,
+    recoveryScore,
+  } = useHealthSync();
 
   const [activeTab, setActiveTab] = useState("schedule");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
@@ -231,6 +244,8 @@ export default function DashboardView({ onBackToHome, onOpenGuidedSession }: Das
 
   const sidebarLinks = [
     { id: "schedule", label: "Today's Schedule", icon: Calendar },
+    { id: "insights", label: "Fitness Insights", icon: TrendingUp },
+    { id: "consistency", label: "Activity Heatmap", icon: CalendarDays },
     { id: "workouts", label: "Workout Logs", icon: Dumbbell },
     { id: "nutrition", label: "Meal & Macros", icon: Utensils },
     { id: "metrics", label: "Body Metrics", icon: Activity },
@@ -330,7 +345,15 @@ export default function DashboardView({ onBackToHome, onOpenGuidedSession }: Das
                   onClick={() => {
                     setActiveTab(link.id);
                     setMobileSidebarOpen(false);
-                    if (link.id === "settings") {
+                    if (link.id === "insights") {
+                      setTimeout(() => {
+                        document.getElementById("fitness-insights-module")?.scrollIntoView({ behavior: "smooth" });
+                      }, 50);
+                    } else if (link.id === "consistency") {
+                      setTimeout(() => {
+                        document.getElementById("activity-heatmap-module")?.scrollIntoView({ behavior: "smooth" });
+                      }, 50);
+                    } else if (link.id === "settings") {
                       setIsGoalsOpen(true);
                       setTimeout(() => {
                         document.getElementById("daily-goals-module")?.scrollIntoView({ behavior: "smooth" });
@@ -401,7 +424,10 @@ export default function DashboardView({ onBackToHome, onOpenGuidedSession }: Das
           </div>
           <div className="flex items-center justify-between text-[11px] text-[#757761] font-mono">
             <span>BIOMARKER SYNC</span>
-            <span className="text-[#f7fe72] font-semibold">Active</span>
+            <span className={`font-semibold flex items-center gap-1.5 ${hasAnyConnected ? "text-[#f7fe72]" : "text-amber-400"}`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${hasAnyConnected ? "bg-[#f7fe72] shadow-[0_0_6px_#f7fe72]" : "bg-amber-400"}`} />
+              {hasAnyConnected ? `${primaryProvider?.name || 'Tracker'} Synced` : "Disconnected"}
+            </span>
           </div>
         </div>
       </aside>
@@ -443,6 +469,28 @@ export default function DashboardView({ onBackToHome, onOpenGuidedSession }: Das
             <button
               type="button"
               onClick={() => {
+                document.getElementById("fitness-insights-module")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#121815] hover:bg-[#181f1b] border border-[#757761]/35 shadow-2xs text-xs font-semibold text-[#E2E7DE] hover:text-white cursor-pointer transition-all active:scale-95"
+            >
+              <TrendingUp className="w-3.5 h-3.5 text-[#f7fe72]" />
+              <span>Fitness Insights</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                document.getElementById("activity-heatmap-module")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#121815] hover:bg-[#181f1b] border border-[#757761]/35 shadow-2xs text-xs font-semibold text-[#E2E7DE] hover:text-white cursor-pointer transition-all active:scale-95"
+            >
+              <CalendarDays className="w-3.5 h-3.5 text-[#f7fe72]" />
+              <span>Activity Heatmap</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
                 setIsGoalsOpen(true);
                 document.getElementById("daily-goals-module")?.scrollIntoView({ behavior: "smooth" });
               }}
@@ -452,10 +500,27 @@ export default function DashboardView({ onBackToHome, onOpenGuidedSession }: Das
               <span>Set Daily Goals</span>
             </button>
 
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#121815] border border-[#757761]/30 shadow-2xs text-xs">
-              <span className="w-2 h-2 rounded-full bg-[#f7fe72] animate-pulse shadow-[0_0_6px_#f7fe72]" />
-              <span className="font-semibold text-[#CBD2C7]">Live Biometrics Connected</span>
-            </div>
+            {hasAnyConnected ? (
+              <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#121815] border border-emerald-500/30 shadow-2xs text-xs">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_#10B981]" />
+                <span className="font-semibold text-emerald-400">{primaryProvider?.name || "Fitness App"} Synced</span>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  if (onBackToHome) onBackToHome();
+                  setTimeout(() => {
+                    document.getElementById("health-sync-section")?.scrollIntoView({ behavior: "smooth" });
+                  }, 100);
+                }}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] shadow-md text-xs font-black cursor-pointer transition-all active:scale-95 hover:brightness-110"
+                title="Connect your fitness tracker"
+              >
+                <Activity className="w-3.5 h-3.5 text-[#0B0E0C]" />
+                <span>Connect Your Tracker</span>
+              </button>
+            )}
           </div>
         </div>
 
@@ -472,17 +537,22 @@ export default function DashboardView({ onBackToHome, onOpenGuidedSession }: Das
               </div>
               <div className="flex items-baseline gap-1">
                 <span className="text-2xl font-black text-white font-mono tabular-nums">
-                  {caloriesBurned}
+                  {caloriesBurned + (hasAnyConnected ? activeBurnExtraKcal : 0)}
                 </span>
                 <span className="text-xs text-[#757761] font-medium">/ {caloriesTarget} kcal</span>
               </div>
+              {hasAnyConnected ? (
+                <span className="text-[10px] text-emerald-400 font-mono block">
+                  ● +{activeBurnExtraKcal} kcal {primaryProvider?.name || 'tracker'} synced
+                </span>
+              ) : null}
               <div className="flex items-center justify-between text-[11px] font-semibold text-[#f7fe72]">
                 <span className="flex items-center gap-1">
                   <Zap className="w-3 h-3 text-[#f7fe72] fill-[#f7fe72]" />
                   <span>
-                    {caloriesBurned >= caloriesTarget
+                    {(caloriesBurned + (hasAnyConnected ? activeBurnExtraKcal : 0)) >= caloriesTarget
                       ? "Target reached!"
-                      : `${caloriesTarget - caloriesBurned} kcal to target`}
+                      : `${caloriesTarget - (caloriesBurned + (hasAnyConnected ? activeBurnExtraKcal : 0))} kcal to target`}
                   </span>
                 </span>
                 <button
@@ -574,15 +644,29 @@ export default function DashboardView({ onBackToHome, onOpenGuidedSession }: Das
                 Sleep Readiness
               </span>
               <div className="flex items-baseline gap-1.5">
-                <span className="text-2xl font-black text-white font-mono">88%</span>
-                <span className="text-xs font-bold text-[#f7fe72] bg-[#757761]/20 border border-[#757761]/30 px-1.5 py-0.5 rounded">
-                  Optimal
+                <span className="text-2xl font-black text-white font-mono">
+                  {hasAnyConnected ? `${recoveryScore || 88}%` : "--%"}
+                </span>
+                <span
+                  className={`text-xs font-bold px-1.5 py-0.5 rounded border ${
+                    hasAnyConnected
+                      ? "text-[#f7fe72] bg-[#757761]/20 border-[#757761]/30"
+                      : "text-amber-300 bg-amber-500/10 border-amber-500/20"
+                  }`}
+                >
+                  {hasAnyConnected ? "Optimal" : "Disconnected"}
                 </span>
               </div>
               <div className="flex items-center gap-2 text-[11px] text-[#A0A493] font-mono">
-                <span>RHR: 52 bpm</span>
-                <span>·</span>
-                <span>7h 48m</span>
+                {hasAnyConnected ? (
+                  <>
+                    <span>RHR: {restingHeartRate || 52} bpm</span>
+                    <span>·</span>
+                    <span>{sleepFormatted || "7h 24m"}</span>
+                  </>
+                ) : (
+                  <span>Tracker unlinked</span>
+                )}
               </div>
             </div>
 
@@ -619,6 +703,12 @@ export default function DashboardView({ onBackToHome, onOpenGuidedSession }: Das
             setCaloriesBurned((prev) => prev + 150);
           }}
         />
+
+        {/* 7-Day Fitness Insights (Recharts Telemetry Visualization) */}
+        <FitnessInsightsChart />
+
+        {/* 365-Day Activity & Training Goals Heatmap (D3.js Visualization) */}
+        <ActivityCalendarHeatmap />
 
         {/* 'Set Daily Goals' Module (Supabase Connected) */}
         <section

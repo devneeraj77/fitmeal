@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Activity,
   Heart,
@@ -9,29 +9,18 @@ import {
   TrendingUp,
   RefreshCw,
   CheckCircle2,
-  ExternalLink,
   Bell,
   Utensils,
   Moon,
-  ChevronRight,
   ShieldCheck,
+  Link2,
+  Unlink,
+  AlertCircle,
+  ArrowRightLeft,
+  ChevronRight,
 } from "lucide-react";
 import { usePWA } from "@/hooks/usePWA";
-
-export interface ConnectedProvider {
-  id: "googlefit" | "applehealth" | "strava" | "whoop";
-  name: string;
-  category: "Aggregator" | "Wearable" | "GPS Tracking" | "Recovery";
-  iconBg: string;
-  badgeColor: string;
-  isConnected: boolean;
-  lastSync: string;
-  metrics: {
-    label: string;
-    value: string;
-    sub: string;
-  }[];
-}
+import { useHealthSync, HealthProvider } from "@/hooks/useHealthSync";
 
 interface ConnectedHealthEngineProps {
   onOpenLocalMeals?: () => void;
@@ -43,201 +32,66 @@ export default function ConnectedHealthEngine({
   className = "",
 }: ConnectedHealthEngineProps) {
   const { triggerNotification, notificationPermission, requestNotificationPermission } = usePWA();
-  const [activeTab, setActiveTab] = useState<"overview" | "providers" | "diet_analysis" | "notifications">("overview");
-  const [isSyncing, setIsSyncing] = useState(false);
-  const [syncStatusMsg, setSyncStatusMsg] = useState<string | null>(null);
+  const {
+    providers,
+    hasAnyConnected,
+    primaryProvider,
+    isSyncing,
+    syncStatusMsg,
+    activeBurnExtraKcal,
+    baselineCalories,
+    totalDailyExpenditure,
+    proteinTargetGrams,
+    dailySteps,
+    restingHeartRate,
+    hrvMs,
+    sleepFormatted,
+    recoveryScore,
+    activeWorkoutName,
+    connectProvider,
+    disconnectProvider,
+    disconnectAll,
+    syncAll,
+  } = useHealthSync();
 
-  // Providers state
-  const [providers, setProviders] = useState<ConnectedProvider[]>([
-    {
-      id: "strava",
-      name: "Strava",
-      category: "GPS Tracking",
-      iconBg: "bg-[#FC4C02]",
-      badgeColor: "text-[#FC4C02] border-[#FC4C02]/30 bg-[#FC4C02]/10",
-      isConnected: true,
-      lastSync: "12 mins ago",
-      metrics: [
-        { label: "Today's Activity", value: "8.4 km Run", sub: "Interval Pace: 4:48 /km" },
-        { label: "Active Energy", value: "540 kcal", sub: "Elev. Gain: 112m" },
-        { label: "Weekly Volume", value: "34.8 km", sub: "4 sessions logged" },
-      ],
-    },
-    {
-      id: "applehealth",
-      name: "Apple Health",
-      category: "Wearable",
-      iconBg: "bg-[#FA2D48]",
-      badgeColor: "text-[#FA2D48] border-[#FA2D48]/30 bg-[#FA2D48]/10",
-      isConnected: true,
-      lastSync: "8 mins ago",
-      metrics: [
-        { label: "Resting Heart Rate", value: "54 BPM", sub: "Baseline: 52-58 BPM" },
-        { label: "HRV (Recovery)", value: "72 ms", sub: "Optimal Parasympathetic State" },
-        { label: "Sleep Architecture", value: "7h 24m", sub: "1h 48m Deep • 1h 55m REM" },
-      ],
-    },
-    {
-      id: "googlefit",
-      name: "Google Fit / Health Connect",
-      category: "Aggregator",
-      iconBg: "bg-[#4285F4]",
-      badgeColor: "text-[#4285F4] border-[#4285F4]/30 bg-[#4285F4]/10",
-      isConnected: true,
-      lastSync: "15 mins ago",
-      metrics: [
-        { label: "Daily Steps", value: "11,840 steps", sub: "Goal: 10,000 steps (118%)" },
-        { label: "Active Heart Points", value: "68 pts", sub: "AHA Cardio Target: Met" },
-        { label: "Move Minutes", value: "84 mins", sub: "Zone 2 + Zone 3 Training" },
-      ],
-    },
-    {
-      id: "whoop",
-      name: "Whoop 4.0 / Garmin",
-      category: "Recovery",
-      iconBg: "bg-emerald-600",
-      badgeColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
-      isConnected: false,
-      lastSync: "Not connected",
-      metrics: [
-        { label: "Daily Strain", value: "14.4", sub: "Optimal target: 12.0 - 15.5" },
-        { label: "Recovery Readiness", value: "88%", sub: "Green Zone • Primed for Power" },
-        { label: "Sleep Debt", value: "14 mins", sub: "Minimal restorative deficit" },
-      ],
-    },
-  ]);
+  const [activeTab, setActiveTab] = useState<"overview" | "diet_analysis" | "providers" | "notifications">("overview");
 
-  // Calculated macro & diet adjustment based on synced metrics
+  // Calculated macro & diet adjustment based on synced metrics from the single chosen app
   const dietAnalysis = {
-    baselineCalories: 2150,
-    activeBurnExtra: 540,
-    totalDailyExpenditure: 2690,
-    proteinTargetGrams: 165,
-    carbTargetGrams: 310,
-    fatTargetGrams: 68,
-    hydrationLiters: 3.6,
-    recoveryWindow: "Next 45 minutes (Post-Run Glycogen Prime)",
+    baselineCalories,
+    activeBurnExtra: activeBurnExtraKcal,
+    totalDailyExpenditure,
+    proteinTargetGrams,
+    carbTargetGrams: hasAnyConnected ? 310 : 250,
+    fatTargetGrams: hasAnyConnected ? 68 : 60,
+    hydrationLiters: hasAnyConnected ? 3.6 : 2.5,
+    recoveryWindow: hasAnyConnected
+      ? `Next 45 minutes (Post-${activeWorkoutName ? activeWorkoutName.split(" ")[0] : "Workout"} Glycogen Prime)`
+      : "Standard Routine (No Active Workout Detected)",
     recommendations: [
       {
-        title: "Post-Run Glycogen & Muscle Rebuild Bowl",
+        title: "Post-Workout Glycogen & Muscle Rebuild Bowl",
         protein: "42g Protein",
         calories: "520 kcal",
         cost: "₹95",
         ingredients: "Unpasteurized Fresh Sattu, Market Paneer Bhurji, Himalayan Rock Salt, Roasted Chana Whey",
         source: "Aggarwal Dairy & Kirana • 850m away",
-        reason: "Compensates for 8.4km Strava run and replenishes depleted lower extremity glycogen stores.",
+        reason: hasAnyConnected
+          ? `Compensates for your ${activeWorkoutName || "session"} and replenishes glycogen stores synced via ${primaryProvider?.name}.`
+          : "Standard high-protein recovery meal for resistance training.",
       },
       {
-        title: "Parasympathetic Sleep & HRV Restorative Dinner",
+        title: "Restorative Sleep & HRV Recovery Dinner",
         protein: "34g Protein",
         calories: "440 kcal",
         cost: "₹80",
         ingredients: "Sprouted Moong Khichdi, Steamed Spinach, Cold-Pressed Mustard Ghee, A2 Curd with Cumin",
         source: "Gupta Sabzi Mandi • 600m away",
-        reason: "Rich in magnesium and tryptophan to boost Apple Health HRV recovery from 72ms into peak 80ms range.",
+        reason: hasAnyConnected
+          ? `Rich in magnesium & tryptophan to support ${sleepFormatted || "7h+"} sleep cycle and ${hrvMs ? `${hrvMs}ms HRV` : "autonomic recovery"} logged via ${primaryProvider?.name}.`
+          : "Restorative micro-nutrient dense dinner supporting sleep architecture.",
       },
     ],
-  };
-
-  // OAuth popup listener compliant with oauth-integration/SKILL.md
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      // Validate origin
-      const origin = event.origin;
-      if (
-        !origin.endsWith(".run.app") &&
-        !origin.includes("localhost") &&
-        !origin.includes("127.0.0.1")
-      ) {
-        return;
-      }
-
-      if (event.data?.type === "OAUTH_AUTH_SUCCESS") {
-        const providerId = event.data?.provider || "strava";
-        setProviders((prev) =>
-          prev.map((p) =>
-            p.id === providerId
-              ? { ...p, isConnected: true, lastSync: "Just now" }
-              : p
-          )
-        );
-
-        setSyncStatusMsg(`${providerId.toUpperCase()} connected successfully!`);
-        setTimeout(() => setSyncStatusMsg(null), 3500);
-
-        // Fire PWA notification alert
-        triggerNotification(`⚡ ${providerId.toUpperCase()} Connected`, {
-          body: `Live biometric telemetry synced. Dietary macros updated for today!`,
-          icon: "/pwa-192x192.png",
-        });
-      }
-    };
-
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, [triggerNotification]);
-
-  // Initiate OAuth connection popup
-  const handleConnectProvider = async (provider: ConnectedProvider) => {
-    try {
-      setIsSyncing(true);
-      const res = await fetch(`/api/auth/url?provider=${provider.id}`);
-      if (!res.ok) throw new Error("Failed to get auth URL");
-      const { url } = await res.json();
-
-      // Open OAuth provider URL directly in popup
-      const authWindow = window.open(
-        url,
-        `${provider.id}_oauth_popup`,
-        "width=600,height=720,status=no,resizable=yes"
-      );
-
-      if (!authWindow) {
-        // Fallback if popup blocked: simulate immediate connection for testability
-        setProviders((prev) =>
-          prev.map((p) =>
-            p.id === provider.id
-              ? { ...p, isConnected: true, lastSync: "Just now" }
-              : p
-          )
-        );
-        setSyncStatusMsg(`${provider.name} connected via Direct Health Bridge!`);
-        setTimeout(() => setSyncStatusMsg(null), 3000);
-      }
-    } catch {
-      // Direct fallback
-      setProviders((prev) =>
-        prev.map((p) =>
-          p.id === provider.id
-            ? { ...p, isConnected: true, lastSync: "Just now" }
-            : p
-        )
-      );
-      setSyncStatusMsg(`${provider.name} connected!`);
-      setTimeout(() => setSyncStatusMsg(null), 3000);
-    } finally {
-      setIsSyncing(false);
-    }
-  };
-
-  // Manual Trigger Biometric Sync & PWA Alert
-  const handleManualSync = async () => {
-    setIsSyncing(true);
-    await new Promise((r) => setTimeout(r, 900));
-
-    setProviders((prev) =>
-      prev.map((p) => (p.isConnected ? { ...p, lastSync: "Just now" } : p))
-    );
-    setIsSyncing(false);
-
-    setSyncStatusMsg("All health sources synchronized. Caloric expenditure updated to 2,690 kcal.");
-    setTimeout(() => setSyncStatusMsg(null), 4000);
-
-    // Trigger Service Worker Alert Notification
-    await triggerNotification("FitMeal Pro // Health Sync Alert", {
-      body: "⚡ Strava & Apple Health Synced: 8.4km Run + 540 kcal burned. +35g Protein & Local Sattu Rebuild Bowl added to today's diet plan!",
-      icon: "/pwa-192x192.png",
-    });
   };
 
   const handleTestNotification = async (type: "macro" | "recovery" | "tier") => {
@@ -247,12 +101,12 @@ export default function ConnectedHealthEngine({
 
     if (type === "macro") {
       await triggerNotification("FitMeal Nutrition Alert", {
-        body: "Post-Workout Glycogen Window: Consume 42g protein within 45 mins. Check Sattu Rebuild Bowl!",
+        body: `Post-Workout Window: Consume 42g protein within 45 mins. Calories adjusted for ${primaryProvider?.name || "daily workout"}!`,
         icon: "/pwa-192x192.png",
       });
     } else if (type === "recovery") {
       await triggerNotification("Parasympathetic Recovery Alert", {
-        body: "Apple Health HRV steady at 72ms. 5-min Box Breathing session recommended at 9:30 PM.",
+        body: `HRV baseline steady at ${hrvMs || 70}ms. 5-min Box Breathing session recommended at 9:30 PM.`,
         icon: "/pwa-192x192.png",
       });
     } else {
@@ -272,38 +126,49 @@ export default function ConnectedHealthEngine({
       {/* Top Header Bar */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-white/10 relative z-10">
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className="p-1.5 rounded-lg bg-[#f7fe72]/20 text-[#f7fe72]">
               <Activity className="w-5 h-5" />
             </span>
             <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
               Biometric Health &amp; Fitness Sync Hub
             </h2>
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-mono">
-              3 ACTIVE SOURCES
+            <span
+              className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border font-mono transition-colors ${
+                hasAnyConnected
+                  ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+                  : "bg-amber-500/20 text-amber-300 border-amber-500/30"
+              }`}
+            >
+              {hasAnyConnected
+                ? `● ${primaryProvider?.name.toUpperCase()} (100% TELEMETRY SYNCED)`
+                : "NO APP CONNECTED (CHOOSE ONE)"}
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-slate-300 mt-1">
-            Seamlessly feeds telemetry from Google Fit, Apple Health, Strava &amp; wearables directly into your dynamic Kirana diet engine.
+          <p className="text-xs sm:text-sm text-slate-300 mt-1.5 max-w-3xl leading-relaxed">
+            Choose the single fitness app you use. Whichever app you pick (Google Fit, Apple Health, Strava, or Whoop) automatically supplies <strong>all your data</strong>: daily steps, active calorie burn, heart rate, HRV, and sleep architecture. No fragmentation, no need to connect multiple apps.
           </p>
         </div>
 
         {/* Sync Controls & Test Alert */}
-        <div className="flex items-center gap-2.5 shrink-0">
-          <button
-            onClick={handleManualSync}
-            disabled={isSyncing}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs transition-all active:scale-95 cursor-pointer disabled:opacity-50"
-          >
-            <RefreshCw className={`w-3.5 h-3.5 ${isSyncing ? "animate-spin text-[#f7fe72]" : ""}`} />
-            <span>{isSyncing ? "Syncing..." : "Sync Health Data"}</span>
-          </button>
+        <div className="flex items-center gap-2.5 shrink-0 flex-wrap">
+          {hasAnyConnected && (
+            <button
+              onClick={syncAll}
+              disabled={isSyncing}
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs transition-all active:scale-95 cursor-pointer disabled:opacity-50"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${isSyncing ? "animate-spin text-[#f7fe72]" : ""}`} />
+              <span>{isSyncing ? "Syncing..." : "Sync Telemetry"}</span>
+            </button>
+          )}
 
           <button
             onClick={() => handleTestNotification("macro")}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] font-black text-xs hover:brightness-110 active:scale-95 transition-all shadow-md shadow-[#f7fe72]/15 cursor-pointer"
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-slate-200 font-bold text-xs active:scale-95 transition-all cursor-pointer"
+            title="Send test alert notification"
           >
-            <Bell className="w-3.5 h-3.5" />
+            <Bell className="w-3.5 h-3.5 text-[#f7fe72]" />
             <span>PWA Alert</span>
           </button>
         </div>
@@ -330,7 +195,7 @@ export default function ConnectedHealthEngine({
               : "text-slate-400 hover:text-white hover:bg-white/5"
           }`}
         >
-          Telemetry Overview
+          Telemetry Overview {hasAnyConnected ? `(${primaryProvider?.name})` : "(Choose App)"}
         </button>
         <button
           onClick={() => setActiveTab("diet_analysis")}
@@ -340,7 +205,7 @@ export default function ConnectedHealthEngine({
               : "text-slate-400 hover:text-white hover:bg-white/5"
           }`}
         >
-          Adaptive Diet &amp; Macros (+540 kcal)
+          Adaptive Diet &amp; Macros ({hasAnyConnected ? `+${activeBurnExtraKcal} kcal` : "Baseline"})
         </button>
         <button
           onClick={() => setActiveTab("providers")}
@@ -350,7 +215,7 @@ export default function ConnectedHealthEngine({
               : "text-slate-400 hover:text-white hover:bg-white/5"
           }`}
         >
-          Connect Devices &amp; OAuth
+          {hasAnyConnected ? `Switch App (${primaryProvider?.name} Active)` : "Choose Fitness App"}
         </button>
         <button
           onClick={() => setActiveTab("notifications")}
@@ -366,104 +231,322 @@ export default function ConnectedHealthEngine({
 
       {/* Tab 1: Overview */}
       {activeTab === "overview" && (
-        <div className="mt-5 space-y-5 animate-in fade-in duration-300">
-          {/* Top 4 Quick Telemetry KPI cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
-            <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all">
-              <div className="flex items-center justify-between text-slate-400 text-xs">
-                <span>Active Burn Today</span>
-                <Flame className="w-4 h-4 text-[#f7fe72]" />
+        <div className="mt-5 space-y-6 animate-in fade-in duration-300">
+          
+          {/* STATE A: NO TRACKER CONNECTED -> Streamlined 1-Choice App Picker */}
+          {!hasAnyConnected && (
+            <div className="p-5 sm:p-7 rounded-3xl bg-[#0B0E0C] border border-[#f7fe72]/30 text-white relative overflow-hidden shadow-2xl">
+              <div className="max-w-3xl">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="p-1 rounded-md bg-[#f7fe72]/20 text-[#f7fe72]">
+                    <Zap className="w-4 h-4" />
+                  </span>
+                  <span className="text-xs font-mono font-bold text-[#f7fe72] uppercase tracking-wider">
+                    SINGLE-APP SYNC ARCHITECTURE
+                  </span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+                  Which single fitness app do you use?
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300 mt-1 leading-relaxed">
+                  Every modern fitness app already captures all your health metrics. Select <strong>the one app you actually use</strong> — it immediately pulls all your daily steps, active calorie burn, heart rate, HRV, and sleep. You never need to connect multiple apps.
+                </p>
               </div>
-              <div className="text-2xl font-black text-white font-mono mt-1">
-                +540 <span className="text-xs text-[#f7fe72] font-sans">kcal</span>
-              </div>
-              <p className="text-[11px] text-emerald-400 mt-1 font-mono">
-                Strava 8.4km Run + Lift
-              </p>
-            </div>
 
-            <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all">
-              <div className="flex items-center justify-between text-slate-400 text-xs">
-                <span>Daily Steps</span>
-                <TrendingUp className="w-4 h-4 text-[#4285F4]" />
-              </div>
-              <div className="text-2xl font-black text-white font-mono mt-1">
-                11,840
-              </div>
-              <p className="text-[11px] text-slate-300 mt-1 font-mono">
-                Google Fit • 118% Goal
-              </p>
-            </div>
-
-            <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all">
-              <div className="flex items-center justify-between text-slate-400 text-xs">
-                <span>HRV (Autonomic)</span>
-                <Heart className="w-4 h-4 text-[#FA2D48]" />
-              </div>
-              <div className="text-2xl font-black text-white font-mono mt-1">
-                72 <span className="text-xs text-slate-400 font-sans">ms</span>
-              </div>
-              <p className="text-[11px] text-emerald-400 mt-1 font-mono">
-                Apple Health • Primed
-              </p>
-            </div>
-
-            <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all">
-              <div className="flex items-center justify-between text-slate-400 text-xs">
-                <span>Sleep Architecture</span>
-                <Moon className="w-4 h-4 text-purple-400" />
-              </div>
-              <div className="text-2xl font-black text-white font-mono mt-1">
-                7h 24m
-              </div>
-              <p className="text-[11px] text-slate-300 mt-1 font-mono">
-                1h 48m Deep Recovery
-              </p>
-            </div>
-          </div>
-
-          {/* Active Provider Synced Streams */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {providers
-              .filter((p) => p.isConnected)
-              .map((provider) => (
-                <div
-                  key={provider.id}
-                  className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        <span className={`w-3 h-3 rounded-full ${provider.iconBg}`} />
-                        <span className="font-bold text-white text-sm">{provider.name}</span>
+              {/* 4 Tracker Options */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 mt-6">
+                {providers.map((p) => (
+                  <div
+                    key={p.id}
+                    className="p-4 rounded-2xl bg-[#121815] border border-[#757761]/35 hover:border-[#f7fe72] transition-all flex flex-col justify-between group hover:shadow-lg hover:shadow-black/60"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className={`w-8 h-8 rounded-xl ${p.iconBg} flex items-center justify-center font-bold text-white text-xs shadow-md`}>
+                          {p.name[0]}
+                        </span>
+                        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300">
+                          {p.category}
+                        </span>
                       </div>
-                      <span className="text-[10px] text-emerald-400 font-mono">
-                        ● Synced {provider.lastSync}
-                      </span>
-                    </div>
 
-                    <div className="space-y-2">
-                      {provider.metrics.map((metric, i) => (
-                        <div
-                          key={i}
-                          className="flex items-center justify-between py-1.5 border-b border-white/5 text-xs"
-                        >
-                          <span className="text-slate-400">{metric.label}</span>
-                          <div className="text-right">
-                            <span className="font-bold text-white font-mono">{metric.value}</span>
-                            <div className="text-[10px] text-slate-400">{metric.sub}</div>
-                          </div>
+                      <h4 className="font-bold text-white text-base group-hover:text-[#f7fe72] transition-colors">
+                        {p.name}
+                      </h4>
+                      <p className="text-xs text-slate-400 mt-1.5 leading-snug">
+                        {p.description}
+                      </p>
+
+                      <div className="mt-3 pt-2.5 border-t border-white/5">
+                        <span className="text-[10px] font-mono text-[#f7fe72] uppercase tracking-wider block font-bold">
+                          Supplies 100% Telemetry:
+                        </span>
+                        <div className="text-[11px] text-slate-300 font-mono mt-1 space-y-0.5">
+                          <div>• Steps: {p.telemetry.dailySteps.toLocaleString()}</div>
+                          <div>• Burn: +{p.telemetry.activeBurnKcal} kcal</div>
+                          <div>• Heart: {p.telemetry.restingHeartRate} bpm / {p.telemetry.hrvMs} ms</div>
+                          <div>• Sleep: {p.telemetry.sleepFormatted}</div>
                         </div>
-                      ))}
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="mt-3 pt-2 flex items-center justify-between text-[11px] text-slate-400">
-                    <span>OAuth Access: Granted</span>
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    <button
+                      onClick={() => connectProvider(p.id)}
+                      disabled={isSyncing}
+                      className="mt-4 w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] font-black text-xs hover:brightness-110 active:scale-98 transition-all shadow-md shadow-[#f7fe72]/15 flex items-center justify-center gap-1.5 cursor-pointer"
+                    >
+                      <Link2 className="w-3.5 h-3.5 text-[#0B0E0C]" />
+                      <span>Use {p.name.split(" ")[0]} Only</span>
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-slate-400">
+                <span className="flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Secure read-only connection • Zero passwords stored • Switch or revoke anytime</span>
+                </span>
+                <span className="text-[11px] text-[#f7fe72] font-mono font-semibold">
+                  Only 1 app needed
+                </span>
+              </div>
+            </div>
+          )}
+
+          {/* STATE B: APP CONNECTED -> Clean Single-App Showcase */}
+          {hasAnyConnected && primaryProvider && (
+            <div className="p-5 sm:p-6 rounded-3xl bg-gradient-to-br from-[#121815] via-[#14231b] to-[#121815] border border-emerald-500/40 text-white relative overflow-hidden shadow-2xl">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-5 border-b border-white/10">
+                <div className="space-y-1.5">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10B981]" />
+                    <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
+                      ALL TELEMETRY POWERED BY {primaryProvider.name.toUpperCase()}
+                    </span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                      100% UNIFIED DATA STREAM
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3 mt-1">
+                    <span className={`w-10 h-10 rounded-2xl ${primaryProvider.iconBg} text-white flex items-center justify-center font-bold text-sm shadow-md`}>
+                      {primaryProvider.name[0]}
+                    </span>
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-black text-white">
+                        {primaryProvider.name} Live Biometric Stream
+                      </h3>
+                      <p className="text-xs text-slate-300">
+                        All steps, burn, heart rate, and sleep architecture streamed from this single app • Last synced {primaryProvider.lastSync}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              ))}
+
+                <div className="flex items-center gap-2.5 self-start lg:self-center shrink-0 flex-wrap">
+                  <button
+                    onClick={syncAll}
+                    disabled={isSyncing}
+                    className="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <RefreshCw className={`w-3.5 h-3.5 ${isSyncing ? "animate-spin text-[#f7fe72]" : ""}`} />
+                    <span>Sync Now</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("providers")}
+                    className="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-200 text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <ArrowRightLeft className="w-3.5 h-3.5 text-[#f7fe72]" />
+                    <span>Switch App</span>
+                  </button>
+                  <button
+                    onClick={() => disconnectProvider(primaryProvider.id)}
+                    className="px-3 py-2 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 border border-white/10 text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer"
+                    title="Disconnect this tracker"
+                  >
+                    <Unlink className="w-3.5 h-3.5" />
+                    <span>Disconnect</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Active Stream Live Metrics Row - All 4 metrics populated from this one app */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 mt-5">
+                {primaryProvider.metrics.map((metric, i) => (
+                  <div
+                    key={i}
+                    className="p-3.5 rounded-2xl bg-black/40 border border-white/10 flex flex-col justify-between"
+                  >
+                    <span className="text-[11px] text-slate-400 font-mono uppercase font-semibold truncate">
+                      {metric.label}
+                    </span>
+                    <div className="text-xl sm:text-2xl font-black text-white font-mono my-1 truncate">
+                      {metric.value}
+                    </div>
+                    <span className="text-[11px] text-emerald-400 font-mono line-clamp-1">
+                      ● {metric.sub}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* 1-Click Tracker Switcher Bar */}
+              <div className="mt-5 pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-300">
+                <span className="flex items-center gap-1.5">
+                  <ArrowRightLeft className="w-3.5 h-3.5 text-[#f7fe72]" />
+                  <span>Changed your fitness app? Switch to another tracker with 1 click:</span>
+                </span>
+                <div className="flex items-center gap-2 flex-wrap">
+                  {providers
+                    .filter((p) => p.id !== primaryProvider.id)
+                    .map((p) => (
+                      <button
+                        key={p.id}
+                        onClick={() => connectProvider(p.id)}
+                        className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/15 border border-white/15 text-slate-200 text-xs font-medium transition-all cursor-pointer hover:text-white"
+                      >
+                        Switch to {p.name.split(" ")[0]}
+                      </button>
+                    ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Unified 4 Telemetry KPI Cards - Sourced 100% from the single chosen app */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3.5">
+            
+            {/* Card 1: Active Burn Today */}
+            <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between text-slate-400 text-xs">
+                  <span>Active Burn Today</span>
+                  <Flame className="w-4 h-4 text-[#f7fe72]" />
+                </div>
+                <div className="text-2xl font-black text-white font-mono mt-1">
+                  {hasAnyConnected ? (
+                    <>
+                      +{activeBurnExtraKcal} <span className="text-xs text-[#f7fe72] font-sans">kcal</span>
+                    </>
+                  ) : (
+                    <span className="text-slate-500 text-lg">-- kcal</span>
+                  )}
+                </div>
+                <p className="text-[11px] text-slate-400 mt-1 font-mono">
+                  {hasAnyConnected ? (
+                    <span className="text-emerald-400">● Synced via {primaryProvider?.name}</span>
+                  ) : (
+                    <span>Awaiting app connection</span>
+                  )}
+                </p>
+              </div>
+
+              <div className="mt-3 pt-2 border-t border-white/5 text-[10px] text-slate-400 font-mono">
+                {hasAnyConnected ? (
+                  <span>Workout: {activeWorkoutName || "Cardio / Strength"}</span>
+                ) : (
+                  <span>Pick any 1 app above to stream</span>
+                )}
+              </div>
+            </div>
+
+            {/* Card 2: Daily Steps */}
+            <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between text-slate-400 text-xs">
+                  <span>Daily Steps</span>
+                  <TrendingUp className="w-4 h-4 text-[#4285F4]" />
+                </div>
+                <div className="text-2xl font-black text-white font-mono mt-1">
+                  {hasAnyConnected ? (
+                    (dailySteps || 10450).toLocaleString()
+                  ) : (
+                    <span className="text-slate-500 text-lg">-- steps</span>
+                  )}
+                </div>
+                <p className="text-[11px] text-slate-400 mt-1 font-mono">
+                  {hasAnyConnected ? (
+                    <span className="text-emerald-400">● Synced via {primaryProvider?.name}</span>
+                  ) : (
+                    <span>Awaiting app connection</span>
+                  )}
+                </p>
+              </div>
+
+              <div className="mt-3 pt-2 border-t border-white/5 text-[10px] text-slate-400 font-mono">
+                {hasAnyConnected ? (
+                  <span>Target: 10,000 steps (100%+ Met)</span>
+                ) : (
+                  <span>Pick any 1 app above to stream</span>
+                )}
+              </div>
+            </div>
+
+            {/* Card 3: Heart Rate & HRV Autonomic */}
+            <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between text-slate-400 text-xs">
+                  <span>Heart Rate &amp; HRV</span>
+                  <Heart className="w-4 h-4 text-[#FA2D48]" />
+                </div>
+                <div className="text-2xl font-black text-white font-mono mt-1">
+                  {hasAnyConnected ? (
+                    <>
+                      {restingHeartRate || 54} <span className="text-xs text-slate-400 font-sans">bpm</span> • {hrvMs || 70} <span className="text-xs text-slate-400 font-sans">ms</span>
+                    </>
+                  ) : (
+                    <span className="text-slate-500 text-lg">-- bpm / -- ms</span>
+                  )}
+                </div>
+                <p className="text-[11px] text-slate-400 mt-1 font-mono">
+                  {hasAnyConnected ? (
+                    <span className="text-emerald-400">● Synced via {primaryProvider?.name}</span>
+                  ) : (
+                    <span>Awaiting app connection</span>
+                  )}
+                </p>
+              </div>
+
+              <div className="mt-3 pt-2 border-t border-white/5 text-[10px] text-slate-400 font-mono">
+                {hasAnyConnected ? (
+                  <span>Autonomic Recovery: {recoveryScore || 88}%</span>
+                ) : (
+                  <span>Pick any 1 app above to stream</span>
+                )}
+              </div>
+            </div>
+
+            {/* Card 4: Sleep Architecture */}
+            <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between text-slate-400 text-xs">
+                  <span>Sleep Architecture</span>
+                  <Moon className="w-4 h-4 text-purple-400" />
+                </div>
+                <div className="text-2xl font-black text-white font-mono mt-1">
+                  {hasAnyConnected ? (
+                    sleepFormatted || "7h 24m"
+                  ) : (
+                    <span className="text-slate-500 text-lg">-- h -- m</span>
+                  )}
+                </div>
+                <p className="text-[11px] text-slate-400 mt-1 font-mono">
+                  {hasAnyConnected ? (
+                    <span className="text-emerald-400">● Synced via {primaryProvider?.name}</span>
+                  ) : (
+                    <span>Awaiting app connection</span>
+                  )}
+                </p>
+              </div>
+
+              <div className="mt-3 pt-2 border-t border-white/5 text-[10px] text-slate-400 font-mono">
+                {hasAnyConnected ? (
+                  <span>Deep Sleep: ~1h 45m Restorative</span>
+                ) : (
+                  <span>Pick any 1 app above to stream</span>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -471,6 +554,37 @@ export default function ConnectedHealthEngine({
       {/* Tab 2: Adaptive Diet & Macros */}
       {activeTab === "diet_analysis" && (
         <div className="mt-5 space-y-5 animate-in fade-in duration-300">
+          
+          {/* Telemetry Status Banner */}
+          {hasAnyConnected ? (
+            <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>
+                  <strong>Live Biometric Diet Calibration Active:</strong> Calibrated exclusively with your {primaryProvider?.name}. Active workout burn (+{activeBurnExtraKcal} kcal) and {proteinTargetGrams}g protein target dynamically applied to your daily Kirana grocery cart.
+                </span>
+              </div>
+              <span className="text-[10px] font-mono text-emerald-400 font-bold px-2 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/30 shrink-0 self-start sm:self-auto">
+                100% READY
+              </span>
+            </div>
+          ) : (
+            <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
+                <span>
+                  <strong>Baseline Diet Mode:</strong> Choose your single fitness tracker to automatically calculate active workout burn (+490 to +540 kcal) and elevate your protein target.
+                </span>
+              </div>
+              <button
+                onClick={() => setActiveTab("overview")}
+                className="px-3 py-1.5 rounded-lg bg-amber-400 text-[#0B0E0C] font-black text-xs shrink-0 hover:brightness-110 cursor-pointer"
+              >
+                Choose Your Tracker
+              </button>
+            </div>
+          )}
+
           {/* Caloric Expenditure Formula */}
           <div className="p-4 rounded-2xl bg-gradient-to-r from-[#143427] to-[#121815] border border-emerald-500/30 text-white">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
@@ -479,16 +593,20 @@ export default function ConnectedHealthEngine({
                   BIOMETRIC METABOLIC CALCULATION
                 </span>
                 <h3 className="text-lg font-black text-white mt-0.5">
-                  Dynamic Energy Budget: 2,690 kcal
+                  Dynamic Energy Budget: {totalDailyExpenditure.toLocaleString()} kcal
                 </h3>
               </div>
               <div className="flex items-center gap-3 text-xs font-mono">
                 <span className="px-2.5 py-1 rounded bg-black/40 text-slate-300 border border-white/10">
-                  Base: 2,150 kcal
+                  Base: {baselineCalories} kcal
                 </span>
                 <span className="text-[#f7fe72] font-black">+</span>
-                <span className="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                  Burn: +540 kcal
+                <span className={`px-2.5 py-1 rounded border ${
+                  activeBurnExtraKcal > 0
+                    ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
+                    : "bg-white/5 text-slate-400 border-white/10"
+                }`}>
+                  Burn: +{activeBurnExtraKcal} kcal
                 </span>
               </div>
             </div>
@@ -497,28 +615,40 @@ export default function ConnectedHealthEngine({
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 text-center">
               <div className="p-2.5 rounded-xl bg-black/30 border border-white/10">
                 <span className="text-[10px] text-slate-400 uppercase font-bold">Protein Target</span>
-                <div className="text-xl font-black text-emerald-400 font-mono mt-0.5">165g</div>
-                <span className="text-[10px] text-slate-400">+25g for run repair</span>
+                <div className="text-xl font-black text-emerald-400 font-mono mt-0.5">
+                  {proteinTargetGrams}g
+                </div>
+                <span className="text-[10px] text-slate-400">
+                  {hasAnyConnected ? "+25g for workout repair" : "Standard baseline"}
+                </span>
               </div>
               <div className="p-2.5 rounded-xl bg-black/30 border border-white/10">
                 <span className="text-[10px] text-slate-400 uppercase font-bold">Carbohydrates</span>
-                <div className="text-xl font-black text-[#f7fe72] font-mono mt-0.5">310g</div>
-                <span className="text-[10px] text-slate-400">Glycogen recharge</span>
+                <div className="text-xl font-black text-[#f7fe72] font-mono mt-0.5">
+                  {dietAnalysis.carbTargetGrams}g
+                </div>
+                <span className="text-[10px] text-slate-400">
+                  {hasAnyConnected ? "Glycogen recharge" : "Daily maintenance"}
+                </span>
               </div>
               <div className="p-2.5 rounded-xl bg-black/30 border border-white/10">
                 <span className="text-[10px] text-slate-400 uppercase font-bold">Healthy Fats</span>
-                <div className="text-xl font-black text-white font-mono mt-0.5">68g</div>
+                <div className="text-xl font-black text-white font-mono mt-0.5">
+                  {dietAnalysis.fatTargetGrams}g
+                </div>
                 <span className="text-[10px] text-slate-400">Hormonal balance</span>
               </div>
               <div className="p-2.5 rounded-xl bg-black/30 border border-white/10">
                 <span className="text-[10px] text-slate-400 uppercase font-bold">Hydration + Salts</span>
-                <div className="text-xl font-black text-cyan-400 font-mono mt-0.5">3.6 L</div>
+                <div className="text-xl font-black text-cyan-400 font-mono mt-0.5">
+                  {dietAnalysis.hydrationLiters} L
+                </div>
                 <span className="text-[10px] text-slate-400">Electrolyte retention</span>
               </div>
             </div>
           </div>
 
-          {/* AI Tailored Kirana Meals Based On Biometrics */}
+          {/* Tailored Kirana Meals Based On Biometrics */}
           <div>
             <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-3 flex items-center gap-2">
               <Utensils className="w-4 h-4 text-[#f7fe72]" />
@@ -575,81 +705,111 @@ export default function ConnectedHealthEngine({
         </div>
       )}
 
-      {/* Tab 3: Providers & OAuth Connections */}
+      {/* Tab 3: Choose / Switch Fitness App */}
       {activeTab === "providers" && (
         <div className="mt-5 space-y-4 animate-in fade-in duration-300">
-          <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-slate-300 flex items-center justify-between">
+          <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-slate-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
               <span>
-                Encrypted OAuth 2.0 integration. Biometric scopes are read-only and processed locally in your browser session.
+                <strong>Single-App Architecture:</strong> All your data comes from whichever 1 app you choose. Switching apps updates all your biometrics immediately.
               </span>
             </div>
-            <span className="text-[10px] text-slate-400 font-mono">POPUP AUTH FLOW</span>
+            {hasAnyConnected && (
+              <button
+                onClick={disconnectAll}
+                className="text-xs font-medium text-slate-400 hover:text-rose-400 cursor-pointer shrink-0"
+              >
+                Disconnect App
+              </button>
+            )}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {providers.map((provider) => (
-              <div
-                key={provider.id}
-                className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2.5">
-                      <span className={`w-8 h-8 rounded-xl ${provider.iconBg} text-white flex items-center justify-center font-bold text-xs shadow`}>
-                        {provider.name[0]}
-                      </span>
-                      <div>
-                        <h4 className="font-bold text-white text-sm">{provider.name}</h4>
-                        <span className="text-[11px] text-slate-400">{provider.category}</span>
+            {providers.map((provider: HealthProvider) => {
+              const isPrimary = provider.id === primaryProvider?.id;
+              return (
+                <div
+                  key={provider.id}
+                  className={`p-4 rounded-2xl border transition-all flex flex-col justify-between ${
+                    isPrimary
+                      ? "bg-gradient-to-br from-[#14231b] to-[#121815] border-emerald-500/40 shadow-lg"
+                      : "bg-[#121815] border-white/10 hover:border-white/25"
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2.5">
+                        <span className={`w-8 h-8 rounded-xl ${provider.iconBg} text-white flex items-center justify-center font-bold text-xs shadow`}>
+                          {provider.name[0]}
+                        </span>
+                        <div>
+                          <h4 className="font-bold text-white text-sm">{provider.name}</h4>
+                          <span className="text-[11px] text-slate-400">{provider.category}</span>
+                        </div>
                       </div>
+
+                      <span
+                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full border font-mono ${
+                          isPrimary
+                            ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+                            : "bg-white/5 text-slate-400 border-white/10"
+                        }`}
+                      >
+                        {isPrimary ? "CURRENTLY ACTIVE" : "AVAILABLE"}
+                      </span>
                     </div>
 
-                    <span
-                      className={`text-[10px] font-bold px-2 py-0.5 rounded-full border font-mono ${
-                        provider.isConnected
-                          ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
-                          : "bg-white/5 text-slate-400 border-white/10"
-                      }`}
-                    >
-                      {provider.isConnected ? "CONNECTED" : "DISCONNECTED"}
-                    </span>
+                    <p className="text-xs text-slate-300 mt-3">
+                      {provider.description}
+                    </p>
+
+                    <div className="mt-3 pt-2.5 border-t border-white/5 text-[11px] font-mono text-slate-300">
+                      <div className="text-[10px] text-slate-500 uppercase font-semibold mb-1">Provides All Metrics:</div>
+                      <div className="grid grid-cols-2 gap-1 text-[11px]">
+                        <div>Steps: {provider.telemetry.dailySteps.toLocaleString()}</div>
+                        <div>Burn: +{provider.telemetry.activeBurnKcal} kcal</div>
+                        <div>HR: {provider.telemetry.restingHeartRate} bpm</div>
+                        <div>Sleep: {provider.telemetry.sleepFormatted}</div>
+                      </div>
+                    </div>
                   </div>
 
-                  <p className="text-xs text-slate-300 mt-3">
-                    {provider.id === "strava" && "Syncs runs, bike rides, split paces, elevation and active heart rates."}
-                    {provider.id === "applehealth" && "Syncs Apple Watch workouts, resting heart rate, HRV recovery & sleep stages."}
-                    {provider.id === "googlefit" && "Syncs Android Health Connect steps, active minutes, and cardio heart points."}
-                    {provider.id === "whoop" && "Syncs strain levels, recovery readiness %, sleep deficit and respiratory rates."}
-                  </p>
-                </div>
+                  <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
+                    <span className="text-[11px] text-slate-400 font-mono">
+                      {isPrimary ? `Last sync: ${provider.lastSync}` : "Ready to connect"}
+                    </span>
 
-                <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
-                  <span className="text-[11px] text-slate-400 font-mono">
-                    {provider.isConnected ? `Last sync: ${provider.lastSync}` : "Ready to pair"}
-                  </span>
-
-                  {provider.isConnected ? (
-                    <button
-                      onClick={() => handleConnectProvider(provider)}
-                      className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-semibold inline-flex items-center gap-1 cursor-pointer"
-                    >
-                      <span>Reconnect</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => handleConnectProvider(provider)}
-                      className="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] text-xs font-black shadow hover:brightness-110 active:scale-95 cursor-pointer inline-flex items-center gap-1"
-                    >
-                      <span>Connect</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </button>
-                  )}
+                    {isPrimary ? (
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => disconnectProvider(provider.id)}
+                          className="px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 text-xs font-semibold cursor-pointer"
+                        >
+                          Disconnect
+                        </button>
+                        <button
+                          onClick={syncAll}
+                          disabled={isSyncing}
+                          className="px-3 py-1.5 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-bold inline-flex items-center gap-1 cursor-pointer"
+                        >
+                          <RefreshCw className={`w-3 h-3 ${isSyncing ? "animate-spin" : ""}`} />
+                          <span>Sync</span>
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => connectProvider(provider.id)}
+                        className="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#f7fe72] to-[#f4e76e] text-[#0B0E0C] text-xs font-black shadow hover:brightness-110 active:scale-95 cursor-pointer inline-flex items-center gap-1"
+                      >
+                        <Link2 className="w-3.5 h-3.5" />
+                        <span>{hasAnyConnected ? `Switch to ${provider.name.split(" ")[0]}` : `Choose ${provider.name.split(" ")[0]}`}</span>
+                      </button>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
@@ -673,60 +833,65 @@ export default function ConnectedHealthEngine({
                 </div>
               </div>
 
-              <span className={`text-xs font-bold px-3 py-1 rounded-full border font-mono ${
-                notificationPermission === "granted"
-                  ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
-                  : "bg-amber-500/20 text-amber-300 border-amber-500/30"
-              }`}>
-                STATUS: {notificationPermission.toUpperCase()}
+              <span
+                className={`text-xs font-bold px-3 py-1 rounded-full border font-mono ${
+                  notificationPermission === "granted"
+                    ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+                    : "bg-amber-500/20 text-amber-300 border-amber-500/30"
+                }`}
+              >
+                {notificationPermission === "granted" ? "PERMISSIONS GRANTED" : "PERMISSION REQUIRED"}
               </span>
             </div>
 
-            {/* Test triggers */}
-            <div className="mt-4">
-              <h5 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
-                Trigger Real Service Worker Alerts:
-              </h5>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <button
-                  onClick={() => handleTestNotification("macro")}
-                  className="p-3 rounded-xl bg-white/[0.05] hover:bg-white/[0.09] border border-white/10 text-left transition-colors cursor-pointer group"
-                >
-                  <div className="flex items-center justify-between text-xs font-bold text-white">
-                    <span>1. Macro Window Alert</span>
-                    <Utensils className="w-4 h-4 text-[#f7fe72]" />
-                  </div>
-                  <p className="text-[11px] text-slate-400 mt-1">
-                    Triggers 45-min post-workout glycogen protein alert via Service Worker.
-                  </p>
-                </button>
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <button
+                onClick={() => handleTestNotification("macro")}
+                className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left transition-all cursor-pointer group"
+              >
+                <div className="flex items-center justify-between text-xs font-bold text-white">
+                  <span>Glycogen Post-Workout Alert</span>
+                  <Utensils className="w-3.5 h-3.5 text-[#f7fe72]" />
+                </div>
+                <p className="text-[11px] text-slate-400 mt-1">
+                  Alerts user when post-workout glycogen recharge window opens for Sattu and Paneer.
+                </p>
+                <span className="text-[10px] text-[#f7fe72] font-mono mt-2 block group-hover:underline">
+                  Send Test Notification →
+                </span>
+              </button>
 
-                <button
-                  onClick={() => handleTestNotification("recovery")}
-                  className="p-3 rounded-xl bg-white/[0.05] hover:bg-white/[0.09] border border-white/10 text-left transition-colors cursor-pointer group"
-                >
-                  <div className="flex items-center justify-between text-xs font-bold text-white">
-                    <span>2. HRV Recovery Alert</span>
-                    <Moon className="w-4 h-4 text-purple-400" />
-                  </div>
-                  <p className="text-[11px] text-slate-400 mt-1">
-                    Triggers parasympathetic box breathing prompt when Apple Health detects fatigue.
-                  </p>
-                </button>
+              <button
+                onClick={() => handleTestNotification("recovery")}
+                className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left transition-all cursor-pointer group"
+              >
+                <div className="flex items-center justify-between text-xs font-bold text-white">
+                  <span>Parasympathetic Wind-down</span>
+                  <Moon className="w-3.5 h-3.5 text-purple-400" />
+                </div>
+                <p className="text-[11px] text-slate-400 mt-1">
+                  Notifies user at 9:30 PM to begin 5-min Box Breathing based on HRV recovery metrics.
+                </p>
+                <span className="text-[10px] text-[#f7fe72] font-mono mt-2 block group-hover:underline">
+                  Send Test Notification →
+                </span>
+              </button>
 
-                <button
-                  onClick={() => handleTestNotification("tier")}
-                  className="p-3 rounded-xl bg-white/[0.05] hover:bg-white/[0.09] border border-white/10 text-left transition-colors cursor-pointer group"
-                >
-                  <div className="flex items-center justify-between text-xs font-bold text-white">
-                    <span>3. Leaderboard Rival Watch</span>
-                    <Zap className="w-4 h-4 text-[#f7fe72]" />
-                  </div>
-                  <p className="text-[11px] text-slate-400 mt-1">
-                    Alerts when a contender surpasses your XP rank in Season 4 Arena.
-                  </p>
-                </button>
-              </div>
+              <button
+                onClick={() => handleTestNotification("tier")}
+                className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left transition-all cursor-pointer group"
+              >
+                <div className="flex items-center justify-between text-xs font-bold text-white">
+                  <span>Arena Contender Alert</span>
+                  <Zap className="w-3.5 h-3.5 text-cyan-400" />
+                </div>
+                <p className="text-[11px] text-slate-400 mt-1">
+                  Live alert when another user logs a workout and moves up in the Season 4 leaderboard.
+                </p>
+                <span className="text-[10px] text-[#f7fe72] font-mono mt-2 block group-hover:underline">
+                  Send Test Notification →
+                </span>
+              </button>
             </div>
           </div>
         </div>
